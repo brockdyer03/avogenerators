@@ -54,6 +54,11 @@ def getOptions():
         "default": True,
     }
 
+    userOptions["Use Symmetry"] = {
+        "type": "boolean",
+        "default": False,
+    }
+
     userOptions["Constrain Geometry"] = {
         "type": "boolean",
         "default": False,
@@ -221,6 +226,7 @@ def generateInputFile(opts,cjson):
     solvtype = opts["Solvation Model"]
     solvent = opts["Solvent"]
     mos = opts["Print Molecular Orbitals"]
+    sym = opts["Use Symmetry"]
     constrain = opts["Constrain Geometry"]
     # autoaux = opts["AutoAux"]
     disp = opts["Dispersion Correction"]
@@ -313,13 +319,18 @@ def generateInputFile(opts,cjson):
     if auxbasis != "None":
         basis = basis + " " + auxbasis
 
+    if sym == True:
+        usesymmetry = 'UseSym'
+    else:
+        usesymmetry = ''
+
     if "-3c" in theory or "-3C" in theory:
         # -3c composite methods have everything together
-        code = f"{calcStr} {theory} {ri} {solvation}"
+        code = f"{calcStr} {theory} {ri} {solvation} {usesymmetry}"
     else:
         theory = theory + disp + ri
         # put the pieces together
-        code = f"{calcStr} {theory} {basis} {solvation}"
+        code = f"{calcStr} {theory} {basis} {solvation} {usesymmetry}"
 
     output = ""
 
