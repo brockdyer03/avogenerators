@@ -54,6 +54,11 @@ def getOptions():
         "default": True,
     }
 
+    userOptions["Use Symmetry"] = {
+        "type": "boolean",
+        "default": False,
+    }
+
     userOptions["Constrain Geometry"] = {
         "type": "boolean",
         "default": False,
@@ -201,8 +206,30 @@ def getOptions():
         "type": "integer",
         "default": 200,
     }
+    excitOptions = {"tabName": "Excited States"}
+    excitOptions["Excited State Method"] = {
+        "type": "stringList",
+        "default": "None",
+        "values": [
+            "None",
+            "CIS",
+            "CIS(D)",
+            "TDDFT",
+            "EOM-CCSD",
+        ],
+    }
+    excitOptions["Number of States"] = {
+        "type": "integer",
+        "default": 3,
+        "minimum": 1,
+    }
+    excitOptions["Target State"] = {
+        "type": "integer",
+        "default": 1,
+        "minimum": 1,
+    }
 
-    opts = {"userOptions": [userOptions, aimdOptions]}
+    opts = {"userOptions": [userOptions, aimdOptions, excitOptions]}
     opts['inputMoleculeFormat'] = 'cjson'
 
     return opts
@@ -221,11 +248,15 @@ def generateInputFile(opts,cjson):
     solvtype = opts["Solvation Model"]
     solvent = opts["Solvent"]
     mos = opts["Print Molecular Orbitals"]
+    sym = opts["Use Symmetry"]
     constrain = opts["Constrain Geometry"]
     # autoaux = opts["AutoAux"]
     disp = opts["Dispersion Correction"]
     ri = opts["RI Approximation"]
     auxbasis = "None"
+    excit = opts["Excited State Method"]
+    nroots = opts["Number of States"]
+    iroot = opts["Target State"]
 
     rijbasis = {
         "6-31G(d)": "AutoAux",
@@ -313,13 +344,26 @@ def generateInputFile(opts,cjson):
     if auxbasis != "None":
         basis = basis + " " + auxbasis
 
+    if auxbasis == "None" and excit == "CIS(D)":
+        basis = basis + " " + "AutoAux"
+
+    if sym == True:
+        usesymmetry = 'UseSym'
+    else:
+        usesymmetry = ''
+
+    if excit == 'EOM-CCSD':
+        theory="EOM-CCSD"
+    elif excit in ["CIS", "CIS(D)"]:
+        theory="HF"
+
     if "-3c" in theory or "-3C" in theory:
         # -3c composite methods have everything together
-        code = f"{calcStr} {theory} {ri} {solvation}"
+        code = f"{calcStr} {theory} {ri} {solvation} {usesymmetry}"
     else:
         theory = theory + disp + ri
         # put the pieces together
-        code = f"{calcStr} {theory} {basis} {solvation}"
+        code = f"{calcStr} {theory} {basis} {solvation} {usesymmetry}"
 
     output = ""
 
@@ -351,6 +395,20 @@ def generateInputFile(opts,cjson):
         )
         output += '   dump position stride 1 filename "trajectory.xyz"\n'
         output += "   run " + str(opts["AIMD RunTime"]) + "\n"
+        output += "end\n\n"
+
+    # Excited states
+    if excit == "CIS" or excit == "CIS(D)":
+        output += "%cis\n"
+    elif excit == "TDDFT":
+        output += "%tddft\n"
+    elif excit == "EOM-CCSD":
+        output += "%mdci\n"
+    if excit != "None":
+        output += f"   nroots {nroots}\n"
+        output += f"   iroot  {iroot}\n"
+        if excit == "CIS(D)":
+            output += "   dcorr 1\n"
         output += "end\n\n"
 
     if mos == True:
