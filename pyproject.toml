@@ -1,0 +1,119 @@
+[project]
+name = "avogenerators"
+version = "2.0"
+authors =  [
+    { name = "Allison Vacanti", email = "allison.vacanti@kitware.com" },
+    { name = "Kyle Lutz", email = "kyle.lutz@kitware.com" },
+    { name = "Marcus D. Hanwell", email = "marcus.hanwell@kitware.com" },
+    { name = "Geoff Hutchison", email = "geoff.hutchison@gmail.com" },
+    { name = "Eric Berquist", email = "eric.berquist@gmail.com" },
+    { name = "Shiv Upadhyay", email = "shivnupadhyay@gmail.com" },
+    { name = "Amanda E. Dumi", email = "amanda.e.dumi@gmail.com" },
+    { name = "Adrea Snow", email = "adrea.snow@gmail.com" },
+    { name = "Christian Clauss", email = "cclauss@me.com" },
+    { name = "Ty Balduf", email = "tbalduf@gmail.com" },
+    { name = "Javier Cerezo", email = "javier.cerezo@um.es" },
+    { name = "Matthew Milner", email = "matterhorn103@proton.me" },
+]
+license = "BSD-3-Clause"
+description = "Scripts for generating input files for computational chemistry packages"
+readme = "README.md"
+
+[project.scripts]
+avogadro-avogenerators = "avogenerators:main"
+
+[build-system]
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
+
+[tool.avogadro]
+minimum-avogadro-version = "1.103"
+
+[[tool.avogadro.input-generators]]
+identifier = "dalton"
+program-name = "DALTON"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/dalton/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "gamessuk"
+program-name = "GAMESS-UK"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/gamessuk/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "gaussian"
+program-name = "Gaussian"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/gaussian/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "molpro"
+program-name = "MOLPRO"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/molpro/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "mopac"
+program-name = "MOPAC"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/mopac/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "nwchem"
+program-name = "NWChem"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/nwchem/options.json"
+highlight-styles = "src/avogenerators/nwchem/syntax.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "orca"
+program-name = "Orca"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/orca/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "psi4"
+program-name = "Psi"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/psi4/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "pyscf"
+program-name = "PYSCF"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/pyscf/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "qchem"
+program-name = "Q-Chem"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/qchem/options.json"
+
+[[tool.avogadro.input-generators]]
+identifier = "terachem"
+program-name = "TeraChem"
+input-format = "cjson"
+support.molecular = true
+support.periodic = false
+user-options = "src/avogenerators/terachem/options.json"

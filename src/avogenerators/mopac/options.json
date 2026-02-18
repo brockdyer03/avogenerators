@@ -1,0 +1,118 @@
+{
+  "userOptions": {
+    "Title": {
+      "type": "string",
+      "default": ""
+    },
+    "Processor Cores": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1
+    },
+    "Calculation Type": {
+      "type": "stringList",
+      "default": 1,
+      "values": [
+        "Single Point",
+        "Equilibrium Geometry",
+        "Frequencies",
+        "Transition State"
+      ]
+    },
+    "Theory": {
+      "type": "stringList",
+      "default": 3,
+      "values": [
+        "AM1",
+        "PM3",
+        "PM6",
+        "PM7",
+        "RM1",
+        "MNDO",
+        "MNDOD"
+      ]
+    },
+    "Filename Base": {
+      "type": "string",
+      "default": "job"
+    },
+    "Multiplicity": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 6
+    },
+    "Charge": {
+      "type": "integer",
+      "default": 0,
+      "minimum": -9,
+      "maximum": 9
+    },
+    "COSMO": {
+      "type": "boolean",
+      "default": true
+    },
+    "Solvent": {
+      "type": "stringList",
+      "default": "Water",
+      "toolTip": "Solvent",
+      "values": [
+        "OTHER",
+        "Acetic acid",
+        "Acetone",
+        "Acetonitrile",
+        "Anisole",
+        "Benzene",
+        "Bromobenzene",
+        "Carbon disulfide",
+        "Carbon tetrachloride",
+        "Chlorobenzene",
+        "Chloroform",
+        "Cyclohexane",
+        "Dibutyl ether",
+        "o-Dichlorobenzene",
+        "1,2-Dichloroethane",
+        "Dichloromethane",
+        "Diethylamine",
+        "Diethylether",
+        "1,2-Dimethoxyethane",
+        "N,N-Dimethylacetamide",
+        "N,N-Dimethylformamide",
+        "Dimethylsulfoxide",
+        "1,4-Dioxane",
+        "Ethanol",
+        "Ethyl acetate",
+        "Ethyl benzoate",
+        "Formamide",
+        "Hexamethylphosphoramide",
+        "Isopropyl lcohol",
+        "Methanol",
+        "2-Methyl-2-propanol",
+        "Nitrobenzene",
+        "Nitromethane",
+        "Pyridine",
+        "Tetrahydrofuran",
+        "Toluene",
+        "Trichloroethylene",
+        "Triethylamine",
+        "Trifluoroacetic acid",
+        "2,2,2-Trifluoroethanol",
+        "Water",
+        "o-Xylene"
+      ]
+    },
+    "Other Solvent Dielectric": {
+      "type": "string",
+      "default": "0.00"
+    },
+    "HF Type": {
+      "type": "stringList",
+      "default": "RHF",
+      "toolTip": "Open or closed shell",
+      "values": [
+        "RHF",
+        "UHF"
+      ]
+    }
+  }
+}

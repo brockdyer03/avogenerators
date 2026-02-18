@@ -1,0 +1,64 @@
+{
+  "userOptions": {
+    "Title": {
+      "type": "string",
+      "default": ""
+    },
+    "Calculation Type": {
+      "type": "stringList",
+      "default": 1,
+      "values": [
+        "Single Point",
+        "Equilibrium Geometry",
+        "Frequencies",
+        "Transition State"
+      ]
+    },
+    "Theory": {
+      "type": "stringList",
+      "default": 2,
+      "values": [
+        "RHF",
+        "MP2",
+        "B3LYP",
+        "BLYP",
+        "SVWN",
+        "B97",
+        "HCTH",
+        "FT97"
+      ]
+    },
+    "Basis": {
+      "type": "stringList",
+      "default": 2,
+      "values": [
+        "STO-3G",
+        "3-21G",
+        "6-31G",
+        "6-31G(d)",
+        "cc-pVDZ",
+        "cc-pVTZ"
+      ]
+    },
+    "Filename Base": {
+      "type": "string",
+      "default": "job"
+    },
+    "Charge": {
+      "type": "integer",
+      "default": 0,
+      "minimum": -9,
+      "maximum": 9
+    },
+    "Multiplicity": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 6
+    },
+    "Direct SCF Mode": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
