@@ -1,0 +1,113 @@
+{
+  "userOptions": [
+    {
+      "tabName": "Standard",
+      "Title": {
+        "type": "string",
+        "default": ""
+      },
+      "Calculation Type": {
+        "type": "stringList",
+        "default": 1,
+        "values": [
+          "Single Point",
+          "Equilibrium Geometry",
+          "Frequencies"
+        ]
+      },
+      "Theory": {
+        "type": "stringList",
+        "default": 3,
+        "values": [
+          "AM1",
+          "PM3",
+          "RHF",
+          "B3LYP",
+          "WB97XD",
+          "MP2",
+          "CCSD"
+        ]
+      },
+      "Basis": {
+        "type": "stringList",
+        "default": 2,
+        "values": [
+          "STO-3G",
+          "3-21G",
+          "6-31G(d)",
+          "6-31G(d,p)",
+          "LANL2DZ",
+          "cc-pVDZ",
+          "cc-pVTZ",
+          "cc-pVQZ",
+          "cc-pV5Z",
+          "cc-pV6Z",
+          "aug-cc-pVDZ",
+          "aug-cc-pVTZ",
+          "aug-cc-pVQZ",
+          "aug-cc-pV5Z",
+          "aug-cc-pV6Z",
+          "Def2SV",
+          "Def2TZV",
+          "Def2QZV",
+          "Def2SVP",
+          "Def2TZVP",
+          "Def2QZVP",
+          "Def2SVPP",
+          "Def2TZVPP",
+          "Def2QZVPP"
+        ]
+      },
+      "Filename Base": {
+        "type": "string",
+        "default": "job"
+      },
+      "Processor Cores": {
+        "type": "integer",
+        "default": 8,
+        "minimum": 1
+      },
+      "Memory": {
+        "type": "integer",
+        "default": 28,
+        "minimum": 1
+      },
+      "Multiplicity": {
+        "type": "integer",
+        "default": 1,
+        "minimum": 1,
+        "maximum": 5
+      },
+      "Charge": {
+        "type": "integer",
+        "default": 0,
+        "minimum": -9,
+        "maximum": 9
+      },
+      "Output Format": {
+        "type": "stringList",
+        "default": 0,
+        "values": [
+          "Standard",
+          "Molden",
+          "Molekel"
+        ]
+      },
+      "Write Checkpoint File": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    {
+      "tabName": "Alternate",
+      "Alternate Theory": {
+        "type": "string",
+        "default": ""
+      },
+      "Alternate Basis Set": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  ]
+}
