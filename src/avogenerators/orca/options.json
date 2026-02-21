@@ -189,7 +189,7 @@
       "tabName": "Excited States",
       "Excited State Method": {
         "type": "stringList",
-        "default": "None",
+        "default": 0,
         "values": [
           "None",
           "CIS",

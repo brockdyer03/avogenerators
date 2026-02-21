@@ -31,7 +31,7 @@ def main():
             from .molpro.molpro import generateInput
         case "mopac":
             from .mopac.mopac import generateInput
-        case "mwchem":
+        case "nwchem":
             from .nwchem.nwchem import generateInput
         case "orca":
             from .orca.orca import generateInput
@@ -46,12 +46,11 @@ def main():
     
     # Load the JSON passed by Avogadro
     input = json.load(sys.stdin)
-
     output = generateInput(input, args.debug)
 
     if args.debug:
         output["files"].append(
-            {"filename": "debug_info", "contents": str(args.input)}
+            {"filename": "debug_info", "contents": args.input}
         )
 
     print(json.dumps(output))

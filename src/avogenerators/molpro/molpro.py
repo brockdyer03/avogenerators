@@ -102,7 +102,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
 
     generated_input += "---\n"
 
-    return generated_input
+    return generated_input, warnings
 
 
 def generateInput(input_json: dict, debug: bool) -> dict:

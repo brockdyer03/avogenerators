@@ -99,7 +99,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         warnings.append("Invalid calculation type: %s" % calculate)
     nwfile += "\n"
 
-    return nwfile
+    return nwfile, warnings
 
 
 def generateInput(input_json: dict, debug: bool) -> dict:
