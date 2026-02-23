@@ -1,0 +1,72 @@
+[[default.rules]]
+format.preset = "literal"
+patterns = [
+    { regexp = '\b[+-]?[.0-9]+(?:[eEdD][+-]?[.0-9]+)?\b' },
+]
+
+[[default.rules]]
+format.preset = "keyword"
+patterns = [
+    { regexp = '\b(?:re)?start\b' },
+    { regexp = '\b(?:scratch|permanent)?_dir\b' },
+    { regexp = '\bmemory\b' },
+    { regexp = '\becho\b' },
+    { regexp = '\btitle\b' },
+    { regexp = '\b(?:no)?print\b' },
+    { regexp = '\b(?:un)?set\b' },
+    { regexp = '\bstop\b' },
+    { regexp = '\btask\b' },
+    { regexp = '\becce_print\b' },
+    { regexp = '\bcharge\b' },
+    { regexp = '\bgeometry\b' },
+    { regexp = '\bbasis\b' },
+    { regexp = '\bspherical\b' },
+    { regexp = '\blibrary\b' },
+    { regexp = '\bend\b' },
+    { regexp = '\bxc\b' },
+    { regexp = '\bmult\b' },
+    { regexp = '\bfreeze atomic\b' },
+    { regexp = '\b(?:no)?center\b' },
+    { regexp = '\bbqbq\b' },
+    { regexp = '\bnuc(?:l(?:eus)?)?\b' },
+    { regexp = '\bscf\b' },
+    { regexp = '\bdft\b' },
+    { regexp = '\bmp2\b' },
+    { regexp = '\bccsd\b' },
+    { regexp = '\bunits\b' },
+    { regexp = '\bautosym\b' },
+]
+
+[[default.rules]]
+format.preset = "property"
+patterns = [
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = '\*\s+library\s+([^\n]+)' },
+    { regexp = 'units\s+(an|angstroms|au|atom|bohr|nm|nanometers|pm|picometers)' },
+    { regexp = '(?:re)?start\s+([^;\\n]+)' },
+    { regexp = '\bprint\s+(xyz)' },
+    { regexp = '\autosym\s+([-\d.eEdD+]+)' },
+    { regexp = '\bnuc(?:l(?:eus)?)?\s+([^\s;]+)' },
+    { regexp = '\bbasis\s+(spherical)\b' },
+    { regexp = '\bxc\s+([^\n]+)\b' },
+    { regexp = '\btask\s+((?:mc)?scf|(:?so)?dft|(:?direct_|ri)?mp2|ccsd(:?\(t\))?|selci|md|pspw|band|tce)\s+(energy|gradient|optimize|saddle|hessian|freq(?:uencies)?|property|(?:thermo)?dynamics)\b' },
+]
+
+[[default.rules]]
+format.preset = "title"
+patterns = [
+    { regexp = 'title\s+"(.+)"' },
+]
+
+[[default.rules]]
+format.preset = "comment"
+patterns = [
+    { regexp = '#[^\n]*' },
+]

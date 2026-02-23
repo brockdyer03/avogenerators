@@ -75,7 +75,7 @@ program-name = "NWChem"
 input-format = "cjson"
 support.molecular = true
 support.periodic = false
-user-options = "src/avogenerators/nwchem/options.json"
+user-options = "src/avogenerators/nwchem/options.toml"
 highlight-styles = "src/avogenerators/nwchem/syntax.json"
 
 [[tool.avogadro.input-generators]]
@@ -84,7 +84,7 @@ program-name = "ORCA"
 input-format = "cjson"
 support.molecular = true
 support.periodic = false
-user-options = "src/avogenerators/orca/options.json"
+user-options = "src/avogenerators/orca/options.toml"
 
 [[tool.avogadro.input-generators]]
 identifier = "psi4"
