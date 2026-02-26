@@ -1,0 +1,72 @@
+{
+  "highlightStyles": [
+    {
+      "style": "default",
+      "rules": [
+        {
+          "patterns": [
+            {
+              "regexp": "\\b[+-]?[.0-9]+(?:[eEdD][+-]?[.0-9]+)?\\b"
+            }
+          ],
+          "format": {
+            "preset": "literal"
+          }
+        },
+        {
+          "patterns": [
+            {
+              "regexp": "\\\\bAM1\\\\b"
+            },
+            {
+              "regexp": "\\\\bPM3\\\\b"
+            }
+          ],
+          "format": {
+            "preset": "keyword"
+          },
+          "case_insensitive": true
+        }
+        {
+          "patterns": [
+            {
+              "regexp": "\\*\\s+library\\s+([^\\n]+)"
+            },
+            {
+              "regexp": "\\*\\s+library\\s+([^\\n]+)"
+            },
+            {
+              "regexp": "\\*\\s+library\\s+([^\\n]+)"
+            },
+            {
+              "regexp": "units\\s+(an|angstroms|au|atom|bohr|nm|nanometers|pm|picometers)"
+            },
+          ],
+          "format": {
+            "preset": "property"
+          }
+        },
+        {
+          "patterns": [
+            {
+              "regexp": "title\\s+\"(.+)\""
+            }
+          ],
+          "format": {
+            "preset": "title"
+          }
+        },
+        {
+          "patterns": [
+            {
+              "regexp": "#[^\n]*"
+            }
+          ],
+          "format": {
+            "preset": "comment"
+          }
+        }
+      ]
+    }
+  ]
+}

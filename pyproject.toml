@@ -68,6 +68,7 @@ input-format = "cjson"
 support.molecular = true
 support.periodic = false
 user-options = "src/avogenerators/mopac/options.json"
+highlight-styles = "src/avogenerators/mopac/syntax.json"
 
 [[tool.avogadro.input-generators]]
 identifier = "nwchem"
