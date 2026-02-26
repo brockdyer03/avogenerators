@@ -16,6 +16,33 @@
         {
           "patterns": [
             {
+              "regexp": "\\\\bAIDER\\\\b"
+            },
+            {
+              "regexp": "\\\\bAIGIN\\\\b"
+            },
+            {
+              "regexp": "\\\\bAIGOUT\\\\b"
+            },
+            {
+              "regexp": "\\\\bALLBONDS\\\\b"
+            },
+            {
+              "regexp": "\\\\bALLVEC\\\\b"
+            },
+            {
+              "regexp": "\\\\bALT_A\\\\b"
+            },
+            {
+              "regexp": "\\\\bALT_R\\\\b"
+            },
+            {
+              "regexp": "\\\\bAM1\\\\b"
+            },
+            {
+              "regexp": "\\\\bAUTOSYM\\\\b"
+            },
+            {
               "regexp": "\\\\bAM1\\\\b"
             },
             {
