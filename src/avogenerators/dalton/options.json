@@ -1,59 +1,57 @@
 {
-  "userOptions": {
-    "Title": {
-      "type": "string",
-      "default": "job"
-    },
-    "Calculation Type": {
-      "type": "stringList",
-      "default": 1,
-      "values": [
-        "Single Point",
-        "Optimize + Frequencies",
-        "Frequencies",
-        "Optimize"
-      ]
-    },
-    "Theory": {
-      "type": "stringList",
-      "default": 1,
-      "values": [
-        "SCF",
-        "DFT",
-        "MP2",
-        "CCSD",
-        "CCS",
-        "CC2"
-      ]
-    },
-    "Basis": {
-      "type": "stringList",
-      "default": 4,
-      "values": [
-        "STO-3G",
-        "3-21 G",
-        "6-31 G(d)",
-        "6-31 G(d,p)",
-        "cc-pVDZ",
-        "cc-pVTZ",
-        "aug-cc-pVDZ",
-        "aug-cc-pVTZ"
-      ]
-    },
-    "Filename Base": {
-      "type": "string",
-      "default": "job"
-    },
-    "Functional": {
-      "type": "stringList",
-      "default": 0,
-      "values": [
-        "B3LYP",
-        "CAMB3LYP",
-        "BP86",
-        "KT3",
-        "PBE"
-      ]
-    }
+  "Title": {
+    "type": "string",
+    "default": "job"
+  },
+  "Calculation Type": {
+    "type": "stringList",
+    "default": 1,
+    "values": [
+      "Single Point",
+      "Optimize + Frequencies",
+      "Frequencies",
+      "Optimize"
+    ]
+  },
+  "Theory": {
+    "type": "stringList",
+    "default": 1,
+    "values": [
+      "SCF",
+      "DFT",
+      "MP2",
+      "CCSD",
+      "CCS",
+      "CC2"
+    ]
+  },
+  "Basis": {
+    "type": "stringList",
+    "default": 4,
+    "values": [
+      "STO-3G",
+      "3-21 G",
+      "6-31 G(d)",
+      "6-31 G(d,p)",
+      "cc-pVDZ",
+      "cc-pVTZ",
+      "aug-cc-pVDZ",
+      "aug-cc-pVTZ"
+    ]
+  },
+  "Filename Base": {
+    "type": "string",
+    "default": "job"
+  },
+  "Functional": {
+    "type": "stringList",
+    "default": 0,
+    "values": [
+      "B3LYP",
+      "CAMB3LYP",
+      "BP86",
+      "KT3",
+      "PBE"
+    ]
   }
 }

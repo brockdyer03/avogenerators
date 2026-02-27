@@ -1,6 +1,6 @@
 [project]
 name = "avogenerators"
-version = "2.0"
+version = "2.0.0"
 authors =  [
     { name = "Allison Vacanti", email = "allison.vacanti@kitware.com" },
     { name = "Kyle Lutz", email = "kyle.lutz@kitware.com" },
@@ -76,7 +76,7 @@ input-format = "cjson"
 support.molecular = true
 support.periodic = false
 user-options = "src/avogenerators/nwchem/options.json"
-highlight-styles = "src/avogenerators/nwchem/syntax.json"
+highlight-styles = "src/avogenerators/nwchem/syntax.toml"
 
 [[tool.avogadro.input-generators]]
 identifier = "orca"
