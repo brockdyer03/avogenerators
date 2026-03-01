@@ -235,6 +235,30 @@
               "regexp": "\\\\bEXTERNAL\\\\b"
             },
             {
+              "regexp": "\\\\bFIELD\\\\b"
+            },
+            {
+              "regexp": "\\\\bFILL\\\\b"
+            },
+            {
+              "regexp": "\\\\bFLEPO\\\\b"
+            },
+            {
+              "regexp": "\\\\bFMAT\\\\b"
+            },
+            {
+              "regexp": "\\\\bFOCK\\\\b"
+            },
+            {
+              "regexp": "\\\\bFREQCY\\\\b"
+            },
+            {
+              "regexp": "\\\\bFORCE\\\\b"
+            },
+            {
+              "regexp": "\\\\bFORCETS\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
