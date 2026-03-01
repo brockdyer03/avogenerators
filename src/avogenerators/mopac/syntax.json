@@ -46,6 +46,30 @@
               "regexp": "\\\\bAM1\\\\b"
             },
             {
+              "regexp": "\\\\bBANANA\\\\b"
+            },
+            {
+              "regexp": "\\\\bBAR\\\\b"
+            },
+            {
+              "regexp": "\\\\bBCC\\\\b"
+            },
+            {
+              "regexp": "\\\\bBIGCYCLES\\\\b"
+            },
+            {
+              "regexp": "\\\\bBIRADICAL\\\\b"
+            },
+            {
+              "regexp": "\\\\bBFGS\\\\b"
+            },
+            {
+              "regexp": "\\\\bBONDS\\\\b"
+            },
+            {
+              "regexp": "\\\\bBZ\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
