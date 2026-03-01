@@ -793,6 +793,15 @@
               "regexp": "\\\\bVELOCITY\\\\b"
             },
             {
+              "regexp": "\\\\bWRTCI\\\\b"
+            },
+            {
+              "regexp": "\\\\bWRTCONF\\\\b"
+            },
+            {
+              "regexp": "\\\\bWILLIAMS\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
