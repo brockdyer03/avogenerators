@@ -70,6 +70,66 @@
               "regexp": "\\\\bBZ\\\\b"
             },
             {
+              "regexp": "\\\\bCAMP\\\\b"
+            },
+            {
+              "regexp": "\\\\bCARTAB\\\\b"
+            },
+            {
+              "regexp": "\\\\bC.A.S.\\\\b"
+            },
+            {
+              "regexp": "\\\\bC.I.D.\\\\b"
+            },
+            {
+              "regexp": "\\\\bCHAINS\\\\b"
+            },
+            {
+              "regexp": "\\\\bCHECK\\\\b"
+            },
+            {
+              "regexp": "\\\\bCHARGE\\\\b"
+            },
+            {
+              "regexp": "\\\\bCHARGES\\\\b"
+            },
+            {
+              "regexp": "\\\\bCHARST\\\\b"
+            },
+            {
+              "regexp": "\\\\bCIS\\\\b"
+            },
+            {
+              "regexp": "\\\\bCISD\\\\b"
+            },
+            {
+              "regexp": "\\\\bCISDT\\\\b"
+            },
+            {
+              "regexp": "\\\\bCOMPARE\\\\b"
+            },
+            {
+              "regexp": "\\\\bCOMPFG\\\\b"
+            },
+            {
+              "regexp": "\\\\bCOSCCH\\\\b"
+            },
+            {
+              "regexp": "\\\\bCOSWRT\\\\b"
+            },
+            {
+              "regexp": "\\\\bCUTOFF\\\\b"
+            },
+            {
+              "regexp": "\\\\bCUTOFS\\\\b"
+            },
+            {
+              "regexp": "\\\\bCYCLES\\\\b"
+            },
+            {
+              "regexp": "\\\\bCVB\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
