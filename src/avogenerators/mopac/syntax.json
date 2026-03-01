@@ -472,6 +472,36 @@
               "regexp": "\\\\bNSURF\\\\b"
             },
             {
+              "regexp": "\\\\bOCTET\\\\b"
+            },
+            {
+              "regexp": "\\\\bOLDCAV\\\\b"
+            },
+            {
+              "regexp": "\\\\bOLDENS\\\\b"
+            },
+            {
+              "regexp": "\\\\bOLDFPC\\\\b"
+            },
+            {
+              "regexp": "\\\\bOLDGEO\\\\b"
+            },
+            {
+              "regexp": "\\\\bOMIN\\\\b"
+            },
+            {
+              "regexp": "\\\\bOPEN\\\\b"
+            },
+            {
+              "regexp": "\\\\bOPT\\\\b"
+            },
+            {
+              "regexp": "\\\\bOPT-X\\\\b"
+            },
+            {
+              "regexp": "\\\\bOUTPUT\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
