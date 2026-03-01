@@ -781,6 +781,18 @@
               "regexp": "\\\\bUHF\\\\b"
             },
             {
+              "regexp": "\\\\bVDW\\\\b"
+            },
+            {
+              "regexp": "\\\\bVDWM\\\\b"
+            },
+            {
+              "regexp": "\\\\bVECTORS\\\\b"
+            },
+            {
+              "regexp": "\\\\bVELOCITY\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
