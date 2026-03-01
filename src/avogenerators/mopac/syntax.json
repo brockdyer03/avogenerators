@@ -328,6 +328,30 @@
               "regexp": "\\\\bKING\\\\b"
             },
             {
+              "regexp": "\\\\bLARGE\\\\b"
+            },
+            {
+              "regexp": "\\\\bLBFGS\\\\b"
+            },
+            {
+              "regexp": "\\\\bLET\\\\b"
+            },
+            {
+              "regexp": "\\\\bLEWIS\\\\b"
+            },
+            {
+              "regexp": "\\\\bLINMIN\\\\b"
+            },
+            {
+              "regexp": "\\\\bLOCAL\\\\b"
+            },
+            {
+              "regexp": "\\\\bLOCATE-TS\\\\b"
+            },
+            {
+              "regexp": "\\\\bLOG\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
