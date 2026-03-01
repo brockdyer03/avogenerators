@@ -352,6 +352,66 @@
               "regexp": "\\\\bLOG\\\\b"
             },
             {
+              "regexp": "\\\\bMAXCI\\\\b"
+            },
+            {
+              "regexp": "\\\\bMECI\\\\b"
+            },
+            {
+              "regexp": "\\\\bMERS\\\\b"
+            },
+            {
+              "regexp": "\\\\bMETAL\\\\b"
+            },
+            {
+              "regexp": "\\\\bMICROS\\\\b"
+            },
+            {
+              "regexp": "\\\\bMINI\\\\b"
+            },
+            {
+              "regexp": "\\\\bMINMEP\\\\b"
+            },
+            {
+              "regexp": "\\\\bMMOK\\\\b"
+            },
+            {
+              "regexp": "\\\\bMNDO\\\\b"
+            },
+            {
+              "regexp": "\\\\bMNDOD\\\\b"
+            },
+            {
+              "regexp": "\\\\bMODE\\\\b"
+            },
+            {
+              "regexp": "\\\\bMOL_QMMM\\\\b"
+            },
+            {
+              "regexp": "\\\\bMOLDAT\\\\b"
+            },
+            {
+              "regexp": "\\\\bMOLSYM\\\\b"
+            },
+            {
+              "regexp": "\\\\bMOPAC\\\\b"
+            },
+            {
+              "regexp": "\\\\bMOZYME\\\\b"
+            },
+            {
+              "regexp": "\\\\bMRCI\\\\b"
+            },
+            {
+              "regexp": "\\\\bMRCI\\\\b"
+            },
+            {
+              "regexp": "\\\\bMS\\\\b"
+            },
+            {
+              "regexp": "\\\\bMULLIK\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
