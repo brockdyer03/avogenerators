@@ -280,6 +280,21 @@
               "regexp": "\\\\bGRAPHf\\\\b"
             },
             {
+              "regexp": "\\\\bHCORE\\\\b"
+            },
+            {
+              "regexp": "\\\\bHESSIAN\\\\b"
+            },
+            {
+              "regexp": "\\\\bH-PRIORITY\\\\b"
+            },
+            {
+              "regexp": "\\\\bHTML\\\\b"
+            },
+            {
+              "regexp": "\\\\bHYPERFINE\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
