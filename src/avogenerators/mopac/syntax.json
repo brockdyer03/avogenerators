@@ -412,6 +412,66 @@
               "regexp": "\\\\bMULLIK\\\\b"
             },
             {
+              "regexp": "\\\\bn**2\\\\b"
+            },
+            {
+              "regexp": "\\\\bNEWPDB\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOANCI\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOCOMMENTS\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOGPU\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOLOG\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOMM\\\\b"
+            },
+            {
+              "regexp": "\\\\bNONR\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOOPT\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOOPT-X\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOREOR\\\\b"
+            },
+            {
+              "regexp": "\\\\bNORESEQ\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOSWAP\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOSYM\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOTER\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOTHIEL\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOTXT\\\\b"
+            },
+            {
+              "regexp": "\\\\bNOXYZ\\\\b"
+            },
+            {
+              "regexp": "\\\\bNSPA\\\\b"
+            },
+            {
+              "regexp": "\\\\bNSURF\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
