@@ -778,6 +778,9 @@
               "regexp": "\\\\bTS\\\\b"
             },
             {
+              "regexp": "\\\\bUHF\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
