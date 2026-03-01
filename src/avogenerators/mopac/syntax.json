@@ -202,6 +202,39 @@
               "regexp": "\\\\bDUMP\\\\b"
             },
             {
+              "regexp": "\\\\bECHO\\\\b"
+            },
+            {
+              "regexp": "\\\\bEF\\\\b"
+            },
+            {
+              "regexp": "\\\\bEIGEN\\\\b"
+            },
+            {
+              "regexp": "\\\\bEIGS\\\\b"
+            },
+            {
+              "regexp": "\\\\bENPART\\\\b"
+            },
+            {
+              "regexp": "\\\\bEPS\\\\b"
+            },
+            {
+              "regexp": "\\\\bESP\\\\b"
+            },
+            {
+              "regexp": "\\\\bESPGRID\\\\b"
+            },
+            {
+              "regexp": "\\\\bESR\\\\b"
+            },
+            {
+              "regexp": "\\\\bEXCITED\\\\b"
+            },
+            {
+              "regexp": "\\\\bEXTERNAL\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
