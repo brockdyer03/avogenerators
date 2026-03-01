@@ -259,6 +259,27 @@
               "regexp": "\\\\bFORCETS\\\\b"
             },
             {
+              "regexp": "\\\\bGEO-OK\\\\b"
+            },
+            {
+              "regexp": "\\\\bGEO_DAT\\\\b"
+            },
+            {
+              "regexp": "\\\\bGEO_REF\\\\b"
+            },
+            {
+              "regexp": "\\\\bGNORM\\\\b"
+            },
+            {
+              "regexp": "\\\\bGRADIENTS\\\\b"
+            },
+            {
+              "regexp": "\\\\bGRAPH\\\\b"
+            },
+            {
+              "regexp": "\\\\bGRAPHf\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
