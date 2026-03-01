@@ -130,6 +130,78 @@
               "regexp": "\\\\bCVB\\\\b"
             },
             {
+              "regexp": "\\\\bDAMP\\\\b"
+            },
+                        {
+              "regexp": "\\\\bDATA\\\\b"
+            },
+            {
+              "regexp": "\\\\bDCART\\\\b"
+            },
+            {
+              "regexp": "\\\\bDDMAX\\\\b"
+            },
+            {
+              "regexp": "\\\\bDDMIN\\\\b"
+            },
+            {
+              "regexp": "\\\\bDEBUG\\\\b"
+            },
+            {
+              "regexp": "\\\\bDEBUG DELAY\\\\b"
+            },
+            {
+              "regexp": "\\\\bDENOUT\\\\b"
+            },
+            {
+              "regexp": "\\\\bDENOUF\\\\b"
+            },
+            {
+              "regexp": "\\\\bDENSITY\\\\b"
+            },
+            {
+              "regexp": "\\\\bDERI1\\\\b"
+            },
+            {
+              "regexp": "\\\\bDERI2\\\\b"
+            },
+            {
+              "regexp": "\\\\bDERITR\\\\b"
+            },
+            {
+              "regexp": "\\\\bDERIV\\\\b"
+            },
+            {
+              "regexp": "\\\\bDERNVO\\\\b"
+            },
+            {
+              "regexp": "\\\\bDFORCE\\\\b"
+            },
+            {
+              "regexp": "\\\\bDFP\\\\b"
+            },
+            {
+              "regexp": "\\\\bDIPOLE\\\\b"
+            },
+            {
+              "regexp": "\\\\bDISEX\\\\b"
+            },
+            {
+              "regexp": "\\\\bDISP\\\\b"
+            },
+            {
+              "regexp": "\\\\bDMAX\\\\b"
+            },
+            {
+              "regexp": "\\\\bDOUBLET\\\\b"
+            },
+            {
+              "regexp": "\\\\bDRC\\\\b"
+            },
+            {
+              "regexp": "\\\\bDUMP\\\\b"
+            },
+            {
               "regexp": "\\\\bPM3\\\\b"
             }
           ],
