@@ -1,11 +1,62 @@
 """Enums of simple input keywords for ORCA calculations"""
 
-from dataclasses import dataclass
-from enum import Enum, StrEnum, Flag, auto
-from ..utilities import Element
+from enum import StrEnum
+
+
+class SCF(StrEnum):
+    """Control SCF Thresholds and other settings."""
+
+    SLOPPYSCF    = "SloppySCF"
+    LOOSESCF     = "LooseSCF"
+    MEDIUMSCF    = "MEDIUMSCF"
+    STRONGSCF    = "StrongSCF"
+    TIGHTSCF     = "TightSCF"
+    VERYTIGHTSCF = "VeryTightSCF"
+    EXTREMESCF   = "ExtremeSCF"
+
+
+class Wavefunction(StrEnum):
+    """Control Reference Determinant(s)."""
+
+    RHF  = "RHF"
+    UHF  = "UHF"
+    ROHF = "ROHF"
+    RKS  = "RKS"
+    UKS  = "UKS"
+    ROKS = "ROKS"
+
+class Opt(StrEnum):
+    """Control Geometry Optimization Thresholds."""
+
+    LOOSEOPT     = "LooseOpt"
+    NORMALOPT    = "NormalOpt"
+    TIGHTOPT     = "TightOpt"
+    VERYTIGHTOPT = "VeryTightOpt"
+    OPTTS        = "OptTS"
+
+
+class Output(StrEnum):
+    """Control of Output."""
+
+    MINIPRINT   = "MiniPrint"
+    SMALLPRINT  = "SmallPrint"
+    NORMALPRINT = "NormalPrint"
+    LARGEPRINT  = "LargePrint"
+    PRINTGAP    = "PrintGap"
+    PRINTMOS    = "PrintMOs"
+    PRINTBASIS  = "PrintBasis"
+
+
+class Grid(StrEnum):
+    """Control of Numerical Integration Grids."""
+
+    DEFGRID1 = "DEFGRID1"
+    DEFGRID2 = "DEFGRID2"
+    DEFGRID3 = "DEFGRID3"
 
 
 class RIApproximation(StrEnum):
+    """Control of Resolution of the Identity and Chain of Spheres."""
 
     COSJXC     = "COSJXC"
     NOCOSX     = "NoCOSX"
@@ -19,6 +70,7 @@ class RIApproximation(StrEnum):
 
 
 class PartialCharges(StrEnum):
+    """Control of Partial Charges/Population Analysis."""
 
     AIM       = "AIM"
     CHELPG    = "CHELPG"
@@ -27,4 +79,17 @@ class PartialCharges(StrEnum):
     MAYER     = "Mayer"
     MBIS      = "MBIS"
     MULLIKEN  = "Mulliken"
+
+
+class Relativistic(StrEnum):
+    """Control of Relativistic Approximations."""
+
+    DKH1    = "DKH1"
+    DKH2    = "DKH2"
+    DKH     = DKH2
+    ZORA    = "ZORA"
+    IORA    = "IORA"
+    X2C     = "X2C"
+
+
 

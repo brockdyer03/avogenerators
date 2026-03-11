@@ -516,7 +516,3 @@ class AuxCBasisSet(AuxBasisSetEnum):
     AUG_CC_PWCVTZ_C = "aug-cc-pwCVTZ/C", ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  CorrelationConsistentBasisSet
     AUG_CC_PWCVQZ_C = "aug-cc-pwCVQZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  CorrelationConsistentBasisSet
     AUG_CC_PWCV5Z_C = "aug-cc-pwCV5Z/C", ("H-Ne", "Al-Ar"),                   CorrelationConsistentBasisSet
-
-
-
-
