@@ -3,6 +3,29 @@
 from enum import StrEnum
 
 
+class RunType(StrEnum):
+    """Types of calculations to run."""
+
+    SP = "SP"
+    ENGRAD = "EnGrad"
+    OPT = "Opt"
+    OPTTS = "OptTS"
+    FREQ = "Freq"
+    NUMFREQ = "NumFreq"
+
+
+class SemiEmpirical(StrEnum):
+    """Semi-empirical methods such as xTB, AM1, and PM3"""
+
+    GFN0_XTB = "GFN0-xTB"
+    GFN1_XTB = "GFN1-xTB"
+    GFN2_XTB = "GFN2-xTB"
+    GFN1_XTB_NATIVE = "Native-GFN1-xTB"
+    GFN2_XTB_NATIVE = "Native-GFN2-xTB"
+    AM1 = "AM1"
+    PM3 = "PM3"
+
+
 class SCF(StrEnum):
     """Control SCF Thresholds and other settings."""
 
@@ -15,7 +38,7 @@ class SCF(StrEnum):
     EXTREMESCF   = "ExtremeSCF"
 
 
-class Wavefunction(StrEnum):
+class DeterminantType(StrEnum):
     """Control Reference Determinant(s)."""
 
     RHF  = "RHF"
@@ -32,7 +55,6 @@ class Opt(StrEnum):
     NORMALOPT    = "NormalOpt"
     TIGHTOPT     = "TightOpt"
     VERYTIGHTOPT = "VeryTightOpt"
-    OPTTS        = "OptTS"
 
 
 class Output(StrEnum):
@@ -92,4 +114,10 @@ class Relativistic(StrEnum):
     X2C     = "X2C"
 
 
+class PNO(StrEnum):
+    """Control of Pair-Natural Orbital Settings."""
+
+    LOOSEPNO  = "LoosePNO"
+    NORMALPNO = "NormalPNO"
+    TIGHTPNO  = "TightPNO"
 
