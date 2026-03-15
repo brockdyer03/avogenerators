@@ -107,10 +107,10 @@ def generateInput(input_json: dict, debug: bool) -> dict:
 
     result = {
         'files': [
-            {'filename': filename,
-             'contents': generated_input,
-             'highlightStyles': ['default']}
-            ],
+            {'filename': filename, 
+            'contents': generated_input,
+            'highlightStyles': ['default']}
+        ],
         'mainFile': filename,
     }
 
@@ -118,3 +118,4 @@ def generateInput(input_json: dict, debug: bool) -> dict:
         result['warnings'] = warnings
 
     return result
+

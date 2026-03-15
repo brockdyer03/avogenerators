@@ -5,872 +5,283 @@
       "rules": [
         {
           "patterns": [
-            {
-              "regexp": "\\b[+-]?[.0-9]+(?:[eEdD][+-]?[.0-9]+)?\\b"
-            }
-          ],
-          "format": {
-            "preset": "literal"
-          }
-        },
-        {
-          "patterns": [
-            {
-              "regexp": "\\\\bAIDER\\\\b"
-            },
-            {
-              "regexp": "\\\\bAIGIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bAIGOUT\\\\b"
-            },
-            {
-              "regexp": "\\\\bALLBONDS\\\\b"
-            },
-            {
-              "regexp": "\\\\bALLVEC\\\\b"
-            },
-            {
-              "regexp": "\\\\bALT_A\\\\b"
-            },
-            {
-              "regexp": "\\\\bALT_R\\\\b"
-            },
-            {
-              "regexp": "\\\\bAM1\\\\b"
-            },
-            {
-              "regexp": "\\\\bAUTOSYM\\\\b"
-            },
-            {
-              "regexp": "\\\\bAM1\\\\b"
-            },
-            {
-              "regexp": "\\\\bBANANA\\\\b"
-            },
-            {
-              "regexp": "\\\\bBAR\\\\b"
-            },
-            {
-              "regexp": "\\\\bBCC\\\\b"
-            },
-            {
-              "regexp": "\\\\bBIGCYCLES\\\\b"
-            },
-            {
-              "regexp": "\\\\bBIRADICAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bBFGS\\\\b"
-            },
-            {
-              "regexp": "\\\\bBONDS\\\\b"
-            },
-            {
-              "regexp": "\\\\bBZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bCAMP\\\\b"
-            },
-            {
-              "regexp": "\\\\bCARTAB\\\\b"
-            },
-            {
-              "regexp": "\\\\bC.A.S.\\\\b"
-            },
-            {
-              "regexp": "\\\\bC.I.D.\\\\b"
-            },
-            {
-              "regexp": "\\\\bCHAINS\\\\b"
-            },
-            {
-              "regexp": "\\\\bCHECK\\\\b"
-            },
-            {
-              "regexp": "\\\\bCHARGE\\\\b"
-            },
-            {
-              "regexp": "\\\\bCHARGES\\\\b"
-            },
-            {
-              "regexp": "\\\\bCHARST\\\\b"
-            },
-            {
-              "regexp": "\\\\bCIS\\\\b"
-            },
-            {
-              "regexp": "\\\\bCISD\\\\b"
-            },
-            {
-              "regexp": "\\\\bCISDT\\\\b"
-            },
-            {
-              "regexp": "\\\\bCOMPARE\\\\b"
-            },
-            {
-              "regexp": "\\\\bCOMPFG\\\\b"
-            },
-            {
-              "regexp": "\\\\bCOSCCH\\\\b"
-            },
-            {
-              "regexp": "\\\\bCOSWRT\\\\b"
-            },
-            {
-              "regexp": "\\\\bCUTOFF\\\\b"
-            },
-            {
-              "regexp": "\\\\bCUTOFS\\\\b"
-            },
-            {
-              "regexp": "\\\\bCYCLES\\\\b"
-            },
-            {
-              "regexp": "\\\\bCVB\\\\b"
-            },
-            {
-              "regexp": "\\\\bDAMP\\\\b"
-            },
-                        {
-              "regexp": "\\\\bDATA\\\\b"
-            },
-            {
-              "regexp": "\\\\bDCART\\\\b"
-            },
-            {
-              "regexp": "\\\\bDDMAX\\\\b"
-            },
-            {
-              "regexp": "\\\\bDDMIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bDEBUG\\\\b"
-            },
-            {
-              "regexp": "\\\\bDEBUG DELAY\\\\b"
-            },
-            {
-              "regexp": "\\\\bDENOUT\\\\b"
-            },
-            {
-              "regexp": "\\\\bDENOUF\\\\b"
-            },
-            {
-              "regexp": "\\\\bDENSITY\\\\b"
-            },
-            {
-              "regexp": "\\\\bDERI1\\\\b"
-            },
-            {
-              "regexp": "\\\\bDERI2\\\\b"
-            },
-            {
-              "regexp": "\\\\bDERITR\\\\b"
-            },
-            {
-              "regexp": "\\\\bDERIV\\\\b"
-            },
-            {
-              "regexp": "\\\\bDERNVO\\\\b"
-            },
-            {
-              "regexp": "\\\\bDFORCE\\\\b"
-            },
-            {
-              "regexp": "\\\\bDFP\\\\b"
-            },
-            {
-              "regexp": "\\\\bDIPOLE\\\\b"
-            },
-            {
-              "regexp": "\\\\bDISEX\\\\b"
-            },
-            {
-              "regexp": "\\\\bDISP\\\\b"
-            },
-            {
-              "regexp": "\\\\bDMAX\\\\b"
-            },
-            {
-              "regexp": "\\\\bDOUBLET\\\\b"
-            },
-            {
-              "regexp": "\\\\bDRC\\\\b"
-            },
-            {
-              "regexp": "\\\\bDUMP\\\\b"
-            },
-            {
-              "regexp": "\\\\bECHO\\\\b"
-            },
-            {
-              "regexp": "\\\\bEF\\\\b"
-            },
-            {
-              "regexp": "\\\\bEIGEN\\\\b"
-            },
-            {
-              "regexp": "\\\\bEIGS\\\\b"
-            },
-            {
-              "regexp": "\\\\bENPART\\\\b"
-            },
-            {
-              "regexp": "\\\\bEPS\\\\b"
-            },
-            {
-              "regexp": "\\\\bESP\\\\b"
-            },
-            {
-              "regexp": "\\\\bESPGRID\\\\b"
-            },
-            {
-              "regexp": "\\\\bESR\\\\b"
-            },
-            {
-              "regexp": "\\\\bEXCITED\\\\b"
-            },
-            {
-              "regexp": "\\\\bEXTERNAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bFIELD\\\\b"
-            },
-            {
-              "regexp": "\\\\bFILL\\\\b"
-            },
-            {
-              "regexp": "\\\\bFLEPO\\\\b"
-            },
-            {
-              "regexp": "\\\\bFMAT\\\\b"
-            },
-            {
-              "regexp": "\\\\bFOCK\\\\b"
-            },
-            {
-              "regexp": "\\\\bFREQCY\\\\b"
-            },
-            {
-              "regexp": "\\\\bFORCE\\\\b"
-            },
-            {
-              "regexp": "\\\\bFORCETS\\\\b"
-            },
-            {
-              "regexp": "\\\\bGEO-OK\\\\b"
-            },
-            {
-              "regexp": "\\\\bGEO_DAT\\\\b"
-            },
-            {
-              "regexp": "\\\\bGEO_REF\\\\b"
-            },
-            {
-              "regexp": "\\\\bGNORM\\\\b"
-            },
-            {
-              "regexp": "\\\\bGRADIENTS\\\\b"
-            },
-            {
-              "regexp": "\\\\bGRAPH\\\\b"
-            },
-            {
-              "regexp": "\\\\bGRAPHf\\\\b"
-            },
-            {
-              "regexp": "\\\\bHCORE\\\\b"
-            },
-            {
-              "regexp": "\\\\bHESSIAN\\\\b"
-            },
-            {
-              "regexp": "\\\\bH-PRIORITY\\\\b"
-            },
-            {
-              "regexp": "\\\\bHTML\\\\b"
-            },
-            {
-              "regexp": "\\\\bHYPERFINE\\\\b"
-            },
-            {
-              "regexp": "\\\\bINDO\\\\b"
-            },
-            {
-              "regexp": "\\\\bINT\\\\b"
-            },
-            {
-              "regexp": "\\\\bINVERT\\\\b"
-            },
-            {
-              "regexp": "\\\\bIONIZE\\\\b"
-            },
-            {
-              "regexp": "\\\\bIRC\\\\b"
-            },
-            {
-              "regexp": "\\\\bISOTOPE\\\\b"
-            },
-            {
-              "regexp": "\\\\bITER\\\\b"
-            },
-            {
-              "regexp": "\\\\bITRY\\\\b"
-            },
-            {
-              "regexp": "\\\\bIUPD\\\\b"
-            },
-            {
-              "regexp": "\\\\bKINETIC\\\\b"
-            },
-            {
-              "regexp": "\\\\bKING\\\\b"
-            },
-            {
-              "regexp": "\\\\bLARGE\\\\b"
-            },
-            {
-              "regexp": "\\\\bLBFGS\\\\b"
-            },
-            {
-              "regexp": "\\\\bLET\\\\b"
-            },
-            {
-              "regexp": "\\\\bLEWIS\\\\b"
-            },
-            {
-              "regexp": "\\\\bLINMIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bLOCAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bLOCATE-TS\\\\b"
-            },
-            {
-              "regexp": "\\\\bLOG\\\\b"
-            },
-            {
-              "regexp": "\\\\bMAXCI\\\\b"
-            },
-            {
-              "regexp": "\\\\bMECI\\\\b"
-            },
-            {
-              "regexp": "\\\\bMERS\\\\b"
-            },
-            {
-              "regexp": "\\\\bMETAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bMICROS\\\\b"
-            },
-            {
-              "regexp": "\\\\bMINI\\\\b"
-            },
-            {
-              "regexp": "\\\\bMINMEP\\\\b"
-            },
-            {
-              "regexp": "\\\\bMMOK\\\\b"
-            },
-            {
-              "regexp": "\\\\bMNDO\\\\b"
-            },
-            {
-              "regexp": "\\\\bMNDOD\\\\b"
-            },
-            {
-              "regexp": "\\\\bMODE\\\\b"
-            },
-            {
-              "regexp": "\\\\bMOL_QMMM\\\\b"
-            },
-            {
-              "regexp": "\\\\bMOLDAT\\\\b"
-            },
-            {
-              "regexp": "\\\\bMOLSYM\\\\b"
-            },
-            {
-              "regexp": "\\\\bMOPAC\\\\b"
-            },
-            {
-              "regexp": "\\\\bMOZYME\\\\b"
-            },
-            {
-              "regexp": "\\\\bMRCI\\\\b"
-            },
-            {
-              "regexp": "\\\\bMRCI\\\\b"
-            },
-            {
-              "regexp": "\\\\bMS\\\\b"
-            },
-            {
-              "regexp": "\\\\bMULLIK\\\\b"
-            },
-            {
-              "regexp": "\\\\bn**2\\\\b"
-            },
-            {
-              "regexp": "\\\\bNEWPDB\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOANCI\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOCOMMENTS\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOGPU\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOLOG\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOMM\\\\b"
-            },
-            {
-              "regexp": "\\\\bNONR\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOOPT\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOOPT-X\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOREOR\\\\b"
-            },
-            {
-              "regexp": "\\\\bNORESEQ\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOSWAP\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOSYM\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOTER\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOTHIEL\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOTXT\\\\b"
-            },
-            {
-              "regexp": "\\\\bNOXYZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bNSPA\\\\b"
-            },
-            {
-              "regexp": "\\\\bNSURF\\\\b"
-            },
-            {
-              "regexp": "\\\\bOCTET\\\\b"
-            },
-            {
-              "regexp": "\\\\bOLDCAV\\\\b"
-            },
-            {
-              "regexp": "\\\\bOLDENS\\\\b"
-            },
-            {
-              "regexp": "\\\\bOLDFPC\\\\b"
-            },
-            {
-              "regexp": "\\\\bOLDGEO\\\\b"
-            },
-            {
-              "regexp": "\\\\bOMIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bOPEN\\\\b"
-            },
-            {
-              "regexp": "\\\\bOPT\\\\b"
-            },
-            {
-              "regexp": "\\\\bOPT-X\\\\b"
-            },
-            {
-              "regexp": "\\\\bOUTPUT\\\\b"
-            },
-            {
-              "regexp": "\\\\bP\\\\b"
-            },
-            {
-              "regexp": "\\\\bPDB\\\\b"
-            },
-            {
-              "regexp": "\\\\bPDBOUT\\\\b"
-            },
-            {
-              "regexp": "\\\\bPECI\\\\b"
-            },
-            {
-              "regexp": "\\\\bPI\\\\b"
-            },
-            {
-              "regexp": "\\\\bpKa\\\\b"
-            },
-            {
-              "regexp": "\\\\bPL\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM3\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-D3\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-DH+\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-DH2\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-DH2X\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-D3H4\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-D3H4X\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM6-ORG\\\\b"
-            },
-            {
-              "regexp": "\\\\bPMEP\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM7\\\\b"
-            },
-            {
-              "regexp": "\\\\bPM7-TS\\\\b"
-            },
-            {
-              "regexp": "\\\\bPMEPR\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOINT\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOINT1\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOINT2\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOLAR\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOTWRT\\\\b"
-            },
-            {
-              "regexp": "\\\\bPOWSQ\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRESSURE\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRNT\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRTCHAR\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRTINT\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRTMEP\\\\b"
-            },
-            {
-              "regexp": "\\\\bPRTXYZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bPULAY\\\\b"
-            },
-            {
-              "regexp": "\\\\bQMM\\\\b"
-            },
-            {
-              "regexp": "\\\\bQPMEP\\\\b"
-            },
-            {
-              "regexp": "\\\\bQUARTET\\\\b"
-            },
-            {
-              "regexp": "\\\\QUINTET\\\\b"
-            },
-            {
-              "regexp": "\\\\bRABBIT\\\\b"
-            },
-            {
-              "regexp": "\\\\bRAMA\\\\b"
-            },
-            {
-              "regexp": "\\\\bRAPID\\\\b"
-            },
-            {
-              "regexp": "\\\\bRECALC\\\\b"
-            },
-            {
-              "regexp": "\\\\bRE-LOCAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bRELSCF\\\\b"
-            },
-            {
-              "regexp": "\\\\bREORTHOG\\\\b"
-            },
-            {
-              "regexp": "\\\\bRESEQ\\\\b"
-            },
-            {
-              "regexp": "\\\\bRESIDUES\\\\b"
-            },
-            {
-              "regexp": "\\\\bRESTART\\\\b"
-            },
-            {
-              "regexp": "\\\\bRHF\\\\b"
-            },
-            {
-              "regexp": "\\\\bRMAX\\\\b"
-            },
-            {
-              "regexp": "\\\\bRMIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bROOT\\\\b"
-            },
-            {
-              "regexp": "\\\\bRSCAL\\\\b"
-            },
-            {
-              "regexp": "\\\\bRSOLV\\\\b"
-            },
-            {
-              "regexp": "\\\\bSADDLE\\\\b"
-            },
-            {
-              "regexp": "\\\\bSCALE\\\\b"
-            },
-            {
-              "regexp": "\\\\bSCFCRT\\\\b"
-            },
-            {
-              "regexp": "\\\\bSCINCR\\\\b"
-            },
-            {
-              "regexp": "\\\\bSEPTET\\\\b"
-            },
-            {
-              "regexp": "\\\\bSETPI\\\\b"
-            },
-            {
-              "regexp": "\\\\bSETUP\\\\b"
-            },
-            {
-              "regexp": "\\\\bSEXTET\\\\b"
-            },
-            {
-              "regexp": "\\\\bSHIFT\\\\b"
-            },
-            {
-              "regexp": "\\\\bSHUT\\\\b"
-            },
-            {
-              "regexp": "\\\\SIGMA\\\\b"
-            },
-            {
-              "regexp": "\\\\bSINGLET\\\\b"
-            },
-            {
-              "regexp": "\\\\bSITE\\\\b"
-            },
-            {
-              "regexp": "\\\\bSLOG\\\\b"
-            },
-            {
-              "regexp": "\\\\bSLOPE\\\\b"
-            },
-            {
-              "regexp": "\\\\bSMOOTH\\\\b"
-            },
-            {
-              "regexp": "\\\\bSNAP\\\\b"
-            },
-            {
-              "regexp": "\\\\bSPARKLE\\\\b"
-            },
-            {
-              "regexp": "\\\\bSPIN\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTART_RES\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTATIC\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTEP\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTEP1\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTEP2\\\\b"
-            },
-            {
-              "regexp": "\\\\bSTO3G\\\\b"
-            },
-            {
-              "regexp": "\\\\bSUPER\\\\b"
-            },
-            {
-              "regexp": "\\\\bSYMAVG\\\\b"
-            },
-            {
-              "regexp": "\\\\bSYMOIR\\\\b"
-            },
-            {
-              "regexp": "\\\\bSYMTRZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bSYMMETRY\\\\b"
-            },
-            {
-              "regexp": "\\\\bT\\\\b"
-            },
-            {
-              "regexp": "\\\\bTDIP\\\\b"
-            },
-            {
-              "regexp": "\\\\bTHERMO\\\\b"
-            },
-            {
-              "regexp": "\\\\bTHREADS\\\\b"
-            },
-            {
-              "regexp": "\\\\bTIMES\\\\b"
-            },
-            {
-              "regexp": "\\\\bT-PRIORITY\\\\b"
-            },
-            {
-              "regexp": "\\\\bTRANS\\\\b"
-            },
-            {
-              "regexp": "\\\\bTRIPLET\\\\b"
-            },
-            {
-              "regexp": "\\\\bTS\\\\b"
-            },
-            {
-              "regexp": "\\\\bUHF\\\\b"
-            },
-            {
-              "regexp": "\\\\bVDW\\\\b"
-            },
-            {
-              "regexp": "\\\\bVDWM\\\\b"
-            },
-            {
-              "regexp": "\\\\bVECTORS\\\\b"
-            },
-            {
-              "regexp": "\\\\bVELOCITY\\\\b"
-            },
-            {
-              "regexp": "\\\\bWRTCI\\\\b"
-            },
-            {
-              "regexp": "\\\\bWRTCONF\\\\b"
-            },
-            {
-              "regexp": "\\\\bWILLIAMS\\\\b"
-            },
-            {
-              "regexp": "\\\\bX-PRIORITY\\\\b"
-            },
-            {
-              "regexp": "\\\\bXENO\\\\b"
-            },
-            {
-              "regexp": "\\\\bXYZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bZ\\\\b"
-            },
-            {
-              "regexp": "\\\\bZERO\\\\b"
-            },
-            {
-              "regexp": "\\\\0SCF&\\\\b"
-            },
-            {
-              "regexp": "\\\\b1ELECTRON\\\\b"
-            },
-            {
-              "regexp": "\\\\b1SCF\\\\b"
-            }
+            { "string": "AIDER" },
+            { "string": "AIGIN" },
+            { "string": "AIGOUT" },
+            { "string": "ALLBONDS" },
+            { "string": "ALLVEC" },
+            { "string": "ALT_A" },
+            { "string": "ALT_R" },
+            { "string": "AM1" },
+            { "string": "AUTOSYM" },
+            { "string": "AM1" },
+            { "string": "BANANA" },
+            { "string": "BAR" },
+            { "string": "BCC" },
+            { "string": "BIGCYCLES" },
+            { "string": "BIRADICAL" },
+            { "string": "BFGS" },
+            { "string": "BONDS" },
+            { "string": "BZ" },
+            { "string": "CAMP" },
+            { "string": "CARTAB" },
+            { "string": "C.A.S." },
+            { "string": "C.I.D." },
+            { "string": "CHAINS" },
+            { "string": "CHECK" },
+            { "string": "CHARGE" },
+            { "string": "CHARGES" },
+            { "string": "CHARST" },
+            { "string": "CIS" },
+            { "string": "CISD" },
+            { "string": "CISDT" },
+            { "string": "COMPARE" },
+            { "string": "COMPFG" },
+            { "string": "COSCCH" },
+            { "string": "COSWRT" },
+            { "string": "CUTOFF" },
+            { "string": "CUTOFS" },
+            { "string": "CYCLES" },
+            { "string": "CVB" },
+            { "string": "DAMP" },
+            { "string": "DATA" },
+            { "string": "DCART" },
+            { "string": "DDMAX" },
+            { "string": "DDMIN" },
+            { "string": "DEBUG" },
+            { "string": "DEBUG DELAY" },
+            { "string": "DENOUT" },
+            { "string": "DENOUF" },
+            { "string": "DENSITY" },
+            { "string": "DERI1" },
+            { "string": "DERI2" },
+            { "string": "DERITR" },
+            { "string": "DERIV" },
+            { "string": "DERNVO" },
+            { "string": "DFORCE" },
+            { "string": "DFP" },
+            { "string": "DIPOLE" },
+            { "string": "DISEX" },
+            { "string": "DISP" },
+            { "string": "DMAX" },
+            { "string": "DOUBLET" },
+            { "string": "DRC" },
+            { "string": "DUMP" },
+            { "string": "ECHO" },
+            { "string": "EF" },
+            { "string": "EIGEN" },
+            { "string": "EIGS" },
+            { "string": "ENPART" },
+            { "string": "EPS" },
+            { "string": "ESP" },
+            { "string": "ESPGRID" },
+            { "string": "ESR" },
+            { "string": "EXCITED" },
+            { "string": "EXTERNAL" },
+            { "string": "FIELD" },
+            { "string": "FILL" },
+            { "string": "FLEPO" },
+            { "string": "FMAT" },
+            { "string": "FOCK" },
+            { "string": "FREQCY" },
+            { "string": "FORCE" },
+            { "string": "FORCETS" },
+            { "string": "GEO-OK" },
+            { "string": "GEO_DAT" },
+            { "string": "GEO_REF" },
+            { "string": "GNORM" },
+            { "string": "GRADIENTS" },
+            { "string": "GRAPH" },
+            { "string": "GRAPHf" },
+            { "string": "HCORE" },
+            { "string": "HESSIAN" },
+            { "string": "H-PRIORITY" },
+            { "string": "HTML" },
+            { "string": "HYPERFINE" },
+            { "string": "INDO" },
+            { "string": "INT" },
+            { "string": "INVERT" },
+            { "string": "IONIZE" },
+            { "string": "IRC" },
+            { "string": "ISOTOPE" },
+            { "string": "ITER" },
+            { "string": "ITRY" },
+            { "string": "IUPD" },
+            { "string": "KINETIC" },
+            { "string": "KING" },
+            { "string": "LARGE" },
+            { "string": "LBFGS" },
+            { "string": "LET" },
+            { "string": "LEWIS" },
+            { "string": "LINMIN" },
+            { "string": "LOCAL" },
+            { "string": "LOCATE-TS" },
+            { "string": "LOG" },
+            { "string": "MAXCI" },
+            { "string": "MECI" },
+            { "string": "MERS" },
+            { "string": "METAL" },
+            { "string": "MICROS" },
+            { "string": "MINI" },
+            { "string": "MINMEP" },
+            { "string": "MMOK" },
+            { "string": "MNDO" },
+            { "string": "MNDOD" },
+            { "string": "MODE" },
+            { "string": "MOL_QMMM" },
+            { "string": "MOLDAT" },
+            { "string": "MOLSYM" },
+            { "string": "MOPAC" },
+            { "string": "MOZYME" },
+            { "string": "MRCI" },
+            { "string": "MRCI" },
+            { "string": "MS" },
+            { "string": "MULLIK" },
+            { "string": "n**2" },
+            { "string": "NEWPDB" },
+            { "string": "NOANCI" },
+            { "string": "NOCOMMENTS" },
+            { "string": "NOGPU" },
+            { "string": "NOLOG" },
+            { "string": "NOMM" },
+            { "string": "NONR" },
+            { "string": "NOOPT" },
+            { "string": "NOOPT-X" },
+            { "string": "NOREOR" },
+            { "string": "NORESEQ" },
+            { "string": "NOSWAP" },
+            { "string": "NOSYM" },
+            { "string": "NOTER" },
+            { "string": "NOTHIEL" },
+            { "string": "NOTXT" },
+            { "string": "NOXYZ" },
+            { "string": "NSPA" },
+            { "string": "NSURF" },
+            { "string": "OCTET" },
+            { "string": "OLDCAV" },
+            { "string": "OLDENS" },
+            { "string": "OLDFPC" },
+            { "string": "OLDGEO" },
+            { "string": "OMIN" },
+            { "string": "OPEN" },
+            { "string": "OPT" },
+            { "string": "OPT-X" },
+            { "string": "OUTPUT" },
+            { "string": "P" },
+            { "string": "PDB" },
+            { "string": "PDBOUT" },
+            { "string": "PECI" },
+            { "string": "PI" },
+            { "string": "pKa" },
+            { "string": "PL" },
+            { "string": "PM3" },
+            { "string": "PM6" },
+            { "string": "PM6-D3" },
+            { "string": "PM6-DH+" },
+            { "string": "PM6-DH2" },
+            { "string": "PM6-DH2X" },
+            { "string": "PM6-D3H4" },
+            { "string": "PM6-D3H4X" },
+            { "string": "PM6-ORG" },
+            { "string": "PMEP" },
+            { "string": "PM7" },
+            { "string": "PM7-TS" },
+            { "string": "PMEPR" },
+            { "string": "POINT" },
+            { "string": "POINT1" },
+            { "string": "POINT2" },
+            { "string": "POLAR" },
+            { "string": "POTWRT" },
+            { "string": "POWSQ" },
+            { "string": "PRESSURE" },
+            { "string": "PRNT" },
+            { "string": "PRTCHAR" },
+            { "string": "PRTINT" },
+            { "string": "PRTMEP" },
+            { "string": "PRTXYZ" },
+            { "string": "PULAY" },
+            { "string": "QMM" },
+            { "string": "QPMEP" },
+            { "string": "QUARTET" },
+            { "string": "QUINTET" },
+            { "string": "RABBIT" },
+            { "string": "RAMA" },
+            { "string": "RAPID" },
+            { "string": "RECALC" },
+            { "string": "RE-LOCAL" },
+            { "string": "RELSCF" },
+            { "string": "REORTHOG" },
+            { "string": "RESEQ" },
+            { "string": "RESIDUES" },
+            { "string": "RESTART" },
+            { "string": "RHF" },
+            { "string": "RMAX" },
+            { "string": "RMIN" },
+            { "string": "ROOT" },
+            { "string": "RSCAL" },
+            { "string": "RSOLV" },
+            { "string": "SADDLE" },
+            { "string": "SCALE" },
+            { "string": "SCFCRT" },
+            { "string": "SCINCR" },
+            { "string": "SEPTET" },
+            { "string": "SETPI" },
+            { "string": "SETUP" },
+            { "string": "SEXTET" },
+            { "string": "SHIFT" },
+            { "string": "SHUT" },
+            { "string": "SIGMA" },
+            { "string": "SINGLET" },
+            { "string": "SITE" },
+            { "string": "SLOG" },
+            { "string": "SLOPE" },
+            { "string": "SMOOTH" },
+            { "string": "SNAP" },
+            { "string": "SPARKLE" },
+            { "string": "SPIN" },
+            { "string": "START_RES" },
+            { "string": "STATIC" },
+            { "string": "STEP" },
+            { "string": "STEP1" },
+            { "string": "STEP2" },
+            { "string": "STO3G" },
+            { "string": "SUPER" },
+            { "string": "SYMAVG" },
+            { "string": "SYMOIR" },
+            { "string": "SYMTRZ" },
+            { "string": "SYMMETRY" },
+            { "string": "T" },
+            { "string": "TDIP" },
+            { "string": "THERMO" },
+            { "string": "THREADS" },
+            { "string": "TIMES" },
+            { "string": "T-PRIORITY" },
+            { "string": "TRANS" },
+            { "string": "TRIPLET" },
+            { "string": "TS" },
+            { "string": "UHF" },
+            { "string": "VDW" },
+            { "string": "VDWM" },
+            { "string": "VECTORS" },
+            { "string": "VELOCITY" },
+            { "string": "WRTCI" },
+            { "string": "WRTCONF" },
+            { "string": "WILLIAMS" },
+            { "string": "X-PRIORITY" },
+            { "string": "XENO" },
+            { "string": "XYZ" },
+            { "string": "Z" },
+            { "string": "ZERO" },
+            { "string": "0SCF" },
+            { "string": "1ELECTRON" },
+            { "string": "1SCF" }
           ],
           "format": {
             "preset": "keyword"
-          },
-          "case_insensitive": true
-        }
-        {
-          "patterns": [
-            {
-              "regexp": "\\*\\s+library\\s+([^\\n]+)"
-            },
-            {
-              "regexp": "\\*\\s+library\\s+([^\\n]+)"
-            },
-            {
-              "regexp": "\\*\\s+library\\s+([^\\n]+)"
-            },
-            {
-              "regexp": "units\\s+(an|angstroms|au|atom|bohr|nm|nanometers|pm|picometers)"
-            },
-          ],
-          "format": {
-            "preset": "property"
-          }
-        },
-        {
-          "patterns": [
-            {
-              "regexp": "title\\s+\"(.+)\""
-            }
-          ],
-          "format": {
-            "preset": "title"
-          }
-        },
-        {
-          "patterns": [
-            {
-              "regexp": "#[^\n]*"
-            }
-          ],
-          "format": {
-            "preset": "comment"
           }
         }
       ]
     }
   ]
 }
+
