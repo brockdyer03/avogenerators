@@ -48,6 +48,7 @@ class DeterminantType(StrEnum):
     UKS  = "UKS"
     ROKS = "ROKS"
 
+
 class Opt(StrEnum):
     """Control Geometry Optimization Thresholds."""
 
@@ -60,13 +61,20 @@ class Opt(StrEnum):
 class Output(StrEnum):
     """Control of Output."""
 
-    MINIPRINT   = "MiniPrint"
-    SMALLPRINT  = "SmallPrint"
-    NORMALPRINT = "NormalPrint"
-    LARGEPRINT  = "LargePrint"
-    PRINTGAP    = "PrintGap"
-    PRINTMOS    = "PrintMOs"
-    PRINTBASIS  = "PrintBasis"
+    MINIPRINT        = "MiniPrint"
+    SMALLPRINT       = "SmallPrint"
+    NORMALPRINT      = "NormalPrint"
+    LARGEPRINT       = "LargePrint"
+    PRINTGAP         = "PrintGap"
+    PRINTMOS         = "PrintMOs"
+    PRINTBASIS       = "PrintBasis"
+    AIM              = "AIM"
+    XYZFILE          = "XYZFile"
+    PDBFILE          = "PDBFile"
+    UNO              = "UNO"
+    NOPROPFILE       = "NoPropFile"
+    KEEPTRANSDENSITY = "KeepTransDensity"
+
 
 
 class Grid(StrEnum):
