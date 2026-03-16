@@ -1,0 +1,308 @@
+# This file was automatically generated, do NOT modify manually!
+
+tabs = ["Basic", "Electric Properties"]
+
+["Title"]
+label = "Title"
+type = "string"
+default = ""
+toolTip = "Title of the input file (not recognized by ORCA)"
+tab = "Basic"
+
+["Filename Base"]
+label = "Filename Base"
+type = "string"
+default = "job"
+tab = "Basic"
+
+["Processor Cores"]
+label = "Number of Processes"
+type = "integer"
+default = 1
+minimum = 1
+tab = "Basic"
+
+["Memory"]
+label = "Memory"
+type = "integer"
+default = 4
+minimum = 1
+toolTip = "Total available memory (divided by nprocs to get memory per core)"
+tab = "Basic"
+
+["Calculation Type"]
+label = "Calculation Type"
+type = "stringList"
+default = 2
+values = [
+    "SP",
+    "EnGrad",
+    "Opt",
+    "OptTS",
+    "Freq",
+    "NumFreq",
+]
+toolTip = "Type of calculation to run"
+tab = "Basic"
+
+["Theory"]
+label = "Theory"
+type = "stringList"
+default = 0
+values = [
+    "r2SCAN-3c",
+    "PBEh-3c",
+    "B97-3c",
+    "wB97X-3c",
+    "LDA",
+    "PBE",
+    "B97M-V",
+    "B97M-D4",
+    "r2SCAN",
+    "PBE0",
+    "r2SCAN0",
+    "wB97X-D4",
+    "wB97X-V",
+    "wB97M-D4",
+    "wB97M-V",
+    "Pr2SCAN69",
+    "B2GP-PLYP",
+]
+tab = "Basic"
+
+["Basis"]
+label = "Basis"
+type = "stringList"
+default = 6
+values = [
+    "def2-SVP",
+    "def2-SVPD",
+    "cc-pVDZ",
+    "aug-cc-pVDZ",
+    "pc-1",
+    "aug-pc-1",
+    "def2-TZVP",
+    "def2-TZVPP",
+    "def2-TZVPPD",
+    "cc-pVTZ",
+    "aug-cc-pVTZ",
+    "pc-2",
+    "aug-pc-2",
+    "def2-QZVP",
+    "def2-QZVPP",
+    "def2-QZVPPD",
+    "cc-pVQZ",
+    "aug-cc-pVQZ",
+    "pc-3",
+    "aug-pc-3",
+]
+tab = "Basic"
+
+["Charge"]
+label = "Charge"
+type = "integer"
+default = 0
+tab = "Basic"
+
+["Multiplicity"]
+label = "Multiplicity"
+type = "integer"
+default = 1
+minimum = 1
+toolTip = "Calculated as 2S+1 where S is the number of unpaired electrons"
+tab = "Basic"
+
+["Solvent"]
+label = "Solvent"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "water",
+    "acetonitrile",
+    "acetone",
+    "ethanol",
+    "methanol",
+    "carbon tetrachloride",
+    "dichloromethane",
+    "chloroform",
+    "dimethylsulfoxide",
+    "n,n-dimethylformamide",
+    "n-hexane",
+    "toluene",
+    "pyridine",
+    "tetrahydrofuran",
+]
+tab = "Basic"
+
+["Solvation Model"]
+label = "Solvation Model"
+type = "stringList"
+default = 0
+values = [
+    "CPCM",
+    "SMD",
+    "COSMO_RS",
+    "ALPB",
+    "ddCOSMO",
+    "CPCMX",
+]
+tab = "Basic"
+
+["basic_disp_corr"]
+label = "Dispersion Correction"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "D3BJ",
+    "D3ZERO",
+    "D4",
+    "NL",
+    "SCNL",
+]
+tab = "Basic"
+
+["basic_print_mos"]
+label = "Print Molecular Orbitals"
+type = "boolean"
+default = true
+tab = "Basic"
+
+["basic_print_level"]
+label = "Print Level"
+type = "stringList"
+default = 2
+values = [
+    "MiniPrint",
+    "SmallPrint",
+    "NormalPrint",
+    "LargePrint",
+]
+tab = "Basic"
+
+["elprop_dipole"]
+label = "Dipole"
+type = "boolean"
+default = true
+toolTip = "Calculate dipole moment."
+tab = "Electric Properties"
+
+["elprop_quadrupole"]
+label = "Quadrupole"
+type = "boolean"
+default = false
+toolTip = "Calculate quadrupole moment."
+tab = "Electric Properties"
+
+["elprop_polar"]
+label = "Polar"
+type = "boolean"
+default = false
+toolTip = "Calculate dipole-dipole polarizability."
+tab = "Electric Properties"
+
+["elprop_polar_velocity"]
+label = "Velocity Polarizability"
+type = "boolean"
+default = false
+toolTip = "Calculate polarizability with respect to velocity perturbations."
+tab = "Electric Properties"
+
+["elprop_polar_dip_quad"]
+label = "Dipole-Quadrupole Polarizability"
+type = "boolean"
+default = false
+toolTip = "Calculate dipole-quadrupole polarizability."
+tab = "Electric Properties"
+
+["elprop_polar_quad_quad"]
+label = "Quadrupole-Quadrupole Polarizability"
+type = "boolean"
+default = false
+toolTip = "Calculate quadrupole-quadrupole polarizability."
+tab = "Electric Properties"
+
+["elprop_hyper_pol"]
+label = "Dip-Dip-Dip Hyperpolarizability"
+type = "boolean"
+default = false
+toolTip = "Calculate Dipole-Dipole Polarizability."
+tab = "Electric Properties"
+
+["elprop_freq_r"]
+label = "Real Frequency"
+type = "float"
+default = 0.0
+minimum = 0.0
+toolTip = "Purely real frequency, leave blank for static calculation."
+tab = "Electric Properties"
+
+["elprop_freq_i"]
+label = "Imaginary Frequency"
+type = "float"
+default = 0.0
+minimum = 0.0
+toolTip = "Purely imaginary frequency, leave blank for static calculation."
+tab = "Electric Properties"
+
+["elprop_solver"]
+label = "CP-SCF Solver"
+type = "string"
+default = "2"
+values = [
+    "CG",
+    "DIIS",
+    "Pople",
+]
+toolTip = "CG: Conjugate Gradient, DIIS: Direct Inversion in the Iterative Subspace."
+tab = "Electric Properties"
+
+["elprop_max_diis"]
+label = "Max DIIS Dimension"
+type = "integer"
+default = 5
+toolTip = "Maximum dimension of DIIS method."
+tab = "Electric Properties"
+
+["elprop_shift"]
+label = "DIIS Level Shift"
+type = "float"
+default = 0.2
+toolTip = "Level shift used in DIIS solver"
+tab = "Electric Properties"
+
+["elprop_tol"]
+label = "CP-SCF Convergence Tolerance"
+type = "float"
+default = 0.001
+toolTip = "Convergence of Coupled-Perturbed SCF Equations (norm of the residual)."
+tab = "Electric Properties"
+
+["elprop_max_iter"]
+label = "Maximum Iterations"
+type = "integer"
+default = 64
+toolTip = "Maximum number of iterations in the CP-SCF solver."
+tab = "Electric Properties"
+
+["elprop_print_level"]
+label = "Print Level"
+type = "integer"
+default = 2
+toolTip = "Control print level for electric property calculation."
+tab = "Electric Properties"
+
+["elprop_origin"]
+label = "Origin"
+type = "string"
+default = "3"
+values = [
+    "CenterOfElCharge",
+    "CenterOfNucCharge",
+    "CenterOfSpinDens",
+    "CenterOfMass",
+]
+toolTip = "Origin to use for electric properties."
+tab = "Electric Properties"
+
