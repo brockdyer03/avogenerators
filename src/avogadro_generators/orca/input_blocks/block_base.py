@@ -20,15 +20,21 @@ class BlockKeyword:
     ----------
     name : str
         Keyword name.
-    var_type : ORCAString | str | bool | int | float | Sequence
+    var_type : ORCAString or str or bool or int or float or Sequence
         Type of the variable, controls formatting in the input.
-    simple : bool, default=False
-        Mark the variable as being available as a simple input keyword.
+    options : tuple of var_type, optional
+        Tuple of known options for the keyword if they exist.
+    minimum : int or float, optional
+        The minimum possible value.
+    maximum : int or float, optional
+        The maximum possible value.
     """
 
     name: str
     var_type: ORCAString | str | bool | int | float | Sequence
-    simple: bool = False
+    options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None
+    minimum: int | float | None = None
+    maximum: int | float | None = None
 
 
 class BlockEnum(BlockKeyword, Enum):
@@ -55,9 +61,19 @@ class BlockEnum(BlockKeyword, Enum):
                 f"Improper type {type(value)} for keyword {self.name}!"
             )
 
-        output = " " * indent
+        output = " " * indent + f"{self.value} = "
         match self.var_type:
             case ORCAString():
+                output += f'"{value}"\n'
+            case str():
+                output += f"{value}\n"
+            case bool():
+                output += f"{value!s}\n"
+            case int():
+                output += f"{value}\n"
+            case float():
+                output += f"{value:8.6f}\n"
+            case Sequence():
                 ...
 
         return output

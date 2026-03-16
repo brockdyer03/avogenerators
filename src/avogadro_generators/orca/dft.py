@@ -70,12 +70,12 @@ class Functional:
 
 class Composite(StrEnum):
 
-    HF_3C     = "HF-3C"
-    B97_3C    = "B97-3C"
-    R2SCAN_3C = "r2SCAN-3C"
-    PBEH_3C   = "PBEh-3C"
-    B3LYP_3C  = "B3LYP-3C"
-    WB97X_3C  = "wB97X-3C"
+    HF_3C     = "HF-3c"
+    B97_3C    = "B97-3c"
+    R2SCAN_3C = "r2SCAN-3c"
+    PBEH_3C   = "PBEh-3c"
+    B3LYP_3C  = "B3LYP-3c"
+    WB97X_3C  = "wB97X-3c"
 
 
 class Functionals(Enum, Functional):
