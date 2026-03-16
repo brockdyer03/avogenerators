@@ -1,0 +1,123 @@
+"""Enums of simple input keywords for ORCA calculations"""
+
+from enum import StrEnum
+
+
+class RunType(StrEnum):
+    """Types of calculations to run."""
+
+    SP = "SP"
+    ENGRAD = "EnGrad"
+    OPT = "Opt"
+    OPTTS = "OptTS"
+    FREQ = "Freq"
+    NUMFREQ = "NumFreq"
+
+
+class SemiEmpirical(StrEnum):
+    """Semi-empirical methods such as xTB, AM1, and PM3"""
+
+    GFN0_XTB = "GFN0-xTB"
+    GFN1_XTB = "GFN1-xTB"
+    GFN2_XTB = "GFN2-xTB"
+    GFN1_XTB_NATIVE = "Native-GFN1-xTB"
+    GFN2_XTB_NATIVE = "Native-GFN2-xTB"
+    AM1 = "AM1"
+    PM3 = "PM3"
+
+
+class SCF(StrEnum):
+    """Control SCF Thresholds and other settings."""
+
+    SLOPPYSCF    = "SloppySCF"
+    LOOSESCF     = "LooseSCF"
+    MEDIUMSCF    = "MEDIUMSCF"
+    STRONGSCF    = "StrongSCF"
+    TIGHTSCF     = "TightSCF"
+    VERYTIGHTSCF = "VeryTightSCF"
+    EXTREMESCF   = "ExtremeSCF"
+
+
+class DeterminantType(StrEnum):
+    """Control Reference Determinant(s)."""
+
+    RHF  = "RHF"
+    UHF  = "UHF"
+    ROHF = "ROHF"
+    RKS  = "RKS"
+    UKS  = "UKS"
+    ROKS = "ROKS"
+
+class Opt(StrEnum):
+    """Control Geometry Optimization Thresholds."""
+
+    LOOSEOPT     = "LooseOpt"
+    NORMALOPT    = "NormalOpt"
+    TIGHTOPT     = "TightOpt"
+    VERYTIGHTOPT = "VeryTightOpt"
+
+
+class Output(StrEnum):
+    """Control of Output."""
+
+    MINIPRINT   = "MiniPrint"
+    SMALLPRINT  = "SmallPrint"
+    NORMALPRINT = "NormalPrint"
+    LARGEPRINT  = "LargePrint"
+    PRINTGAP    = "PrintGap"
+    PRINTMOS    = "PrintMOs"
+    PRINTBASIS  = "PrintBasis"
+
+
+class Grid(StrEnum):
+    """Control of Numerical Integration Grids."""
+
+    DEFGRID1 = "DEFGRID1"
+    DEFGRID2 = "DEFGRID2"
+    DEFGRID3 = "DEFGRID3"
+
+
+class RIApproximation(StrEnum):
+    """Control of Resolution of the Identity and Chain of Spheres."""
+
+    COSJXC     = "COSJXC"
+    NOCOSX     = "NoCOSX"
+    RI         = "RI" # Turns on Split-RI-J by default
+    NORI       = "NoRI"
+    RIJCOSX    = "RIJCOSX" # Default for Hybrid DFT
+    NORIJCOSX  = "NoRIJCOSX"
+    SPLITRIJ   = "Split-RI-J" # Default for non-Hybrid DFT
+    NOSPLITRIJ = "NoSplit-RI-J"
+    RIJK       = "RI-JK"
+
+
+class PartialCharges(StrEnum):
+    """Control of Partial Charges/Population Analysis."""
+
+    AIM       = "AIM"
+    CHELPG    = "CHELPG"
+    HIRSHFELD = "Hirshfeld"
+    LOEWDIN   = "Loewdin"
+    MAYER     = "Mayer"
+    MBIS      = "MBIS"
+    MULLIKEN  = "Mulliken"
+
+
+class Relativistic(StrEnum):
+    """Control of Relativistic Approximations."""
+
+    DKH1    = "DKH1"
+    DKH2    = "DKH2"
+    DKH     = DKH2
+    ZORA    = "ZORA"
+    IORA    = "IORA"
+    X2C     = "X2C"
+
+
+class PNO(StrEnum):
+    """Control of Pair-Natural Orbital Settings."""
+
+    LOOSEPNO  = "LoosePNO"
+    NORMALPNO = "NormalPNO"
+    TIGHTPNO  = "TightPNO"
+
