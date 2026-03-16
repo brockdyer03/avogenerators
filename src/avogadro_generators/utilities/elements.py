@@ -4,13 +4,18 @@ from enum import Enum
 
 class Element(Enum):
 
+    def __new__(cls, value):
+        self = object.__new__(cls)
+        self._value_ = value
+        return self
+
     def __str__(self):
         return self.name
-    
+
     @property
     def number(self) -> int:
         return self.value
-    
+
     @property
     def symbol(self) -> str:
         return self.name

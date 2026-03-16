@@ -10,7 +10,7 @@ class MP2(StrEnum):
     RI_MP2          = "RI-MP2"
     DLPNO_MP2       = "DLPNO-MP2"
     SCS_MP2         = "SCS-MP2"
-    SCS_MP2         = "SCS-MP2"
+    SOS_MP2         = "SOS-MP2"
     SCS_RI_MP2      = "SCS-RI-MP2"
     SOS_RI_MP2      = "SOS-RI-MP2"
     SCS_DLPNO_MP2   = "SCS-DLPNO-MP2"

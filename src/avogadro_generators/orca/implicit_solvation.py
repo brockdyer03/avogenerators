@@ -23,8 +23,12 @@ class SolventData:
     models: SolvationModel
 
 
-class Solvent(Enum, SolventData):
+class Solvent(SolventData, Enum):
 
+    def __str__(self):
+        return self.aliases[0]
+
+    s_NONE                           = ("",), 0
     s_111_TRICHLOROETHANE            = ("1,1,1-trichloroethane",),                     SM.CPCM | SM.SMD | SM.COSMO_RS
     s_112_TRICHLOROETHANE            = ("1,1,2-trichloroethane",),                     SM.CPCM | SM.SMD
     s_124_TRIMETHYLBENZENE           = ("1,2,4-trimethylbenzene",),                    SM.CPCM | SM.SMD | SM.COSMO_RS
@@ -210,7 +214,7 @@ class Solvent(Enum, SolventData):
     s_P_XYLENE                       = ("p-xylene",),                                  SM.CPCM | SM.SMD
 
 
-class XTBSolvent(Enum, SolventData):
+class XTBSolvent(SolventData, Enum):
     """Solvents available through the ALPB, ddCOSMO, or CPCMX methods
     
     Notes
@@ -219,6 +223,7 @@ class XTBSolvent(Enum, SolventData):
     GFN2-xTB implementations.
     """
 
+    s_NONE                           = (""), 0
     s_124_TRIMETHYLBENZENE           = ("1,2,4-trimethylbenzene",),                     SM.CPCMX
     s_12_DIBROMOETHANE               = ("1,2-dibromoethane",),                          SM.CPCMX
     s_14_DIOXANE                     = ("1,4-dioxane", "dioxane"),                                 SM.ALPB | SM.DDCOSMO

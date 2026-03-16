@@ -76,7 +76,6 @@ class Output(StrEnum):
     KEEPTRANSDENSITY = "KeepTransDensity"
 
 
-
 class Grid(StrEnum):
     """Control of Numerical Integration Grids."""
 

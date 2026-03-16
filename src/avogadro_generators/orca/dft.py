@@ -64,7 +64,7 @@ class Functional:
     corrections.
     """
 
-    name: str
+    func_name: str
     disp: Disp
 
 
@@ -78,7 +78,7 @@ class Composite(StrEnum):
     WB97X_3C  = "wB97X-3c"
 
 
-class Functionals(Enum, Functional):
+class Functionals(Functional, Enum):
     """Enumeration of all density functionals available via simple
     input keyword.
 
@@ -99,11 +99,11 @@ class Functionals(Enum, Functional):
 
     def __new__(
         cls,
-        name: str,
+        func_name: str,
         dispersion: Disp,
     ):
         functional = Functional.__new__(cls)
-        functional._value_ = name
+        functional._value_ = func_name
         return functional
 
     def __str__(self) -> str:

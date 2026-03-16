@@ -3,25 +3,25 @@ from enum import Enum
 from ..utilities import Element
 
 
-@dataclass(init=False, frozen=True)
+@dataclass(init=False, frozen=False)
 class BasisSet:
     """Dataclass to store a basis set's name, the supported elements,
     and the ECPs that may required for heavy elements.
     """
 
-    name: str
+    basis_name: str
     elements: tuple[Element]
     ecp: str | None
     ecp_elements: tuple[Element] | None
 
     def __init__(
         self,
-        name: str,
+        basis_name: str,
         element_ranges: tuple[str],
         ecp: str | None = None,
         ecp_elements: tuple[str] | None = None,
     ):
-        self.name = name
+        self.basis_name = basis_name
         self.elements = BasisSet.split_elements(element_ranges)
         self.ecp = ecp
         self.ecp_elements = (
@@ -36,33 +36,37 @@ class BasisSet:
         convert it into a tuple of ``Element`` that indicate all of the
         elements that are defined in the basis set.
         """
-        elements = ()
+        elements = []
         for elem_range in element_ranges:
             if "-" not in elem_range:
-                elements.append(Element(elem_range))
+                elements.append(Element[elem_range])
             else:
                 elem_range = elem_range.split("-")
-                start = Element(elem_range[0])
-                end = Element(elem_range[1])
+                start = Element[elem_range[0]]
+                end = Element[elem_range[1]]
                 for num in range(start.number, end.number+1):
                     elements.append(Element(num))
 
-        return elements
+        return tuple(elements)
 
 
-class BasisSetEnum(Enum, BasisSet):
+class BasisSetEnum(BasisSet, Enum):
     """Base class for basis set enums."""
 
     def __new__(
         cls,
-        name: str,
+        basis_name: str,
         element_ranges: tuple[str],
         ecp: str | None,
         ecp_elements: tuple[str] | None,
     ):
         self = BasisSet.__new__(cls)
-        self._name_ = name
+        self._name_ = basis_name
+        self._value_ = basis_name
         return self
+
+    def __str__(self):
+        return self.basis_name
 
 
 class PopleBasisSet(BasisSetEnum):
@@ -250,7 +254,7 @@ class JensenBasisSet(BasisSetEnum):
     AUG_PCX_4    = "aug-pcX-4",    ("Li-Ar",), None, None
 
 
-class CorrelationConsistentBasisSet(BasisSetEnum):
+class ccBasisSet(BasisSetEnum):
     """Correlation Consistent basis sets, cc-pVnZ"""
 
     CC_PVDZ               = "cc-pVDZ",          ("H-Ar", "Ca-Kr"),             None, None
@@ -419,13 +423,13 @@ class RelativisticBasisSet(BasisSetEnum):
     ANO_RCC_QZP  = "ANO-RCC-QZP",  ("H-Cm",), None, None
 
 
-@dataclass(init=False, frozen=True)
+@dataclass(init=False, frozen=False)
 class AuxBasisSet:
     """Dataclass to store a basis set's name, the supported elements,
     and the ECPs that may required for heavy elements.
     """
 
-    name: str
+    basis_name: str
     elements: tuple[Element]
     ecp: str | None
     ecp_elements: tuple[Element] | None
@@ -438,22 +442,23 @@ class AuxBasisSet:
         ecp: str | None = None,
         ecp_elements: tuple[str] | None = None,
     ):
-        self.name = name
+        self.basis_name = name
         self.elements = BasisSet.split_elements(element_ranges)
         self.parent_basis = parent_basis
 
 
-class AuxBasisSetEnum(Enum, AuxBasisSet):
+class AuxBasisSetEnum(AuxBasisSet, Enum):
     """Base class for auxiliary basis set enums."""
 
     def __new__(
         cls,
-        name: str,
+        basis_name: str,
         element_ranges: tuple[str],
         parent_basis: BasisSetEnum,
     ):
         self = BasisSet.__new__(cls)
-        self._name_ = name
+        self._name_ = basis_name
+        self._value_ = basis_name
         return self
 
 
@@ -470,15 +475,15 @@ class AuxJBasisSet(AuxBasisSetEnum):
 class AuxJKBasisSet(AuxBasisSetEnum):
     """Coulomb- and exchange-fitting auxiliary basis sets"""
 
-    DEF2_JK            = "def2/JK",            ("H-Rn"),          def2BasisSet
+    DEF2_JK            = "def2/JK",            ("H-Rn",),         def2BasisSet
     DEF2_JK_SMALL      = "def2/JKsmall",       ("H-Ra", "Th-Lr"), def2BasisSet
 
-    CC_PVTZ_JK         = "cc-pVTZ/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
-    CC_PVQZ_JK         = "cc-pVQZ/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
-    CC_PV5Z_JK         = "cc-pV5Z/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
-    AUG_CC_PVTZ_JK     = "aug-cc-pVTZ/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
-    AUG_CC_PVQZ_JK     = "aug-cc-pVQZ/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
-    AUG_CC_PV5Z_JK     = "aug-cc-pV5Z/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), CorrelationConsistentBasisSet
+    CC_PVTZ_JK         = "cc-pVTZ/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
+    CC_PVQZ_JK         = "cc-pVQZ/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
+    CC_PV5Z_JK         = "cc-pV5Z/JK",         ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
+    AUG_CC_PVTZ_JK     = "aug-cc-pVTZ/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
+    AUG_CC_PVQZ_JK     = "aug-cc-pVQZ/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
+    AUG_CC_PV5Z_JK     = "aug-cc-pV5Z/JK",     ("H", "B-F", "Al-Cl", "Ga-Br"), ccBasisSet
 
     SARC2_DKH_QZV_JK   = "SARC2-DKH-QZV/JK",   ("La-Lu",), RelativisticBasisSet
     SARC2_DKH_QZVP_JK  = "SARC2-DKH-QZVP/JK",  ("La-Lu",), RelativisticBasisSet
@@ -498,21 +503,21 @@ class AuxCBasisSet(AuxBasisSetEnum):
     DEF2_TZVPPD_C = "def2-TZVPPD/C",     ("H-La", "Hf-Rn"), def2BasisSet
     DEF2_QZVPPD_C = "def2-QZVPPD/C",     ("H-La", "Hf-Rn"), def2BasisSet
 
-    CC_PVDZ_C     = "cc-pVDZ/C",         ("H-Ar", "Ga-Kr"),                   CorrelationConsistentBasisSet
-    CC_PVTZ_C     = "cc-pVTZ/C",         ("H-Ar", "Sc-Kr"),                   CorrelationConsistentBasisSet
-    CC_PVQZ_C     = "cc-pVQZ/C",         ("H-Ar", "Sc-Kr"),                   CorrelationConsistentBasisSet
-    CC_PV5Z_C     = "cc-pV5Z/C",         ("H-Ar", "Ga-Kr"),                   CorrelationConsistentBasisSet
-    CC_PV6Z_C     = "cc-pV6Z/C",         ("H-He", "B-Ne",  "Al-Ar"),          CorrelationConsistentBasisSet
-    AUG_CC_PVDZ_C = "aug-cc-pVDZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Ga-Kr"), CorrelationConsistentBasisSet
-    AUG_CC_PVTZ_C = "aug-cc-pVTZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Sc-Kr"), CorrelationConsistentBasisSet
-    AUG_CC_PVQZ_C = "aug-cc-pVQZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Sc-Kr"), CorrelationConsistentBasisSet
-    AUG_CC_PV5Z_C = "aug-cc-pV5Z/C",     ("H-Ne", "Al-Ar", "Ga-Kr"),          CorrelationConsistentBasisSet
-    AUG_CC_PV6Z_C   = "aug-cc-pV6Z/C",   ("H-He", "B-Ne", "Al-Ar"),           CorrelationConsistentBasisSet
-    CC_PWCVDZ_C     = "cc-pwCVDZ/C",     ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  CorrelationConsistentBasisSet
-    CC_PWCVTZ_C     = "cc-pwCVTZ/C",     ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  CorrelationConsistentBasisSet
-    CC_PWCVQZ_C     = "cc-pwCVQZ/C",     ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  CorrelationConsistentBasisSet
-    CC_PWCV5Z_C     = "cc-pwCV5Z/C",     ("H-Ne", "Al-Ar"),                   CorrelationConsistentBasisSet
-    AUG_CC_PWCVDZ_C = "aug-cc-pwCVDZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  CorrelationConsistentBasisSet
-    AUG_CC_PWCVTZ_C = "aug-cc-pwCVTZ/C", ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  CorrelationConsistentBasisSet
-    AUG_CC_PWCVQZ_C = "aug-cc-pwCVQZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  CorrelationConsistentBasisSet
-    AUG_CC_PWCV5Z_C = "aug-cc-pwCV5Z/C", ("H-Ne", "Al-Ar"),                   CorrelationConsistentBasisSet
+    CC_PVDZ_C     = "cc-pVDZ/C",         ("H-Ar", "Ga-Kr"),                   ccBasisSet
+    CC_PVTZ_C     = "cc-pVTZ/C",         ("H-Ar", "Sc-Kr"),                   ccBasisSet
+    CC_PVQZ_C     = "cc-pVQZ/C",         ("H-Ar", "Sc-Kr"),                   ccBasisSet
+    CC_PV5Z_C     = "cc-pV5Z/C",         ("H-Ar", "Ga-Kr"),                   ccBasisSet
+    CC_PV6Z_C     = "cc-pV6Z/C",         ("H-He", "B-Ne",  "Al-Ar"),          ccBasisSet
+    AUG_CC_PVDZ_C = "aug-cc-pVDZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Ga-Kr"), ccBasisSet
+    AUG_CC_PVTZ_C = "aug-cc-pVTZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Sc-Kr"), ccBasisSet
+    AUG_CC_PVQZ_C = "aug-cc-pVQZ/C",     ("H-He", "Be-Ne", "Mg-Ar", "Sc-Kr"), ccBasisSet
+    AUG_CC_PV5Z_C = "aug-cc-pV5Z/C",     ("H-Ne", "Al-Ar", "Ga-Kr"),          ccBasisSet
+    AUG_CC_PV6Z_C   = "aug-cc-pV6Z/C",   ("H-He", "B-Ne", "Al-Ar"),           ccBasisSet
+    CC_PWCVDZ_C     = "cc-pwCVDZ/C",     ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  ccBasisSet
+    CC_PWCVTZ_C     = "cc-pwCVTZ/C",     ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  ccBasisSet
+    CC_PWCVQZ_C     = "cc-pwCVQZ/C",     ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  ccBasisSet
+    CC_PWCV5Z_C     = "cc-pwCV5Z/C",     ("H-Ne", "Al-Ar"),                   ccBasisSet
+    AUG_CC_PWCVDZ_C = "aug-cc-pwCVDZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  ccBasisSet
+    AUG_CC_PWCVTZ_C = "aug-cc-pwCVTZ/C", ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  ccBasisSet
+    AUG_CC_PWCVQZ_C = "aug-cc-pwCVQZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  ccBasisSet
+    AUG_CC_PWCV5Z_C = "aug-cc-pwCV5Z/C", ("H-Ne", "Al-Ar"),                   ccBasisSet

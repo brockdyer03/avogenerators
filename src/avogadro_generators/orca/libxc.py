@@ -135,7 +135,6 @@ class SimpleLibXC(StrEnum):
     SOS1_R2SCAN0_2   = "SOS1-R2SCAN0-2"    # mgga_x_r2scan + mgga_c_r2scan
 
 
-
 class ExchangeLibXC(StrEnum):
 
     @classmethod
