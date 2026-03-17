@@ -399,9 +399,14 @@ class ElPropTab:
         return tab
 
 
-class MethodTab:
-    """Class for writing the %method tab"""
-    ...
+class BasisTab:
+    """Class for writing the %basis tab"""
+
+    inputs = {
+        "basis_"
+    }
+
+
 
 
 if __name__ == "__main__":
