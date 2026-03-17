@@ -6,24 +6,33 @@ from enum import StrEnum
 class RunType(StrEnum):
     """Types of calculations to run."""
 
-    SP = "SP"
-    ENGRAD = "EnGrad"
-    OPT = "Opt"
-    OPTTS = "OptTS"
-    FREQ = "Freq"
+    SP      = "SP"
+    ENGRAD  = "EnGrad"
+    OPT     = "Opt"
+    OPTTS   = "OptTS"
+    FREQ    = "Freq"
     NUMFREQ = "NumFreq"
 
 
 class SemiEmpirical(StrEnum):
     """Semi-empirical methods such as xTB, AM1, and PM3"""
 
+    # xTB-based methods
     GFN0_XTB = "GFN0-xTB"
     GFN1_XTB = "GFN1-xTB"
     GFN2_XTB = "GFN2-xTB"
     GFN1_XTB_NATIVE = "Native-GFN1-xTB"
     GFN2_XTB_NATIVE = "Native-GFN2-xTB"
-    AM1 = "AM1"
-    PM3 = "PM3"
+
+    # NDO-based methods
+    AM1     = "AM1"
+    PM3     = "PM3"
+    MNDO    = "MNDO"
+    ZINDO_1 = "ZINDO/1"
+    ZINDO_2 = "ZINDO/2"
+    ZINDO_S = "ZINDO/S"
+    ZNDDO_1 = "ZNDDO/1"
+    ZNDDO_2 = "ZNDDO/2"
 
 
 class SCF(StrEnum):

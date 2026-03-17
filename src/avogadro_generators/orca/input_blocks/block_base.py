@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from collections.abc import Sequence
 from typing import NewType
 from enum import Enum
-import builtins
 
 
 #: Strings that are specially recognized by ORCA, for example in the
@@ -19,9 +18,9 @@ class BlockKeyword:
 
     Attributes
     ----------
-    name : str
+    key_name : str
         Keyword name.
-    _dtype : ORCAString or str or bool or int or float or Sequence
+    _dtype : ORCAString or str or bool or int or float or Sequence or dict
         Type of the variable, controls formatting in the input.
     options : tuple of dtype, optional
         Tuple of known options for the keyword if they exist.
@@ -38,9 +37,9 @@ class BlockKeyword:
     """
 
     key_name: str
-    _dtype: ORCAString | str | bool | int | float | Sequence
-    options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None
-    default: ORCAString | str | bool | int | float | Sequence | None = None
+    _dtype: type[ORCAString] | type[str] | type[bool] | type[int] | type[float] | type[Sequence] | type[dict]
+    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = None
+    default: ORCAString | str | bool | int | float | Sequence | dict | None = None
     minimum: int | float | None = None
     maximum: int | float | None = None
 
@@ -57,7 +56,9 @@ class BlockKeyword:
         elif self._dtype is float:
             return "float"
         elif self._dtype is Sequence:
-            return "sequence"
+            return "string"
+        elif self._dtype is dict:
+            return "string"
         else:
             raise ValueError(
                 f"Invalid Type {self._dtype} for BlockEnum member {self}.\n"
@@ -80,38 +81,6 @@ class BlockEnum(BlockKeyword, Enum):
         self = BlockKeyword.__new__(cls)
         self._value_ = key_name
         return self
-
-    def format(
-        self,
-        value: ORCAString | str | bool | int | float | Sequence,
-        indent: int = 4,
-    ) -> str:
-        """Format a keyword with its value."""
-        if not isinstance(value, self._dtype):
-            raise TypeError(
-                f"Improper type {type(value)} for keyword {self.key_name}!"
-            )
-
-        output = " " * indent + f"{self.value} = "
-        match self._dtype:
-            case ORCAString():
-                output += f'"{value}"\n'
-            case str():
-                output += f"{value}\n"
-            case bool():
-                output += f"{value!s}\n"
-            case int():
-                output += f"{value}\n"
-            case float():
-                output += f"{value:8.6f}\n"
-            case Sequence():
-                for item in value[:-1]:
-                    output += f"{item}, "
-                output += f"{value[-1]}\n"
-
-        return output
-
-
 
 
 

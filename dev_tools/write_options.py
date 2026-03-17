@@ -399,6 +399,11 @@ class ElPropTab:
         return tab
 
 
+class MethodTab:
+    """Class for writing the %method tab"""
+    ...
+
+
 if __name__ == "__main__":
     orca_toml = Path(__file__).parent.parent / "src/avogadro_generators/orca/options.toml"
 
