@@ -300,36 +300,42 @@ patterns = [
     { string = "SOS1-R2SCAN-QIDH", caseSensitive = false },
     { string = "SOS1-R2SCAN0-2",   caseSensitive = false },
     # MP2
-    { regex = '^(?:RI-()|S[CO]S-()|OO-()|F12(?:-D|D|\/D)?-()|DLPNO-){0,3}MP2$' },
+    { regexp = '\b(?:RI-()|S[CO]S-()|OO-()|F12(?:-D|D|\/D)?-()|DLPNO-){0,3}MP2\s' },
     # Coupled-Cluster methods
-    { regexp = '^(?:RI|DLPNO)?-?CCSD(?:\(T1?\))?(?:-F12(?:D|\/D)?(?:\/RI)?)?$' },
+    { regexp = '\b(?:RI|DLPNO)?-?CCSD(?:\(T1?\))?(?:-F12(?:D|\/D)?(?:\/RI)?)?\s' },
     # LibXC Functionals - This is deliberately left vague.
-    { regexp = '^(?:hyb_)?(?:lda|m?gga)_(?:xc|[xc]{1})_?[a-z0-9_]*$' },
+    { regexp = '\b(?:hyb_)?(?:lda|m?gga)_(?:xc|[xc]{1})_?[a-z0-9_]*\s' },
 ]
 
 [[default.rules]]
 format.preset = "basis"
 patterns = [
     # STO-nG
-    { regexp = '^STO-[0-9]*G$' },
-    # Pople sets without parentheses
-    { regexp = '^m?[346]-[23]1*\+*G\*{0,2}[SP]{0,2}$' },
-    # Pople sets with parentheses
-    { regexp = '^[346]-[23]1*\+*G\([23]?[dfp]{1,2},?[23]?[dfp]{0,2}\)$' },
+    { regexp = '\bSTO-[0-9]*G\s' },
+    # Pople basis sets
+    { regexp = '\bm?[346]-[23][12]*\+*G(?:\([23]?[dfp]{1,2},?[23]?[dfp]{0,2}\)|\**)?[SP]{0,2}\s' },
     # def2 basis sets, some of the AuxJ variants, and all of the AuxC variants
-    { regexp = '^(?:ma-)?def2-m?[STQ]?[ZVPD()]{1,5}(?:\(-f\))?(?:\/J|\/C)?$' },
+    { regexp = '\b(?:ma-)?def2-m?[STQ]?[ZVPD()]{1,5}(?:\(-f\))?(?:\/J|\/C)?\s' },
     # def2/J, def2/JK, def2/JKsmall, x2c/J, SARC/J
-    { regexp = '^(?:def2|x2c|SARC)(?:\/J|\/JK)(?:small)?$' },
+    { regexp = '\b(?:def2|x2c|SARC)(?:\/J|\/JK)(?:small)?\s' },
     # Jensen polarization consistent (pc) basis sets
-    { regexp = '^(?:aug-)?pc[XJH]?S?(?:seg)?-[0-9]?$' },
+    { regexp = '\b(?:aug-)?pc[XJH]?S?(?:seg)?-[0-9]?\s' },
     # Correlation Consistent cc-pVnZ basis sets
-    { regexp = '^(?:m?aug)?(?:apr)?(?:may)?(?:ju[nl]?)?-?cc-p[wC]{0,2}V[DTQ56]?(?:[DTQ56]|\([DTQ56]?\+d\))Z(?:-DK3?)?(?:\/JK|\/C)?$' },
+    { regexp = '\b(?:m?aug)?(?:apr)?(?:may)?(?:ju[nl]?)?-?cc-p[wC]{0,2}V[DTQ56]?(?:[DTQ56]|\([DTQ56]?\+d\))Z(?:-DK3?)?(?:\/JK|\/C)?\s' },
     # DKH, ZORA, SARC/SARC2 basis sets
-    { regexp = '^(?:ma-)?(?:SARC-|SARC2-)?(?:DKH-|ZORA-)?(?:def2-)?m?[STQ]?[ZVPD()]{1,5}\(?-?f?\)?(?:\/JK)?$' },
+    { regexp = '\b(?:ma-)?(?:SARC-|SARC2-)?(?:DKH-|ZORA-){1}(?:def2-)?m?[STQ]?[ZVPD()]{1,5}\(?-?f?\)?(?:\/JK)?\s' },
     # x2c basis sets
-    { regexp = '^x2c-[STQ][VZ]{1,2}[P()]{1,3}all(?:-2c)?(?:-s)?$' },
+    { regexp = '\bx2c-[STQ][VZ]{1,2}[P()]{1,3}all(?:-2c)?(?:-s)?\s' },
     # ANO-RCC Basis Sets
-    { regexp = '^ANO-RCC-(?:Full|[DTQ]ZP)$' },
+    { regexp = '\bANO-RCC-(?:Full|[DTQ]ZP)\s' },
 ]
 
-
+[[default.rules]]
+format.preset = "block"
+patterns = [
+    { regexp = '%[a-zA-Z2]+\s?' },
+    { regexp = 'end\s?' },
+    { regexp = '\* xyz' },
+    { regexp = '\*' },
+    { regexp = '!' },
+]
