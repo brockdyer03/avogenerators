@@ -83,5 +83,19 @@ class BlockEnum(BlockKeyword, Enum):
         return self
 
 
+class NestedBlockEnum(BlockKeyword, Enum):
+    """Class for handling nested blocks, such as the TRAH section of %scf."""
 
+    def __new__(
+        cls,
+        key_name: str,
+        _dtype: ORCAString | str | bool | int | float | Sequence,
+        options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
+        default: ORCAString | str | bool | int | float | Sequence | None = None,
+        minimum: int | float | None = None,
+        maximum: int | float | None = None,
+    ):
+        self = BlockKeyword.__new__(cls)
+        self._value_ = key_name
+        return self
 
