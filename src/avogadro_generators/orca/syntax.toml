@@ -21,6 +21,26 @@ patterns = [
     { regexp = '\b((?:CPCMC?|SMD|COSMORS){1}\([\w,-]*\))\s', caseSensitive = false },
     # Avoid capturing RI-<method>
     { regexp = '\b(RI){1}\h', caseSensitive = false},
+    # Dn dispersion corrections
+    { regexp = '\b(D[34](?:BJ|ZERO|0|TZ)?)\s', caseSensitive = false },
+    # SCFCONV<n>
+    { regexp = '\b(SCFCONV[0-9]+)\s', caseSensitive = false},
+    # Spin-Orbit Coupling
+    { regexp = '\b((?:RI-)?SOMF(?:\([14]X\))?)\s', caseSensitive = false },
+    { regexp = '\b(VEff(?:\(-2X\))?-SOC)\s', caseSensitive = false },
+    # Storage formats for numbers
+    { regexp = '\b((?:U?C)?(?:Float|Double))\s', caseSensitive = false },
+    # Population analysis
+    { regexp = '\b(ChElPG(?:Large)?)\s', caseSensitive = false },
+    { regexp = '\b((?:No)?Hirshfeld)\s', caseSensitive = false },
+    { regexp = '\b((?:No)?Loewdin)\s',   caseSensitive = false },
+    { regexp = '\b((?:No)?Mayer)\s',     caseSensitive = false },
+    { regexp = '\b((?:No)?Mulliken)\s',  caseSensitive = false },
+    { regexp = '\b((?:No)?NPA)\s',       caseSensitive = false },
+    { regexp = '\b((?:No)?NBO)\s',       caseSensitive = false },
+    { regexp = '\b((?:All|No|(?:No)?Reduced)?Pop)\s', caseSensitive = false },
+    # NEB
+    { regexp = '\b((?:Fast-|Loose-|Tight-)?NEB(?:-CI|-TS|-IDPP)?)\s', caseSensitive = false },
     # Everything else
     { string = "SP",               caseSensitive = false},
     { string = "EnGrad",           caseSensitive = false},
@@ -50,15 +70,51 @@ patterns = [
     { string = "NoSplit-RI-J",     caseSensitive = false},
     { string = "RI-JK",            caseSensitive = false},
     { string = "AIM",              caseSensitive = false},
-    { string = "CHELPG",           caseSensitive = false},
-    { string = "Hirshfeld",        caseSensitive = false},
-    { string = "Loewdin",          caseSensitive = false},
-    { string = "Mayer",            caseSensitive = false},
     { string = "MBIS",             caseSensitive = false},
-    { string = "Mulliken",         caseSensitive = false},
     { string = "ZORA",             caseSensitive = false},
     { string = "IORA",             caseSensitive = false},
     { string = "X2C",              caseSensitive = false},
+    { string = "DLU-X2C",          caseSensitive = false},
+    { string = "RelDLU",           caseSensitive = false},
+    { string = "Rel1C",            caseSensitive = false},
+    { string = "RelFull",          caseSensitive = false},
+    { string = "PAtom",            caseSensitive = false},
+    { string = "PModel",           caseSensitive = false},
+    { string = "Hueckel",          caseSensitive = false},
+    { string = "HCore",            caseSensitive = false},
+    { string = "MORead",           caseSensitive = false},
+    { string = "AutoStart",        caseSensitive = false},
+    { string = "NoAutoStart",      caseSensitive = false},
+    { string = "NoIter",           caseSensitive = false},
+    { string = "KeepInts",         caseSensitive = false},
+    { string = "ReadInts",         caseSensitive = false},
+    { string = "CalcGuessEnergy",  caseSensitive = false},
+    { string = "DIIS",             caseSensitive = false},
+    { string = "NoDIIS",           caseSensitive = false},
+    { string = "KDIIS",            caseSensitive = false},
+    { string = "TRAH",             caseSensitive = false},
+    { string = "NoTRAH",           caseSensitive = false},
+    { string = "SOSCF",            caseSensitive = false},
+    { string = "NoSOSCF",          caseSensitive = false},
+    { string = "Damp",             caseSensitive = false},
+    { string = "NoDamp",           caseSensitive = false},
+    { string = "LShift",           caseSensitive = false},
+    { string = "NoLShift",         caseSensitive = false},
+    { string = "EasyConv",         caseSensitive = false},
+    { string = "NormalConv",       caseSensitive = false},
+    { string = "SlowConv",         caseSensitive = false},
+    { string = "VerySlowConv",     caseSensitive = false},
+    { string = "FracOcc",          caseSensitive = false},
+    { string = "Smear",            caseSensitive = false},
+    { string = "NoSmear",          caseSensitive = false},
+    { string = "FOD",              caseSensitive = false},
+    { string = "ZEff-SOC",         caseSensitive = false},
+    { string = "AMFI",             caseSensitive = false},
+    { string = "Direct",           caseSensitive = false},
+    { string = "Conv",             caseSensitive = false},
+    { string = "CheapInts",        caseSensitive = false},
+    { string = "NoCheapInts",      caseSensitive = false},
+
 ]
 
 [[default.rules]]
@@ -362,12 +418,24 @@ patterns = [
     { string = "SOS1-R2SCAN-CIDH", caseSensitive = false },
     { string = "SOS1-R2SCAN-QIDH", caseSensitive = false },
     { string = "SOS1-R2SCAN0-2",   caseSensitive = false },
+    # Wavefunction Theory
+    { string = "DMRG", caseSensitive = false },
     # MP2, including arbitrary ordering of prefixes
     { regexp = '\b((?:(?:RI|S[CO]S|OO|DLPNO|F12(?:\/D|D)?)-){0,3}MP2)\s', caseSensitive = false },
     # Coupled-Cluster methods
     { regexp = '\b((?:RI|DLPNO)?-?CCSD(?:\(T1?\))?(?:-F12(?:D|\/D)?(?:\/RI)?)?)\s', caseSensitive = false },
     # LibXC Functionals - This is deliberately left vague.
     { regexp = '\b((?:hyb_)?(?:lda|m?gga)_(?:xc|[xc]{1})_?[a-z0-9_]*)\s' },
+    # AutoCI Methods
+    { regexp = '\b(AutoCI-(?:(?:C[CI][SDTQ[\]()]{1,5}(?:-[1-9])?|(?:MP[234](?:\(SDQ\))?))))\s', caseSensitive = false },
+    # NEVPT2
+    { regexp = '\b((?:SC-|RI-|FIC-|DLPNO-)?NEVPT2)\s', caseSensitive = false },
+    # CASPT2 and CAS(2)
+    { regexp = '\b((?:RI-|DCD-){0,2}CAS(?:PT2|\(2\)))\s', caseSensitive = false },
+    # MRCI
+    { regexp = '\b((?:M|SO)R(?:CI(?:\+Q)?|ACPF|AQCC|DDCI[123](?:\+Q)?))\s', caseSensitive = false },
+    # EOM-CC
+    { regexp = '\b((?:EE-|IP-|EA-)?(?:ST)?EOM-(?:DLPNO-)?CCSD)\s', caseSensitive = false },
 ]
 
 [[default.rules]]
