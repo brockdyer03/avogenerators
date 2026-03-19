@@ -45,10 +45,11 @@ class BlockKeyword:
 
     @property
     def dtype(self) -> str:
-        if self._dtype is ORCAString:
-            return "string"
-        elif self._dtype is str:
-            return "string"
+        if self._dtype is ORCAString or self._dtype is str:
+            if self.options is not None:
+                return "stringList"
+            else:
+                return "string"
         elif self._dtype is bool:
             return "boolean"
         elif self._dtype is int:

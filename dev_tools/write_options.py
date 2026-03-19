@@ -291,7 +291,10 @@ class BlockTab(ABC):
             tab += f'label = "{val.label}"\n'
             tab += f'type = "{val.dtype}"\n'
             if val.dtype == "string" and val.default is not None:
-                tab += f'default = "{val.default}"\n'
+                if val.options is None:
+                    tab += f'default = "{val.default}"\n'
+                else:
+                    tab += f'default = {val.default}\n'
             elif val.dtype == "boolean" and val.default is not None:
                 tab += f"default = {str(val.default).lower()}\n"
             elif val.default is not None:
@@ -517,91 +520,91 @@ class BasisTab(BlockTab):
             toolTip="Set the highest allowed angular momentum (-1 means do not set limit)",
             label="AutoAux L Limit",
         ),
-        "basis_autoaux_f_0": BlockOption(
-            keyword=Basis.AUTOAUXF_0,
-            toolTip="Factor by which to increase the maximal s-exponent.",
-            label="AutoAux F[0]",
-        ),
-        "basis_autoaux_f_1": BlockOption(
-            keyword=Basis.AUTOAUXF_1,
-            toolTip="Factor by which to increase the maximal p-exponent.",
-            label="AutoAux F[1]",
-        ),
-        "basis_autoaux_f_2": BlockOption(
-            keyword=Basis.AUTOAUXF_2,
-            toolTip="Factor by which to increase the maximal d-exponent.",
-            label="AutoAux F[2]",
-        ),
-        "basis_autoaux_f_3": BlockOption(
-            keyword=Basis.AUTOAUXF_3,
-            toolTip="Factor by which to increase the maximal f-exponent.",
-            label="AutoAux F[3]",
-        ),
-        "basis_autoaux_f_4": BlockOption(
-            keyword=Basis.AUTOAUXF_4,
-            toolTip="Factor by which to increase the maximal g-exponent.",
-            label="AutoAux F[4]",
-        ),
-        "basis_autoaux_f_5": BlockOption(
-            keyword=Basis.AUTOAUXF_5,
-            toolTip="Factor by which to increase the maximal h-exponent.",
-            label="AutoAux F[5]",
-        ),
-        "basis_autoaux_f_6": BlockOption(
-            keyword=Basis.AUTOAUXF_6,
-            toolTip="Factor by which to increase the maximal i-exponent.",
-            label="AutoAux F[6]",
-        ),
-        "basis_autoaux_f_7": BlockOption(
-            keyword=Basis.AUTOAUXF_7,
-            toolTip="Factor by which to increase the maximal j-exponent.",
-            label="AutoAux F[7]",
-        ),
-        "basis_autoaux_B_0": BlockOption(
-            keyword=Basis.AUTOAUXB_0,
-            toolTip="Even-tempered expansion factor for the s-shell.",
-            label="AutoAux B[0]",
-        ),
-        "basis_autoaux_B_1": BlockOption(
-            keyword=Basis.AUTOAUXB_1,
-            toolTip="Even-tempered expansion factor for the p-shell.",
-            label="AutoAux B[1]",
-        ),
-        "basis_autoaux_B_2": BlockOption(
-            keyword=Basis.AUTOAUXB_2,
-            toolTip="Even-tempered expansion factor for the d-shell.",
-            label="AutoAux B[2]",
-        ),
-        "basis_autoaux_B_3": BlockOption(
-            keyword=Basis.AUTOAUXB_3,
-            toolTip="Even-tempered expansion factor for the f-shell.",
-            label="AutoAux B[3]",
-        ),
-        "basis_autoaux_B_4": BlockOption(
-            keyword=Basis.AUTOAUXB_4,
-            toolTip="Even-tempered expansion factor for the g-shell.",
-            label="AutoAux B[4]",
-        ),
-        "basis_autoaux_B_5": BlockOption(
-            keyword=Basis.AUTOAUXB_5,
-            toolTip="Even-tempered expansion factor for the h-shell.",
-            label="AutoAux B[5]",
-        ),
-        "basis_autoaux_B_6": BlockOption(
-            keyword=Basis.AUTOAUXB_6,
-            toolTip="Even-tempered expansion factor for the i-shell.",
-            label="AutoAux B[6]",
-        ),
-        "basis_autoaux_B_7": BlockOption(
-            keyword=Basis.AUTOAUXB_7,
-            toolTip="Even-tempered expansion factor for the j-shell.",
-            label="AutoAux B[7]",
-        ),
-        "basis_autoaux_tight_b": BlockOption(
-            keyword=Basis.AUTOAUXTIGHTB,
-            toolTip="Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest.",
-            label="AutoAux Tight B",
-        ),
+        # "basis_autoaux_f_0": BlockOption(
+        #     keyword=Basis.AUTOAUXF_0,
+        #     toolTip="Factor by which to increase the maximal s-exponent.",
+        #     label="AutoAux F[0]",
+        # ),
+        # "basis_autoaux_f_1": BlockOption(
+        #     keyword=Basis.AUTOAUXF_1,
+        #     toolTip="Factor by which to increase the maximal p-exponent.",
+        #     label="AutoAux F[1]",
+        # ),
+        # "basis_autoaux_f_2": BlockOption(
+        #     keyword=Basis.AUTOAUXF_2,
+        #     toolTip="Factor by which to increase the maximal d-exponent.",
+        #     label="AutoAux F[2]",
+        # ),
+        # "basis_autoaux_f_3": BlockOption(
+        #     keyword=Basis.AUTOAUXF_3,
+        #     toolTip="Factor by which to increase the maximal f-exponent.",
+        #     label="AutoAux F[3]",
+        # ),
+        # "basis_autoaux_f_4": BlockOption(
+        #     keyword=Basis.AUTOAUXF_4,
+        #     toolTip="Factor by which to increase the maximal g-exponent.",
+        #     label="AutoAux F[4]",
+        # ),
+        # "basis_autoaux_f_5": BlockOption(
+        #     keyword=Basis.AUTOAUXF_5,
+        #     toolTip="Factor by which to increase the maximal h-exponent.",
+        #     label="AutoAux F[5]",
+        # ),
+        # "basis_autoaux_f_6": BlockOption(
+        #     keyword=Basis.AUTOAUXF_6,
+        #     toolTip="Factor by which to increase the maximal i-exponent.",
+        #     label="AutoAux F[6]",
+        # ),
+        # "basis_autoaux_f_7": BlockOption(
+        #     keyword=Basis.AUTOAUXF_7,
+        #     toolTip="Factor by which to increase the maximal j-exponent.",
+        #     label="AutoAux F[7]",
+        # ),
+        # "basis_autoaux_B_0": BlockOption(
+        #     keyword=Basis.AUTOAUXB_0,
+        #     toolTip="Even-tempered expansion factor for the s-shell.",
+        #     label="AutoAux B[0]",
+        # ),
+        # "basis_autoaux_B_1": BlockOption(
+        #     keyword=Basis.AUTOAUXB_1,
+        #     toolTip="Even-tempered expansion factor for the p-shell.",
+        #     label="AutoAux B[1]",
+        # ),
+        # "basis_autoaux_B_2": BlockOption(
+        #     keyword=Basis.AUTOAUXB_2,
+        #     toolTip="Even-tempered expansion factor for the d-shell.",
+        #     label="AutoAux B[2]",
+        # ),
+        # "basis_autoaux_B_3": BlockOption(
+        #     keyword=Basis.AUTOAUXB_3,
+        #     toolTip="Even-tempered expansion factor for the f-shell.",
+        #     label="AutoAux B[3]",
+        # ),
+        # "basis_autoaux_B_4": BlockOption(
+        #     keyword=Basis.AUTOAUXB_4,
+        #     toolTip="Even-tempered expansion factor for the g-shell.",
+        #     label="AutoAux B[4]",
+        # ),
+        # "basis_autoaux_B_5": BlockOption(
+        #     keyword=Basis.AUTOAUXB_5,
+        #     toolTip="Even-tempered expansion factor for the h-shell.",
+        #     label="AutoAux B[5]",
+        # ),
+        # "basis_autoaux_B_6": BlockOption(
+        #     keyword=Basis.AUTOAUXB_6,
+        #     toolTip="Even-tempered expansion factor for the i-shell.",
+        #     label="AutoAux B[6]",
+        # ),
+        # "basis_autoaux_B_7": BlockOption(
+        #     keyword=Basis.AUTOAUXB_7,
+        #     toolTip="Even-tempered expansion factor for the j-shell.",
+        #     label="AutoAux B[7]",
+        # ),
+        # "basis_autoaux_tight_b": BlockOption(
+        #     keyword=Basis.AUTOAUXTIGHTB,
+        #     toolTip="Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest.",
+        #     label="AutoAux Tight B",
+        # ),
     }
 
 
@@ -681,196 +684,196 @@ class SCFTab(BlockTab):
             toolTip="Toggle whether or not convergence is mandatory for the next calculation step.",
             label="Require Convergence",
         ),
-        "scf_hf_type": BlockOption(
-            keyword=SCF.HFTYP,
-            toolTip="Set the wavefunction type for HF calculations.",
-            label="HF Wavefunction Type",
-        ),
-        "scf_rohf_case": BlockOption(
-            keyword=SCF.ROHF_CASE,
-            toolTip="Type of ROHF wavefunction (only if HFTyp=ROHF).",
-            label="ROHF Case",
-        ),
-        "scf_rohf_nel": BlockOption(
-            keyword=SCF.ROHF_NEL,
-            toolTip="Number of open-shell electrons (only if HFTyp=ROHF).",
-            label="ROHF Num. Electrons",
-        ),
-        "scf_rohf_numop": BlockOption(
-            keyword=SCF.ROHF_NUMOP,
-            toolTip="Number of Operators (only if HFTyp=ROHF).",
-            label="ROHF Num. Operators",
-        ),
-        "scf_rohf_norb": BlockOption(
-            keyword=SCF.ROHF_NORB,
-            toolTip="Number of open-shell orbitals (only if HFTyp=ROHF).",
-            label="ROHF Num. Orbitals",
-        ),
-        # "scf_rohf_ref": BlockOption(
-        #     keyword=SCF.ROHF_REF,
-        #     toolTip="Specify orbital rotations (only if HFTyp=ROHF).",
-        #     label="ROHF Orbital Rotations",
+        # "scf_hf_type": BlockOption(
+        #     keyword=SCF.HFTYP,
+        #     toolTip="Set the wavefunction type for HF calculations.",
+        #     label="HF Wavefunction Type",
         # ),
-        # "scf_rohf_aforbs": BlockOption(
-        #     keyword=SCF.ROHF_AFORBS,
-        #     toolTip="User-defined anti-ferromagnetic orbitals (only if HFTyp=ROHF).",
-        #     label="ROHF AF Orbitals",
+        # "scf_rohf_case": BlockOption(
+        #     keyword=SCF.ROHF_CASE,
+        #     toolTip="Type of ROHF wavefunction (only if HFTyp=ROHF).",
+        #     label="ROHF Case",
         # ),
-        "scf_xtbfod": BlockOption(
-            keyword=SCF.XTBFOD,
-            toolTip="Enable FOD Printout for native-xTB calculations.",
-            label="xTB FOD Printout",
-        ),
-        "scf_use_xtb_mixer": BlockOption(
-            keyword=SCF.USEXTBMIXER,
-            toolTip="Use special SCF settings similar to the ones in xTB.",
-            label="Use xTB Mixer",
-        ),
-        "scf_soscf_max_step": BlockOption(
-            keyword=SCF.SOSCFMAXSTEP,
-            toolTip="Maximum SOSCF Step Size.",
-            label="SOSCF Max Step",
-        ),
-        "scf_soscf_block_diag": BlockOption(
-            keyword=SCF.SOSCFBLOCKDIAG,
-            toolTip="Perform a diagonalization of the occupied and virtual orbital blocks of the Fock matrix at the start.",
-            label="Use SOSCF Block Diagonalization",
-        ),
-        "scf_delta_scf_from_gs": BlockOption(
-            keyword=SCF.DELTASCFFROMGS,
-            toolTip="Start ΔSCF from an input converged ground state solution or assume it is an excited state solution.",
-            label="Start ΔSCF From Ground State",
-        ),
-        "scf_do_mom": BlockOption(
-            keyword=SCF.DOMOM,
-            toolTip="Use maximum overlap method.",
-            label="Use Maximum Overlap Method",
-        ),
-        "scf_keep_initial_ref": BlockOption(
-            keyword=SCF.KEEPINITIALREF,
-            toolTip="Always keep initial reference: IMOM.",
-            label="Keep Initial Reference",
-        ),
-        "scf_pmom": BlockOption(
-            keyword=SCF.PMOM,
-            toolTip="Use the PMOM metric instead of regular MOM.",
-            label="Use PMOM Metric",
-        ),
-        # "scf_alpha_conf": BlockOption(
-        #     keyword=SCF.ALPHACONF,
-        #     toolTip="Define occupation of frontier orbitals in the alpha spin channel.",
-        #     label="Alpha Configuration",
+        # "scf_rohf_nel": BlockOption(
+        #     keyword=SCF.ROHF_NEL,
+        #     toolTip="Number of open-shell electrons (only if HFTyp=ROHF).",
+        #     label="ROHF Num. Electrons",
         # ),
-        # "scf_beta_conf": BlockOption(
-        #     keyword=SCF.BETACONF,
-        #     toolTip="Define occupation of frontier orbitals in the beta spin channel.",
-        #     label="Beta Configuration",
+        # "scf_rohf_numop": BlockOption(
+        #     keyword=SCF.ROHF_NUMOP,
+        #     toolTip="Number of Operators (only if HFTyp=ROHF).",
+        #     label="ROHF Num. Operators",
         # ),
-        "scf_ionize_alpha": BlockOption(
-            keyword=SCF.IONIZEALPHA,
-            toolTip="Remove electrons from specified MOs in alpha spin channel.",
-            label="Ionize Alpha",
-        ),
-        "scf_ionize_beta": BlockOption(
-            keyword=SCF.IONIZEBETA,
-            toolTip="Remove electrons from specified MOs in beta spin channel.",
-            label="Ionize Beta",
-        ),
-        "scf_soscf_hess_up": BlockOption(
-            keyword=SCF.SOSCFHESSUP,
-            toolTip="Select quasi-Newton method for SOSCF Hessian Update.",
-            label="SOSCF Hessian Update Method",
-        ),
-        "scf_soscf_constraints": BlockOption(
-            keyword=SCF.SOSCFCONSTRAINTS,
-            toolTip="Activate freeze-and-release SOSCF.",
-            label="SOSCF Contraints",
-        ),
-        "scf_soscf_constrained_maxstep": BlockOption(
-            keyword=SCF.SOSCFCONSTRAINEDMAXSTEP,
-            toolTip="Maximum step size for the constrained SOSCF minimization.",
-            label="SOSCF Const. Max Step",
-        ),
-        "scf_soscf_conv_factor": BlockOption(
-            keyword=SCF.SOSCFCONVFACTOR,
-            toolTip="Factor to multiply convergence criteria with in the constrained minimization. e.g. 100 loosens the criteria by two orders of magnitude.",
-            label="SOSCF Conv. Factor",
-        ),
-        "scf_soscf_constrained_hess_up": BlockOption(
-            keyword=SCF.SOSCFCONSTRAINEDHESSUP,
-            toolTip="SOSCF Hessian update for constrained minimization.",
-            label="SOSCF Const. Hess. Update",
-        ),
-        "scf_soscf_write_constrained_gbw": BlockOption(
-            keyword=SCF.SOSCFWRITECONSTRAINEDGBW,
-            toolTip="Write a GBW file for the constrained solution.",
-            label="Write SOSCF Const. GBW",
-        ),
-        "scf_soscf_davidson_maxit": BlockOption(
-            keyword=SCF.SOSCFDAVIDSONMAXIT,
-            toolTip="Maximum number of iterations for Davidson diagonalization in SOSCF procedure.",
-            label="SOSCF Davidson MaxIter",
-        ),
-        "scf_soscf_davidson_tol_r": BlockOption(
-            keyword=SCF.SOSCFDAVIDSONTOLR,
-            toolTip="SOSCF Davidson convergence tolerance for the maximum component of each residual vector.",
-            label="SOSCF Davidson Residual Tol.",
-        ),
-        "scf_soscf_max_red": BlockOption(
-            keyword=SCF.SOSCFDAVIDSONMAXRED,
-            toolTip="Davidson maximum size of the Krylov subspace per target eigenvector, meaning this will be multiplied by the target saddle point order.",
-            label="SOSCF Davidson Max Reduction",
-        ),
-        "scf_soscf_davidson_fd_mode": BlockOption(
-            keyword=SCF.SOSCFDAVIDSONFDMODE,
-            toolTip="SOSCF Davidson finite difference stencil.",
-            label="SOSCF Davidson FD Stencil",
-        ),
-        "scf_soscf_davidson_fd_step": BlockOption(
-            keyword=SCF.SOSCFDAVIDSONFDSTEP,
-            toolTip="Davidson finite difference step size.",
-            label="SOSCF Davidson FD Step",
-        ),
-        "scf_soscf_precond_type": BlockOption(
-            keyword=SCF.SOSCFPRECONDTYPE,
-            toolTip="SOSCF Preconditioner to use",
-            label="SOSCF Preconditioner",
-        ),
-        "scf_soscf_precond_gamma": BlockOption(
-            keyword=SCF.SOSCFPRECONDGAMMA,
-            toolTip="Mixing Factor for GradientExpansion preconditioner",
-            label="SOSCF Preconditioner Gamma (GradientExpansion only)",
-        ),
-        "scf_soscf_gmf": BlockOption(
-            keyword=SCF.SOSCFGMF,
-            toolTip="Use generalized mode following (GMF).",
-            label="Use GMF",
-        ),
-        "scf_soscf_spo": BlockOption(
-            keyword=SCF.SOSCFSPO,
-            toolTip="GMF only: Optional user-defined target saddle point order (SPO).",
-            label="GMF Saddle Point Order (SPO)",
-        ),
-        "scf_soscf_spo_est": BlockOption(
-            keyword=SCF.SOSCFSPOEST,
-            toolTip="GMF only: Target saddle point order estimate.",
-            label="GMF SPO Estimate",
-        ),
-        "scf_soscf_update_spo_est": BlockOption(
-            keyword=SCF.SOSCFUPDATESPOEST,
-            toolTip="GMF only: Update the SPO with the number of negative eigenvalues of the first Davidson run.",
-            label="GMF Update SPO Estimate",
-        ),
-        "scf_soscf_spo_est_ntrial": BlockOption(
-            keyword=SCF.SOSCFSPOESTNTRIAL,
-            toolTip="GMF Only: How many eigenvectors of the Hessian to target more for the SPO estimate.",
-            label="GMF SPO Num Eigenvectors",
-        ),
-        "scf_soscf_update_spo_thresh": BlockOption(
-            keyword=SCF.SOSCFUPDATESPOTHRESH,
-            toolTip="GMF Only: Only eigenvalues below this threshold are considered negative enough for the SPO estimate.",
-            label="GMF SPO Eigenvalue Threshold",
-        ),
+        # "scf_rohf_norb": BlockOption(
+        #     keyword=SCF.ROHF_NORB,
+        #     toolTip="Number of open-shell orbitals (only if HFTyp=ROHF).",
+        #     label="ROHF Num. Orbitals",
+        # ),
+        # # "scf_rohf_ref": BlockOption(
+        # #     keyword=SCF.ROHF_REF,
+        # #     toolTip="Specify orbital rotations (only if HFTyp=ROHF).",
+        # #     label="ROHF Orbital Rotations",
+        # # ),
+        # # "scf_rohf_aforbs": BlockOption(
+        # #     keyword=SCF.ROHF_AFORBS,
+        # #     toolTip="User-defined anti-ferromagnetic orbitals (only if HFTyp=ROHF).",
+        # #     label="ROHF AF Orbitals",
+        # # ),
+        # "scf_xtbfod": BlockOption(
+        #     keyword=SCF.XTBFOD,
+        #     toolTip="Enable FOD Printout for native-xTB calculations.",
+        #     label="xTB FOD Printout",
+        # ),
+        # "scf_use_xtb_mixer": BlockOption(
+        #     keyword=SCF.USEXTBMIXER,
+        #     toolTip="Use special SCF settings similar to the ones in xTB.",
+        #     label="Use xTB Mixer",
+        # ),
+        # "scf_soscf_max_step": BlockOption(
+        #     keyword=SCF.SOSCFMAXSTEP,
+        #     toolTip="Maximum SOSCF Step Size.",
+        #     label="SOSCF Max Step",
+        # ),
+        # "scf_soscf_block_diag": BlockOption(
+        #     keyword=SCF.SOSCFBLOCKDIAG,
+        #     toolTip="Perform a diagonalization of the occupied and virtual orbital blocks of the Fock matrix at the start.",
+        #     label="Use SOSCF Block Diagonalization",
+        # ),
+        # "scf_delta_scf_from_gs": BlockOption(
+        #     keyword=SCF.DELTASCFFROMGS,
+        #     toolTip="Start ΔSCF from an input converged ground state solution or assume it is an excited state solution.",
+        #     label="Start ΔSCF From Ground State",
+        # ),
+        # "scf_do_mom": BlockOption(
+        #     keyword=SCF.DOMOM,
+        #     toolTip="Use maximum overlap method.",
+        #     label="Use Maximum Overlap Method",
+        # ),
+        # "scf_keep_initial_ref": BlockOption(
+        #     keyword=SCF.KEEPINITIALREF,
+        #     toolTip="Always keep initial reference: IMOM.",
+        #     label="Keep Initial Reference",
+        # ),
+        # "scf_pmom": BlockOption(
+        #     keyword=SCF.PMOM,
+        #     toolTip="Use the PMOM metric instead of regular MOM.",
+        #     label="Use PMOM Metric",
+        # ),
+        # # "scf_alpha_conf": BlockOption(
+        # #     keyword=SCF.ALPHACONF,
+        # #     toolTip="Define occupation of frontier orbitals in the alpha spin channel.",
+        # #     label="Alpha Configuration",
+        # # ),
+        # # "scf_beta_conf": BlockOption(
+        # #     keyword=SCF.BETACONF,
+        # #     toolTip="Define occupation of frontier orbitals in the beta spin channel.",
+        # #     label="Beta Configuration",
+        # # ),
+        # "scf_ionize_alpha": BlockOption(
+        #     keyword=SCF.IONIZEALPHA,
+        #     toolTip="Remove electrons from specified MOs in alpha spin channel.",
+        #     label="Ionize Alpha",
+        # ),
+        # "scf_ionize_beta": BlockOption(
+        #     keyword=SCF.IONIZEBETA,
+        #     toolTip="Remove electrons from specified MOs in beta spin channel.",
+        #     label="Ionize Beta",
+        # ),
+        # "scf_soscf_hess_up": BlockOption(
+        #     keyword=SCF.SOSCFHESSUP,
+        #     toolTip="Select quasi-Newton method for SOSCF Hessian Update.",
+        #     label="SOSCF Hessian Update Method",
+        # ),
+        # "scf_soscf_constraints": BlockOption(
+        #     keyword=SCF.SOSCFCONSTRAINTS,
+        #     toolTip="Activate freeze-and-release SOSCF.",
+        #     label="SOSCF Contraints",
+        # ),
+        # "scf_soscf_constrained_maxstep": BlockOption(
+        #     keyword=SCF.SOSCFCONSTRAINEDMAXSTEP,
+        #     toolTip="Maximum step size for the constrained SOSCF minimization.",
+        #     label="SOSCF Const. Max Step",
+        # ),
+        # "scf_soscf_conv_factor": BlockOption(
+        #     keyword=SCF.SOSCFCONVFACTOR,
+        #     toolTip="Factor to multiply convergence criteria with in the constrained minimization. e.g. 100 loosens the criteria by two orders of magnitude.",
+        #     label="SOSCF Conv. Factor",
+        # ),
+        # "scf_soscf_constrained_hess_up": BlockOption(
+        #     keyword=SCF.SOSCFCONSTRAINEDHESSUP,
+        #     toolTip="SOSCF Hessian update for constrained minimization.",
+        #     label="SOSCF Const. Hess. Update",
+        # ),
+        # "scf_soscf_write_constrained_gbw": BlockOption(
+        #     keyword=SCF.SOSCFWRITECONSTRAINEDGBW,
+        #     toolTip="Write a GBW file for the constrained solution.",
+        #     label="Write SOSCF Const. GBW",
+        # ),
+        # "scf_soscf_davidson_maxit": BlockOption(
+        #     keyword=SCF.SOSCFDAVIDSONMAXIT,
+        #     toolTip="Maximum number of iterations for Davidson diagonalization in SOSCF procedure.",
+        #     label="SOSCF Davidson MaxIter",
+        # ),
+        # "scf_soscf_davidson_tol_r": BlockOption(
+        #     keyword=SCF.SOSCFDAVIDSONTOLR,
+        #     toolTip="SOSCF Davidson convergence tolerance for the maximum component of each residual vector.",
+        #     label="SOSCF Davidson Residual Tol.",
+        # ),
+        # "scf_soscf_max_red": BlockOption(
+        #     keyword=SCF.SOSCFDAVIDSONMAXRED,
+        #     toolTip="Davidson maximum size of the Krylov subspace per target eigenvector, meaning this will be multiplied by the target saddle point order.",
+        #     label="SOSCF Davidson Max Reduction",
+        # ),
+        # "scf_soscf_davidson_fd_mode": BlockOption(
+        #     keyword=SCF.SOSCFDAVIDSONFDMODE,
+        #     toolTip="SOSCF Davidson finite difference stencil.",
+        #     label="SOSCF Davidson FD Stencil",
+        # ),
+        # "scf_soscf_davidson_fd_step": BlockOption(
+        #     keyword=SCF.SOSCFDAVIDSONFDSTEP,
+        #     toolTip="Davidson finite difference step size.",
+        #     label="SOSCF Davidson FD Step",
+        # ),
+        # "scf_soscf_precond_type": BlockOption(
+        #     keyword=SCF.SOSCFPRECONDTYPE,
+        #     toolTip="SOSCF Preconditioner to use",
+        #     label="SOSCF Preconditioner",
+        # ),
+        # "scf_soscf_precond_gamma": BlockOption(
+        #     keyword=SCF.SOSCFPRECONDGAMMA,
+        #     toolTip="Mixing Factor for GradientExpansion preconditioner",
+        #     label="SOSCF Preconditioner Gamma (GradientExpansion only)",
+        # ),
+        # "scf_soscf_gmf": BlockOption(
+        #     keyword=SCF.SOSCFGMF,
+        #     toolTip="Use generalized mode following (GMF).",
+        #     label="Use GMF",
+        # ),
+        # "scf_soscf_spo": BlockOption(
+        #     keyword=SCF.SOSCFSPO,
+        #     toolTip="GMF only: Optional user-defined target saddle point order (SPO).",
+        #     label="GMF Saddle Point Order (SPO)",
+        # ),
+        # "scf_soscf_spo_est": BlockOption(
+        #     keyword=SCF.SOSCFSPOEST,
+        #     toolTip="GMF only: Target saddle point order estimate.",
+        #     label="GMF SPO Estimate",
+        # ),
+        # "scf_soscf_update_spo_est": BlockOption(
+        #     keyword=SCF.SOSCFUPDATESPOEST,
+        #     toolTip="GMF only: Update the SPO with the number of negative eigenvalues of the first Davidson run.",
+        #     label="GMF Update SPO Estimate",
+        # ),
+        # "scf_soscf_spo_est_ntrial": BlockOption(
+        #     keyword=SCF.SOSCFSPOESTNTRIAL,
+        #     toolTip="GMF Only: How many eigenvectors of the Hessian to target more for the SPO estimate.",
+        #     label="GMF SPO Num Eigenvectors",
+        # ),
+        # "scf_soscf_update_spo_thresh": BlockOption(
+        #     keyword=SCF.SOSCFUPDATESPOTHRESH,
+        #     toolTip="GMF Only: Only eigenvalues below this threshold are considered negative enough for the SPO estimate.",
+        #     label="GMF SPO Eigenvalue Threshold",
+        # ),
     }
 
 

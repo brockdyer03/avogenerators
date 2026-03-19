@@ -30,6 +30,8 @@ class Disp(Flag):
 
     The ``D3`` keyword automatically activates D3(BJ) dispersion in
     ORCA, so it is merely an alias for ``D3BJ`` here.
+
+    You can access members by string with ``Disp["<member_name>"]``
     """
 
     def __str__(self) -> str:

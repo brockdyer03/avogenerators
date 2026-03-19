@@ -32,10 +32,10 @@ class Basis(BlockEnum):
     # GTOCABSNAME  = "GTOCABSName",  str
 
     # Removal of linear dependence
-    PCDTRIMBAS   = "PCDTrimBas",   ORCAString, ("Overlap", "Coulomb")
-    PCDTRIMAUXJ  = "PCDTrimAuxJ",  ORCAString, ("Overlap", "Coulomb")
-    PCDTRIMAUXJK = "PCDTrimAuxJK", ORCAString, ("Overlap", "Coulomb")
-    PCDTRIMAUXC  = "PCDTrimAuxC",  ORCAString, ("Overlap", "Coulomb")
+    PCDTRIMBAS   = "PCDTrimBas",   ORCAString, 0, ("Overlap", "Coulomb")
+    PCDTRIMAUXJ  = "PCDTrimAuxJ",  ORCAString, 1, ("Overlap", "Coulomb")
+    PCDTRIMAUXJK = "PCDTrimAuxJK", ORCAString, 1, ("Overlap", "Coulomb")
+    PCDTRIMAUXC  = "PCDTrimAuxC",  ORCAString, 1, ("Overlap", "Coulomb")
     PCDTHRESH    = "PCDThresh",    float, -1
 
     # AutoAux Keywords

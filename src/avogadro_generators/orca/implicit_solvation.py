@@ -5,7 +5,10 @@ from dataclasses import dataclass
 
 
 class SolvationModel(Flag):
-    """Solvation models supported in ORCA."""
+    """Solvation models supported in ORCA.
+
+    Access members by string with ``SolvationModel["<member_name>"]``.
+    """
 
     CPCM     = auto()
     SMD      = auto()

@@ -35,7 +35,7 @@ class SemiEmpirical(StrEnum):
     ZNDDO_2 = "ZNDDO/2"
 
 
-class SCF(StrEnum):
+class SCFConv(StrEnum):
     """Control SCF Thresholds and other settings."""
 
     SLOPPYSCF    = "SloppySCF"
