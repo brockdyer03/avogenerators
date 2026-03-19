@@ -1,6 +1,6 @@
 # This file was automatically generated, do NOT modify manually!
 
-tabs = ["Basic", "Electric Properties"]
+tabs = ["Basic", "Basis", "SCF", "Electric Properties"]
 
 ["Title"]
 label = "Title"
@@ -305,4 +305,644 @@ values = [
 ]
 toolTip = "Origin to use for electric properties."
 tab = "Electric Properties"
+
+["basis_basis"]
+label = "Basis"
+type = "string"
+toolTip = "Specify a basis set."
+tab = "Basis"
+
+["basis_auxj"]
+label = "AuxJ"
+type = "string"
+toolTip = "Specify a Coulomb-fitting auxiliary basis set."
+tab = "Basis"
+
+["basis_auxjk"]
+label = "AuxJK"
+type = "string"
+toolTip = "Specify a Coulomb- and Exchange-fitting auxiliary basis set."
+tab = "Basis"
+
+["basis_auxc"]
+label = "AuxC"
+type = "string"
+toolTip = "Specify a Post-HF auxiliary basis set."
+tab = "Basis"
+
+["basis_cabs"]
+label = "CABS (F12 only)"
+type = "string"
+toolTip = "Specify a Complementary Auxiliary Basis Set (CABS) for F12 calculations."
+tab = "Basis"
+
+["basis_ecp"]
+label = "ECP"
+type = "string"
+toolTip = "Specify an Effective Core Potential (ECP)."
+tab = "Basis"
+
+["basis_ghost_ecp"]
+label = "Allow Ghost ECPs"
+type = "boolean"
+default = false
+toolTip = "Specify whether or not to use ECPs for Ghost atoms."
+tab = "Basis"
+
+["basis_decontract"]
+label = "Decontract All"
+type = "boolean"
+default = false
+toolTip = "Decontract all orbital and auxiliary basis sets."
+tab = "Basis"
+
+["basis_decontract_bas"]
+label = "Decontract Orbital Basis"
+type = "boolean"
+default = false
+toolTip = "Decontract only orbital basis sets."
+tab = "Basis"
+
+["basis_decontract_auxj"]
+label = "Decontract AuxJ Basis"
+type = "boolean"
+default = false
+toolTip = "Decontract only AuxJ basis sets."
+tab = "Basis"
+
+["basis_decontract_auxjk"]
+label = "Decontract AuxJK Basis"
+type = "boolean"
+default = false
+toolTip = "Decontract only AuxJK basis sets."
+tab = "Basis"
+
+["basis_decontract_auxc"]
+label = "Decontract AuxC Basis"
+type = "boolean"
+default = false
+toolTip = "Decontract only AuxC basis sets."
+tab = "Basis"
+
+["basis_decontract_cabs"]
+label = "Decontract CABS Basis"
+type = "boolean"
+default = false
+toolTip = "Decontract only CABS basis sets."
+tab = "Basis"
+
+["basis_pcd_trim_bas"]
+label = "Trim Orbital Basis"
+type = "string"
+default = "('Overlap', 'Coulomb')"
+toolTip = "Trim the orbital basis in the overlap metric."
+tab = "Basis"
+
+["basis_pcd_trim_auxj"]
+label = "Trim AuxJ Basis"
+type = "string"
+default = "('Overlap', 'Coulomb')"
+toolTip = "Trim the AuxJ basis in the Coulomb metric."
+tab = "Basis"
+
+["basis_pcd_trim_auxjk"]
+label = "Trim AuxJK Basis"
+type = "string"
+default = "('Overlap', 'Coulomb')"
+toolTip = "Trim the AuxJK basis in the Coulomb metric."
+tab = "Basis"
+
+["basis_pcd_trim_auxc"]
+label = "Trim AuxC Basis"
+type = "string"
+default = "('Overlap', 'Coulomb')"
+toolTip = "Trim the AuxC basis in the Coulomb metric."
+tab = "Basis"
+
+["basis_pcd_thresh"]
+label = "PCD Threshold"
+type = "float"
+default = -1
+toolTip = "Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0)."
+tab = "Basis"
+
+["basis_autoaux_size"]
+label = "AutoAux Size"
+type = "integer"
+default = 1
+minimum = 0
+maximum = 3
+toolTip = "Control size of AutoAux basis sets. Larger value means larger basis."
+tab = "Basis"
+
+["basis_autoaux_l_max"]
+label = "AutoAux L Max"
+type = "boolean"
+default = false
+toolTip = "Enable use of highest-possible angular momentum permitted by ORCA"
+tab = "Basis"
+
+["basis_autoaux_l_limit"]
+label = "AutoAux L Limit"
+type = "integer"
+default = -1
+toolTip = "Set the highest allowed angular momentum (-1 means do not set limit)"
+tab = "Basis"
+
+["basis_autoaux_f_0"]
+label = "AutoAux F[0]"
+type = "float"
+default = 20.0
+toolTip = "Factor by which to increase the maximal s-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_1"]
+label = "AutoAux F[1]"
+type = "float"
+default = 7.0
+toolTip = "Factor by which to increase the maximal p-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_2"]
+label = "AutoAux F[2]"
+type = "float"
+default = 4.0
+toolTip = "Factor by which to increase the maximal d-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_3"]
+label = "AutoAux F[3]"
+type = "float"
+default = 4.0
+toolTip = "Factor by which to increase the maximal f-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_4"]
+label = "AutoAux F[4]"
+type = "float"
+default = 3.5
+toolTip = "Factor by which to increase the maximal g-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_5"]
+label = "AutoAux F[5]"
+type = "float"
+default = 2.5
+toolTip = "Factor by which to increase the maximal h-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_6"]
+label = "AutoAux F[6]"
+type = "float"
+default = 2.0
+toolTip = "Factor by which to increase the maximal i-exponent."
+tab = "Basis"
+
+["basis_autoaux_f_7"]
+label = "AutoAux F[7]"
+type = "float"
+default = 2.0
+toolTip = "Factor by which to increase the maximal j-exponent."
+tab = "Basis"
+
+["basis_autoaux_B_0"]
+label = "AutoAux B[0]"
+type = "float"
+default = 1.8
+toolTip = "Even-tempered expansion factor for the s-shell."
+tab = "Basis"
+
+["basis_autoaux_B_1"]
+label = "AutoAux B[1]"
+type = "float"
+default = 2.0
+toolTip = "Even-tempered expansion factor for the p-shell."
+tab = "Basis"
+
+["basis_autoaux_B_2"]
+label = "AutoAux B[2]"
+type = "float"
+default = 2.2
+toolTip = "Even-tempered expansion factor for the d-shell."
+tab = "Basis"
+
+["basis_autoaux_B_3"]
+label = "AutoAux B[3]"
+type = "float"
+default = 2.2
+toolTip = "Even-tempered expansion factor for the f-shell."
+tab = "Basis"
+
+["basis_autoaux_B_4"]
+label = "AutoAux B[4]"
+type = "float"
+default = 2.2
+toolTip = "Even-tempered expansion factor for the g-shell."
+tab = "Basis"
+
+["basis_autoaux_B_5"]
+label = "AutoAux B[5]"
+type = "float"
+default = 2.3
+toolTip = "Even-tempered expansion factor for the h-shell."
+tab = "Basis"
+
+["basis_autoaux_B_6"]
+label = "AutoAux B[6]"
+type = "float"
+default = 3.0
+toolTip = "Even-tempered expansion factor for the i-shell."
+tab = "Basis"
+
+["basis_autoaux_B_7"]
+label = "AutoAux B[7]"
+type = "float"
+default = 3.0
+toolTip = "Even-tempered expansion factor for the j-shell."
+tab = "Basis"
+
+["basis_autoaux_tight_b"]
+label = "AutoAux Tight B"
+type = "boolean"
+default = true
+toolTip = "Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest."
+tab = "Basis"
+
+["scf_guess"]
+label = "Initial Guess"
+type = "string"
+values = [
+    "HCore",
+    "Hueckel",
+    "PAtom",
+    "PModel",
+    "MORead",
+]
+toolTip = "Pick initial guess for SCF orbitals"
+tab = "SCF"
+
+["scf_guess_mode"]
+label = "Guess Mode"
+type = "string"
+values = [
+    "FMatrix",
+    "CMatrix",
+]
+toolTip = "Mode for projecting initial guess orbitals onto the basis set (not for Guess=HCore)"
+tab = "SCF"
+
+["scf_autostart"]
+label = "AutoStart"
+type = "boolean"
+default = true
+toolTip = "Try to use orbitals from existing GBW file of the same name (if it exists)."
+tab = "SCF"
+
+["scf_moinp"]
+label = "MOInp GBW File"
+type = "string"
+toolTip = "GBW file used for MORead"
+tab = "SCF"
+
+["scf_convergence"]
+label = "Convergence Tolerance"
+type = "string"
+default = "2"
+values = [
+    "Sloppy",
+    "Loose",
+    "Medium",
+    "Strong",
+    "Tight",
+    "VeryTight",
+    "Extreme",
+]
+toolTip = "Set the SCF convergence tolerances."
+tab = "SCF"
+
+["scf_tol_e"]
+label = "Energy Tolerance"
+type = "float"
+default = 1e-08
+toolTip = "Set the SCF energy convergence criteria."
+tab = "SCF"
+
+["scf_tol_rmsp"]
+label = "RMS Density Tolerance"
+type = "float"
+default = 5e-09
+toolTip = "Set the SCF RMS density change convergence criteria."
+tab = "SCF"
+
+["scf_tol_maxp"]
+label = "Max Density Tolerance"
+type = "float"
+default = 1e-07
+toolTip = "Set the SCF maximum density change convergence criteria."
+tab = "SCF"
+
+["scf_tol_err"]
+label = "DIIS Error Tolerance"
+type = "float"
+default = 5e-07
+toolTip = "Set the SCF DIIS Error convergence criteria."
+tab = "SCF"
+
+["scf_tol_g"]
+label = "Orbital Gradient Tolerance"
+type = "float"
+default = 1e-05
+toolTip = "Set the SCF orbital gradient convergence criteria."
+tab = "SCF"
+
+["scf_tol_x"]
+label = "Orbital Rotation Angle Tolerance"
+type = "float"
+default = 1e-05
+toolTip = "Set the SCF orbital rotation angle convergence criteria."
+tab = "SCF"
+
+["scf_int_thresh"]
+label = "Integral Prescreening Threshold"
+type = "float"
+default = 2.5e-11
+toolTip = "Set the SCF integral prescreening threshold."
+tab = "SCF"
+
+["scf_conv_check_mode"]
+label = "Convergence Check Mode"
+type = "integer"
+default = 2
+minimum = 0
+maximum = 2
+toolTip = "Set the SCF convergence check mode."
+tab = "SCF"
+
+["scf_conv_forced"]
+label = "Require Convergence"
+type = "integer"
+default = 1
+minimum = 0
+maximum = 1
+toolTip = "Toggle whether or not convergence is mandatory for the next calculation step."
+tab = "SCF"
+
+["scf_hf_type"]
+label = "HF Wavefunction Type"
+type = "string"
+default = "('RHF', 'UHF', 'ROHF', 'CASSCF')"
+toolTip = "Set the wavefunction type for HF calculations."
+tab = "SCF"
+
+["scf_rohf_case"]
+label = "ROHF Case"
+type = "string"
+default = "('HighSpin', 'CAHF', 'SAHF', 'USER_CSF', 'AF_CSF')"
+toolTip = "Type of ROHF wavefunction (only if HFTyp=ROHF)."
+tab = "SCF"
+
+["scf_rohf_nel"]
+label = "ROHF Num. Electrons"
+type = "string"
+toolTip = "Number of open-shell electrons (only if HFTyp=ROHF)."
+tab = "SCF"
+
+["scf_rohf_numop"]
+label = "ROHF Num. Operators"
+type = "integer"
+minimum = 1
+maximum = 3
+toolTip = "Number of Operators (only if HFTyp=ROHF)."
+tab = "SCF"
+
+["scf_rohf_norb"]
+label = "ROHF Num. Orbitals"
+type = "string"
+toolTip = "Number of open-shell orbitals (only if HFTyp=ROHF)."
+tab = "SCF"
+
+["scf_xtbfod"]
+label = "xTB FOD Printout"
+type = "boolean"
+toolTip = "Enable FOD Printout for native-xTB calculations."
+tab = "SCF"
+
+["scf_use_xtb_mixer"]
+label = "Use xTB Mixer"
+type = "boolean"
+toolTip = "Use special SCF settings similar to the ones in xTB."
+tab = "SCF"
+
+["scf_soscf_max_step"]
+label = "SOSCF Max Step"
+type = "float"
+default = 0.2
+toolTip = "Maximum SOSCF Step Size."
+tab = "SCF"
+
+["scf_soscf_block_diag"]
+label = "Use SOSCF Block Diagonalization"
+type = "boolean"
+default = false
+toolTip = "Perform a diagonalization of the occupied and virtual orbital blocks of the Fock matrix at the start."
+tab = "SCF"
+
+["scf_delta_scf_from_gs"]
+label = "Start ΔSCF From Ground State"
+type = "boolean"
+default = true
+toolTip = "Start ΔSCF from an input converged ground state solution or assume it is an excited state solution."
+tab = "SCF"
+
+["scf_do_mom"]
+label = "Use Maximum Overlap Method"
+type = "boolean"
+default = true
+toolTip = "Use maximum overlap method."
+tab = "SCF"
+
+["scf_keep_initial_ref"]
+label = "Keep Initial Reference"
+type = "boolean"
+default = true
+toolTip = "Always keep initial reference: IMOM."
+tab = "SCF"
+
+["scf_pmom"]
+label = "Use PMOM Metric"
+type = "boolean"
+default = false
+toolTip = "Use the PMOM metric instead of regular MOM."
+tab = "SCF"
+
+["scf_ionize_alpha"]
+label = "Ionize Alpha"
+type = "integer"
+toolTip = "Remove electrons from specified MOs in alpha spin channel."
+tab = "SCF"
+
+["scf_ionize_beta"]
+label = "Ionize Beta"
+type = "integer"
+toolTip = "Remove electrons from specified MOs in beta spin channel."
+tab = "SCF"
+
+["scf_soscf_hess_up"]
+label = "SOSCF Hessian Update Method"
+type = "string"
+default = "0"
+values = [
+    "LSR1",
+    "LBFGS",
+    "LPowell",
+    "LBOFill",
+]
+toolTip = "Select quasi-Newton method for SOSCF Hessian Update."
+tab = "SCF"
+
+["scf_soscf_constraints"]
+label = "SOSCF Contraints"
+type = "boolean"
+default = false
+toolTip = "Activate freeze-and-release SOSCF."
+tab = "SCF"
+
+["scf_soscf_constrained_maxstep"]
+label = "SOSCF Const. Max Step"
+type = "float"
+default = 0.2
+toolTip = "Maximum step size for the constrained SOSCF minimization."
+tab = "SCF"
+
+["scf_soscf_conv_factor"]
+label = "SOSCF Conv. Factor"
+type = "float"
+default = 1
+toolTip = "Factor to multiply convergence criteria with in the constrained minimization. e.g. 100 loosens the criteria by two orders of magnitude."
+tab = "SCF"
+
+["scf_soscf_constrained_hess_up"]
+label = "SOSCF Const. Hess. Update"
+type = "string"
+default = "1"
+values = [
+    "LSR1",
+    "LBFGS",
+    "LPowell",
+    "LBOFill",
+]
+toolTip = "SOSCF Hessian update for constrained minimization."
+tab = "SCF"
+
+["scf_soscf_write_constrained_gbw"]
+label = "Write SOSCF Const. GBW"
+type = "boolean"
+default = true
+toolTip = "Write a GBW file for the constrained solution."
+tab = "SCF"
+
+["scf_soscf_davidson_maxit"]
+label = "SOSCF Davidson MaxIter"
+type = "integer"
+default = 100
+toolTip = "Maximum number of iterations for Davidson diagonalization in SOSCF procedure."
+tab = "SCF"
+
+["scf_soscf_davidson_tol_r"]
+label = "SOSCF Davidson Residual Tol."
+type = "float"
+default = 0.01
+toolTip = "SOSCF Davidson convergence tolerance for the maximum component of each residual vector."
+tab = "SCF"
+
+["scf_soscf_max_red"]
+label = "SOSCF Davidson Max Reduction"
+type = "integer"
+default = 20
+toolTip = "Davidson maximum size of the Krylov subspace per target eigenvector, meaning this will be multiplied by the target saddle point order."
+tab = "SCF"
+
+["scf_soscf_davidson_fd_mode"]
+label = "SOSCF Davidson FD Stencil"
+type = "string"
+default = "0"
+values = [
+    "Forward",
+    "Central",
+]
+toolTip = "SOSCF Davidson finite difference stencil."
+tab = "SCF"
+
+["scf_soscf_davidson_fd_step"]
+label = "SOSCF Davidson FD Step"
+type = "float"
+default = 0.001
+toolTip = "Davidson finite difference step size."
+tab = "SCF"
+
+["scf_soscf_precond_type"]
+label = "SOSCF Preconditioner"
+type = "string"
+default = "0"
+values = [
+    "OrbitalEnergyDiff",
+    "DavidsonUpdate",
+    "GradientExpansion",
+]
+toolTip = "SOSCF Preconditioner to use"
+tab = "SCF"
+
+["scf_soscf_precond_gamma"]
+label = "SOSCF Preconditioner Gamma (GradientExpansion only)"
+type = "float"
+default = 0.25
+toolTip = "Mixing Factor for GradientExpansion preconditioner"
+tab = "SCF"
+
+["scf_soscf_gmf"]
+label = "Use GMF"
+type = "boolean"
+default = false
+toolTip = "Use generalized mode following (GMF)."
+tab = "SCF"
+
+["scf_soscf_spo"]
+label = "GMF Saddle Point Order (SPO)"
+type = "integer"
+toolTip = "GMF only: Optional user-defined target saddle point order (SPO)."
+tab = "SCF"
+
+["scf_soscf_spo_est"]
+label = "GMF SPO Estimate"
+type = "string"
+default = "0"
+values = [
+    "Auto",
+    "Excitation",
+    "HDiag",
+    "Davidson",
+]
+toolTip = "GMF only: Target saddle point order estimate."
+tab = "SCF"
+
+["scf_soscf_update_spo_est"]
+label = "GMF Update SPO Estimate"
+type = "boolean"
+default = true
+toolTip = "GMF only: Update the SPO with the number of negative eigenvalues of the first Davidson run."
+tab = "SCF"
+
+["scf_soscf_spo_est_ntrial"]
+label = "GMF SPO Num Eigenvectors"
+type = "integer"
+default = 3
+toolTip = "GMF Only: How many eigenvectors of the Hessian to target more for the SPO estimate."
+tab = "SCF"
+
+["scf_soscf_update_spo_thresh"]
+label = "GMF SPO Eigenvalue Threshold"
+type = "float"
+default = -1
+toolTip = "GMF Only: Only eigenvalues below this threshold are considered negative enough for the SPO estimate."
+tab = "SCF"
 

@@ -65,6 +65,11 @@ class SCF(BlockEnum):
     SOSCFPRECONDTYPE         = "SOSCFPrecondType",         ORCAString, 0, ("OrbitalEnergyDiff", "DavidsonUpdate", "GradientExpansion")
     SOSCFPRECONDGAMMA        = "SOSCFPrecondGamma",        float, 0.25
 
+    # Initial Guess
+    GUESS     = "Guess",     ORCAString, None, ("HCore", "Hueckel", "PAtom", "PModel", "MORead")
+    MOINP     = "MOInp",     str
+    GUESSMODE = "GuessMode", ORCAString, None, ("FMatrix", "CMatrix")
+    AUTOSTART = "AutoStart", bool, True
 
 
 class TRAH(NestedBlockEnum):
@@ -84,5 +89,3 @@ class TRAH(NestedBlockEnum):
     INACTIVEMOS     = "InactiveMOs",     ORCAString, 0, ("Canonical", "NotSet")
     PRECOND         = "Precond",         ORCAString, 0, ("Diag", "Full", "None")
     PRECONMAXRED    = "PreconMaxRed",    int,   250
-
-

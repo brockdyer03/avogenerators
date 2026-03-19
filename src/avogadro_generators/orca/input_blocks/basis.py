@@ -39,7 +39,7 @@ class Basis(BlockEnum):
     PCDTHRESH    = "PCDThresh",    float, -1
 
     # AutoAux Keywords
-    AUTOAUXSIZE   = "AutoAuxSize",   int,   1, 0, 3
+    AUTOAUXSIZE   = "AutoAuxSize",   int,   1, None, 0, 3
     AUTOAUXLMAX   = "AutoAuxLmax",   bool,  False
     AUTOAUXLLIMIT = "AutoAuxLLimit", int,   -1
     AUTOAUXF_0    = "AutoAuxF[0]",   float, 20.0
@@ -59,5 +59,3 @@ class Basis(BlockEnum):
     AUTOAUXB_6    = "AutoAuxB[6]",   float, 3.0
     AUTOAUXB_7    = "AutoAuxB[7]",   float, 3.0
     AUTOAUXTIGHTB = "AutoAuxTightB", bool,  True
-    OLDAUTOAUX    = "OldAutoAux",    bool,  False
-
