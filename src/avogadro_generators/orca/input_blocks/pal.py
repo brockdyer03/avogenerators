@@ -4,4 +4,4 @@ from .block_base import BlockEnum
 
 class PAL(BlockEnum):
 
-    NPROCS = "nprocs", int, None, 0
+    NPROCS = "nprocs", int, 0

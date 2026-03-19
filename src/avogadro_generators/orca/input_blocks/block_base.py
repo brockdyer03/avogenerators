@@ -22,14 +22,14 @@ class BlockKeyword:
         Keyword name.
     _dtype : ORCAString or str or bool or int or float or Sequence or dict
         Type of the variable, controls formatting in the input.
-    options : tuple of dtype, optional
-        Tuple of known options for the keyword if they exist.
     default : _dtype or int, optional
         The default value of the keyword or the index of it in ``options``.
 
         If ``options`` exists, then this is the index of the default
         option. For example, if ``options=("CG", "DIIS", "Pople")`` then
         setting ``default=2`` means the default is ``"Pople"``.
+    options : tuple of dtype, optional
+        Tuple of known options for the keyword if they exist.
     minimum : int or float, optional
         The minimum possible value.
     maximum : int or float, optional
@@ -38,8 +38,8 @@ class BlockKeyword:
 
     key_name: str
     _dtype: type[ORCAString] | type[str] | type[bool] | type[int] | type[float] | type[Sequence] | type[dict]
-    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = None
     default: ORCAString | str | bool | int | float | Sequence | dict | None = None
+    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = None
     minimum: int | float | None = None
     maximum: int | float | None = None
 
@@ -73,8 +73,8 @@ class BlockEnum(BlockKeyword, Enum):
         cls,
         key_name: str,
         _dtype: ORCAString | str | bool | int | float | Sequence,
-        options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
         default: ORCAString | str | bool | int | float | Sequence | None = None,
+        options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
         minimum: int | float | None = None,
         maximum: int | float | None = None,
     ):
@@ -90,8 +90,8 @@ class NestedBlockEnum(BlockKeyword, Enum):
         cls,
         key_name: str,
         _dtype: ORCAString | str | bool | int | float | Sequence,
-        options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
         default: ORCAString | str | bool | int | float | Sequence | None = None,
+        options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
         minimum: int | float | None = None,
         maximum: int | float | None = None,
     ):
