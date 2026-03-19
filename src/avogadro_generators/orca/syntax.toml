@@ -452,7 +452,7 @@ patterns = [
     # Jensen polarization consistent (pc) basis sets
     { regexp = '\b((?:aug-)?pc[XJH]?S?(?:seg)?-[0-9]?)\s', caseSensitive = false },
     # Correlation Consistent cc-pVnZ basis sets
-    { regexp = '\b((?:m?aug)?(?:apr)?(?:may)?(?:ju[nl]?)?-?cc-p[wC]{0,2}V[DTQ56]?(?:[DTQ56]|\([DTQ56]?\+d\))Z(?:-DK3?)?(?:\/JK|\/C)?)\s', caseSensitive = false },
+    { regexp = '\b((?:m?aug-|apr-|may-|ju[nl]-)?cc-p[wC]{0,2}V[DTQ56]?(?:[DTQ56]|\([DTQ56]?\+d\))Z(?:-DK3?)?(?:\/JK|\/C)?)\s', caseSensitive = false },
     # DKH, ZORA, SARC/SARC2 basis sets
     { regexp = '\b((?:ma-)?(?:SARC-|SARC2-)?(?:DKH-|ZORA-){1}(?:def2-)?m?[STQ]?[ZVPD()]{1,5}\(?-?f?\)?(?:\/JK)?)\s', caseSensitive = false },
     # x2c basis sets
