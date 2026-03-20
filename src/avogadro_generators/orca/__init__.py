@@ -253,27 +253,33 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
             "end\n"
         )
 
-    if constrain is True and "atoms" in cjson and ("constraints" in cjson or "frozen" in cjson):
+    if (
+        constrain is True
+        and "atoms" in cjson
+        and ("constraints" in cjson or "frozen" in cjson)
+    ):
         # check for constraints and frozen atoms in cjson
-        generated_input += "%geom Constraints\n"
+        generated_input += "%geom\n"
+        generated_input += "    Constraints \n"
 
         # look for bond, angle, torsion constraints
         if "constraints" in cjson:
             # loop through the output
             # e.g. "{ B N1 N2 value C }"
             for constraint in cjson["constraints"]:
+                generated_input += " "*8 # Add indentation
                 if len(constraint) == 3:
                     # distance
                     value, atom1, atom2 = constraint
-                    generated_input += f"{{ B {atom1} {atom2} {value:.6f} C }}\n"
+                    generated_input += f"{{ B {atom1} {atom2} {value:.6f} C }} \n"
                 if len(constraint) == 4:
                     # angle
                     value, atom1, atom2, atom3 = constraint
-                    generated_input += f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }}\n"
+                    generated_input += f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }} \n"
                 if len(constraint) == 5:
                     # torsion / dihedral
                     value, atom1, atom2, atom3, atom4 = constraint
-                    generated_input += f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }}\n"
+                    generated_input += f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }} \n"
 
         # look for frozen atoms
         if "frozen" in cjson["atoms"]:
@@ -285,19 +291,19 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 # look for 1 or 0
                 for i in range(len(frozen)):
                     if frozen[i] == 1:
-                        generated_input += f"{{ C {i} C }}\n"
+                        generated_input += f"{' '*8}{{ C {i} C }} \n"
             elif len(frozen) == 3 * atomCount:
                 # look for 1 or 0 - x, y, z for each atom
                 for i in range(0, len(frozen), 3):
                     if frozen[i] == 0:
-                        generated_input += f"{{ X {i} C }}\n"
+                        generated_input += f"{' '*8}{{ X {i} C }} \n"
                     if frozen[i + 1] == 0:
-                        generated_input += f"{{ Y {i} C }}\n"
+                        generated_input += f"{' '*8}{{ Y {i} C }} \n"
                     if frozen[i + 2] == 0:
-                        generated_input += f"{{ Z {i} C }}\n"
+                        generated_input += f"{' '*8}{{ Z {i} C }} \n"
 
+        generated_input += "    end\n"
         generated_input += "end\n"
-        generated_input += "end\n\n"
 
     scf_block = "%scf\n"
     for kwd, kwd_type in SCF_BLOCK_KEYWORDS.items():
