@@ -157,6 +157,8 @@ class BasicTab:
             dtype="integer",
             default=0,
             label="Charge",
+            minimum=-9,
+            maximum=9
         ),
         "Multiplicity": BasicOption(
             dtype="integer",
@@ -287,11 +289,17 @@ class BlockOption:
         label: str,
         toolTip: str | None = None,
         add_dummy: bool = False,
+        override_type: str | None = None
     ):
         self.option_name = keyword.key_name
-        self.dtype       = keyword.dtype
+        if override_type is not None:
+            self.dtype = override_type
+            self.default = str(keyword.default)
+        else:
+            self.dtype       = keyword.dtype
+            self.default     = keyword.default
+
         self.options     = keyword.options
-        self.default     = keyword.default
         self.minimum     = keyword.minimum
         self.maximum     = keyword.maximum
         self.label       = label
@@ -441,6 +449,7 @@ class ElPropTab(BlockTab):
             keyword=ElProp.TOL,
             toolTip="Convergence of Coupled-Perturbed SCF Equations (norm of the residual).",
             label="CP-SCF Convergence Tolerance",
+            override_type="string",
         ),
         "elprop_max_iter": BlockOption(
             keyword=ElProp.MAXITER,
@@ -564,16 +573,16 @@ class BasisTab(BlockTab):
             toolTip="Control size of AutoAux basis sets. Larger value means larger basis.",
             label="AutoAux Size",
         ),
-        "basis_autoaux_l_max": BlockOption(
-            keyword=Basis.AUTOAUXLMAX,
-            toolTip="Enable use of highest-possible angular momentum permitted by ORCA",
-            label="AutoAux L Max",
-        ),
-        "basis_autoaux_l_limit": BlockOption(
-            keyword=Basis.AUTOAUXLLIMIT,
-            toolTip="Set the highest allowed angular momentum (-1 means do not set limit)",
-            label="AutoAux L Limit",
-        ),
+        # "basis_autoaux_l_max": BlockOption(
+        #     keyword=Basis.AUTOAUXLMAX,
+        #     toolTip="Enable use of highest-possible angular momentum permitted by ORCA",
+        #     label="AutoAux L Max",
+        # ),
+        # "basis_autoaux_l_limit": BlockOption(
+        #     keyword=Basis.AUTOAUXLLIMIT,
+        #     toolTip="Set the highest allowed angular momentum (-1 means do not set limit)",
+        #     label="AutoAux L Limit",
+        # ),
         # "basis_autoaux_f_0": BlockOption(
         #     keyword=Basis.AUTOAUXF_0,
         #     toolTip="Factor by which to increase the maximal s-exponent.",
@@ -735,36 +744,43 @@ class SCFTab(BlockTab):
             keyword=SCF.TOL_E,
             toolTip="Set the SCF energy convergence criteria.",
             label="Energy Tolerance",
+            override_type="string",
         ),
         "scf_tol_rmsp": BlockOption(
             keyword=SCF.TOL_RMSP,
             toolTip="Set the SCF RMS density change convergence criteria.",
             label="RMS Density Tolerance",
+            override_type="string",
         ),
         "scf_tol_maxp": BlockOption(
             keyword=SCF.TOL_MAXP,
             toolTip="Set the SCF maximum density change convergence criteria.",
             label="Max Density Tolerance",
+            override_type="string",
         ),
         "scf_tol_err": BlockOption(
             keyword=SCF.TOL_ERR,
             toolTip="Set the SCF DIIS Error convergence criteria.",
             label="DIIS Error Tolerance",
+            override_type="string",
         ),
         "scf_tol_g": BlockOption(
             keyword=SCF.TOL_G,
             toolTip="Set the SCF orbital gradient convergence criteria.",
             label="Orbital Gradient Tolerance",
+            override_type="string",
         ),
         "scf_tol_x": BlockOption(
             keyword=SCF.TOL_X,
             toolTip="Set the SCF orbital rotation angle convergence criteria.",
             label="Orbital Rotation Angle Tolerance",
+            override_type="string",
         ),
         "scf_int_thresh": BlockOption(
             keyword=SCF.THRESH,
             toolTip="Set the SCF integral prescreening threshold.",
             label="Integral Prescreening Threshold",
+            override_type="string",
         ),
         "scf_conv_check_mode": BlockOption(
             keyword=SCF.CONVCHECKMODE,

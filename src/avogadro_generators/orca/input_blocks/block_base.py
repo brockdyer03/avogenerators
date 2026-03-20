@@ -94,12 +94,12 @@ class BlockKeyword:
                     return False
             elif isinstance(value, str):
                 if isinstance(self.options, Sequence):
-                    if self.value == self.options[self.default]:
+                    if value == self.options[self.default]:
                         return True
                     else:
                         return False
                 else:
-                    if self.value == self.default:
+                    if value == self.default:
                         return True
                     else:
                         return False

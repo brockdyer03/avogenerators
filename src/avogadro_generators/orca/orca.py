@@ -87,9 +87,9 @@ SCF_BLOCK_KEYWORDS = {
 
 BASIS_BLOCK_KEYWORDS = {
     # "basis_basis":            Basis.BASIS,
-    "basis_auxj":             Basis.AUXJ,
-    "basis_auxjk":            Basis.AUXJK,
-    "basis_auxc":             Basis.AUXC,
+    # "basis_auxj":             Basis.AUXJ,
+    # "basis_auxjk":            Basis.AUXJK,
+    # "basis_auxc":             Basis.AUXC,
     "basis_cabs":             Basis.CABS,
     "basis_ecp":              Basis.ECP,
     "basis_ghost_ecp":        Basis.GHOSTECP,
@@ -105,8 +105,8 @@ BASIS_BLOCK_KEYWORDS = {
     # "basis_pcd_trim_auxc":    Basis.PCDTRIMAUXC,
     # "basis_pcd_thresh":       Basis.PCDTHRESH,
     "basis_autoaux_size":     Basis.AUTOAUXSIZE,
-    "basis_autoaux_l_max":    Basis.AUTOAUXLMAX,
-    "basis_autoaux_l_limit":  Basis.AUTOAUXLLIMIT,
+    # "basis_autoaux_l_max":    Basis.AUTOAUXLMAX,
+    # "basis_autoaux_l_limit":  Basis.AUTOAUXLLIMIT,
 }
 
 ELPROP_BLOCK_KEYWORDS = {
@@ -313,6 +313,10 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     scf_block = "%scf\n"
     for kwd, kwd_type in SCF_BLOCK_KEYWORDS.items():
         val = opts[kwd]
+        try:
+            val = kwd_type._dtype(val)
+        except ValueError:
+            pass
         if not kwd_type.is_default(val):
             scf_block += format_block_keyword(kwd_type, val)
     scf_block += "end\n"
@@ -320,6 +324,10 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     basis_block = "%basis\n"
     for kwd, kwd_type in BASIS_BLOCK_KEYWORDS.items():
         val = opts[kwd]
+        try:
+            val = kwd_type._dtype(val)
+        except ValueError:
+            pass
         if not kwd_type.is_default(val):
             basis_block += format_block_keyword(kwd_type, val)
     basis_block += "end\n"
@@ -327,6 +335,10 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elprop_block = "%elprop\n"
     for kwd, kwd_type in ELPROP_BLOCK_KEYWORDS.items():
         val = opts[kwd]
+        try:
+            val = kwd_type._dtype(val)
+        except ValueError:
+            pass
         if not kwd_type.is_default(val):
             elprop_block += format_block_keyword(kwd_type, val)
     elprop_block += "end\n"

@@ -109,6 +109,8 @@ tab = "Basic"
 label = "Charge"
 type = "integer"
 default = 0
+minimum = -9
+maximum = 9
 tab = "Basic"
 
 ["Multiplicity"]
@@ -294,8 +296,8 @@ tab = "Electric Properties"
 
 ["elprop_tol"]
 label = "CP-SCF Convergence Tolerance"
-type = "float"
-default = 0.001
+type = "string"
+default = "0.001"
 toolTip = "Convergence of Coupled-Perturbed SCF Equations (norm of the residual)."
 tab = "Electric Properties"
 
@@ -753,22 +755,6 @@ maximum = 3
 toolTip = "Control size of AutoAux basis sets. Larger value means larger basis."
 tab = "Basis"
 
-["basis_autoaux_l_max"]
-label = "AutoAux L Max"
-type = "boolean"
-default = false
-toolTip = "Enable use of highest-possible angular momentum permitted by ORCA"
-tab = "Basis"
-
-["basis_autoaux_l_limit"]
-label = "AutoAux L Limit"
-type = "integer"
-default = -1
-minimum = -1
-maximum = 7
-toolTip = "Set the highest allowed angular momentum (-1 means do not set limit)"
-tab = "Basis"
-
 ["scf_guess"]
 label = "Initial Guess"
 type = "stringList"
@@ -825,50 +811,50 @@ tab = "SCF"
 
 ["scf_tol_e"]
 label = "Energy Tolerance"
-type = "float"
-default = 1e-08
+type = "string"
+default = "1e-08"
 toolTip = "Set the SCF energy convergence criteria."
 tab = "SCF"
 
 ["scf_tol_rmsp"]
 label = "RMS Density Tolerance"
-type = "float"
-default = 5e-09
+type = "string"
+default = "5e-09"
 toolTip = "Set the SCF RMS density change convergence criteria."
 tab = "SCF"
 
 ["scf_tol_maxp"]
 label = "Max Density Tolerance"
-type = "float"
-default = 1e-07
+type = "string"
+default = "1e-07"
 toolTip = "Set the SCF maximum density change convergence criteria."
 tab = "SCF"
 
 ["scf_tol_err"]
 label = "DIIS Error Tolerance"
-type = "float"
-default = 5e-07
+type = "string"
+default = "5e-07"
 toolTip = "Set the SCF DIIS Error convergence criteria."
 tab = "SCF"
 
 ["scf_tol_g"]
 label = "Orbital Gradient Tolerance"
-type = "float"
-default = 1e-05
+type = "string"
+default = "1e-05"
 toolTip = "Set the SCF orbital gradient convergence criteria."
 tab = "SCF"
 
 ["scf_tol_x"]
 label = "Orbital Rotation Angle Tolerance"
-type = "float"
-default = 1e-05
+type = "string"
+default = "1e-05"
 toolTip = "Set the SCF orbital rotation angle convergence criteria."
 tab = "SCF"
 
 ["scf_int_thresh"]
 label = "Integral Prescreening Threshold"
-type = "float"
-default = 2.5e-11
+type = "string"
+default = "2.5e-11"
 toolTip = "Set the SCF integral prescreening threshold."
 tab = "SCF"
 
