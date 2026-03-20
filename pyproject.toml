@@ -14,6 +14,7 @@ authors =  [
     { name = "Ty Balduf", email = "tbalduf@gmail.com" },
     { name = "Javier Cerezo", email = "javier.cerezo@um.es" },
     { name = "Matthew Milner", email = "matterhorn103@proton.me" },
+    { name = "Brock A. Dyer", email = "brockdyer03@gmail.com" },
 ]
 license = "BSD-3-Clause"
 description = "Scripts for generating input files for computational chemistry packages"
