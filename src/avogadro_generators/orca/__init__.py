@@ -216,6 +216,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
             )
         else:
             simple_keywords.append(f"{solvent_model}({solvent})")
+        syntax_groups.append("solvent")
 
     if print_mos:
         simple_keywords.extend([Output.PRINTMOS, Output.PRINTBASIS])
@@ -240,7 +241,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     generated_input += f"!{run_type.value}"
     for kwd in simple_keywords:
         generated_input += f" {kwd}"
-    generated_input += "\n"
+    generated_input += " \n" # Trailing whitespace to avoid syntax highlighting bugs
 
     if max_mem != 4:
         generated_input += f"%MaxCore {int(max_mem*1024/nprocs)}\n"
