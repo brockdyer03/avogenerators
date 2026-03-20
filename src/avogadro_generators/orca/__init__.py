@@ -174,11 +174,12 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     if isinstance(method, Functionals):
         if disp == "":
-            simple_keywords.append(method.value)
+            simple_keywords.extend([method.value, basis_set])
         elif Disp[disp] not in method.disp:
             warnings.append(
                 f"The dispersion correction {Disp[disp]} is not available for {method.value}!"
             )
+            simple_keywords.extend([method.value, basis_set])
         else:
             simple_keywords.extend([method.value, disp, basis_set])
     elif isinstance(method, Composite):

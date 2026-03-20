@@ -171,30 +171,30 @@ class BasicTab:
         ),
         "Basis": BasicOption(
             dtype="stringList",
-            default=6, # def2-TZVP
+            default=1, # def2-TZVP
             label="Basis",
             options=(
                 def2BasisSet.DEF2_SVP,
-                def2BasisSet.DEF2_SVPD,
-                ccBasisSet.CC_PVDZ,
-                ccBasisSet.AUG_CC_PVDZ,
-                JensenBasisSet.PC_1,
-                JensenBasisSet.AUG_PC_1,
-
                 def2BasisSet.DEF2_TZVP,
-                def2BasisSet.DEF2_TZVPP,
-                def2BasisSet.DEF2_TZVPPD,
-                ccBasisSet.CC_PVTZ,
-                ccBasisSet.AUG_CC_PVTZ,
-                JensenBasisSet.PC_2,
-                JensenBasisSet.AUG_PC_2,
-
                 def2BasisSet.DEF2_QZVP,
+                def2BasisSet.DEF2_TZVPP,
                 def2BasisSet.DEF2_QZVPP,
+                def2BasisSet.DEF2_SVPD,
+                def2BasisSet.DEF2_TZVPPD,
                 def2BasisSet.DEF2_QZVPPD,
+
+                ccBasisSet.CC_PVDZ,
+                ccBasisSet.CC_PVTZ,
                 ccBasisSet.CC_PVQZ,
+                ccBasisSet.AUG_CC_PVDZ,
+                ccBasisSet.AUG_CC_PVTZ,
                 ccBasisSet.AUG_CC_PVQZ,
+
+                JensenBasisSet.PC_1,
+                JensenBasisSet.PC_2,
                 JensenBasisSet.PC_3,
+                JensenBasisSet.AUG_PC_1,
+                JensenBasisSet.AUG_PC_2,
                 JensenBasisSet.AUG_PC_3,
             )
         ),

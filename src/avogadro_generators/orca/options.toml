@@ -80,27 +80,27 @@ tab = "Basic"
 ["Basis"]
 label = "Basis"
 type = "stringList"
-default = 6
+default = 1
 values = [
     "def2-SVP",
-    "def2-SVPD",
-    "cc-pVDZ",
-    "aug-cc-pVDZ",
-    "pc-1",
-    "aug-pc-1",
     "def2-TZVP",
-    "def2-TZVPP",
-    "def2-TZVPPD",
-    "cc-pVTZ",
-    "aug-cc-pVTZ",
-    "pc-2",
-    "aug-pc-2",
     "def2-QZVP",
+    "def2-TZVPP",
     "def2-QZVPP",
+    "def2-SVPD",
+    "def2-TZVPPD",
     "def2-QZVPPD",
+    "cc-pVDZ",
+    "cc-pVTZ",
     "cc-pVQZ",
+    "aug-cc-pVDZ",
+    "aug-cc-pVTZ",
     "aug-cc-pVQZ",
+    "pc-1",
+    "pc-2",
     "pc-3",
+    "aug-pc-1",
+    "aug-pc-2",
     "aug-pc-3",
 ]
 tab = "Basic"
