@@ -5,6 +5,57 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
+"""This script writes the entirety of the ORCA generator's ``options.toml``
+file.
+
+This script is structured in two main parts, the Basic tab and the
+Block tabs.
+
+The ``BasicTab`` class is composed of instances of the
+``BasicOption`` dataclass, and is generally supposed to be where the
+most common user options are placed. It also contains some of the
+special options such as ``Title``, ``Theory``, ``Basis``, and so on.
+If you are adding a new option to the Basic tab, it should go into
+that class.
+
+The latter portion of this script is designed to allow for automatic
+writing of the various input blocks that ORCA offers. If you wish to
+add a new block or change an existing block, do not just add the
+options using the ``extra_inputs`` attribute, add the block and its
+options into the correct Python module located at
+``src/avogadro_generators/orca/input_blocks``.
+You can then easily copy and paste the options you wish to include into
+this file, and add their respective options. It is important to note
+that while the ``label`` option is technically optional for input
+generators, it is mandatory here. This is for several reasons, but the
+most important are that it helps in providing translations for users,
+and that it means you can more clearly label the key that is used by
+Avogadro when passing the user options in a JSON. Every key in one of
+the ``cls.inputs`` or ``cls.extra_inputs`` dictionaries should be
+prefixed by the name of the input block (in lowercase). When you add
+options to these blocks, be sure to add their keys and their Enum
+members to their respective parsing blocks in the ``__init__.py`` file.
+
+
+Notes
+-----
+If you are supplying a value that is best expressed in scientific
+notation, use the ``override_type`` option in ``BlockOption`` to make
+the option a string instead of a floating point number. This is because
+the Qt widget that is currently used is a ``QDoubleSpinBox``, which can
+not handle scientific notation. This may change in the future, but for
+now it this is the simplest workaround.
+
+You may notice a large number of commented-out options in the various
+block tabs. This is because the current widget handling in Avogadro 2
+does not support a scroll bar, so it tries to resize the window to fit
+everything on it. Naturally, when a block has >50 options, this means
+the windows can be extremely tall and inhibit use of the generator.
+Until this is fixed, please test thoroughly and ensure that the options
+in the generator do not cause the aforementioned window size issue.
+"""
+
+
 from abc import ABC
 from dataclasses import dataclass
 from pathlib import Path
