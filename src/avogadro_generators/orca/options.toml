@@ -67,6 +67,13 @@ values = [
     "wB97M-V",
     "Pr2SCAN69",
     "B2GP-PLYP",
+    "HF",
+    "RI-MP2",
+    "DLPNO-MP2",
+    "SCS-DLPNO-MP2",
+    "RI-CCSD(T)",
+    "DLPNO-CCSD(T)",
+    "DLPNO-CCSD(T1)",
 ]
 tab = "Basic"
 
@@ -179,6 +186,19 @@ values = [
     "NormalPrint",
     "LargePrint",
 ]
+tab = "Basic"
+
+["basic_constrain"]
+label = "Use Constraints"
+type = "boolean"
+default = false
+tab = "Basic"
+
+["basic_simple_keywords"]
+label = "Additional Simple Keywords"
+type = "string"
+default = ""
+toolTip = "Comma- or whitespace-separated list of simple input keywords."
 tab = "Basic"
 
 ["elprop_dipole"]
@@ -306,27 +326,392 @@ values = [
 toolTip = "Origin to use for electric properties."
 tab = "Electric Properties"
 
-["basis_basis"]
-label = "Basis"
-type = "string"
-toolTip = "Specify a basis set."
+["basis_pople_basis"]
+label = "Pople Basis Set"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "STO-3G",
+    "3-21G",
+    "3-21GSP",
+    "4-22GSP",
+    "6-31G",
+    "6-31G(d)",
+    "6-31G(d,p)",
+    "6-31G(2d)",
+    "6-31G(2d,p)",
+    "6-31G(2d,2p)",
+    "6-31G(2df)",
+    "6-31G(2df,2p)",
+    "6-31G(2df,2pd)",
+    "6-31+G(d)",
+    "6-31+G(d,p)",
+    "6-31+G(2d)",
+    "6-31+G(2d,p)",
+    "6-31+G(2d,2p)",
+    "6-31+G(2df)",
+    "6-31+G(2df,2p)",
+    "6-31+G(2df,2pd)",
+    "6-31++G(d,p)",
+    "6-31++G(2d,p)",
+    "6-31++G(2d,2p)",
+    "6-31++G(2df,2p)",
+    "6-31++G(2df,2pd)",
+    "6-311G",
+    "6-311G(d)",
+    "6-311G(d,p)",
+    "6-311G(2d)",
+    "6-311G(2d,p)",
+    "6-311G(2d,2p)",
+    "6-311G(2df)",
+    "6-311G(2df,2p)",
+    "6-311G(2df,2pd)",
+    "6-311G(3df)",
+    "6-311G(3df,3pd)",
+    "6-311+G(d)",
+    "6-311+G(d,p)",
+    "6-311+G(2d)",
+    "6-311+G(2d,p)",
+    "6-311+G(2d,2p)",
+    "6-311+G(2df)",
+    "6-311+G(2df,2p)",
+    "6-311+G(2df,2pd)",
+    "6-311+G(3df)",
+    "6-311+G(3df,2p)",
+    "6-311+G(3df,3pd)",
+    "6-311++G(d,p)",
+    "6-311++G(2d,p)",
+    "6-311++G(2d,2p)",
+    "6-311++G(2df,2p)",
+    "6-311++G(2df,2pd)",
+    "6-311++G(3df,3pd)",
+    "m6-31G",
+    "m6-31G*",
+]
+toolTip = "Pople-style split-valence basis sets."
+tab = "Basis"
+
+["basis_def2_basis"]
+label = "def2 Basis Set"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "def2-SVP",
+    "def2-SV(P)",
+    "def2-TZVP",
+    "def2-TZVP(-f)",
+    "def2-TZVPP",
+    "def2-QZVP",
+    "def2-QZVPP",
+    "def2-SVPD",
+    "def2-TZVPD",
+    "def2-TZVPPD",
+    "def2-QZVPD",
+    "def2-QZVPPD",
+    "ma-def2-SVP",
+    "ma-def2-SV(P)",
+    "ma-def2-mSVP",
+    "ma-def2-TZVP",
+    "ma-def2-TZVP(-f)",
+    "ma-def2-TZVPP",
+    "ma-def2-QZVPP",
+]
+toolTip = "Karlsruhe def2-n(Z)VP basis sets."
+tab = "Basis"
+
+["basis_cc_basis"]
+label = "cc-pVnZ Basis Set"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "cc-pVDZ",
+    "cc-pVTZ",
+    "cc-pVQZ",
+    "cc-pV5Z",
+    "cc-pV6Z",
+    "aug-cc-pVDZ",
+    "aug-cc-pVTZ",
+    "aug-cc-pVQZ",
+    "aug-cc-pV5Z",
+    "aug-cc-pV6Z",
+    "cc-pVD(+d)Z",
+    "cc-pVT(+d)Z",
+    "cc-pVQ(+d)Z",
+    "cc-pV5(+d)Z",
+    "aug-cc-pVD(+d)Z",
+    "aug-cc-pVT(+d)Z",
+    "aug-cc-pVQ(+d)Z",
+    "aug-cc-pV5(+d)Z",
+    "aug-cc-pV6(+d)Z",
+    "apr-cc-pV(Q+d)Z",
+    "may-cc-pV(T+d)Z",
+    "may-cc-pV(Q+d)Z",
+    "jun-cc-pV(D+d)Z",
+    "jun-cc-pV(T+d)Z",
+    "jun-cc-pV(Q+d)Z",
+    "jul-cc-pV(D+d)Z",
+    "jul-cc-pV(T+d)Z",
+    "jul-cc-pV(Q+d)Z",
+    "maug-cc-pV(D+d)Z",
+    "maug-cc-pV(T+d)Z",
+    "maug-cc-pV(Q+d)Z",
+    "cc-pCVDZ",
+    "cc-pCVTZ",
+    "cc-pCVQZ",
+    "cc-pCV5Z",
+    "cc-pCV6Z",
+    "aug-cc-pCVDZ",
+    "aug-cc-pCVTZ",
+    "aug-cc-pCVQZ",
+    "aug-cc-pCV5Z",
+    "aug-cc-pCV6Z",
+    "cc-pwCVDZ",
+    "cc-pwCVTZ",
+    "cc-pwCVQZ",
+    "cc-pwCV5Z",
+    "aug-cc-pwCVDZ",
+    "aug-cc-pwCVTZ",
+    "aug-cc-pwCVQZ",
+    "aug-cc-pwCV5Z",
+]
+toolTip = "Correlation Consistent basis sets."
+tab = "Basis"
+
+["basis_jensen_basis"]
+label = "pc-n Basis Set"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "pc-0",
+    "pc-1",
+    "pc-2",
+    "pc-3",
+    "pc-4",
+    "aug-pc-0",
+    "aug-pc-1",
+    "aug-pc-2",
+    "aug-pc-3",
+    "aug-pc-4",
+    "pcseg-0",
+    "pcseg-1",
+    "pcseg-2",
+    "pcseg-3",
+    "pcseg-4",
+    "aug-pcseg-0",
+    "aug-pcseg-1",
+    "aug-pcseg-2",
+    "aug-pcseg-3",
+    "aug-pcseg-4",
+    "pcSseg-0",
+    "pcSseg-1",
+    "pcSseg-2",
+    "pcSseg-3",
+    "pcSseg-4",
+    "aug-pcSseg-0",
+    "aug-pcSseg-1",
+    "aug-pcSseg-2",
+    "aug-pcSseg-3",
+    "aug-pcSseg-4",
+    "pcJ-0",
+    "pcJ-1",
+    "pcJ-2",
+    "pcJ-3",
+    "pcJ-4",
+    "aug-pcJ-0",
+    "aug-pcJ-1",
+    "aug-pcJ-2",
+    "aug-pcJ-3",
+    "aug-pcJ-4",
+    "pcH-1",
+    "pcH-2",
+    "pcH-3",
+    "pcH-4",
+    "aug-pcH-1",
+    "aug-pcH-2",
+    "aug-pcH-3",
+    "aug-pcH-4",
+    "pcX-1",
+    "pcX-2",
+    "pcX-3",
+    "pcX-4",
+    "aug-pcX-1",
+    "aug-pcX-2",
+    "aug-pcX-3",
+    "aug-pcX-4",
+]
+toolTip = "Jensen's Polarization-Consistent basis sets."
+tab = "Basis"
+
+["basis_relativistic_basis"]
+label = "Relativistic Basis Set"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "DKH-SV(P)",
+    "DKH-SVP",
+    "DKH-TZV(P)",
+    "DKH-TZVP",
+    "DKH-TZVPP",
+    "DKH-QZVP",
+    "DKH-QZVPP",
+    "ZORA-SV(P)",
+    "ZORA-SVP",
+    "ZORA-TZV(P)",
+    "ZORA-TZVP",
+    "ZORA-TZVPP",
+    "ZORA-QZVP",
+    "ZORA-QZVPP",
+    "DKH-def2-SVP",
+    "DKH-def2-SV(P)",
+    "DKH-def2-TZVP",
+    "DKH-def2-TZVP(-f)",
+    "DKH-def2-TZVPP",
+    "DKH-def2-QZVPP",
+    "ZORA-def2-SVP",
+    "ZORA-def2-SV(P)",
+    "ZORA-def2-TZVP",
+    "ZORA-def2-TZVP(-f)",
+    "ZORA-def2-TZVPP",
+    "ZORA-def2-QZVPP",
+    "ma-DKH-def2-SVP",
+    "ma-DKH-def2-SV(P)",
+    "ma-DKH-def2-TZVP",
+    "ma-DKH-def2-TZVP(-f)",
+    "ma-DKH-def2-TZVPP",
+    "ma-DKH-def2-QZVPP",
+    "ma-ZORA-def2-SVP",
+    "ma-ZORA-def2-SV(P)",
+    "ma-ZORA-def2-TZVP",
+    "ma-ZORA-def2-TZVP(-f)",
+    "ma-ZORA-def2-TZVPP",
+    "ma-ZORA-def2-QZVPP",
+    "SARC-DKH-SVP",
+    "SARC-DKH-TZVP",
+    "SARC-DKH-TZVPP",
+    "SARC-ZORA-SVP",
+    "SARC-ZORA-TZVP",
+    "SARC-ZORA-TZVPP",
+    "SARC2-DKH-QZV",
+    "SARC2-DKH-QZVP",
+    "SARC2-ZORA-QZV",
+    "SARC2-ZORA-QZVP",
+    "x2c-SV(P)all",
+    "x2c-SVPall",
+    "x2c-TZVPall",
+    "x2c-TZVPPall",
+    "x2c-QZVPall",
+    "x2c-QZVPPall",
+    "x2c-SV(P)all-s",
+    "x2c-SVPall-s",
+    "x2c-TZVPall-s",
+    "x2c-TZVPPall-s",
+    "x2c-QZVPall-s",
+    "x2c-QZVPPall-s",
+    "cc-pVDZ-DK",
+    "cc-pVTZ-DK",
+    "cc-pVQZ-DK",
+    "cc-pV5Z-DK",
+    "cc-pVDZ-DK3",
+    "cc-pVTZ-DK3",
+    "cc-pVQZ-DK3",
+    "aug-cc-pVDZ-DK",
+    "aug-cc-pVTZ-DK",
+    "aug-cc-pVQZ-DK",
+    "aug-cc-pV5Z-DK",
+    "cc-pwCVDZ-DK",
+    "cc-pwCVTZ-DK",
+    "cc-pwCVQZ-DK",
+    "cc-pwCV5Z-DK",
+    "cc-pwCVDZ-DK3",
+    "cc-pwCVTZ-DK3",
+    "cc-pwCVQZ-DK3",
+    "aug-cc-pwCVDZ-DK",
+    "aug-cc-pwCVTZ-DK",
+    "aug-cc-pwCVQZ-DK",
+    "aug-cc-pwCV5Z-DK",
+    "ANO-RCC-Full",
+    "ANO-RCC-DZP",
+    "ANO-RCC-TZP",
+    "ANO-RCC-QZP",
+]
+toolTip = "Relativistic SARC/ZORA/DKH/x2c basis sets."
 tab = "Basis"
 
 ["basis_auxj"]
 label = "AuxJ"
-type = "string"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "def2/J",
+    "def2-mTZVP/J",
+    "def2-mTZVPP/J",
+    "x2c/J",
+    "SARC/J",
+]
 toolTip = "Specify a Coulomb-fitting auxiliary basis set."
 tab = "Basis"
 
 ["basis_auxjk"]
 label = "AuxJK"
-type = "string"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "def2/JK",
+    "def2/JKsmall",
+    "cc-pVTZ/JK",
+    "cc-pVQZ/JK",
+    "cc-pV5Z/JK",
+    "aug-cc-pVTZ/JK",
+    "aug-cc-pVQZ/JK",
+    "aug-cc-pV5Z/JK",
+    "SARC2-DKH-QZV/JK",
+    "SARC2-DKH-QZVP/JK",
+    "SARC2-ZORA-QZV/JK",
+    "SARC2-ZORA-QZVP/JK",
+]
 toolTip = "Specify a Coulomb- and Exchange-fitting auxiliary basis set."
 tab = "Basis"
 
 ["basis_auxc"]
 label = "AuxC"
-type = "string"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "def2-SVP/C",
+    "def2-TZVP/C",
+    "def2-TZVPP/C",
+    "def2-QZVPP/C",
+    "def2-SVPD/C",
+    "def2-TZVPD/C",
+    "def2-TZVPPD/C",
+    "def2-QZVPPD/C",
+    "cc-pVDZ/C",
+    "cc-pVTZ/C",
+    "cc-pVQZ/C",
+    "cc-pV5Z/C",
+    "cc-pV6Z/C",
+    "aug-cc-pVDZ/C",
+    "aug-cc-pVTZ/C",
+    "aug-cc-pVQZ/C",
+    "aug-cc-pV5Z/C",
+    "aug-cc-pV6Z/C",
+    "cc-pwCVDZ/C",
+    "cc-pwCVTZ/C",
+    "cc-pwCVQZ/C",
+    "cc-pwCV5Z/C",
+    "aug-cc-pwCVDZ/C",
+    "aug-cc-pwCVTZ/C",
+    "aug-cc-pwCVQZ/C",
+    "aug-cc-pwCV5Z/C",
+]
 toolTip = "Specify a Post-HF auxiliary basis set."
 tab = "Basis"
 
@@ -338,7 +723,17 @@ tab = "Basis"
 
 ["basis_ecp"]
 label = "ECP"
-type = "string"
+type = "stringList"
+default = 0
+values = [
+    "",
+    "def2-ECP",
+    "SK-MCDHF-RSC",
+    "HayWadt",
+    "dhf-ECP",
+    "vDZP-ECP",
+    "CRENBL-ECP",
+]
 toolTip = "Specify an Effective Core Potential (ECP)."
 tab = "Basis"
 
@@ -347,99 +742,6 @@ label = "Allow Ghost ECPs"
 type = "boolean"
 default = false
 toolTip = "Specify whether or not to use ECPs for Ghost atoms."
-tab = "Basis"
-
-["basis_decontract"]
-label = "Decontract All"
-type = "boolean"
-default = false
-toolTip = "Decontract all orbital and auxiliary basis sets."
-tab = "Basis"
-
-["basis_decontract_bas"]
-label = "Decontract Orbital Basis"
-type = "boolean"
-default = false
-toolTip = "Decontract only orbital basis sets."
-tab = "Basis"
-
-["basis_decontract_auxj"]
-label = "Decontract AuxJ Basis"
-type = "boolean"
-default = false
-toolTip = "Decontract only AuxJ basis sets."
-tab = "Basis"
-
-["basis_decontract_auxjk"]
-label = "Decontract AuxJK Basis"
-type = "boolean"
-default = false
-toolTip = "Decontract only AuxJK basis sets."
-tab = "Basis"
-
-["basis_decontract_auxc"]
-label = "Decontract AuxC Basis"
-type = "boolean"
-default = false
-toolTip = "Decontract only AuxC basis sets."
-tab = "Basis"
-
-["basis_decontract_cabs"]
-label = "Decontract CABS Basis"
-type = "boolean"
-default = false
-toolTip = "Decontract only CABS basis sets."
-tab = "Basis"
-
-["basis_pcd_trim_bas"]
-label = "Trim Orbital Basis"
-type = "stringList"
-default = 0
-values = [
-    "Overlap",
-    "Coulomb",
-]
-toolTip = "Trim the orbital basis in the overlap metric."
-tab = "Basis"
-
-["basis_pcd_trim_auxj"]
-label = "Trim AuxJ Basis"
-type = "stringList"
-default = 1
-values = [
-    "Overlap",
-    "Coulomb",
-]
-toolTip = "Trim the AuxJ basis in the Coulomb metric."
-tab = "Basis"
-
-["basis_pcd_trim_auxjk"]
-label = "Trim AuxJK Basis"
-type = "stringList"
-default = 1
-values = [
-    "Overlap",
-    "Coulomb",
-]
-toolTip = "Trim the AuxJK basis in the Coulomb metric."
-tab = "Basis"
-
-["basis_pcd_trim_auxc"]
-label = "Trim AuxC Basis"
-type = "stringList"
-default = 1
-values = [
-    "Overlap",
-    "Coulomb",
-]
-toolTip = "Trim the AuxC basis in the Coulomb metric."
-tab = "Basis"
-
-["basis_pcd_thresh"]
-label = "PCD Threshold"
-type = "float"
-default = -1
-toolTip = "Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0)."
 tab = "Basis"
 
 ["basis_autoaux_size"]
@@ -462,12 +764,15 @@ tab = "Basis"
 label = "AutoAux L Limit"
 type = "integer"
 default = -1
+minimum = -1
+maximum = 7
 toolTip = "Set the highest allowed angular momentum (-1 means do not set limit)"
 tab = "Basis"
 
 ["scf_guess"]
 label = "Initial Guess"
 type = "stringList"
+default = 2
 values = [
     "HCore",
     "Hueckel",
@@ -481,6 +786,7 @@ tab = "SCF"
 ["scf_guess_mode"]
 label = "Guess Mode"
 type = "stringList"
+default = 0
 values = [
     "FMatrix",
     "CMatrix",

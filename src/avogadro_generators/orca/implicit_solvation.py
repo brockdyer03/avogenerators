@@ -10,6 +10,23 @@ class SolvationModel(Flag):
     Access members by string with ``SolvationModel["<member_name>"]``.
     """
 
+    def __str__(self) -> str:
+        match self:
+            case SolvationModel.CPCM:
+                return "CPCM"
+            case SolvationModel.SMD:
+                return "SMD"
+            case SolvationModel.COSMO_RS:
+                return "COSMORS"
+            case SolvationModel.ALPB:
+                return "ALPB"
+            case SolvationModel.DDCOSMO:
+                return "ddCOSMO"
+            case SolvationModel.CPCMX:
+                return "CPCMX"
+            case _:
+                raise ValueError("Invalid Solvent, how did you even get here?")
+
     CPCM     = auto()
     SMD      = auto()
     COSMO_RS = auto()
@@ -27,6 +44,17 @@ class SolventData:
 
 
 class Solvent(SolventData, Enum):
+
+    def __new__(
+        cls,
+        aliases: tuple[str],
+        models: SolvationModel,
+    ):
+        self = SolventData.__new__(cls)
+        self._name_ = aliases[0]
+        self._value_ = aliases[0]
+        return self
+
 
     def __str__(self):
         return self.aliases[0]

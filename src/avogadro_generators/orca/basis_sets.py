@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+import re
 from ..utilities import Element
 
 
@@ -91,7 +92,7 @@ class PopleBasisSet(BasisSetEnum):
             value = value.replace("**", "(d,p)")
         elif "*" in value:
             value = value.replace("*", "(d)")
-        
+
         for member in cls:
             if member.name == value:
                 return member
@@ -431,35 +432,37 @@ class AuxBasisSet:
 
     basis_name: str
     elements: tuple[Element]
-    ecp: str | None
-    ecp_elements: tuple[Element] | None
+    # ecp: str | None
+    # ecp_elements: tuple[Element] | None
 
     def __init__(
         self,
         name: str,
         element_ranges: tuple[str],
-        parent_basis: BasisSetEnum,
-        ecp: str | None = None,
-        ecp_elements: tuple[str] | None = None,
+        parent_basis: PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet,
+        # ecp: str | None = None,
+        # ecp_elements: tuple[str] | None = None,
     ):
         self.basis_name = name
         self.elements = BasisSet.split_elements(element_ranges)
-        self.parent_basis = parent_basis
+        self.parent_basis = parent_basis.__name__
 
 
 class AuxBasisSetEnum(AuxBasisSet, Enum):
     """Base class for auxiliary basis set enums."""
-
     def __new__(
         cls,
         basis_name: str,
         element_ranges: tuple[str],
-        parent_basis: BasisSetEnum,
+        parent_basis: PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet,
     ):
         self = BasisSet.__new__(cls)
         self._name_ = basis_name
         self._value_ = basis_name
         return self
+    
+    def __str__(self):
+        return self.basis_name
 
 
 class AuxJBasisSet(AuxBasisSetEnum):
@@ -521,3 +524,78 @@ class AuxCBasisSet(AuxBasisSetEnum):
     AUG_CC_PWCVTZ_C = "aug-cc-pwCVTZ/C", ("H-He", "B-Ne", "Al-Ar", "Sc-Kr"),  ccBasisSet
     AUG_CC_PWCVQZ_C = "aug-cc-pwCVQZ/C", ("H-He", "B-Ne", "Al-Ar", "Ga-Kr"),  ccBasisSet
     AUG_CC_PWCV5Z_C = "aug-cc-pwCV5Z/C", ("H-Ne", "Al-Ar"),                   ccBasisSet
+
+
+def get_basis_set(
+    value: str
+) -> PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet:
+    """Get a basis set enum member from a basis set"""
+
+    pople_pattern = re.compile(
+        pattern=r"\b(m?[346]-[23][12]*\+*G(?:\([23]?[dfp]{1,2},?[23]?[dfp]{0,2}\)|\**)?[SP]{0,2})\b",
+        flags=re.IGNORECASE,
+    )
+    def2_pattern = re.compile(
+        pattern=r"\b((?:ma-)?def2-m?[STQ]?[ZVPD()]{1,5}(?:\(-f\))?(?:\/J|\/C)?)\b",
+        flags=re.IGNORECASE,
+    )
+    jensen_pattern = re.compile(
+        pattern=r"\b((?:aug-)?pc[XJH]?S?(?:seg)?-[0-9]?)\b",
+        flags=re.IGNORECASE,
+    )
+    cc_pattern = re.compile(
+        pattern=r"\b((?:m?aug-|apr-|may-|ju[nl]-)?cc-p[wC]{0,2}V[DTQ56]?(?:[DTQ56]|\([DTQ56]?\+d\))Z(?:-DK3?)?(?:\/JK|\/C)?)\b",
+        flags=re.IGNORECASE,
+    )
+    relativistic_pattern = re.compile(
+        pattern=r"\b((?:ma-)?(?:SARC-|SARC2-)?(?:DKH-|ZORA-){1}(?:def2-)?m?[STQ]?[ZVPD()]{1,5}\(?-?f?\)?(?:\/JK)?)\b",
+        flags=re.IGNORECASE,
+    )
+
+    patterns = {
+        pople_pattern: PopleBasisSet,
+        def2_pattern: def2BasisSet,
+        jensen_pattern: JensenBasisSet,
+        cc_pattern: ccBasisSet,
+        relativistic_pattern: RelativisticBasisSet,
+    }
+
+
+    for pattern, basis_set in patterns.items():
+        if pattern.match(value) is not None:
+            return basis_set(value)
+
+
+def get_aux_basis(
+    value: str
+) -> AuxJBasisSet | AuxJKBasisSet | AuxCBasisSet:
+    """Get a basis set enum member from a basis set"""
+
+    if "/J" in value:
+        return AuxJBasisSet(value)
+    elif "/JK" in value:
+        return AuxJKBasisSet(value)
+    elif "/C" in value:
+        return AuxCBasisSet(value)
+    else:
+        return None
+
+
+def get_basis_family(basis_class: str) -> str:
+
+    match basis_class:
+        case "def2BasisSet":
+            return "def2-n(Z)VP"
+        case "ccBasisSet":
+            return "cc-pVnZ"
+        case "JensenBasisSet":
+            return "Jensen"
+        case "RelativisticBasisSet":
+            return "SARC/DKH/ZORA/x2c"
+        case "PopleBasisSet":
+            return "Pople"
+        case _:
+            return "Unknown"
+
+
+

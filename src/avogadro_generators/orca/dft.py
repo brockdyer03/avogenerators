@@ -31,7 +31,7 @@ class Disp(Flag):
     The ``D3`` keyword automatically activates D3(BJ) dispersion in
     ORCA, so it is merely an alias for ``D3BJ`` here.
 
-    You can access members by string with ``Disp["<member_name>"]``
+    You can access members by string with ``Disp["<member_name>"]``.
     """
 
     def __str__(self) -> str:
@@ -49,7 +49,7 @@ class Disp(Flag):
             case Disp.SCNL:
                 return "SCNL"
             case _:
-                raise ValueError("How did you even get here?")
+                raise ValueError("Invalid Dispersion, how did you even get here?")
 
     NODISP = 0
     D3BJ   = auto()
@@ -110,12 +110,6 @@ class Functionals(Functional, Enum):
 
     def __str__(self) -> str:
         return self.value
-
-    def check_disp(self, disp: Disp) -> bool:
-        if disp in self.disp:
-            return True
-        else:
-            return False
 
     # Local Density Approximation (LDA)
     HFS    = "HFS",   Disp.NODISP

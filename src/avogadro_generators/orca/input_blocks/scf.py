@@ -66,9 +66,9 @@ class SCF(BlockEnum):
     SOSCFPRECONDGAMMA        = "SOSCFPrecondGamma",        float, 0.25
 
     # Initial Guess
-    GUESS     = "Guess",     ORCAString, None, ("HCore", "Hueckel", "PAtom", "PModel", "MORead")
+    GUESS     = "Guess",     ORCAString, 2, ("HCore", "Hueckel", "PAtom", "PModel", "MORead")
     MOINP     = "MOInp",     str
-    GUESSMODE = "GuessMode", ORCAString, None, ("FMatrix", "CMatrix")
+    GUESSMODE = "GuessMode", ORCAString, 0, ("FMatrix", "CMatrix")
     AUTOSTART = "AutoStart", bool, True
 
 

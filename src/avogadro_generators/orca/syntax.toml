@@ -23,6 +23,8 @@ patterns = [
     { regexp = '\b(RI){1}\h', caseSensitive = false},
     # Dn dispersion corrections
     { regexp = '\b(D[34](?:BJ|ZERO|0|TZ)?)\s', caseSensitive = false },
+    # VV10 NL correction
+    { regexp = '\b((?:SC)?NL)\s', caseSensitive = false },
     # SCFCONV<n>
     { regexp = '\b(SCFCONV[0-9]+)\s', caseSensitive = false},
     # Spin-Orbit Coupling
@@ -259,6 +261,8 @@ patterns = [
 [[default.rules]]
 format.preset = "method"
 patterns = [
+    # The OG
+    { string = "HF", caseSensitive = false },
     # Built in Functionals
     { string = "HF-3c",                 caseSensitive = false },
     { string = "B97-3c",                caseSensitive = false },
@@ -383,7 +387,7 @@ patterns = [
     { string = "TASK-CC",          caseSensitive = false },
     { string = "TASK-LDA",         caseSensitive = false },
     { string = "TASK-SCAN",        caseSensitive = false },
-    { string = "TM",               caseSensitive = false },
+    { regexp = '\b(TM)\s',         caseSensitive = false },
     { string = "HFLDA",            caseSensitive = false },
     { string = "B1PW",             caseSensitive = false },
     { string = "B1PBE",            caseSensitive = false },

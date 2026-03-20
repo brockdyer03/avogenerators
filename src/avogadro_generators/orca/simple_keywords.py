@@ -137,3 +137,27 @@ class PNO(StrEnum):
     NORMALPNO = "NormalPNO"
     TIGHTPNO  = "TightPNO"
 
+
+def match_simple_keyword(kwd: str):
+    """Brute force matching of simple keywords."""
+
+    keyword_types = [
+        RunType,
+        SemiEmpirical,
+        SCFConv,
+        DeterminantType,
+        Opt,
+        Output,
+        Grid,
+        RIApproximation,
+        PartialCharges,
+        Relativistic,
+        PNO,
+    ]
+
+    for kwd_type in keyword_types:
+        for key in kwd_type:
+            if str(key) == kwd:
+                return key
+
+    return None

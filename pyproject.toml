@@ -85,8 +85,8 @@ program-name = "ORCA"
 input-format = "cjson"
 support.molecular = true
 support.periodic = false
-# user-options = "src/avogadro_generators/orca/options.json"
 user-options = "src/avogadro_generators/orca/options.toml"
+highlight-styles = "src/avogadro_generators/orca/syntax.toml"
 
 [[tool.avogadro.input-generators]]
 identifier = "psi4"

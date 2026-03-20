@@ -14,10 +14,11 @@ from avogadro_generators.orca.basis_sets import (
     AuxCBasisSet,
 )
 from avogadro_generators.orca.dft import Composite, Functionals, Disp
+from avogadro_generators.orca.wft import MP2, CoupledCluster
 from avogadro_generators.orca.simple_keywords import (
     RunType,
     SemiEmpirical,
-    SCF,
+    SCFConv,
     DeterminantType,
     Opt,
     Output,
@@ -27,7 +28,6 @@ from avogadro_generators.orca.simple_keywords import (
     Relativistic,
     PNO,
 )
-from avogadro_generators.orca.wft import MP2, CoupledCluster
 from avogadro_generators.orca.implicit_solvation import Solvent, XTBSolvent
 from avogadro_generators.orca.input_blocks.block_base import BlockKeyword, ORCAString
 from avogadro_generators.orca.input_blocks.elprop import ElProp
@@ -95,7 +95,7 @@ class BasicTab:
         ),
         "Theory": BasicOption(
             dtype="stringList",
-            default=0,
+            default=0, # r2SCAN-3c
             label="Theory",
             options=(
                 Composite.R2SCAN_3C,
@@ -115,6 +115,13 @@ class BasicTab:
                 Functionals.WB97M_V,
                 Functionals.PR2SCAN69,
                 Functionals.B2GP_PLYP,
+                "HF",
+                MP2.RI_MP2,
+                MP2.DLPNO_MP2,
+                MP2.SCS_DLPNO_MP2,
+                CoupledCluster.RI_CCSD_T_,
+                CoupledCluster.DLPNO_CCSD_T_,
+                CoupledCluster.DLPNO_CCSD_T1_,
             ),
         ),
         "Basis": BasicOption(
@@ -222,6 +229,17 @@ class BasicTab:
                 Output.LARGEPRINT,
             )
         ),
+        "basic_constrain": BasicOption(
+            dtype="boolean",
+            default=False,
+            label="Use Constraints",
+        ),
+        "basic_simple_keywords": BasicOption(
+            dtype="string",
+            default="",
+            label="Additional Simple Keywords",
+            toolTip="Comma- or whitespace-separated list of simple input keywords.",
+        ),
     }
 
     @classmethod
@@ -268,15 +286,17 @@ class BlockOption:
         keyword: BlockKeyword,
         label: str,
         toolTip: str | None = None,
+        add_dummy: bool = False,
     ):
         self.option_name = keyword.key_name
-        self.dtype   = keyword.dtype
-        self.options = keyword.options
-        self.default = keyword.default
-        self.minimum = keyword.minimum
-        self.maximum = keyword.maximum
-        self.label   = label
-        self.toolTip = toolTip
+        self.dtype       = keyword.dtype
+        self.options     = keyword.options
+        self.default     = keyword.default
+        self.minimum     = keyword.minimum
+        self.maximum     = keyword.maximum
+        self.label       = label
+        self.toolTip     = toolTip
+        self.add_dummy   = add_dummy
 
 
 class BlockTab(ABC):
@@ -286,6 +306,35 @@ class BlockTab(ABC):
     def write_tab(cls) -> str:
         """Write the ``options.toml`` entry for this tab."""
         tab = ""
+        if hasattr(cls, "extra_inputs"):
+            for key, val in cls.extra_inputs.items():
+                tab += f'["{key}"]\n'
+                tab += f'label = "{val.label}"\n'
+                tab += f'type = "{val.dtype}"\n'
+                if val.dtype == "string" and val.default is not None:
+                    tab += f'default = "{val.default}"\n'
+                elif val.dtype == "boolean" and val.default is not None:
+                    tab += f"default = {str(val.default).lower()}\n"
+                elif val.default is not None:
+                    tab += f"default = {val.default}\n"
+
+                if val.options is not None:
+                    tab += "values = [\n"
+                    for option in val.options:
+                        tab += f'    "{option}",\n'
+                    tab += "]\n"
+
+                if val.minimum is not None:
+                    tab += f"minimum = {val.minimum}\n"
+
+                if val.maximum is not None:
+                    tab += f"maximum = {val.maximum}\n"
+
+                if val.toolTip is not None:
+                    tab += f'toolTip = "{val.toolTip}"\n'
+
+                tab += f'tab = "{cls.name}"\n\n'
+
         for key, val in cls.inputs.items():
             tab += f'["{key}"]\n'
             tab += f'label = "{val.label}"\n'
@@ -302,6 +351,8 @@ class BlockTab(ABC):
 
             if val.options is not None:
                 tab += "values = [\n"
+                if val.add_dummy: # Add a blank option at the beginning.
+                    tab += '    "",\n'
                 for option in val.options:
                     tab += f'    "{option}",\n'
                 tab += "]\n"
@@ -415,25 +466,28 @@ class BasisTab(BlockTab):
     name = "Basis"
 
     inputs = {
-        "basis_basis": BlockOption(
-            keyword=Basis.BASIS,
-            toolTip="Specify a basis set.",
-            label="Basis",
-        ),
+        # "basis_basis": BlockOption(
+        #     keyword=Basis.BASIS,
+        #     toolTip="Specify a basis set.",
+        #     label="Basis",
+        # ),
         "basis_auxj": BlockOption(
             keyword=Basis.AUXJ,
             toolTip="Specify a Coulomb-fitting auxiliary basis set.",
             label="AuxJ",
+            add_dummy=True,
         ),
         "basis_auxjk": BlockOption(
             keyword=Basis.AUXJK,
             toolTip="Specify a Coulomb- and Exchange-fitting auxiliary basis set.",
             label="AuxJK",
+            add_dummy=True,
         ),
         "basis_auxc": BlockOption(
             keyword=Basis.AUXC,
             toolTip="Specify a Post-HF auxiliary basis set.",
             label="AuxC",
+            add_dummy=True,
         ),
         "basis_cabs": BlockOption(
             keyword=Basis.CABS,
@@ -450,61 +504,61 @@ class BasisTab(BlockTab):
             toolTip="Specify whether or not to use ECPs for Ghost atoms.",
             label="Allow Ghost ECPs",
         ),
-        "basis_decontract": BlockOption(
-            keyword=Basis.DECONTRACT,
-            toolTip="Decontract all orbital and auxiliary basis sets.",
-            label="Decontract All",
-        ),
-        "basis_decontract_bas": BlockOption(
-            keyword=Basis.DECONTRACTBAS,
-            toolTip="Decontract only orbital basis sets.",
-            label="Decontract Orbital Basis",
-        ),
-        "basis_decontract_auxj": BlockOption(
-            keyword=Basis.DECONTRACTAUXJ,
-            toolTip="Decontract only AuxJ basis sets.",
-            label="Decontract AuxJ Basis",
-        ),
-        "basis_decontract_auxjk": BlockOption(
-            keyword=Basis.DECONTRACTAUXJK,
-            toolTip="Decontract only AuxJK basis sets.",
-            label="Decontract AuxJK Basis",
-        ),
-        "basis_decontract_auxc": BlockOption(
-            keyword=Basis.DECONTRACTAUXC,
-            toolTip="Decontract only AuxC basis sets.",
-            label="Decontract AuxC Basis",
-        ),
-        "basis_decontract_cabs": BlockOption(
-            keyword=Basis.DECONTRACTCABS,
-            toolTip="Decontract only CABS basis sets.",
-            label="Decontract CABS Basis",
-        ),
-        "basis_pcd_trim_bas": BlockOption(
-            keyword=Basis.PCDTRIMBAS,
-            toolTip="Trim the orbital basis in the overlap metric.",
-            label="Trim Orbital Basis",
-        ),
-        "basis_pcd_trim_auxj": BlockOption(
-            keyword=Basis.PCDTRIMAUXJ,
-            toolTip="Trim the AuxJ basis in the Coulomb metric.",
-            label="Trim AuxJ Basis",
-        ),
-        "basis_pcd_trim_auxjk": BlockOption(
-            keyword=Basis.PCDTRIMAUXJK,
-            toolTip="Trim the AuxJK basis in the Coulomb metric.",
-            label="Trim AuxJK Basis",
-        ),
-        "basis_pcd_trim_auxc": BlockOption(
-            keyword=Basis.PCDTRIMAUXC,
-            toolTip="Trim the AuxC basis in the Coulomb metric.",
-            label="Trim AuxC Basis",
-        ),
-        "basis_pcd_thresh": BlockOption(
-            keyword=Basis.PCDTHRESH,
-            toolTip="Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0).",
-            label="PCD Threshold",
-        ),
+        # "basis_decontract": BlockOption(
+        #     keyword=Basis.DECONTRACT,
+        #     toolTip="Decontract all orbital and auxiliary basis sets.",
+        #     label="Decontract All",
+        # ),
+        # "basis_decontract_bas": BlockOption(
+        #     keyword=Basis.DECONTRACTBAS,
+        #     toolTip="Decontract only orbital basis sets.",
+        #     label="Decontract Orbital Basis",
+        # ),
+        # "basis_decontract_auxj": BlockOption(
+        #     keyword=Basis.DECONTRACTAUXJ,
+        #     toolTip="Decontract only AuxJ basis sets.",
+        #     label="Decontract AuxJ Basis",
+        # ),
+        # "basis_decontract_auxjk": BlockOption(
+        #     keyword=Basis.DECONTRACTAUXJK,
+        #     toolTip="Decontract only AuxJK basis sets.",
+        #     label="Decontract AuxJK Basis",
+        # ),
+        # "basis_decontract_auxc": BlockOption(
+        #     keyword=Basis.DECONTRACTAUXC,
+        #     toolTip="Decontract only AuxC basis sets.",
+        #     label="Decontract AuxC Basis",
+        # ),
+        # "basis_decontract_cabs": BlockOption(
+        #     keyword=Basis.DECONTRACTCABS,
+        #     toolTip="Decontract only CABS basis sets.",
+        #     label="Decontract CABS Basis",
+        # ),
+        # "basis_pcd_trim_bas": BlockOption(
+        #     keyword=Basis.PCDTRIMBAS,
+        #     toolTip="Trim the orbital basis in the overlap metric.",
+        #     label="Trim Orbital Basis",
+        # ),
+        # "basis_pcd_trim_auxj": BlockOption(
+        #     keyword=Basis.PCDTRIMAUXJ,
+        #     toolTip="Trim the AuxJ basis in the Coulomb metric.",
+        #     label="Trim AuxJ Basis",
+        # ),
+        # "basis_pcd_trim_auxjk": BlockOption(
+        #     keyword=Basis.PCDTRIMAUXJK,
+        #     toolTip="Trim the AuxJK basis in the Coulomb metric.",
+        #     label="Trim AuxJK Basis",
+        # ),
+        # "basis_pcd_trim_auxc": BlockOption(
+        #     keyword=Basis.PCDTRIMAUXC,
+        #     toolTip="Trim the AuxC basis in the Coulomb metric.",
+        #     label="Trim AuxC Basis",
+        # ),
+        # "basis_pcd_thresh": BlockOption(
+        #     keyword=Basis.PCDTHRESH,
+        #     toolTip="Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0).",
+        #     label="PCD Threshold",
+        # ),
         "basis_autoaux_size": BlockOption(
             keyword=Basis.AUTOAUXSIZE,
             toolTip="Control size of AutoAux basis sets. Larger value means larger basis.",
@@ -605,6 +659,44 @@ class BasisTab(BlockTab):
         #     toolTip="Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest.",
         #     label="AutoAux Tight B",
         # ),
+    }
+
+    extra_inputs = {
+        "basis_pople_basis": BasicOption(
+            dtype="stringList",
+            default=0,
+            label="Pople Basis Set",
+            options=[""]+[str(i) for i in PopleBasisSet],
+            toolTip="Pople-style split-valence basis sets.",
+        ),
+        "basis_def2_basis": BasicOption(
+            dtype="stringList",
+            default=0,
+            label="def2 Basis Set",
+            options=[""]+[str(i) for i in def2BasisSet],
+            toolTip="Karlsruhe def2-n(Z)VP basis sets.",
+        ),
+        "basis_cc_basis": BasicOption(
+            dtype="stringList",
+            default=0,
+            label="cc-pVnZ Basis Set",
+            options=[""]+[str(i) for i in ccBasisSet],
+            toolTip="Correlation Consistent basis sets.",
+        ),
+        "basis_jensen_basis": BasicOption(
+            dtype="stringList",
+            default=0,
+            label="pc-n Basis Set",
+            options=[""]+[str(i) for i in JensenBasisSet],
+            toolTip="Jensen's Polarization-Consistent basis sets.",
+        ),
+        "basis_relativistic_basis": BasicOption(
+            dtype="stringList",
+            default=0,
+            label="Relativistic Basis Set",
+            options=[""]+[str(i) for i in RelativisticBasisSet],
+            toolTip="Relativistic SARC/ZORA/DKH/x2c basis sets.",
+        ),
     }
 
 

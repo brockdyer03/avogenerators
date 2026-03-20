@@ -66,6 +66,47 @@ class BlockKeyword:
                 "How did you even get here?"
             )
 
+    def is_default(self, value) -> bool:
+        """Determine whether or not a value is the default for the
+        keyword. If there is no default, this will return ``False`` for
+        anything that is an empty value.
+
+        Notes
+        -----
+        A keyword that is a sequence or dict should probably never have
+        a default.
+        """
+        if isinstance(value, str):
+            if value == "":
+                return True
+
+        if self.default is None:
+            if isinstance(value, (str, Sequence, dict)):
+                if len(value) == 0: # Empty strings or sequences are the default
+                    return True
+            elif isinstance(value, (int, float, bool)):
+                return False # If it is a number it must exist.
+        else:
+            if isinstance(value, (bool, int, float)):
+                if value == self.default:
+                    return True
+                else:
+                    return False
+            elif isinstance(value, str):
+                if isinstance(self.options, Sequence):
+                    if self.value == self.options[self.default]:
+                        return True
+                    else:
+                        return False
+                else:
+                    if self.value == self.default:
+                        return True
+                    else:
+                        return False
+        raise RuntimeError(
+            f"Something went wrong with checking the default for {self} against {value}."
+        )
+
 
 class BlockEnum(BlockKeyword, Enum):
     """Base class for block keyword enums."""
@@ -82,10 +123,17 @@ class BlockEnum(BlockKeyword, Enum):
         self = BlockKeyword.__new__(cls)
         self._value_ = key_name
         return self
+    
+
+    def __str__(self) -> str:
+        return self.key_name
 
 
 class NestedBlockEnum(BlockKeyword, Enum):
-    """Class for handling nested blocks, such as the TRAH section of %scf."""
+    """Class for handling nested blocks, such as the TRAH section of %scf.
+    
+    Currently unused.
+    """
 
     def __new__(
         cls,
@@ -100,3 +148,19 @@ class NestedBlockEnum(BlockKeyword, Enum):
         self._value_ = key_name
         return self
 
+
+def format_block_keyword(
+    kwd: BlockKeyword,
+    val: str | bool | int | float | Sequence,
+) -> str:
+
+    if kwd._dtype is str:
+        return f'    {kwd} = "{val}"\n'
+    elif kwd._dtype is Sequence:
+        fmt = f"    {kwd} = "
+        for item in val[:-1]:
+            fmt += f"{item}, "
+        fmt += f"{val[-1]}\n"
+        return fmt
+    else:
+        return f"    {kwd} = {val}\n"

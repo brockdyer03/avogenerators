@@ -6,9 +6,7 @@
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
 """Input generation for ORCA (https://www.faccts.de/orca/)."""
-from .input_blocks.scf import SCF
-from .input_blocks.basis import Basis
-from .input_blocks.elprop import ElProp
+from .input_blocks import SCF, Basis, ElProp, Method, format_block_keyword
 from .simple_keywords import (
     RunType,
     SemiEmpirical,
@@ -21,8 +19,10 @@ from .simple_keywords import (
     PartialCharges,
     Relativistic,
     PNO,
+    match_simple_keyword,
 )
 from .dft import Composite, Functionals, Disp
+from .wft import MP2, CoupledCluster
 from .basis_sets import (
     PopleBasisSet,
     def2BasisSet,
@@ -32,120 +32,81 @@ from .basis_sets import (
     AuxJBasisSet,
     AuxJKBasisSet,
     AuxCBasisSet,
+    get_basis_set,
+    get_aux_basis,
+    get_basis_family,
 )
 from .implicit_solvation import Solvent, SolvationModel
+from ..utilities import Element
 
-BASIC_TAB_KEYWORDS = {
-    "Title": str,
-    "Filename Base": str,
-    "Processor Cores": int,
-    "Memory": int,
-    "Calculation Type": RunType,
-    "Theory": (Composite, Functionals),
-    "Basis": (def2BasisSet, ccBasisSet, JensenBasisSet),
-    "Charge": int,
-    "Multiplicity": int,
-    "Solvent": Solvent,
-    "Solvation Model": str,
-    "basic_disp_corr": Disp,
-    "basic_print_mos": bool,
-    "basic_print_level": Output,
-}
+def write_block(block_name: str, keys_vals: dict):
+    """Write an input block."""
+    block = f"%{block_name}\n"
+
+    for key, value in keys_vals.items():
+        if key._dtype is str:
+            block += f'    {key.name} = "{value}"\n'
+        else:
+            block += f"    {key.name} = {value}\n"
+
+    block += "end\n"
+    return block
+
+
+def get_method(value: str) -> str | Functionals | Composite | MP2 | CoupledCluster:
+    """Get a method from a string."""
+
+    if value == "HF":
+        return value
+    elif "MP2" in value:
+        return MP2(value)
+    elif "CCSD" in value:
+        return CoupledCluster(value)
+    elif "-3c" in value:
+        return Composite(value)
+    else:
+        return Functionals(value)
+
 
 SCF_BLOCK_KEYWORDS = {
-    "scf_guess":                       SCF.GUESS,
-    "scf_guess_mode":                  SCF.GUESSMODE,
-    "scf_autostart":                   SCF.AUTOSTART,
-    "scf_moinp":                       SCF.MOINP,
-    "scf_convergence":                 SCF.CONVERGENCE,
-    "scf_tol_e":                       SCF.TOL_E,
-    "scf_tol_rmsp":                    SCF.TOL_RMSP,
-    "scf_tol_maxp":                    SCF.TOL_MAXP,
-    "scf_tol_err":                     SCF.TOL_ERR,
-    "scf_tol_g":                       SCF.TOL_G,
-    "scf_tol_x":                       SCF.TOL_X,
-    "scf_int_thresh":                  SCF.THRESH,
-    "scf_conv_check_mode":             SCF.CONVCHECKMODE,
-    "scf_conv_forced":                 SCF.CONVFORCED,
-    "scf_hf_type":                     SCF.HFTYP,
-    "scf_rohf_case":                   SCF.ROHF_CASE,
-    "scf_rohf_nel":                    SCF.ROHF_NEL,
-    "scf_rohf_numop":                  SCF.ROHF_NUMOP,
-    "scf_rohf_norb":                   SCF.ROHF_NORB,
-    # "scf_rohf_ref":                    SCF.ROHF_REF,
-    # "scf_rohf_aforbs":                 SCF.ROHF_AFORBS,
-    "scf_xtbfod":                      SCF.XTBFOD,
-    "scf_use_xtb_mixer":               SCF.USEXTBMIXER,
-    "scf_soscf_max_step":              SCF.SOSCFMAXSTEP,
-    "scf_soscf_block_diag":            SCF.SOSCFBLOCKDIAG,
-    "scf_delta_scf_from_gs":           SCF.DELTASCFFROMGS,
-    "scf_do_mom":                      SCF.DOMOM,
-    "scf_keep_initial_ref":            SCF.KEEPINITIALREF,
-    "scf_pmom":                        SCF.PMOM,
-    # "scf_alpha_conf":                  SCF.ALPHACONF,
-    # "scf_beta_conf":                   SCF.BETACONF,
-    "scf_ionize_alpha":                SCF.IONIZEALPHA,
-    "scf_ionize_beta":                 SCF.IONIZEBETA,
-    "scf_soscf_hess_up":               SCF.SOSCFHESSUP,
-    "scf_soscf_constraints":           SCF.SOSCFCONSTRAINTS,
-    "scf_soscf_constrained_maxstep":   SCF.SOSCFCONSTRAINEDMAXSTEP,
-    "scf_soscf_conv_factor":           SCF.SOSCFCONVFACTOR,
-    "scf_soscf_constrained_hess_up":   SCF.SOSCFCONSTRAINEDHESSUP,
-    "scf_soscf_write_constrained_gbw": SCF.SOSCFWRITECONSTRAINEDGBW,
-    "scf_soscf_davidson_maxit":        SCF.SOSCFDAVIDSONMAXIT,
-    "scf_soscf_davidson_tol_r":        SCF.SOSCFDAVIDSONTOLR,
-    "scf_soscf_max_red":               SCF.SOSCFDAVIDSONMAXRED,
-    "scf_soscf_davidson_fd_mode":      SCF.SOSCFDAVIDSONFDMODE,
-    "scf_soscf_davidson_fd_step":      SCF.SOSCFDAVIDSONFDSTEP,
-    "scf_soscf_precond_type":          SCF.SOSCFPRECONDTYPE,
-    "scf_soscf_precond_gamma":         SCF.SOSCFPRECONDGAMMA,
-    "scf_soscf_gmf":                   SCF.SOSCFGMF,
-    "scf_soscf_spo":                   SCF.SOSCFSPO,
-    "scf_soscf_spo_est":               SCF.SOSCFSPOEST,
-    "scf_soscf_update_spo_est":        SCF.SOSCFUPDATESPOEST,
-    "scf_soscf_spo_est_ntrial":        SCF.SOSCFSPOESTNTRIAL,
-    "scf_soscf_update_spo_thresh":     SCF.SOSCFUPDATESPOTHRESH,
+    "scf_guess":           SCF.GUESS,
+    "scf_guess_mode":      SCF.GUESSMODE,
+    "scf_autostart":       SCF.AUTOSTART,
+    "scf_moinp":           SCF.MOINP,
+    "scf_convergence":     SCF.CONVERGENCE,
+    "scf_tol_e":           SCF.TOL_E,
+    "scf_tol_rmsp":        SCF.TOL_RMSP,
+    "scf_tol_maxp":        SCF.TOL_MAXP,
+    "scf_tol_err":         SCF.TOL_ERR,
+    "scf_tol_g":           SCF.TOL_G,
+    "scf_tol_x":           SCF.TOL_X,
+    "scf_int_thresh":      SCF.THRESH,
+    "scf_conv_check_mode": SCF.CONVCHECKMODE,
+    "scf_conv_forced":     SCF.CONVFORCED,
 }
 
 BASIS_BLOCK_KEYWORDS = {
-    "basis_basis":            Basis.BASIS,
+    # "basis_basis":            Basis.BASIS,
     "basis_auxj":             Basis.AUXJ,
     "basis_auxjk":            Basis.AUXJK,
     "basis_auxc":             Basis.AUXC,
     "basis_cabs":             Basis.CABS,
     "basis_ecp":              Basis.ECP,
     "basis_ghost_ecp":        Basis.GHOSTECP,
-    "basis_decontract":       Basis.DECONTRACT,
-    "basis_decontract_bas":   Basis.DECONTRACTBAS,
-    "basis_decontract_auxj":  Basis.DECONTRACTAUXJ,
-    "basis_decontract_auxjk": Basis.DECONTRACTAUXJK,
-    "basis_decontract_auxc":  Basis.DECONTRACTAUXC,
-    "basis_decontract_cabs":  Basis.DECONTRACTCABS,
-    "basis_pcd_trim_bas":     Basis.PCDTRIMBAS,
-    "basis_pcd_trim_auxj":    Basis.PCDTRIMAUXJ,
-    "basis_pcd_trim_auxjk":   Basis.PCDTRIMAUXJK,
-    "basis_pcd_trim_auxc":    Basis.PCDTRIMAUXC,
-    "basis_pcd_thresh":       Basis.PCDTHRESH,
+    # "basis_decontract":       Basis.DECONTRACT,
+    # "basis_decontract_bas":   Basis.DECONTRACTBAS,
+    # "basis_decontract_auxj":  Basis.DECONTRACTAUXJ,
+    # "basis_decontract_auxjk": Basis.DECONTRACTAUXJK,
+    # "basis_decontract_auxc":  Basis.DECONTRACTAUXC,
+    # "basis_decontract_cabs":  Basis.DECONTRACTCABS,
+    # "basis_pcd_trim_bas":     Basis.PCDTRIMBAS,
+    # "basis_pcd_trim_auxj":    Basis.PCDTRIMAUXJ,
+    # "basis_pcd_trim_auxjk":   Basis.PCDTRIMAUXJK,
+    # "basis_pcd_trim_auxc":    Basis.PCDTRIMAUXC,
+    # "basis_pcd_thresh":       Basis.PCDTHRESH,
     "basis_autoaux_size":     Basis.AUTOAUXSIZE,
     "basis_autoaux_l_max":    Basis.AUTOAUXLMAX,
     "basis_autoaux_l_limit":  Basis.AUTOAUXLLIMIT,
-    "basis_autoaux_f_0":      Basis.AUTOAUXF_0,
-    "basis_autoaux_f_1":      Basis.AUTOAUXF_1,
-    "basis_autoaux_f_2":      Basis.AUTOAUXF_2,
-    "basis_autoaux_f_3":      Basis.AUTOAUXF_3,
-    "basis_autoaux_f_4":      Basis.AUTOAUXF_4,
-    "basis_autoaux_f_5":      Basis.AUTOAUXF_5,
-    "basis_autoaux_f_6":      Basis.AUTOAUXF_6,
-    "basis_autoaux_f_7":      Basis.AUTOAUXF_7,
-    "basis_autoaux_B_0":      Basis.AUTOAUXB_0,
-    "basis_autoaux_B_1":      Basis.AUTOAUXB_1,
-    "basis_autoaux_B_2":      Basis.AUTOAUXB_2,
-    "basis_autoaux_B_3":      Basis.AUTOAUXB_3,
-    "basis_autoaux_B_4":      Basis.AUTOAUXB_4,
-    "basis_autoaux_B_5":      Basis.AUTOAUXB_5,
-    "basis_autoaux_B_6":      Basis.AUTOAUXB_6,
-    "basis_autoaux_B_7":      Basis.AUTOAUXB_7,
-    "basis_autoaux_tight_b":  Basis.AUTOAUXTIGHTB,
 }
 
 ELPROP_BLOCK_KEYWORDS = {
@@ -174,188 +135,136 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     opts = input_json["options"]
     cjson = input_json["cjson"]
 
-    # Extract options:
-    title = opts["Title"]
-    calculate = opts["Calculation Type"]
-    theory = opts["Theory"]
-    basis = opts["Basis"]
-    charge = opts["Charge"]
-    multiplicity = opts["Multiplicity"]
-    nCores = int(opts["Processor Cores"])
-    memory = int((opts["Memory"] * 1024) / nCores)
-    solvtype = opts["Solvation Model"]
-    solvent = opts["Solvent"]
-    mos = opts["Print Molecular Orbitals"]
-    sym = opts["Use Symmetry"]
-    constrain = opts["Constrain Geometry"]
-    # autoaux = opts["AutoAux"]
-    disp = opts["Dispersion Correction"]
-    ri = opts["RI Approximation"]
-    auxbasis = "None"
-    excit = opts["Excited State Method"]
-    nroots = opts["Number of States"]
-    iroot = opts["Target State"]
+    # Extract undefined options:
+    title: str          = opts["Title"]
+    file_name: str      = opts["Filename Base"]
+    charge: int         = opts["Charge"]
+    multiplicity: int   = opts["Multiplicity"]
+    nprocs: int         = opts["Processor Cores"]
+    max_mem: int        = opts["Memory"]
+    extra_keywords: str = opts["basic_simple_keywords"]
 
-    rijbasis = {
-        "6-31G(d)": "AutoAux",
-        "cc-pVDZ": "Def2/J",
-        "cc-pVTZ": "Def2/J",
-        "cc-pVQZ": "Def2/J",
-        "aug-cc-pVDZ": "AutoAux",
-        "aug-cc-pVTZ": "AutoAux",
-        "aug-cc-pVQZ": "AutoAux",
-        "def2-SVP": "Def2/J",
-        "def2-TZVP": "Def2/J",
-        "def2-QZVP": "Def2/J",
-        "def2-TZVPP": "Def2/J",
-        "def2-QZVPP": "Def2/J",
-        "def2-TZVPPD": "AutoAux",
-        "def2-QZVPPD": "AutoAux",
-        "ma-def2-SVP": "AutoAux",
-        "ma-def2-TZVP": "AutoAux",
-        "ma-def2-QZVP": "AutoAux",
+    # Extract defined options
+    run_type        = RunType(opts["Calculation Type"])
+    method          = get_method(opts["Theory"])
+    basis_set       = get_basis_set(opts["Basis"])
+    solvent         = opts["Solvent"]
+    disp            = opts["basic_disp_corr"]
+    print_mos: bool = opts["basic_print_mos"]
+    print_level     = Output(opts["basic_print_level"])
+    constrain: bool = opts["basic_constrain"]
+
+    # Extract some items from other tabs
+    auxj_basis  = get_aux_basis(opts["basis_auxj"])
+    auxjk_basis = get_aux_basis(opts["basis_auxjk"])
+    auxc_basis  = get_aux_basis(opts["basis_auxc"])
+
+    override_bases = {
+        "basis_def2_basis": def2BasisSet,
+        "basis_cc_basis": ccBasisSet,
+        "basis_pople_basis": PopleBasisSet,
+        "basis_jensen_basis": JensenBasisSet,
+        "basis_relativistic_basis": RelativisticBasisSet,
     }
 
-    rijkbasis = {
-        "6-31G(d)": "AutoAux",
-        "cc-pVDZ": "cc-pVDZ/JK",
-        "cc-pVTZ": "cc-pVTZ/JK",
-        "cc-pVQZ": "cc-pVQZ/JK",
-        "aug-cc-pVDZ": "aug-cc-pVDZ/JK",
-        "aug-cc-pVTZ": "aug-cc-pVTZ/JK",
-        "aug-cc-pVQZ": "aug-cc-pVQZ/JK",
-        "def2-SVP": "Def2/JK",
-        "def2-TZVP": "Def2/JK",
-        "def2-QZVP": "Def2/JK",
-        "def2-TZVPP": "Def2/JK",
-        "def2-QZVPP": "Def2/JK",
-        "def2-TZVPPD": "aug-cc-pVTZ/JK",
-        "def2-QZVPPD": "aug-cc-pVQZ/JK",
-        "ma-def2-SVP": "aug-cc-pVDZ/JK",
-        "ma-def2-TZVP": "aug-cc-pVTZ/JK",
-        "ma-def2-QZVP": "aug-cc-pVQZ/JK",
-    }
-
-    # Convert to code-specific strings
-    calcStr = ""
-    if calculate == "Single Point":
-        calcStr = "SP"
-    elif calculate == "Geometry Optimization":
-        calcStr = "Opt"
-    elif calculate == "Frequencies":
-        calcStr = "Opt Freq"
-    elif calculate == "Dynamics":
-        calcStr = "MD"
-    elif calculate == "Transition State":
-        calcStr = "OptTS"
-    else:
-        warnings.append("Unhandled calculation type: %s" % calculate)
-
-    solvation = ""
-    if "None" not in opts["Solvent"] and solvtype == "CPCM":
-        solvation = "CPCM(" + solvent + ")"
-    elif "None" not in opts["Solvent"] and solvtype == "SMD":
-        solvation = "CPCM"
-
-    if disp == "None":
-        disp = ""
-    else:
-        disp = " " + disp
-
-    if ri in ["None"]:
-        #autoaux = False
-        ri = ""
-    # see https://discuss.avogadro.cc/t/orca-input-generator-does-not-print-nori-when-selected/5489
-    elif ri in ["NORI"]:
-        #autoaux = False
-        ri = " " + ri
-    else:
-        if ri in ["RIJONX", "RIJCOSX"]:
-            auxbasis = rijbasis[basis]
+    for basis, basis_type in override_bases.items():
+        basis = opts[basis]
+        if basis == "":
+            pass
         else:
-            auxbasis = rijkbasis[basis]
-        ri = " " + ri
+            basis_set = basis_type(basis)
 
-    #if autoaux == True:
-    #    auxbasis = "AutoAux"
+    simple_keywords = []
 
-    if auxbasis != "None":
-        basis = basis + " " + auxbasis
+    if "atoms" in cjson:
+        for element in set(cjson["atoms"]["elements"]["number"]):
+            element = Element(element)
+            if element not in basis_set.elements:
+                warnings.append(
+                    f"Element {element.symbol} is not defined for the {basis_set.value} basis set!"
+                )
 
-    if auxbasis == "None" and excit == "CIS(D)":
-        basis = basis + " " + "AutoAux"
+    if isinstance(method, Functionals):
+        if disp == "":
+            simple_keywords.append(method.value)
+        elif Disp[disp] not in method.disp:
+            warnings.append(
+                f"The dispersion correction {Disp[disp]} is not available for {method.value}!"
+            )
+        else:
+            simple_keywords.extend([method.value, disp])
+    elif isinstance(method, Composite):
+        basis_set = ""
+        simple_keywords.append(method.value)
+    elif isinstance(method, (MP2, CoupledCluster)):
+        if auxc_basis.parent_basis != basis_set.__class__.__name__:
+            aux_fam = get_basis_family(auxc_basis.parent_basis)
+            main_fam = get_basis_family(basis_set.__class__.__name__)
+            warnings.append(
+                f"The auxiliary basis {auxc_basis.basis_name} belongs to the {aux_fam} family, but your primary basis is of the {main_fam} family!"
+            )
+        simple_keywords.append(method.value)
+    elif method == "HF":
+        simple_keywords.append(method)
 
-    if sym is True:
-        usesymmetry = 'UseSym'
-    else:
-        usesymmetry = ''
+    if basis_set != "":
+        simple_keywords.append(basis_set)
 
-    if excit == 'EOM-CCSD':
-        theory="EOM-CCSD"
-    elif excit in ["CIS", "CIS(D)"]:
-        theory="HF"
+    if isinstance(method, (MP2, CoupledCluster)):
+        simple_keywords.append(auxc_basis)
 
-    if "-3c" in theory or "-3C" in theory:
-        # -3c composite methods have everything together
-        code = f"{calcStr} {theory} {ri} {solvation} {usesymmetry}"
-    else:
-        theory = theory + disp + ri
-        # put the pieces together
-        code = f"{calcStr} {theory} {basis} {solvation} {usesymmetry}"
+    if auxj_basis is not None:
+        simple_keywords.append(auxj_basis)
 
-    generated_input = ""
+    if auxjk_basis is not None:
+        simple_keywords.append(auxjk_basis)
 
-    generated_input += "# avogadro generated ORCA file\n"
-    generated_input += "# " + title + "\n"
-    generated_input += "# \n"
-    generated_input += f"! {code}\n\n"
-    generated_input += "%maxcore " + str(memory) + "\n\n"
-    if nCores > 1:
-        generated_input += "%pal\n"
-        generated_input += "   nprocs " + str(nCores) + "\n"
-        generated_input += "end\n\n"
-    if "None" not in opts["Solvent"] and solvtype == "SMD":
-        generated_input += "%cpcm\n"
-        generated_input += "   smd true\n"
-        generated_input += '   SMDSolvent "' + solvent + '"\n'
-        generated_input += "end\n\n"
+    if solvent != "":
+        solvent = Solvent(solvent)
+        solvent_model = SolvationModel[opts["Solvation Model"].upper()]
+        if solvent_model not in solvent.models:
+            warnings.append(
+                f"Solvation model {solvent_model} not available for solvent {solvent.aliases[0]}"
+            )
+        else:
+            simple_keywords.append(f"{solvent_model}({solvent})")
 
-    if calcStr == "MD":
-        generated_input += "%md\n"
-        generated_input += "   timestep " + opts["AIMD TimeStep"] + "\n"
-        generated_input += "   initvel " + opts["AIMD Initvel"] + "_k\n"
+    if print_mos:
+        simple_keywords.extend([Output.PRINTMOS, Output.PRINTBASIS])
+
+    if print_level != "NormalPrint":
+        simple_keywords.append(print_level)
+
+    for keyword in extra_keywords.replace(",", " ").split():
+        kwd = match_simple_keyword(keyword)
+        if kwd is not None:
+            simple_keywords.append(kwd)
+        else:
+            warnings.append(
+                f"Keyword {keyword} is not recognized!"
+            )
+
+    generated_input = (
+        "# File Generated with Avogadro\n"
+       f"# {title}\n"
+       f"#\n"
+    )
+    generated_input += f"!{run_type.value}"
+    for kwd in simple_keywords:
+        generated_input += f" {kwd}"
+    generated_input += "\n"
+
+    if max_mem != 4:
+        generated_input += f"%MaxCore {int(max_mem*1024/nprocs)}\n"
+
+    if nprocs != 1:
         generated_input += (
-            "   thermostat berendsen "
-            + str(opts["AIMD Thermostat Temp"])
-            + "_k timecon "
-            + opts["AIMD Thermostat Time"]
-            + "\n"
+            "%pal\n"
+           f"    nprocs = {nprocs}\n"
+            "end\n"
         )
-        generated_input += '   dump position stride 1 filename "trajectory.xyz"\n'
-        generated_input += "   run " + str(opts["AIMD RunTime"]) + "\n"
-        generated_input += "end\n\n"
 
-    # Excited states
-    if excit == "CIS" or excit == "CIS(D)":
-        generated_input += "%cis\n"
-    elif excit == "TDDFT":
-        generated_input += "%tddft\n"
-    elif excit == "EOM-CCSD":
-        generated_input += "%mdci\n"
-    if excit != "None":
-        generated_input += f"   nroots {nroots}\n"
-        generated_input += f"   iroot  {iroot}\n"
-        if excit == "CIS(D)":
-            generated_input += "   dcorr 1\n"
-        generated_input += "end\n\n"
-
-    if mos is True:
-        generated_input += "%output\n"
-        generated_input += "   print[p_mos] 1\n"
-        generated_input += "   print[p_basis] 2\n"
-        generated_input += "end\n\n"
-
-    if constrain is True:
+    if constrain is True and "atoms" in cjson and ("constraints" in cjson or "frozen" in cjson):
         # check for constraints and frozen atoms in cjson
         generated_input += "%geom Constraints\n"
 
@@ -401,6 +310,34 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         generated_input += "end\n"
         generated_input += "end\n\n"
 
+    scf_block = "%scf\n"
+    for kwd, kwd_type in SCF_BLOCK_KEYWORDS.items():
+        val = opts[kwd]
+        if not kwd_type.is_default(val):
+            scf_block += format_block_keyword(kwd_type, val)
+    scf_block += "end\n"
+
+    basis_block = "%basis\n"
+    for kwd, kwd_type in BASIS_BLOCK_KEYWORDS.items():
+        val = opts[kwd]
+        if not kwd_type.is_default(val):
+            basis_block += format_block_keyword(kwd_type, val)
+    basis_block += "end\n"
+
+    elprop_block = "%elprop\n"
+    for kwd, kwd_type in ELPROP_BLOCK_KEYWORDS.items():
+        val = opts[kwd]
+        if not kwd_type.is_default(val):
+            elprop_block += format_block_keyword(kwd_type, val)
+    elprop_block += "end\n"
+
+    if scf_block != "%scf\nend\n":
+        generated_input += scf_block
+    if basis_block != "%basis\nend\n":
+        generated_input += basis_block
+    if elprop_block != "%elprop\nend\n":
+        generated_input += elprop_block
+
     generated_input += f"* xyz {charge} {multiplicity}\n"
     generated_input += "$$coords:___Sxyz$$\n"
     generated_input += "*\n\n\n"
@@ -416,7 +353,10 @@ def generateInput(input_json: dict, debug: bool) -> dict:
 
     result = {
         'files': [
-            {'filename': filename, 'contents': generated_input},
+            {
+                'filename': filename,
+                'contents': generated_input
+            },
         ],
         'mainFile': filename,
     }
