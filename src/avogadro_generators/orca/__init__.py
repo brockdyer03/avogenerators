@@ -116,9 +116,10 @@ ELPROP_BLOCK_KEYWORDS = {
     "elprop_origin":          ElProp.ORIGIN,
 }
 
-def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
+def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     # Collect warning strings as we go
     warnings = []
+    syntax_groups = ["default"]
 
     opts = input_json["options"]
     cjson = input_json["cjson"]
@@ -332,21 +333,24 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
 
     if scf_block != "%scf\nend\n":
         generated_input += scf_block
+        syntax_groups.append("scf")
     if basis_block != "%basis\nend\n":
         generated_input += basis_block
+        syntax_groups.append("basis")
     if elprop_block != "%elprop\nend\n":
         generated_input += elprop_block
+        syntax_groups.append("elprop")
 
     generated_input += f"* xyz {charge} {multiplicity}\n"
     generated_input += "$$coords:___Sxyz$$\n"
     generated_input += "*\n\n\n"
 
-    return generated_input, warnings
+    return generated_input, warnings, syntax_groups
 
 
 def generateInput(input_json: dict, debug: bool) -> dict:
 
-    generated_input, warnings = generateInputFile(input_json)
+    generated_input, warnings, syntax_groups = generateInputFile(input_json)
 
     filename = input_json['options']['Filename Base'] + '.inp'
 
@@ -354,7 +358,8 @@ def generateInput(input_json: dict, debug: bool) -> dict:
         'files': [
             {
                 'filename': filename,
-                'contents': generated_input
+                'contents': generated_input,
+                'highlightStyles': syntax_groups,
             },
         ],
         'mainFile': filename,
