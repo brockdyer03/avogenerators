@@ -1,3 +1,10 @@
+# SPDX-FileCopyrightText: 2026 Avogadro Project
+# SPDX-License-Identifier: BSD 3-Clause
+# ******************************************************************************
+# This source file is part of the Avogadro project.
+#
+# This source code is released under the New BSD License, (the "License").
+# ******************************************************************************
 from dataclasses import dataclass
 from enum import Enum
 import re

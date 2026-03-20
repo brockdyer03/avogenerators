@@ -1,3 +1,10 @@
+# SPDX-FileCopyrightText: 2026 Avogadro Project
+# SPDX-License-Identifier: BSD 3-Clause
+# ******************************************************************************
+# This source file is part of the Avogadro project.
+#
+# This source code is released under the New BSD License, (the "License").
+# ******************************************************************************
 """Classes and methods for using WFT methods such as DLPNO-CCSD(T) and MP2"""
 
 from enum import StrEnum
