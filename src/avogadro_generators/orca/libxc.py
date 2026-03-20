@@ -5,7 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Enumeration and access functions for LibXC functionals"""
+"""Enumeration and access functions for LibXC functionals."""
 
 from enum import StrEnum
 from typing import Self

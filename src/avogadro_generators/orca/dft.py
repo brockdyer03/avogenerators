@@ -10,7 +10,7 @@ from enum import Enum, StrEnum, Flag, auto
 
 
 class Disp(Flag):
-    """Dispersion corrections available in ORCA
+    """Dispersion corrections available in ORCA.
 
     Attributes
     ----------
@@ -78,6 +78,7 @@ class Functional:
 
 
 class Composite(StrEnum):
+    """Composite -3c methods."""
 
     HF_3C     = "HF-3c"
     B97_3C    = "B97-3c"

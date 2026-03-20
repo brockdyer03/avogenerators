@@ -15,7 +15,7 @@ from .block_base import BlockEnum, ORCAString
 
 
 class Method(BlockEnum):
-    """Enumeration of keywords available in the %method block"""
+    """Enumeration of keywords available in the %method block."""
 
     RUNTYPE = "RunType", ORCAString, 0, ("Energy", "Gradient", "Opt", "Scan", "CIM")
     METHOD = (

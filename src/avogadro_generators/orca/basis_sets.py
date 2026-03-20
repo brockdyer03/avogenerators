@@ -89,7 +89,7 @@ class PopleBasisSet(BasisSetEnum):
     asterisks is equivalent to (d,p).
 
     For example, 6-31G* translates to 6-31G(d), and 6-31G** translates
-    to 6-31G(d,p)
+    to 6-31G(d,p).
     """
 
     @classmethod
@@ -263,7 +263,7 @@ class JensenBasisSet(BasisSetEnum):
 
 
 class ccBasisSet(BasisSetEnum):
-    """Correlation Consistent basis sets, cc-pVnZ"""
+    """Correlation Consistent basis sets, cc-pVnZ."""
 
     CC_PVDZ               = "cc-pVDZ",          ("H-Ar", "Ca-Kr"),             None, None
     CC_PVTZ               = "cc-pVTZ",          ("H-Ar", "Ca-Kr", "Y", "Ag", "Au"), None, None
@@ -473,7 +473,7 @@ class AuxBasisSetEnum(AuxBasisSet, Enum):
 
 
 class AuxJBasisSet(AuxBasisSetEnum):
-    """Coulomb-fitting auxiliary basis sets"""
+    """Coulomb-fitting auxiliary basis sets."""
 
     DEF2_J        = "def2/J",        ("H-Lr",), def2BasisSet
     DEF2_MTZVP_J  = "def2-mTZVP/J",  ("H-Lr",), def2BasisSet
@@ -483,7 +483,7 @@ class AuxJBasisSet(AuxBasisSetEnum):
 
 
 class AuxJKBasisSet(AuxBasisSetEnum):
-    """Coulomb- and exchange-fitting auxiliary basis sets"""
+    """Coulomb- and exchange-fitting auxiliary basis sets."""
 
     DEF2_JK            = "def2/JK",            ("H-Rn",),         def2BasisSet
     DEF2_JK_SMALL      = "def2/JKsmall",       ("H-Ra", "Th-Lr"), def2BasisSet
@@ -536,7 +536,7 @@ class AuxCBasisSet(AuxBasisSetEnum):
 def get_basis_set(
     value: str
 ) -> PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet:
-    """Get a basis set enum member from a basis set"""
+    """Get a basis set enum member from a basis set."""
 
     pople_pattern = re.compile(
         pattern=r"\b(m?[346]-[23][12]*\+*G(?:\([23]?[dfp]{1,2},?[23]?[dfp]{0,2}\)|\**)?[SP]{0,2})\b",
@@ -576,7 +576,7 @@ def get_basis_set(
 def get_aux_basis(
     value: str
 ) -> AuxJBasisSet | AuxJKBasisSet | AuxCBasisSet:
-    """Get a basis set enum member from a basis set"""
+    """Get a basis set enum member from a basis set."""
 
     if "/J" in value:
         return AuxJBasisSet(value)
@@ -589,6 +589,7 @@ def get_aux_basis(
 
 
 def get_basis_family(basis_class: str) -> str:
+    """Get the recognizable name from the name of a basis set enum."""
 
     match basis_class:
         case "def2BasisSet":

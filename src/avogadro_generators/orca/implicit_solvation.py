@@ -253,7 +253,7 @@ class Solvent(SolventData, Enum):
 
 
 class XTBSolvent(SolventData, Enum):
-    """Solvents available through the ALPB, ddCOSMO, or CPCMX methods
+    """Solvents available through the ALPB, ddCOSMO, or CPCMX methods.
     
     Notes
     -----

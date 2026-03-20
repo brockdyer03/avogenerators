@@ -5,7 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Base classes and functions for input blocks in ORCA"""
+"""Base classes and functions for input blocks in ORCA."""
 
 from dataclasses import dataclass
 from collections.abc import Sequence
@@ -13,9 +13,10 @@ from typing import NewType
 from enum import Enum
 
 
-#: Strings that are specially recognized by ORCA, for example in the
-#: %method block you can use ``method HF`` and it will be recognized
-#: without needing double quotes around ``HF``.
+"""Strings that are specially recognized by ORCA, for example in the
+%method block you can use ``method HF`` and it will be recognized
+without needing double quotes around ``HF``.
+"""
 ORCAString = NewType("ORCAString", str)
 
 
@@ -130,7 +131,7 @@ class BlockEnum(BlockKeyword, Enum):
         self = BlockKeyword.__new__(cls)
         self._value_ = key_name
         return self
-    
+
 
     def __str__(self) -> str:
         return self.key_name
@@ -138,7 +139,7 @@ class BlockEnum(BlockKeyword, Enum):
 
 class NestedBlockEnum(BlockKeyword, Enum):
     """Class for handling nested blocks, such as the TRAH section of %scf.
-    
+
     Currently unused.
     """
 

@@ -5,7 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Classes and functions for the %elprop block"""
+"""Classes and functions for the %elprop block."""
 
 from .block_base import BlockEnum, ORCAString
 

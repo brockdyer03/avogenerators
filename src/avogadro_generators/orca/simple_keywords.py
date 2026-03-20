@@ -5,7 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Enums of simple input keywords for ORCA calculations"""
+"""Enums of simple input keywords for ORCA calculations."""
 
 from enum import StrEnum
 
@@ -22,7 +22,7 @@ class RunType(StrEnum):
 
 
 class SemiEmpirical(StrEnum):
-    """Semi-empirical methods such as xTB, AM1, and PM3"""
+    """Semi-empirical methods such as xTB, AM1, and PM3."""
 
     # xTB-based methods
     GFN0_XTB = "GFN0-xTB"

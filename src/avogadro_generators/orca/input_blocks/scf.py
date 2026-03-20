@@ -5,10 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Classes and methods for the %scf block in ORCA.
-
-Currently unused.
-"""
+"""Classes and methods for the %scf block in ORCA."""
 
 from collections.abc import Sequence
 from .block_base import BlockEnum, ORCAString, NestedBlockEnum

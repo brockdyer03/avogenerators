@@ -5,7 +5,7 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Classes and methods for using WFT methods such as DLPNO-CCSD(T) and MP2"""
+"""Classes and methods for using WFT methods such as DLPNO-CCSD(T) and MP2."""
 
 from enum import StrEnum
 
