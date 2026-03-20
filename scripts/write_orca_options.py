@@ -1,6 +1,5 @@
 from abc import ABC
 from dataclasses import dataclass
-from collections.abc import Sequence
 from pathlib import Path
 
 from avogadro_generators.orca.basis_sets import (
@@ -9,27 +8,15 @@ from avogadro_generators.orca.basis_sets import (
     JensenBasisSet,
     ccBasisSet,
     RelativisticBasisSet,
-    AuxJBasisSet,
-    AuxJKBasisSet,
-    AuxCBasisSet,
 )
 from avogadro_generators.orca.dft import Composite, Functionals, Disp
 from avogadro_generators.orca.wft import MP2, CoupledCluster
 from avogadro_generators.orca.simple_keywords import (
     RunType,
-    SemiEmpirical,
-    SCFConv,
-    DeterminantType,
-    Opt,
     Output,
-    Grid,
-    RIApproximation,
-    PartialCharges,
-    Relativistic,
-    PNO,
 )
-from avogadro_generators.orca.implicit_solvation import Solvent, XTBSolvent
-from avogadro_generators.orca.input_blocks.block_base import BlockKeyword, ORCAString
+from avogadro_generators.orca.implicit_solvation import Solvent
+from avogadro_generators.orca.input_blocks.block_base import BlockKeyword
 from avogadro_generators.orca.input_blocks.elprop import ElProp
 from avogadro_generators.orca.input_blocks.basis import Basis
 from avogadro_generators.orca.input_blocks.scf import SCF

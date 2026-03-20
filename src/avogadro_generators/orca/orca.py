@@ -6,19 +6,10 @@
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
 """Input generation for ORCA (https://www.faccts.de/orca/)."""
-from .input_blocks import SCF, Basis, ElProp, Method, format_block_keyword
+from .input_blocks import SCF, Basis, ElProp, format_block_keyword
 from .simple_keywords import (
     RunType,
-    SemiEmpirical,
-    SCFConv,
-    DeterminantType,
-    Opt,
     Output,
-    Grid,
-    RIApproximation,
-    PartialCharges,
-    Relativistic,
-    PNO,
     match_simple_keyword,
 )
 from .dft import Composite, Functionals, Disp
@@ -29,9 +20,6 @@ from .basis_sets import (
     JensenBasisSet,
     ccBasisSet,
     RelativisticBasisSet,
-    AuxJBasisSet,
-    AuxJKBasisSet,
-    AuxCBasisSet,
     get_basis_set,
     get_aux_basis,
     get_basis_family,
@@ -137,7 +125,6 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
 
     # Extract undefined options:
     title: str          = opts["Title"]
-    file_name: str      = opts["Filename Base"]
     charge: int         = opts["Charge"]
     multiplicity: int   = opts["Multiplicity"]
     nprocs: int         = opts["Processor Cores"]
