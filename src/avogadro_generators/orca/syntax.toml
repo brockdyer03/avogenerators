@@ -130,6 +130,11 @@ patterns = [
 [[default.rules]]
 format.preset = "num_literal"
 patterns = [
+    # Matches numbers in either typical base-10 positional notation
+    # or in scientific notation. The `[-\+]?` blocks are for positive
+    # and negative signs. The `[eEdD]` block is for scientific format.
+    # The `[\.0-9]+` block is for a decimal point follow by 1 or more
+    # numbers.
     { regexp = '\s([-\+]?[\.0-9]+(?:[eEdD][-\+]?[\.0-9]+)?)\b' },
 ]
 
@@ -468,9 +473,14 @@ patterns = [
 [[default.rules]]
 format.preset = "block"
 patterns = [
+    # `%<block-name>`
+    # Includes the number 2 for the 2 at the end of `%mp2`
     { regexp = '(%[a-zA-Z2]+)\s?' },
+    # end of a block
     { regexp = '\b(end)\s?', caseSensitive = false },
-    { regexp = '\* xyz', caseSensitive = false },
+    # the `* xyz` block in ORCA
+    { regexp = '\* xyz(?:file)?', caseSensitive = false },
     { regexp = '\*' },
+    # Simple input line start.
     { regexp = '!' },
 ]
