@@ -34,7 +34,7 @@ def main():
         case "nwchem":
             from .nwchem.nwchem import generateInput
         case "orca":
-            from .orca.orca import generateInput
+            from .orca import generateInput
         case "pyscf":
             from .pyscf.pyscf import generateInput
         case "psi4":
