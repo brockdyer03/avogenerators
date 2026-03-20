@@ -180,26 +180,25 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 f"The dispersion correction {Disp[disp]} is not available for {method.value}!"
             )
         else:
-            simple_keywords.extend([method.value, disp])
+            simple_keywords.extend([method.value, disp, basis_set])
     elif isinstance(method, Composite):
         basis_set = ""
         simple_keywords.append(method.value)
     elif isinstance(method, (MP2, CoupledCluster)):
-        if auxc_basis.parent_basis != basis_set.__class__.__name__:
-            aux_fam = get_basis_family(auxc_basis.parent_basis)
+        if auxc_basis is None:
+            warnings.append("No AuxC basis selected, please select one from the Basis tab.")
+            simple_keywords.extend([method.value, basis_set])
+        elif auxc_basis.parent_basis != basis_set.__class__.__name__:
+            aux_fam  = get_basis_family(auxc_basis.parent_basis)
             main_fam = get_basis_family(basis_set.__class__.__name__)
             warnings.append(
-                f"The auxiliary basis {auxc_basis.basis_name} belongs to the {aux_fam} family, but your primary basis is of the {main_fam} family!"
+                f"The auxiliary basis {auxc_basis.basis_name} belongs to the {aux_fam} family, but your primary basis is of the {main_fam} family."
             )
-        simple_keywords.append(method.value)
+            simple_keywords.extend([method.value, basis_set, auxc_basis])
+        else:
+            simple_keywords.extend([method.value, basis_set, auxc_basis])
     elif method == "HF":
-        simple_keywords.append(method)
-
-    if basis_set != "":
-        simple_keywords.append(basis_set)
-
-    if isinstance(method, (MP2, CoupledCluster)):
-        simple_keywords.append(auxc_basis)
+        simple_keywords.extend([method, basis_set])
 
     if auxj_basis is not None:
         simple_keywords.append(auxj_basis)
@@ -212,7 +211,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         solvent_model = SolvationModel[opts["Solvation Model"].upper()]
         if solvent_model not in solvent.models:
             warnings.append(
-                f"Solvation model {solvent_model} not available for solvent {solvent.aliases[0]}"
+                f"Solvation model {solvent_model} not available for solvent {solvent.aliases[0]}!"
             )
         else:
             simple_keywords.append(f"{solvent_model}({solvent})")
