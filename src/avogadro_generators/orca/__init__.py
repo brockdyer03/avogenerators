@@ -300,7 +300,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         generated_input += "end\n"
 
     generated_input += f"* xyz {charge} {multiplicity}\n"
-    generated_input += "$$coords:___Sxyz$$\n"
+    generated_input += "$$coords:____Sxyz$$\n"
     generated_input += "*\n\n\n"
 
     return generated_input, warnings, syntax_groups
