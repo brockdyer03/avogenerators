@@ -26,48 +26,48 @@ class SCF(BlockEnum):
     CONVFORCED    = "ConvForced",    int,   1, None, 0, 1
 
     # Wavefunction Types
-    HFTYP       = "HFTyp",       ORCAString, ("RHF", "UHF", "ROHF", "CASSCF")
-    ROHF_CASE   = "ROHF_Case",   ORCAString, ("HighSpin", "CAHF", "SAHF", "USER_CSF", "AF_CSF")
-    ROHF_NEL    = "ROHF_NEl",    Sequence
-    ROHF_NUMOP  = "ROHF_NumOp",  int, None, None, 1, 3
-    ROHF_NORB   = "ROHF_NOrb",   Sequence
-    ROHF_REF    = "ROHF_Ref",    dict
-    ROHF_AFORBS = "ROHF_AFOrbs", Sequence
+    # HFTYP       = "HFTyp",       ORCAString, ("RHF", "UHF", "ROHF", "CASSCF")
+    # ROHF_CASE   = "ROHF_Case",   ORCAString, ("HighSpin", "CAHF", "SAHF", "USER_CSF", "AF_CSF")
+    # ROHF_NEL    = "ROHF_NEl",    Sequence
+    # ROHF_NUMOP  = "ROHF_NumOp",  int, None, None, 1, 3
+    # ROHF_NORB   = "ROHF_NOrb",   Sequence
+    # ROHF_REF    = "ROHF_Ref",    dict
+    # ROHF_AFORBS = "ROHF_AFOrbs", Sequence
 
     # native xTB
-    XTBFOD      = "xTBFOD", bool
-    USEXTBMIXER = "UsexTBMixer", bool
+    # XTBFOD      = "xTBFOD", bool
+    # USEXTBMIXER = "UsexTBMixer", bool
 
     # ΔSCF Keywords
-    SOSCFMAXSTEP             = "SOSCFMaxStep",             float, 0.2
-    DELTASCFFROMGS           = "DeltaSCFFromGS",           bool,  True
-    SOSCFBLOCKDIAG           = "SOSCFBlockDiag",           bool,  False
-    DOMOM                    = "DoMOM",                    bool,  True
-    KEEPINITIALREF           = "KeepInitialRef",           bool,  True
-    PMOM                     = "PMOM",                     bool,  False
-    ALPHACONF                = "AlphaConf",                int,   None, None, 0, 2
-    BETACONF                 = "BetaConf",                 int,   None, None, 0, 2
-    IONIZEALPHA              = "IonizeAlpha",              int
-    IONIZEBETA               = "IonizeBeta",               int
-    SOSCFHESSUP              = "SOSCFHessUp",              ORCAString, 0, ("LSR1", "LBFGS", "LPowell", "LBOFill")
-    SOSCFCONSTRAINTS         = "SOSCFConstraints",         bool,  False
-    SOSCFCONSTRAINEDMAXSTEP  = "SOSCFConstrainedMaxStep",  float, 0.2
-    SOSCFCONVFACTOR          = "SOSCFConvFactor",          float, 1
-    SOSCFCONSTRAINEDHESSUP   = "SOSCFConstrainedHessUp",   ORCAString, 1, ("LSR1", "LBFGS", "LPowell", "LBOFill")
-    SOSCFWRITECONSTRAINEDGBW = "SOSCFWriteConstrainedGBW", bool,  True
-    SOSCFGMF                 = "SOSCFGMF",                 bool,  False
-    SOSCFDAVIDSONMAXIT       = "SOSCFDavidsonMaxIt",       int,   100
-    SOSCFDAVIDSONTOLR        = "SOSCFDavidsonTolR",        float, 0.01
-    SOSCFDAVIDSONMAXRED      = "SOSCFDavidsonMaxRed",      int,   20
-    SOSCFDAVIDSONFDMODE      = "SOSCFDavidsonFDMode",      ORCAString, 0, ("Forward", "Central")
-    SOSCFDAVIDSONFDSTEP      = "SOSCFDavidsonFDStep",      float, 0.001
-    SOSCFSPO                 = "SOSCFSPO",                 int
-    SOSCFSPOEST              = "SOSCFSPOEst",              ORCAString, 0, ("Auto", "Excitation", "HDiag", "Davidson")
-    SOSCFUPDATESPOEST        = "SOSCFUpdateSPOEst",        bool,  True
-    SOSCFSPOESTNTRIAL        = "SOSCFSPOEstNTrial",        int,   3
-    SOSCFUPDATESPOTHRESH     = "SOSCFUpdateSPOThresh",     float, -1
-    SOSCFPRECONDTYPE         = "SOSCFPrecondType",         ORCAString, 0, ("OrbitalEnergyDiff", "DavidsonUpdate", "GradientExpansion")
-    SOSCFPRECONDGAMMA        = "SOSCFPrecondGamma",        float, 0.25
+    # SOSCFMAXSTEP             = "SOSCFMaxStep",             float, 0.2
+    # DELTASCFFROMGS           = "DeltaSCFFromGS",           bool,  True
+    # SOSCFBLOCKDIAG           = "SOSCFBlockDiag",           bool,  False
+    # DOMOM                    = "DoMOM",                    bool,  True
+    # KEEPINITIALREF           = "KeepInitialRef",           bool,  True
+    # PMOM                     = "PMOM",                     bool,  False
+    # ALPHACONF                = "AlphaConf",                int,   None, None, 0, 2
+    # BETACONF                 = "BetaConf",                 int,   None, None, 0, 2
+    # IONIZEALPHA              = "IonizeAlpha",              int
+    # IONIZEBETA               = "IonizeBeta",               int
+    # SOSCFHESSUP              = "SOSCFHessUp",              ORCAString, 0, ("LSR1", "LBFGS", "LPowell", "LBOFill")
+    # SOSCFCONSTRAINTS         = "SOSCFConstraints",         bool,  False
+    # SOSCFCONSTRAINEDMAXSTEP  = "SOSCFConstrainedMaxStep",  float, 0.2
+    # SOSCFCONVFACTOR          = "SOSCFConvFactor",          float, 1
+    # SOSCFCONSTRAINEDHESSUP   = "SOSCFConstrainedHessUp",   ORCAString, 1, ("LSR1", "LBFGS", "LPowell", "LBOFill")
+    # SOSCFWRITECONSTRAINEDGBW = "SOSCFWriteConstrainedGBW", bool,  True
+    # SOSCFGMF                 = "SOSCFGMF",                 bool,  False
+    # SOSCFDAVIDSONMAXIT       = "SOSCFDavidsonMaxIt",       int,   100
+    # SOSCFDAVIDSONTOLR        = "SOSCFDavidsonTolR",        float, 0.01
+    # SOSCFDAVIDSONMAXRED      = "SOSCFDavidsonMaxRed",      int,   20
+    # SOSCFDAVIDSONFDMODE      = "SOSCFDavidsonFDMode",      ORCAString, 0, ("Forward", "Central")
+    # SOSCFDAVIDSONFDSTEP      = "SOSCFDavidsonFDStep",      float, 0.001
+    # SOSCFSPO                 = "SOSCFSPO",                 int
+    # SOSCFSPOEST              = "SOSCFSPOEst",              ORCAString, 0, ("Auto", "Excitation", "HDiag", "Davidson")
+    # SOSCFUPDATESPOEST        = "SOSCFUpdateSPOEst",        bool,  True
+    # SOSCFSPOESTNTRIAL        = "SOSCFSPOEstNTrial",        int,   3
+    # SOSCFUPDATESPOTHRESH     = "SOSCFUpdateSPOThresh",     float, -1
+    # SOSCFPRECONDTYPE         = "SOSCFPrecondType",         ORCAString, 0, ("OrbitalEnergyDiff", "DavidsonUpdate", "GradientExpansion")
+    # SOSCFPRECONDGAMMA        = "SOSCFPrecondGamma",        float, 0.25
 
     # Initial Guess
     GUESS     = "Guess",     ORCAString, 2, ("HCore", "Hueckel", "PAtom", "PModel", "MORead")

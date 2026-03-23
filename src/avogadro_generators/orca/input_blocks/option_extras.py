@@ -5,17 +5,32 @@
 #
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
-"""Tooltips for all of the block keywords"""
+"""Tooltips for all of the block keywords
+
+Notes
+-----
+You may see a key called ``override_type``. This is primarily used to
+take options that are floating-point numbers and turn them into strings
+so that they can accept scientific notation as an input.
+
+Another common item that you may see is ``add_dummy``. This is used to
+add a dummy item at the beginning of a list so that there is not a
+default value. The reason this is necessary is because there are checks
+in the code for whether or not a keyword is in its default state so
+that it can be skipped in writing the input file, and if there was a
+default for some of the items then that might remove one of the
+potential options for a user.
+"""
 
 from .basis import Basis
 from .scf import SCF
 from .elprop import ElProp
 
 basis_extras = {
-    Basis.BASIS: {
-        "label"  : "Basis",
-        "toolTip": "Specify a basis set.",
-    },
+    # Basis.BASIS: {
+    #     "label"  : "Basis",
+    #     "toolTip": "Specify a basis set.",
+    # },
     Basis.AUXJ: {
         "label"  : "AuxJ",
         "toolTip": "Specify a Coulomb-fitting auxiliary basis set.",
@@ -43,130 +58,130 @@ basis_extras = {
         "label"  : "Allow Ghost ECPs",
         "toolTip": "Specify whether or not to use ECPs for Ghost atoms.",
     },
-    Basis.DECONTRACT: {
-        "label"  : "Decontract All",
-        "toolTip": "Decontract all orbital and auxiliary basis sets.",
-    },
-    Basis.DECONTRACTBAS: {
-        "label"  : "Decontract Orbital Basis",
-        "toolTip": "Decontract only orbital basis sets.",
-    },
-    Basis.DECONTRACTAUXJ: {
-        "label"  : "Decontract AuxJ Basis",
-        "toolTip": "Decontract only AuxJ basis sets.",
-    },
-    Basis.DECONTRACTAUXJK: {
-        "label"  : "Decontract AuxJK Basis",
-        "toolTip": "Decontract only AuxJK basis sets.",
-    },
-    Basis.DECONTRACTAUXC: {
-        "label"  : "Decontract AuxC Basis",
-        "toolTip": "Decontract only AuxC basis sets.",
-    },
-    Basis.DECONTRACTCABS: {
-        "label"  : "Decontract CABS Basis",
-        "toolTip": "Decontract only CABS basis sets.",
-    },
-    Basis.PCDTRIMBAS: {
-        "label"  : "Trim Orbital Basis",
-        "toolTip": "Trim the orbital basis in the overlap metric.",
-    },
-    Basis.PCDTRIMAUXJ: {
-        "label"  : "Trim AuxJ Basis",
-        "toolTip": "Trim the AuxJ basis in the Coulomb metric.",
-    },
-    Basis.PCDTRIMAUXJK: {
-        "label"  : "Trim AuxJK Basis",
-        "toolTip": "Trim the AuxJK basis in the Coulomb metric.",
-    },
-    Basis.PCDTRIMAUXC: {
-        "label"  : "Trim AuxC Basis",
-        "toolTip": "Trim the AuxC basis in the Coulomb metric.",
-    },
-    Basis.PCDTHRESH: {
-        "label"  : "PCD Threshold",
-        "toolTip": "Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0).",
-    },
+    # Basis.DECONTRACT: {
+    #     "label"  : "Decontract All",
+    #     "toolTip": "Decontract all orbital and auxiliary basis sets.",
+    # },
+    # Basis.DECONTRACTBAS: {
+    #     "label"  : "Decontract Orbital Basis",
+    #     "toolTip": "Decontract only orbital basis sets.",
+    # },
+    # Basis.DECONTRACTAUXJ: {
+    #     "label"  : "Decontract AuxJ Basis",
+    #     "toolTip": "Decontract only AuxJ basis sets.",
+    # },
+    # Basis.DECONTRACTAUXJK: {
+    #     "label"  : "Decontract AuxJK Basis",
+    #     "toolTip": "Decontract only AuxJK basis sets.",
+    # },
+    # Basis.DECONTRACTAUXC: {
+    #     "label"  : "Decontract AuxC Basis",
+    #     "toolTip": "Decontract only AuxC basis sets.",
+    # },
+    # Basis.DECONTRACTCABS: {
+    #     "label"  : "Decontract CABS Basis",
+    #     "toolTip": "Decontract only CABS basis sets.",
+    # },
+    # Basis.PCDTRIMBAS: {
+    #     "label"  : "Trim Orbital Basis",
+    #     "toolTip": "Trim the orbital basis in the overlap metric.",
+    # },
+    # Basis.PCDTRIMAUXJ: {
+    #     "label"  : "Trim AuxJ Basis",
+    #     "toolTip": "Trim the AuxJ basis in the Coulomb metric.",
+    # },
+    # Basis.PCDTRIMAUXJK: {
+    #     "label"  : "Trim AuxJK Basis",
+    #     "toolTip": "Trim the AuxJK basis in the Coulomb metric.",
+    # },
+    # Basis.PCDTRIMAUXC: {
+    #     "label"  : "Trim AuxC Basis",
+    #     "toolTip": "Trim the AuxC basis in the Coulomb metric.",
+    # },
+    # Basis.PCDTHRESH: {
+    #     "label"  : "PCD Threshold",
+    #     "toolTip": "Threshold for PCD (suggested 1e-16 to 1e-10, automatically chosen if < 0).",
+    # },
     Basis.AUTOAUXSIZE: {
         "label"  : "AutoAux Size",
         "toolTip": "Control size of AutoAux basis sets. Larger value means larger basis.",
     },
-    Basis.AUTOAUXLMAX: {
-        "label"  : "AutoAux L Max",
-        "toolTip": "Enable use of highest-possible angular momentum permitted by ORCA",
-    },
-    Basis.AUTOAUXLLIMIT: {
-        "label"  : "AutoAux L Limit",
-        "toolTip": "Set the highest allowed angular momentum (-1 means do not set limit)",
-    },
-    Basis.AUTOAUXF_0: {
-        "label"  : "AutoAux F[0]",
-        "toolTip": "Factor by which to increase the maximal s-exponent.",
-    },
-    Basis.AUTOAUXF_1: {
-        "label"  : "AutoAux F[1]",
-        "toolTip": "Factor by which to increase the maximal p-exponent.",
-    },
-    Basis.AUTOAUXF_2: {
-        "label"  : "AutoAux F[2]",
-        "toolTip": "Factor by which to increase the maximal d-exponent.",
-    },
-    Basis.AUTOAUXF_3: {
-        "label"  : "AutoAux F[3]",
-        "toolTip": "Factor by which to increase the maximal f-exponent.",
-    },
-    Basis.AUTOAUXF_4: {
-        "label"  : "AutoAux F[4]",
-        "toolTip": "Factor by which to increase the maximal g-exponent.",
-    },
-    Basis.AUTOAUXF_5: {
-        "label"  : "AutoAux F[5]",
-        "toolTip": "Factor by which to increase the maximal h-exponent.",
-    },
-    Basis.AUTOAUXF_6: {
-        "label"  : "AutoAux F[6]",
-        "toolTip": "Factor by which to increase the maximal i-exponent.",
-    },
-    Basis.AUTOAUXF_7: {
-        "label"  : "AutoAux F[7]",
-        "toolTip": "Factor by which to increase the maximal j-exponent.",
-    },
-    Basis.AUTOAUXB_0: {
-        "label"  : "AutoAux B[0]",
-        "toolTip": "Even-tempered expansion factor for the s-shell.",
-    },
-    Basis.AUTOAUXB_1: {
-        "label"  : "AutoAux B[1]",
-        "toolTip": "Even-tempered expansion factor for the p-shell.",
-    },
-    Basis.AUTOAUXB_2: {
-        "label"  : "AutoAux B[2]",
-        "toolTip": "Even-tempered expansion factor for the d-shell.",
-    },
-    Basis.AUTOAUXB_3: {
-        "label"  : "AutoAux B[3]",
-        "toolTip": "Even-tempered expansion factor for the f-shell.",
-    },
-    Basis.AUTOAUXB_4: {
-        "label"  : "AutoAux B[4]",
-        "toolTip": "Even-tempered expansion factor for the g-shell.",
-    },
-    Basis.AUTOAUXB_5: {
-        "label"  : "AutoAux B[5]",
-        "toolTip": "Even-tempered expansion factor for the h-shell.",
-    },
-    Basis.AUTOAUXB_6: {
-        "label"  : "AutoAux B[6]",
-        "toolTip": "Even-tempered expansion factor for the i-shell.",
-    },
-    Basis.AUTOAUXB_7: {
-        "label"  : "AutoAux B[7]",
-        "toolTip": "Even-tempered expansion factor for the j-shell.",
-    },
-    Basis.AUTOAUXTIGHTB: {
-        "label"  : "AutoAux Tight B",
-        "toolTip": "Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest.",
-    },
+    # Basis.AUTOAUXLMAX: {
+    #     "label"  : "AutoAux L Max",
+    #     "toolTip": "Enable use of highest-possible angular momentum permitted by ORCA",
+    # },
+    # Basis.AUTOAUXLLIMIT: {
+    #     "label"  : "AutoAux L Limit",
+    #     "toolTip": "Set the highest allowed angular momentum (-1 means do not set limit)",
+    # },
+    # Basis.AUTOAUXF_0: {
+    #     "label"  : "AutoAux F[0]",
+    #     "toolTip": "Factor by which to increase the maximal s-exponent.",
+    # },
+    # Basis.AUTOAUXF_1: {
+    #     "label"  : "AutoAux F[1]",
+    #     "toolTip": "Factor by which to increase the maximal p-exponent.",
+    # },
+    # Basis.AUTOAUXF_2: {
+    #     "label"  : "AutoAux F[2]",
+    #     "toolTip": "Factor by which to increase the maximal d-exponent.",
+    # },
+    # Basis.AUTOAUXF_3: {
+    #     "label"  : "AutoAux F[3]",
+    #     "toolTip": "Factor by which to increase the maximal f-exponent.",
+    # },
+    # Basis.AUTOAUXF_4: {
+    #     "label"  : "AutoAux F[4]",
+    #     "toolTip": "Factor by which to increase the maximal g-exponent.",
+    # },
+    # Basis.AUTOAUXF_5: {
+    #     "label"  : "AutoAux F[5]",
+    #     "toolTip": "Factor by which to increase the maximal h-exponent.",
+    # },
+    # Basis.AUTOAUXF_6: {
+    #     "label"  : "AutoAux F[6]",
+    #     "toolTip": "Factor by which to increase the maximal i-exponent.",
+    # },
+    # Basis.AUTOAUXF_7: {
+    #     "label"  : "AutoAux F[7]",
+    #     "toolTip": "Factor by which to increase the maximal j-exponent.",
+    # },
+    # Basis.AUTOAUXB_0: {
+    #     "label"  : "AutoAux B[0]",
+    #     "toolTip": "Even-tempered expansion factor for the s-shell.",
+    # },
+    # Basis.AUTOAUXB_1: {
+    #     "label"  : "AutoAux B[1]",
+    #     "toolTip": "Even-tempered expansion factor for the p-shell.",
+    # },
+    # Basis.AUTOAUXB_2: {
+    #     "label"  : "AutoAux B[2]",
+    #     "toolTip": "Even-tempered expansion factor for the d-shell.",
+    # },
+    # Basis.AUTOAUXB_3: {
+    #     "label"  : "AutoAux B[3]",
+    #     "toolTip": "Even-tempered expansion factor for the f-shell.",
+    # },
+    # Basis.AUTOAUXB_4: {
+    #     "label"  : "AutoAux B[4]",
+    #     "toolTip": "Even-tempered expansion factor for the g-shell.",
+    # },
+    # Basis.AUTOAUXB_5: {
+    #     "label"  : "AutoAux B[5]",
+    #     "toolTip": "Even-tempered expansion factor for the h-shell.",
+    # },
+    # Basis.AUTOAUXB_6: {
+    #     "label"  : "AutoAux B[6]",
+    #     "toolTip": "Even-tempered expansion factor for the i-shell.",
+    # },
+    # Basis.AUTOAUXB_7: {
+    #     "label"  : "AutoAux B[7]",
+    #     "toolTip": "Even-tempered expansion factor for the j-shell.",
+    # },
+    # Basis.AUTOAUXTIGHTB: {
+    #     "label"  : "AutoAux Tight B",
+    #     "toolTip": "Only use AutoAuxB[1] for shells with high L and AutoAuxB[0] for the rest.",
+    # },
 }
 
 scf_extras = {
@@ -220,6 +235,11 @@ scf_extras = {
         "toolTip": "Set the SCF orbital rotation angle convergence criteria.",
         "override_type": "string",
     },
+    SCF.TCUT: {
+        "label": "Primitive Integral Prescreening Cutoff",
+        "toolTip": "Set the SCF primitive integral prescreening threshold.",
+        "override_type": "string",
+    },
     SCF.THRESH: {
         "label"  : "Integral Prescreening Threshold",
         "toolTip": "Set the SCF integral prescreening threshold.",
@@ -233,158 +253,158 @@ scf_extras = {
         "label"  : "Require Convergence",
         "toolTip": "Toggle whether or not convergence is mandatory for the next calculation step.",
     },
-    SCF.HFTYP: {
-        "label"  : "HF Wavefunction Type",
-        "toolTip": "Set the wavefunction type for HF calculations.",
-    },
-    SCF.ROHF_CASE: {
-        "label"  : "ROHF Case",
-        "toolTip": "Type of ROHF wavefunction (only if HFTyp=ROHF).",
-    },
-    SCF.ROHF_NEL: {
-        "label"  : "ROHF Num. Electrons",
-        "toolTip": "Number of open-shell electrons (only if HFTyp=ROHF).",
-    },
-    SCF.ROHF_NUMOP: {
-        "label"  : "ROHF Num. Operators",
-        "toolTip": "Number of Operators (only if HFTyp=ROHF).",
-    },
-    SCF.ROHF_NORB: {
-        "label"  : "ROHF Num. Orbitals",
-        "toolTip": "Number of open-shell orbitals (only if HFTyp=ROHF).",
-    },
-    SCF.ROHF_REF: {
-        "label"  : "ROHF Orbital Rotations",
-        "toolTip": "Specify orbital rotations (only if HFTyp=ROHF).",
-    },
-    SCF.ROHF_AFORBS: {
-        "label"  : "ROHF AF Orbitals",
-        "toolTip": "User-defined anti-ferromagnetic orbitals (only if HFTyp=ROHF).",
-    },
-    SCF.XTBFOD: {
-        "label"  : "xTB FOD Printout",
-        "toolTip": "Enable FOD Printout for native-xTB calculations.",
-    },
-    SCF.USEXTBMIXER: {
-        "label"  : "Use xTB Mixer",
-        "toolTip": "Use special SCF settings similar to the ones in xTB.",
-    },
-    SCF.SOSCFMAXSTEP: {
-        "label"  : "SOSCF Max Step",
-        "toolTip": "Maximum SOSCF Step Size.",
-    },
-    SCF.SOSCFBLOCKDIAG: {
-        "label"  : "Use SOSCF Block Diagonalization",
-        "toolTip": "Perform a diagonalization of the occupied and virtual orbital blocks of the Fock matrix at the start.",
-    },
-    SCF.DELTASCFFROMGS: {
-        "label"  : "Start ΔSCF From Ground State",
-        "toolTip": "Start ΔSCF from an input converged ground state solution or assume it is an excited state solution.",
-    },
-    SCF.DOMOM: {
-        "label"  : "Use Maximum Overlap Method",
-        "toolTip": "Use maximum overlap method.",
-    },
-    SCF.KEEPINITIALREF: {
-        "label"  : "Keep Initial Reference",
-        "toolTip": "Always keep initial reference: IMOM.",
-    },
-    SCF.PMOM: {
-        "label"  : "Use PMOM Metric",
-        "toolTip": "Use the PMOM metric instead of regular MOM.",
-    },
-    SCF.ALPHACONF: {
-        "label"  : "Alpha Configuration",
-        "toolTip": "Define occupation of frontier orbitals in the alpha spin channel.",
-    },
-    SCF.BETACONF: {
-        "label"  : "Beta Configuration",
-        "toolTip": "Define occupation of frontier orbitals in the beta spin channel.",
-    },
-    SCF.IONIZEALPHA: {
-        "label"  : "Ionize Alpha",
-        "toolTip": "Remove electrons from specified MOs in alpha spin channel.",
-    },
-    SCF.IONIZEBETA: {
-        "label"  : "Ionize Beta",
-        "toolTip": "Remove electrons from specified MOs in beta spin channel.",
-    },
-    SCF.SOSCFHESSUP: {
-        "label"  : "SOSCF Hessian Update Method",
-        "toolTip": "Select quasi-Newton method for SOSCF Hessian Update.",
-    },
-    SCF.SOSCFCONSTRAINTS: {
-        "label"  : "SOSCF Contraints",
-        "toolTip": "Activate freeze-and-release SOSCF.",
-    },
-    SCF.SOSCFCONSTRAINEDMAXSTEP: {
-        "label"  : "SOSCF Const. Max Step",
-        "toolTip": "Maximum step size for the constrained SOSCF minimization.",
-    },
-    SCF.SOSCFCONVFACTOR: {
-        "label"  : "SOSCF Conv. Factor",
-        "toolTip": "Factor to multiply convergence criteria with in the constrained minimization. e.g. 100 loosens the criteria by two orders of magnitude.",
-    },
-    SCF.SOSCFCONSTRAINEDHESSUP: {
-        "label"  : "SOSCF Const. Hess. Update",
-        "toolTip": "SOSCF Hessian update for constrained minimization.",
-    },
-    SCF.SOSCFWRITECONSTRAINEDGBW: {
-        "label"  : "Write SOSCF Const. GBW",
-        "toolTip": "Write a GBW file for the constrained solution.",
-    },
-    SCF.SOSCFDAVIDSONMAXIT: {
-        "label"  : "SOSCF Davidson MaxIter",
-        "toolTip": "Maximum number of iterations for Davidson diagonalization in SOSCF procedure.",
-    },
-    SCF.SOSCFDAVIDSONTOLR: {
-        "label"  : "SOSCF Davidson Residual Tol.",
-        "toolTip": "SOSCF Davidson convergence tolerance for the maximum component of each residual vector.",
-    },
-    SCF.SOSCFDAVIDSONMAXRED: {
-        "label"  : "SOSCF Davidson Max Reduction",
-        "toolTip": "Davidson maximum size of the Krylov subspace per target eigenvector, meaning this will be multiplied by the target saddle point order.",
-    },
-    SCF.SOSCFDAVIDSONFDMODE: {
-        "label"  : "SOSCF Davidson FD Stencil",
-        "toolTip": "SOSCF Davidson finite difference stencil.",
-    },
-    SCF.SOSCFDAVIDSONFDSTEP: {
-        "label"  : "SOSCF Davidson FD Step",
-        "toolTip": "Davidson finite difference step size.",
-    },
-    SCF.SOSCFPRECONDTYPE: {
-        "label"  : "SOSCF Preconditioner",
-        "toolTip": "SOSCF Preconditioner to use",
-    },
-    SCF.SOSCFPRECONDGAMMA: {
-        "label"  : "SOSCF Preconditioner Gamma (GradientExpansion only)",
-        "toolTip": "Mixing Factor for GradientExpansion preconditioner",
-    },
-    SCF.SOSCFGMF: {
-        "label"  : "Use GMF",
-        "toolTip": "Use generalized mode following (GMF).",
-    },
-    SCF.SOSCFSPO: {
-        "label"  : "GMF Saddle Point Order (SPO)",
-        "toolTip": "GMF only: Optional user-defined target saddle point order (SPO).",
-    },
-    SCF.SOSCFSPOEST: {
-        "label"  : "GMF SPO Estimate",
-        "toolTip": "GMF only: Target saddle point order estimate.",
-    },
-    SCF.SOSCFUPDATESPOEST: {
-        "label"  : "GMF Update SPO Estimate",
-        "toolTip": "GMF only: Update the SPO with the number of negative eigenvalues of the first Davidson run.",
-    },
-    SCF.SOSCFSPOESTNTRIAL: {
-        "label"  : "GMF SPO Num Eigenvectors",
-        "toolTip": "GMF Only: How many eigenvectors of the Hessian to target more for the SPO estimate.",
-    },
-    SCF.SOSCFUPDATESPOTHRESH: {
-        "label"  : "GMF SPO Eigenvalue Threshold",
-        "toolTip": "GMF Only: Only eigenvalues below this threshold are considered negative enough for the SPO estimate.",
-    },
+    # SCF.HFTYP: {
+    #     "label"  : "HF Wavefunction Type",
+    #     "toolTip": "Set the wavefunction type for HF calculations.",
+    # },
+    # SCF.ROHF_CASE: {
+    #     "label"  : "ROHF Case",
+    #     "toolTip": "Type of ROHF wavefunction (only if HFTyp=ROHF).",
+    # },
+    # SCF.ROHF_NEL: {
+    #     "label"  : "ROHF Num. Electrons",
+    #     "toolTip": "Number of open-shell electrons (only if HFTyp=ROHF).",
+    # },
+    # SCF.ROHF_NUMOP: {
+    #     "label"  : "ROHF Num. Operators",
+    #     "toolTip": "Number of Operators (only if HFTyp=ROHF).",
+    # },
+    # SCF.ROHF_NORB: {
+    #     "label"  : "ROHF Num. Orbitals",
+    #     "toolTip": "Number of open-shell orbitals (only if HFTyp=ROHF).",
+    # },
+    # SCF.ROHF_REF: {
+    #     "label"  : "ROHF Orbital Rotations",
+    #     "toolTip": "Specify orbital rotations (only if HFTyp=ROHF).",
+    # },
+    # SCF.ROHF_AFORBS: {
+    #     "label"  : "ROHF AF Orbitals",
+    #     "toolTip": "User-defined anti-ferromagnetic orbitals (only if HFTyp=ROHF).",
+    # },
+    # SCF.XTBFOD: {
+    #     "label"  : "xTB FOD Printout",
+    #     "toolTip": "Enable FOD Printout for native-xTB calculations.",
+    # },
+    # SCF.USEXTBMIXER: {
+    #     "label"  : "Use xTB Mixer",
+    #     "toolTip": "Use special SCF settings similar to the ones in xTB.",
+    # },
+    # SCF.SOSCFMAXSTEP: {
+    #     "label"  : "SOSCF Max Step",
+    #     "toolTip": "Maximum SOSCF Step Size.",
+    # },
+    # SCF.SOSCFBLOCKDIAG: {
+    #     "label"  : "Use SOSCF Block Diagonalization",
+    #     "toolTip": "Perform a diagonalization of the occupied and virtual orbital blocks of the Fock matrix at the start.",
+    # },
+    # SCF.DELTASCFFROMGS: {
+    #     "label"  : "Start ΔSCF From Ground State",
+    #     "toolTip": "Start ΔSCF from an input converged ground state solution or assume it is an excited state solution.",
+    # },
+    # SCF.DOMOM: {
+    #     "label"  : "Use Maximum Overlap Method",
+    #     "toolTip": "Use maximum overlap method.",
+    # },
+    # SCF.KEEPINITIALREF: {
+    #     "label"  : "Keep Initial Reference",
+    #     "toolTip": "Always keep initial reference: IMOM.",
+    # },
+    # SCF.PMOM: {
+    #     "label"  : "Use PMOM Metric",
+    #     "toolTip": "Use the PMOM metric instead of regular MOM.",
+    # },
+    # SCF.ALPHACONF: {
+    #     "label"  : "Alpha Configuration",
+    #     "toolTip": "Define occupation of frontier orbitals in the alpha spin channel.",
+    # },
+    # SCF.BETACONF: {
+    #     "label"  : "Beta Configuration",
+    #     "toolTip": "Define occupation of frontier orbitals in the beta spin channel.",
+    # },
+    # SCF.IONIZEALPHA: {
+    #     "label"  : "Ionize Alpha",
+    #     "toolTip": "Remove electrons from specified MOs in alpha spin channel.",
+    # },
+    # SCF.IONIZEBETA: {
+    #     "label"  : "Ionize Beta",
+    #     "toolTip": "Remove electrons from specified MOs in beta spin channel.",
+    # },
+    # SCF.SOSCFHESSUP: {
+    #     "label"  : "SOSCF Hessian Update Method",
+    #     "toolTip": "Select quasi-Newton method for SOSCF Hessian Update.",
+    # },
+    # SCF.SOSCFCONSTRAINTS: {
+    #     "label"  : "SOSCF Contraints",
+    #     "toolTip": "Activate freeze-and-release SOSCF.",
+    # },
+    # SCF.SOSCFCONSTRAINEDMAXSTEP: {
+    #     "label"  : "SOSCF Const. Max Step",
+    #     "toolTip": "Maximum step size for the constrained SOSCF minimization.",
+    # },
+    # SCF.SOSCFCONVFACTOR: {
+    #     "label"  : "SOSCF Conv. Factor",
+    #     "toolTip": "Factor to multiply convergence criteria with in the constrained minimization. e.g. 100 loosens the criteria by two orders of magnitude.",
+    # },
+    # SCF.SOSCFCONSTRAINEDHESSUP: {
+    #     "label"  : "SOSCF Const. Hess. Update",
+    #     "toolTip": "SOSCF Hessian update for constrained minimization.",
+    # },
+    # SCF.SOSCFWRITECONSTRAINEDGBW: {
+    #     "label"  : "Write SOSCF Const. GBW",
+    #     "toolTip": "Write a GBW file for the constrained solution.",
+    # },
+    # SCF.SOSCFDAVIDSONMAXIT: {
+    #     "label"  : "SOSCF Davidson MaxIter",
+    #     "toolTip": "Maximum number of iterations for Davidson diagonalization in SOSCF procedure.",
+    # },
+    # SCF.SOSCFDAVIDSONTOLR: {
+    #     "label"  : "SOSCF Davidson Residual Tol.",
+    #     "toolTip": "SOSCF Davidson convergence tolerance for the maximum component of each residual vector.",
+    # },
+    # SCF.SOSCFDAVIDSONMAXRED: {
+    #     "label"  : "SOSCF Davidson Max Reduction",
+    #     "toolTip": "Davidson maximum size of the Krylov subspace per target eigenvector, meaning this will be multiplied by the target saddle point order.",
+    # },
+    # SCF.SOSCFDAVIDSONFDMODE: {
+    #     "label"  : "SOSCF Davidson FD Stencil",
+    #     "toolTip": "SOSCF Davidson finite difference stencil.",
+    # },
+    # SCF.SOSCFDAVIDSONFDSTEP: {
+    #     "label"  : "SOSCF Davidson FD Step",
+    #     "toolTip": "Davidson finite difference step size.",
+    # },
+    # SCF.SOSCFPRECONDTYPE: {
+    #     "label"  : "SOSCF Preconditioner",
+    #     "toolTip": "SOSCF Preconditioner to use",
+    # },
+    # SCF.SOSCFPRECONDGAMMA: {
+    #     "label"  : "SOSCF Preconditioner Gamma (GradientExpansion only)",
+    #     "toolTip": "Mixing Factor for GradientExpansion preconditioner",
+    # },
+    # SCF.SOSCFGMF: {
+    #     "label"  : "Use GMF",
+    #     "toolTip": "Use generalized mode following (GMF).",
+    # },
+    # SCF.SOSCFSPO: {
+    #     "label"  : "GMF Saddle Point Order (SPO)",
+    #     "toolTip": "GMF only: Optional user-defined target saddle point order (SPO).",
+    # },
+    # SCF.SOSCFSPOEST: {
+    #     "label"  : "GMF SPO Estimate",
+    #     "toolTip": "GMF only: Target saddle point order estimate.",
+    # },
+    # SCF.SOSCFUPDATESPOEST: {
+    #     "label"  : "GMF Update SPO Estimate",
+    #     "toolTip": "GMF only: Update the SPO with the number of negative eigenvalues of the first Davidson run.",
+    # },
+    # SCF.SOSCFSPOESTNTRIAL: {
+    #     "label"  : "GMF SPO Num Eigenvectors",
+    #     "toolTip": "GMF Only: How many eigenvectors of the Hessian to target more for the SPO estimate.",
+    # },
+    # SCF.SOSCFUPDATESPOTHRESH: {
+    #     "label"  : "GMF SPO Eigenvalue Threshold",
+    #     "toolTip": "GMF Only: Only eigenvalues below this threshold are considered negative enough for the SPO estimate.",
+    # },
 }
 
 elprop_extras = {

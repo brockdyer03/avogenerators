@@ -132,9 +132,16 @@ class BlockEnum(BlockKeyword, Enum):
         self._value_ = key_name
         return self
 
-
     def __str__(self) -> str:
         return self.key_name
+    
+    # def __repr__(self) -> str:
+    #     """Returns, e.g., 'ElProp.Dipole'."""
+    #     return f"{self.__class__.__name__}.{self.name}"
+
+    def key(self) -> str:
+        """Give the JSON key we will use."""
+        return f"{self.__class__.__name__}_{self.name}"
 
 
 class NestedBlockEnum(BlockKeyword, Enum):

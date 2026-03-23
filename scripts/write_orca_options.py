@@ -336,8 +336,8 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
         key = f"{option.__class__.__name__}_{option.name}" # e.g. ElProp_DIPOLE
         toolTip       = extras[option]["toolTip"]
         label         = extras[option]["label"]
-        override_type = extras[option].get("override_type", default=None)
-        add_dummy     = extras[option].get("add_dummy", default=False)
+        override_type = extras[option].get("override_type", None)
+        add_dummy     = extras[option].get("add_dummy", False)
 
         tab += f'[{key}]\n'
         tab += f'label = "{label}"\n'
@@ -361,8 +361,8 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
             tab += "values = [\n"
             if add_dummy: # Add a blank option at the beginning.
                 tab += '    "",\n'
-            for option in option.options:
-                tab += f'    "{option}",\n'
+            for opt in option.options:
+                tab += f'    "{opt}",\n'
             tab += "]\n"
 
         if option.minimum is not None:
@@ -377,9 +377,12 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
 
     return tab
 
-
+"""This is where you should put any custom options that have special
+behavior. It is currently used to put lists of every basis set into
+the Basis tab.
+"""
 custom_opts = {
-    "pople_basis": {
+    "Basis_pople": {
         "type": "stringList",
         "default": 0,
         "label": "Pople Basis Set",
@@ -387,7 +390,7 @@ custom_opts = {
         "toolTip": "Pople-style split-valence basis sets.",
         "tab": "Basis",
     },
-    "def2_basis": {
+    "Basis_def2": {
         "type": "stringList",
         "default": 0,
         "label": "def2 Basis Set",
@@ -395,7 +398,7 @@ custom_opts = {
         "toolTip": "Karlsruhe def2-n(Z)VP basis sets.",
         "tab": "Basis",
     },
-    "cc_basis": {
+    "Basis_cc": {
         "type": "stringList",
         "default": 0,
         "label": "cc-pVnZ Basis Set",
@@ -403,7 +406,7 @@ custom_opts = {
         "toolTip": "Correlation Consistent basis sets.",
         "tab": "Basis",
     },
-    "jensen_basis": {
+    "Basis_jensen": {
         "type": "stringList",
         "default": 0,
         "label": "pc-n Basis Set",
@@ -411,7 +414,7 @@ custom_opts = {
         "toolTip": "Jensen's Polarization-Consistent basis sets.",
         "tab": "Basis",
     },
-    "relativistic_basis": {
+    "Basis_relativistic": {
         "type": "stringList",
         "default": 0,
         "label": "Relativistic Basis Set",
@@ -451,12 +454,14 @@ if __name__ == "__main__":
 
     for key, opt in custom_opts.items():
         toml += f'[{key}]\n'
-        toml += f"label = {opt['label']}\n"
-        toml += f"type = {opt['type']}\n"
+        toml += f'label = "{opt["label"]}"\n'
+        toml += f'type = "{opt["type"]}"\n'
         toml += f"default = {opt['default']}\n"
         if "values" in opt:
+            toml += "values = [\n"
             for item in opt["values"]:
                 toml += f'    "{item}",\n'
+            toml += "]\n"
         if "minimum" in opt:
             toml += f"minimum = {opt['minimum']}"
         if "maximum" in opt:
@@ -467,6 +472,7 @@ if __name__ == "__main__":
 
     for block, info in tabs.items():
         tab_string = write_block_tab(block, info["name"], info["extras"])
+        toml += tab_string
 
     with open(orca_toml, "w") as orca:
         orca.write(toml)

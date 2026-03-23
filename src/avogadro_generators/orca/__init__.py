@@ -83,16 +83,16 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     constrain: bool = opts["basic_constrain"]
 
     # Extract some items from other tabs
-    auxj_basis  = get_aux_basis(opts["basis_auxj"])
-    auxjk_basis = get_aux_basis(opts["basis_auxjk"])
-    auxc_basis  = get_aux_basis(opts["basis_auxc"])
+    auxj_basis  = get_aux_basis(opts["Basis_AUXJ"])
+    auxjk_basis = get_aux_basis(opts["Basis_AUXJK"])
+    auxc_basis  = get_aux_basis(opts["Basis_AUXC"])
 
     override_bases = {
-        "basis_def2_basis": def2BasisSet,
-        "basis_cc_basis": ccBasisSet,
-        "basis_pople_basis": PopleBasisSet,
-        "basis_jensen_basis": JensenBasisSet,
-        "basis_relativistic_basis": RelativisticBasisSet,
+        "Basis_pople": PopleBasisSet,
+        "Basis_def2": def2BasisSet,
+        "Basis_cc": ccBasisSet,
+        "Basis_jensen": JensenBasisSet,
+        "Basis_relativistic": RelativisticBasisSet,
     }
 
     for basis, basis_type in override_bases.items():
@@ -247,7 +247,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     scf_block = []
     for kwd in SCF:
-        val = opts[kwd.name]
+        val = opts[kwd.key()]
         try:
             val = kwd._dtype(val)
         except ValueError:
@@ -257,7 +257,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     basis_block = []
     for kwd in Basis:
-        val = opts[kwd.name]
+        val = opts[kwd.key()]
         try:
             val = kwd._dtype(val)
         except ValueError:
@@ -267,7 +267,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     elprop_block = []
     for kwd in ElProp:
-        val = opts[kwd.name]
+        val = opts[kwd.key()]
         try:
             val = kwd._dtype(val)
         except ValueError:
@@ -280,7 +280,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
         generated_input += "%scf\n"
         for item in scf_block:
-            generated_input += f"    {item}\n"
+            generated_input += item
         generated_input += "end\n"
 
     if len(basis_block) != 0:
@@ -288,7 +288,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
         generated_input += "%basis\n"
         for item in basis_block:
-            generated_input += f"    {item}\n"
+            generated_input += item
         generated_input += "end\n"
 
     if len(elprop_block) != 0:
@@ -296,7 +296,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
         generated_input += "%elprop\n"
         for item in elprop_block:
-            generated_input += f"    {item}\n"
+            generated_input += item
         generated_input += "end\n"
 
     generated_input += f"* xyz {charge} {multiplicity}\n"

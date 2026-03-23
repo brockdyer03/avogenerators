@@ -56,6 +56,14 @@ class BasisSet:
                     elements.append(Element(num))
 
         return tuple(elements)
+    
+    def __hash__(self):
+        return hash((
+            self.basis_name,
+            self.elements,
+            self.ecp,
+            self.ecp_elements,
+        ))
 
 
 class BasisSetEnum(BasisSet, Enum):
@@ -453,6 +461,11 @@ class AuxBasisSet:
         self.basis_name = name
         self.elements = BasisSet.split_elements(element_ranges)
         self.parent_basis = parent_basis.__name__
+
+    def __hash__(self):
+        return hash(
+            (self.basis_name, self.elements, self.parent_basis)
+        )
 
 
 class AuxBasisSetEnum(AuxBasisSet, Enum):
