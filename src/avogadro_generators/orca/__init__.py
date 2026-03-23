@@ -247,7 +247,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     scf_block = []
     for kwd in SCF:
-        val = opts[kwd.key()]
+        val = opts[kwd.get_json_key()]
         try:
             val = kwd._dtype(val)
         except ValueError:
@@ -257,7 +257,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     basis_block = []
     for kwd in Basis:
-        val = opts[kwd.key()]
+        val = opts[kwd.get_json_key()]
         try:
             val = kwd._dtype(val)
         except ValueError:
@@ -267,7 +267,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
 
     elprop_block = []
     for kwd in ElProp:
-        val = opts[kwd.key()]
+        val = opts[kwd.get_json_key()]
         try:
             val = kwd._dtype(val)
         except ValueError:

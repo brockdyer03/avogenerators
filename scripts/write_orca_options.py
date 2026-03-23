@@ -333,7 +333,7 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
     tab = ""
     for option in block_enum:
 
-        key = f"{option.__class__.__name__}_{option.name}" # e.g. ElProp_DIPOLE
+        key = option.get_json_key() # e.g. ElProp_DIPOLE
         toolTip       = extras[option]["toolTip"]
         label         = extras[option]["label"]
         override_type = extras[option].get("override_type", None)

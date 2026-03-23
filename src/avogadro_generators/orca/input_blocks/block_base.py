@@ -139,7 +139,7 @@ class BlockEnum(BlockKeyword, Enum):
     #     """Returns, e.g., 'ElProp.Dipole'."""
     #     return f"{self.__class__.__name__}.{self.name}"
 
-    def key(self) -> str:
+    def get_json_key(self) -> str:
         """Give the JSON key we will use."""
         return f"{self.__class__.__name__}_{self.name}"
 
