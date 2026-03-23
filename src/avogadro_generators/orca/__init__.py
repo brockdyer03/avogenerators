@@ -56,66 +56,6 @@ def get_method(value: str) -> str | Functionals | Composite | MP2 | CoupledClust
         return Functionals(value)
 
 
-SCF_BLOCK_KEYWORDS = {
-    "scf_guess":           SCF.GUESS,
-    "scf_guess_mode":      SCF.GUESSMODE,
-    "scf_autostart":       SCF.AUTOSTART,
-    "scf_moinp":           SCF.MOINP,
-    "scf_convergence":     SCF.CONVERGENCE,
-    "scf_tol_e":           SCF.TOL_E,
-    "scf_tol_rmsp":        SCF.TOL_RMSP,
-    "scf_tol_maxp":        SCF.TOL_MAXP,
-    "scf_tol_err":         SCF.TOL_ERR,
-    "scf_tol_g":           SCF.TOL_G,
-    "scf_tol_x":           SCF.TOL_X,
-    "scf_int_thresh":      SCF.THRESH,
-    "scf_conv_check_mode": SCF.CONVCHECKMODE,
-    "scf_conv_forced":     SCF.CONVFORCED,
-}
-
-BASIS_BLOCK_KEYWORDS = {
-    # "basis_basis":            Basis.BASIS,
-    # "basis_auxj":             Basis.AUXJ,
-    # "basis_auxjk":            Basis.AUXJK,
-    # "basis_auxc":             Basis.AUXC,
-    "basis_cabs":             Basis.CABS,
-    "basis_ecp":              Basis.ECP,
-    "basis_ghost_ecp":        Basis.GHOSTECP,
-    # "basis_decontract":       Basis.DECONTRACT,
-    # "basis_decontract_bas":   Basis.DECONTRACTBAS,
-    # "basis_decontract_auxj":  Basis.DECONTRACTAUXJ,
-    # "basis_decontract_auxjk": Basis.DECONTRACTAUXJK,
-    # "basis_decontract_auxc":  Basis.DECONTRACTAUXC,
-    # "basis_decontract_cabs":  Basis.DECONTRACTCABS,
-    # "basis_pcd_trim_bas":     Basis.PCDTRIMBAS,
-    # "basis_pcd_trim_auxj":    Basis.PCDTRIMAUXJ,
-    # "basis_pcd_trim_auxjk":   Basis.PCDTRIMAUXJK,
-    # "basis_pcd_trim_auxc":    Basis.PCDTRIMAUXC,
-    # "basis_pcd_thresh":       Basis.PCDTHRESH,
-    "basis_autoaux_size":     Basis.AUTOAUXSIZE,
-    # "basis_autoaux_l_max":    Basis.AUTOAUXLMAX,
-    # "basis_autoaux_l_limit":  Basis.AUTOAUXLLIMIT,
-}
-
-ELPROP_BLOCK_KEYWORDS = {
-    "elprop_dipole":          ElProp.DIPOLE,
-    "elprop_quadrupole":      ElProp.QUADRUPOLE,
-    "elprop_polar":           ElProp.POLAR,
-    "elprop_polar_velocity":  ElProp.POLARVELOCITY,
-    "elprop_polar_dip_quad":  ElProp.POLARDIPQUAD,
-    "elprop_polar_quad_quad": ElProp.POLARQUADQUAD,
-    "elprop_hyper_pol":       ElProp.HYPERPOL,
-    "elprop_freq_r":          ElProp.FREQ_R,
-    "elprop_freq_i":          ElProp.FREQ_I,
-    "elprop_solver":          ElProp.SOLVER,
-    "elprop_max_diis":        ElProp.MAXDIIS,
-    "elprop_shift":           ElProp.SHIFT,
-    "elprop_tol":             ElProp.TOL,
-    "elprop_max_iter":        ElProp.MAXITER,
-    "elprop_print_level":     ElProp.PRINTLEVEL,
-    "elprop_origin":          ElProp.ORIGIN,
-}
-
 def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     # Collect warning strings as we go
     warnings = []
@@ -305,48 +245,59 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         generated_input += "    end\n"
         generated_input += "end\n"
 
-    scf_block = "%scf\n"
-    for kwd, kwd_type in SCF_BLOCK_KEYWORDS.items():
-        val = opts[kwd]
+    scf_block = []
+    for kwd in SCF:
+        val = opts[kwd.name]
         try:
-            val = kwd_type._dtype(val)
+            val = kwd._dtype(val)
         except ValueError:
             pass
-        if not kwd_type.is_default(val):
-            scf_block += format_block_keyword(kwd_type, val)
-    scf_block += "end\n"
+        if not kwd.is_default(val):
+            scf_block.append(format_block_keyword(kwd, val))
 
-    basis_block = "%basis\n"
-    for kwd, kwd_type in BASIS_BLOCK_KEYWORDS.items():
-        val = opts[kwd]
+    basis_block = []
+    for kwd in Basis:
+        val = opts[kwd.name]
         try:
-            val = kwd_type._dtype(val)
+            val = kwd._dtype(val)
         except ValueError:
             pass
-        if not kwd_type.is_default(val):
-            basis_block += format_block_keyword(kwd_type, val)
-    basis_block += "end\n"
+        if not kwd.is_default(val):
+            basis_block.append(format_block_keyword(kwd, val))
 
-    elprop_block = "%elprop\n"
-    for kwd, kwd_type in ELPROP_BLOCK_KEYWORDS.items():
-        val = opts[kwd]
+    elprop_block = []
+    for kwd in ElProp:
+        val = opts[kwd.name]
         try:
-            val = kwd_type._dtype(val)
+            val = kwd._dtype(val)
         except ValueError:
             pass
-        if not kwd_type.is_default(val):
-            elprop_block += format_block_keyword(kwd_type, val)
-    elprop_block += "end\n"
+        if not kwd.is_default(val):
+            elprop_block.append(format_block_keyword(kwd, val))
 
-    if scf_block != "%scf\nend\n":
-        generated_input += scf_block
+    if len(scf_block) != 0:
         syntax_groups.append("scf")
-    if basis_block != "%basis\nend\n":
-        generated_input += basis_block
+
+        generated_input += "%scf\n"
+        for item in scf_block:
+            generated_input += f"    {item}\n"
+        generated_input += "end\n"
+
+    if len(basis_block) != 0:
         syntax_groups.append("basis")
-    if elprop_block != "%elprop\nend\n":
-        generated_input += elprop_block
+
+        generated_input += "%basis\n"
+        for item in basis_block:
+            generated_input += f"    {item}\n"
+        generated_input += "end\n"
+
+    if len(elprop_block) != 0:
         syntax_groups.append("elprop")
+
+        generated_input += "%elprop\n"
+        for item in elprop_block:
+            generated_input += f"    {item}\n"
+        generated_input += "end\n"
 
     generated_input += f"* xyz {charge} {multiplicity}\n"
     generated_input += "$$coords:___Sxyz$$\n"
