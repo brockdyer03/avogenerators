@@ -18,24 +18,15 @@ special options such as ``Title``, ``Theory``, ``Basis``, and so on.
 If you are adding a new option to the Basic tab, it should go into
 that class.
 
-The latter portion of this script is designed to allow for automatic
+The function ``write_block_tab`` is designed to allow for automatic
 writing of the various input blocks that ORCA offers. If you wish to
 add a new block or change an existing block, do not just add the
-options using the ``extra_inputs`` attribute, add the block and its
+options using the ``custom_opts`` dict, add the block and its
 options into the correct Python module located at
-``src/avogadro_generators/orca/input_blocks``.
-You can then easily copy and paste the options you wish to include into
-this file, and add their respective options. It is important to note
-that while the ``label`` option is technically optional for input
-generators, it is mandatory here. This is for several reasons, but the
-most important are that it helps in providing translations for users,
-and that it means you can more clearly label the key that is used by
-Avogadro when passing the user options in a JSON. Every key in one of
-the ``cls.inputs`` or ``cls.extra_inputs`` dictionaries should be
-prefixed by the name of the input block (in lowercase). When you add
-options to these blocks, be sure to add their keys and their Enum
-members to their respective parsing blocks in the ``__init__.py`` file.
-
+``src/avogadro_generators/orca/input_blocks``, and write the toolTips
+and labels to the ``option_extras.py`` file, then just put the relevant
+block enum, tab name, and block extras into the ``tabs`` dict near the
+bottom of this file.
 
 Notes
 -----
