@@ -7,7 +7,6 @@
 # ******************************************************************************
 """Classes and methods for the %basis block in ORCA."""
 
-
 from .block_base import BlockEnum, ORCAString
 from ..basis_sets import (
     AuxJBasisSet,
@@ -16,6 +15,7 @@ from ..basis_sets import (
 )
 
 
+# fmt: off
 class Basis(BlockEnum):
 
     # BASIS    = "Basis", str
@@ -71,3 +71,4 @@ class Basis(BlockEnum):
     # AUTOAUXB_6    = "AutoAuxB[6]",   float, 3.0
     # AUTOAUXB_7    = "AutoAuxB[7]",   float, 3.0
     # AUTOAUXTIGHTB = "AutoAuxTightB", bool,  True
+# fmt: on
