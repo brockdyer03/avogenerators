@@ -45,9 +45,19 @@ class BlockKeyword:
     """
 
     key_name: str
-    _dtype: type[ORCAString] | type[str] | type[bool] | type[int] | type[float] | type[Sequence] | type[dict]
+    _dtype: (
+        type[ORCAString]
+        | type[str]
+        | type[bool]
+        | type[int]
+        | type[float]
+        | type[Sequence]
+        | type[dict]
+    )
     default: ORCAString | str | bool | int | float | Sequence | dict | None = None
-    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = None
+    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = (
+        None
+    )
     minimum: int | float | None = None
     maximum: int | float | None = None
 
@@ -90,10 +100,10 @@ class BlockKeyword:
 
         if self.default is None:
             if isinstance(value, (str, Sequence, dict)):
-                if len(value) == 0: # Empty strings or sequences are the default
+                if len(value) == 0:  # Empty strings or sequences are the default
                     return True
             elif isinstance(value, (int, float, bool)):
-                return False # If it is a number it must exist.
+                return False  # If it is a number it must exist.
         else:
             if isinstance(value, (bool, int, float)):
                 if value == self.default:
@@ -134,7 +144,7 @@ class BlockEnum(BlockKeyword, Enum):
 
     def __str__(self) -> str:
         return self.key_name
-    
+
     # def __repr__(self) -> str:
     #     """Returns, e.g., 'ElProp.Dipole'."""
     #     return f"{self.__class__.__name__}.{self.name}"
