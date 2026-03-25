@@ -14,6 +14,7 @@ from collections.abc import Sequence
 from .block_base import BlockEnum, ORCAString
 
 
+# fmt: off
 class Method(BlockEnum):
     """Enumeration of keywords available in the %method block."""
 
@@ -42,3 +43,4 @@ class Method(BlockEnum):
     HGRIDREDUCED = "HGridReduced", bool,  True
     BFCUT        = "BFCut",        float, 1e-10
     WEIGHTCUT    = "WeightCut",    float, 1e-14
+# fmt: on
