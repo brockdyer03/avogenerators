@@ -336,7 +336,7 @@ scf_extras = {
     #     "toolTip": "Select quasi-Newton method for SOSCF Hessian Update.",
     # },
     # SCF.SOSCFCONSTRAINTS: {
-    #     "label"  : "SOSCF Contraints",
+    #     "label"  : "SOSCF Constraints",
     #     "toolTip": "Activate freeze-and-release SOSCF.",
     # },
     # SCF.SOSCFCONSTRAINEDMAXSTEP: {
