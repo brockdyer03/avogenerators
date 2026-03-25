@@ -6,6 +6,7 @@
 # This source code is released under the New BSD License, (the "License").
 # ******************************************************************************
 """Input generation for ORCA (https://www.faccts.de/orca/)."""
+
 from .input_blocks import SCF, Basis, ElProp, format_block_keyword
 from .simple_keywords import (
     RunType,
@@ -27,6 +28,7 @@ from .basis_sets import (
 from .implicit_solvation import Solvent, SolvationModel
 from ..utilities import Element
 
+
 def write_block(block_name: str, keys_vals: dict):
     """Write an input block."""
     block = f"%{block_name}\n"
@@ -41,7 +43,9 @@ def write_block(block_name: str, keys_vals: dict):
     return block
 
 
-def get_method(value: str) -> str | Functionals | Composite | MP2 | CoupledCluster:
+def get_method(
+    value: str,
+) -> str | Functionals | Composite | MP2 | CoupledCluster:
     """Get a method from a string."""
 
     if value == "HF":
@@ -60,8 +64,8 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     # Collect warning strings as we go
     warnings = []
     syntax_groups = ["default"]
-
-    opts = input_json["options"]
+    # fmt: off
+    opts  = input_json["options"]
     cjson = input_json["cjson"]
 
     # Extract undefined options:
@@ -86,7 +90,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     auxj_basis  = get_aux_basis(opts["Basis_AUXJ"])
     auxjk_basis = get_aux_basis(opts["Basis_AUXJK"])
     auxc_basis  = get_aux_basis(opts["Basis_AUXC"])
-
+    # fmt: on
     override_bases = {
         "Basis_pople": PopleBasisSet,
         "Basis_def2": def2BasisSet,
@@ -127,10 +131,12 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         simple_keywords.append(method.value)
     elif isinstance(method, (MP2, CoupledCluster)):
         if auxc_basis is None:
-            warnings.append("No AuxC basis selected, please select one from the Basis tab.")
+            warnings.append(
+                "No AuxC basis selected, please select one from the Basis tab."
+            )
             simple_keywords.extend([method.value, basis_set])
         elif auxc_basis.parent_basis != basis_set.__class__.__name__:
-            aux_fam  = get_basis_family(auxc_basis.parent_basis)
+            aux_fam = get_basis_family(auxc_basis.parent_basis)
             main_fam = get_basis_family(basis_set.__class__.__name__)
             warnings.append(
                 f"The auxiliary basis {auxc_basis.basis_name} belongs to the {aux_fam} family, but your primary basis is of the {main_fam} family."
@@ -169,29 +175,25 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         if kwd is not None:
             simple_keywords.append(kwd)
         else:
-            warnings.append(
-                f"Keyword {keyword} is not recognized!"
-            )
-
+            warnings.append(f"Keyword {keyword} is not recognized!")
+    # fmt: off
     generated_input = (
         "# File Generated with Avogadro\n"
        f"# {title}\n"
        f"#\n"
     )
+    # fmt: on
     generated_input += f"!{run_type.value}"
     for kwd in simple_keywords:
         generated_input += f" {kwd}"
-    generated_input += " \n" # Trailing whitespace to avoid syntax highlighting bugs
+    # Trailing whitespace to avoid syntax highlighting bugs
+    generated_input += " \n"
 
     if max_mem != 4:
-        generated_input += f"%MaxCore {int(max_mem*1024/nprocs)}\n"
+        generated_input += f"%MaxCore {int(max_mem * 1024 / nprocs)}\n"
 
     if nprocs != 1:
-        generated_input += (
-            "%pal\n"
-           f"    nprocs = {nprocs}\n"
-            "end\n"
-        )
+        generated_input += f"%pal\n    nprocs = {nprocs}\nend\n"
 
     if (
         constrain is True
@@ -207,15 +209,19 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
             # loop through the output
             # e.g. "{ B N1 N2 value C }"
             for constraint in cjson["constraints"]:
-                generated_input += " "*8 # Add indentation
+                generated_input += " " * 8  # Add indentation
                 if len(constraint) == 3:
                     # distance
                     value, atom1, atom2 = constraint
-                    generated_input += f"{{ B {atom1} {atom2} {value:.6f} C }} \n"
+                    generated_input += (
+                        f"{{ B {atom1} {atom2} {value:.6f} C }} \n"
+                    )
                 if len(constraint) == 4:
                     # angle
                     value, atom1, atom2, atom3 = constraint
-                    generated_input += f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }} \n"
+                    generated_input += (
+                        f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }} \n"
+                    )
                 if len(constraint) == 5:
                     # torsion / dihedral
                     value, atom1, atom2, atom3, atom4 = constraint
@@ -231,16 +237,16 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 # look for 1 or 0
                 for i in range(len(frozen)):
                     if frozen[i] == 1:
-                        generated_input += f"{' '*8}{{ C {i} C }} \n"
+                        generated_input += f"{' ' * 8}{{ C {i} C }} \n"
             elif len(frozen) == 3 * atomCount:
                 # look for 1 or 0 - x, y, z for each atom
                 for i in range(0, len(frozen), 3):
                     if frozen[i] == 0:
-                        generated_input += f"{' '*8}{{ X {i} C }} \n"
+                        generated_input += f"{' ' * 8}{{ X {i} C }} \n"
                     if frozen[i + 1] == 0:
-                        generated_input += f"{' '*8}{{ Y {i} C }} \n"
+                        generated_input += f"{' ' * 8}{{ Y {i} C }} \n"
                     if frozen[i + 2] == 0:
-                        generated_input += f"{' '*8}{{ Z {i} C }} \n"
+                        generated_input += f"{' ' * 8}{{ Z {i} C }} \n"
 
         generated_input += "    end\n"
         generated_input += "end\n"
@@ -310,22 +316,20 @@ def generateInput(input_json: dict, debug: bool) -> dict:
 
     generated_input, warnings, syntax_groups = generateInputFile(input_json)
 
-    filename = input_json['options']['Filename Base'] + '.inp'
+    filename = input_json["options"]["Filename Base"] + ".inp"
 
     result = {
-        'files': [
+        "files": [
             {
-                'filename': filename,
-                'contents': generated_input,
-                'highlightStyles': syntax_groups,
+                "filename": filename,
+                "contents": generated_input,
+                "highlightStyles": syntax_groups,
             },
         ],
-        'mainFile': filename,
+        "mainFile": filename,
     }
 
     if warnings:
-        result['warnings'] = warnings
+        result["warnings"] = warnings
 
     return result
-
-
