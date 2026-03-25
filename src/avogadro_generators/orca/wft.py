@@ -10,6 +10,7 @@
 from enum import StrEnum
 
 
+# fmt: off
 class MP2(StrEnum):
     """All MP2 methods in ORCA."""
 
@@ -54,5 +55,4 @@ class CoupledCluster(StrEnum):
     DLPNO_CCSD_T_F12_D  = "DLPNO-CCSD(T)-F12/D"
     DLPNO_CCSD_T1_F12   = "DLPNO-CCSD(T1)-F12"
     DLPNO_CCSD_T1_F12_D = "DLPNO-CCSD(T1)-F12/D"
-
-
+# fmt: on
