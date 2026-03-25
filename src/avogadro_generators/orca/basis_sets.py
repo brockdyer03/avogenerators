@@ -33,9 +33,7 @@ class BasisSet:
         self.elements = BasisSet.split_elements(element_ranges)
         self.ecp = ecp
         self.ecp_elements = (
-            BasisSet.split_elements(ecp_elements)
-            if ecp_elements is not None
-            else None
+            BasisSet.split_elements(ecp_elements) if ecp_elements is not None else None
         )
 
     @staticmethod
@@ -52,18 +50,20 @@ class BasisSet:
                 elem_range = elem_range.split("-")
                 start = Element[elem_range[0]]
                 end = Element[elem_range[1]]
-                for num in range(start.number, end.number+1):
+                for num in range(start.number, end.number + 1):
                     elements.append(Element(num))
 
         return tuple(elements)
-    
+
     def __hash__(self):
-        return hash((
-            self.basis_name,
-            self.elements,
-            self.ecp,
-            self.ecp_elements,
-        ))
+        return hash(
+            (
+                self.basis_name,
+                self.elements,
+                self.ecp,
+                self.ecp_elements,
+            )
+        )
 
 
 class BasisSetEnum(BasisSet, Enum):
@@ -73,8 +73,8 @@ class BasisSetEnum(BasisSet, Enum):
         cls,
         basis_name: str,
         element_ranges: tuple[str],
-        ecp: str | None,
-        ecp_elements: tuple[str] | None,
+        ecp: str | None = None,
+        ecp_elements: tuple[str] | None = None,
     ):
         self = BasisSet.__new__(cls)
         self._name_ = basis_name
@@ -85,6 +85,7 @@ class BasisSetEnum(BasisSet, Enum):
         return self.basis_name
 
 
+# fmt: off
 class PopleBasisSet(BasisSetEnum):
     """All Pople-style (X-YZG) basis sets in ORCA.
 
@@ -113,62 +114,62 @@ class PopleBasisSet(BasisSetEnum):
                 return member
         return None
 
-    bSTO_3G                    = "STO-3G",            ("H-I", ),  None, None
-    b3_21G                     = "3-21G",             ("H-Cs",),  None, None
-    b3_21GSP                   = "3-21GSP",           ("H-Ar",),  None, None
-    b4_22GSP                   = "4-22GSP",           ("H-Ar",),  None, None
-    b6_31G                     = "6-31G",             ("H-Zn",),  None, None
-    b6_31G_D                   = "6-31G(d)",          ("H-Zn",),  None, None
-    b6_31G_D_P                 = "6-31G(d,p)",        ("H-Zn",),  None, None
-    b6_31G_2D                  = "6-31G(2d)",         ("H-Zn",),  None, None
-    b6_31G_2D_P                = "6-31G(2d,p)",       ("H-Zn",),  None, None
-    b6_31G_2D_2P               = "6-31G(2d,2p)",      ("H-Zn",),  None, None
-    b6_31G_2DF                 = "6-31G(2df)",        ("H-Zn",),  None, None
-    b6_31G_2DF_2P              = "6-31G(2df,2p)",     ("H-Zn",),  None, None
-    b6_31G_2DF_2PD             = "6-31G(2df,2pd)",    ("H-Zn",),  None, None
-    b6_31_PLUS_G_D             = "6-31+G(d)",         ("H-Zn",),  None, None
-    b6_31_PLUS_G_D_P           = "6-31+G(d,p)",       ("H-Zn",),  None, None
-    b6_31_PLUS_G_2D            = "6-31+G(2d)",        ("H-Zn",),  None, None
-    b6_31_PLUS_G_2D_P          = "6-31+G(2d,p)",      ("H-Zn",),  None, None
-    b6_31_PLUS_G_2D_2P         = "6-31+G(2d,2p)",     ("H-Zn",),  None, None
-    b6_31_PLUS_G_2DF           = "6-31+G(2df)",       ("H-Zn",),  None, None
-    b6_31_PLUS_G_2DF_2P        = "6-31+G(2df,2p)",    ("H-Zn",),  None, None
-    b6_31_PLUS_G_2DF_2PD       = "6-31+G(2df,2pd)",   ("H-Zn",),  None, None
-    b6_31_PLUS_PLUS_G_D_P      = "6-31++G(d,p)",      ("H-Zn",),  None, None
-    b6_31_PLUS_PLUS_G_2D_P     = "6-31++G(2d,p)",     ("H-Zn",),  None, None
-    b6_31_PLUS_PLUS_G_2D_2P    = "6-31++G(2d,2p)",    ("H-Zn",),  None, None
-    b6_31_PLUS_PLUS_G_2DF_2P   = "6-31++G(2df,2p)",   ("H-Zn",),  None, None
-    b6_31_PLUS_PLUS_G_2DF_2PD  = "6-31++G(2df,2pd)",  ("H-Zn",),  None, None
-    b6_311G                    = "6-311G",            ("H-Br",),  None, None
-    b6_311G_D                  = "6-311G(d)",         ("H-Br",),  None, None
-    b6_311G_D_P                = "6-311G(d,p)",       ("H-Br",),  None, None
-    b6_311G_2D                 = "6-311G(2d)",        ("H-Br",),  None, None
-    b6_311G_2D_P               = "6-311G(2d,p)",      ("H-Br",),  None, None
-    b6_311G_2D_2P              = "6-311G(2d,2p)",     ("H-Br",),  None, None
-    b6_311G_2DF                = "6-311G(2df)",       ("H-Br",),  None, None
-    b6_311G_2DF_2P             = "6-311G(2df,2p)",    ("H-Br",),  None, None
-    b6_311G_2DF_2PD            = "6-311G(2df,2pd)",   ("H-Br",),  None, None
-    b6_311G_3DF                = "6-311G(3df)",       ("H-Br",),  None, None
-    b6_311G_3DF_3PD            = "6-311G(3df,3pd)",   ("H-Br",),  None, None
-    b6_311_PLUS_G_D            = "6-311+G(d)",        ("H-Br",),  None, None
-    b6_311_PLUS_G_D_P          = "6-311+G(d,p)",      ("H-Br",),  None, None
-    b6_311_PLUS_G_2D           = "6-311+G(2d)",       ("H-Br",),  None, None
-    b6_311_PLUS_G_2D_P         = "6-311+G(2d,p)",     ("H-Br",),  None, None
-    b6_311_PLUS_G_2D_2P        = "6-311+G(2d,2p)",    ("H-Br",),  None, None
-    b6_311_PLUS_G_2DF          = "6-311+G(2df)",      ("H-Br",),  None, None
-    b6_311_PLUS_G_2DF_2P       = "6-311+G(2df,2p)",   ("H-Br",),  None, None
-    b6_311_PLUS_G_2DF_2PD      = "6-311+G(2df,2pd)",  ("H-Br",),  None, None
-    b6_311_PLUS_G_3DF          = "6-311+G(3df)",      ("H-Br",),  None, None
-    b6_311_PLUS_G_3DF_2P       = "6-311+G(3df,2p)",   ("H-Br",),  None, None
-    b6_311_PLUS_G_3DF_3PD      = "6-311+G(3df,3pd)",  ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_D_P     = "6-311++G(d,p)",     ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_2D_P    = "6-311++G(2d,p)",    ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_2D_2P   = "6-311++G(2d,2p)",   ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_2DF_2P  = "6-311++G(2df,2p)",  ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_2DF_2PD = "6-311++G(2df,2pd)", ("H-Br",),  None, None
-    b6_311_PLUS_PLUS_G_3DF_3PD = "6-311++G(3df,3pd)", ("H-Br",),  None, None
-    bm6_31G                    = "m6-31G",            ("Sc-Cu",), None, None
-    bm6_31G_STAR               = "m6-31G*",           ("Sc-Cu",), None, None
+    bSTO_3G                    = "STO-3G",            ("H-I", )
+    b3_21G                     = "3-21G",             ("H-Cs",)
+    b3_21GSP                   = "3-21GSP",           ("H-Ar",)
+    b4_22GSP                   = "4-22GSP",           ("H-Ar",)
+    b6_31G                     = "6-31G",             ("H-Zn",)
+    b6_31G_D                   = "6-31G(d)",          ("H-Zn",)
+    b6_31G_D_P                 = "6-31G(d,p)",        ("H-Zn",)
+    b6_31G_2D                  = "6-31G(2d)",         ("H-Zn",)
+    b6_31G_2D_P                = "6-31G(2d,p)",       ("H-Zn",)
+    b6_31G_2D_2P               = "6-31G(2d,2p)",      ("H-Zn",)
+    b6_31G_2DF                 = "6-31G(2df)",        ("H-Zn",)
+    b6_31G_2DF_2P              = "6-31G(2df,2p)",     ("H-Zn",)
+    b6_31G_2DF_2PD             = "6-31G(2df,2pd)",    ("H-Zn",)
+    b6_31_PLUS_G_D             = "6-31+G(d)",         ("H-Zn",)
+    b6_31_PLUS_G_D_P           = "6-31+G(d,p)",       ("H-Zn",)
+    b6_31_PLUS_G_2D            = "6-31+G(2d)",        ("H-Zn",)
+    b6_31_PLUS_G_2D_P          = "6-31+G(2d,p)",      ("H-Zn",)
+    b6_31_PLUS_G_2D_2P         = "6-31+G(2d,2p)",     ("H-Zn",)
+    b6_31_PLUS_G_2DF           = "6-31+G(2df)",       ("H-Zn",)
+    b6_31_PLUS_G_2DF_2P        = "6-31+G(2df,2p)",    ("H-Zn",)
+    b6_31_PLUS_G_2DF_2PD       = "6-31+G(2df,2pd)",   ("H-Zn",)
+    b6_31_PLUS_PLUS_G_D_P      = "6-31++G(d,p)",      ("H-Zn",)
+    b6_31_PLUS_PLUS_G_2D_P     = "6-31++G(2d,p)",     ("H-Zn",)
+    b6_31_PLUS_PLUS_G_2D_2P    = "6-31++G(2d,2p)",    ("H-Zn",)
+    b6_31_PLUS_PLUS_G_2DF_2P   = "6-31++G(2df,2p)",   ("H-Zn",)
+    b6_31_PLUS_PLUS_G_2DF_2PD  = "6-31++G(2df,2pd)",  ("H-Zn",)
+    b6_311G                    = "6-311G",            ("H-Br",)
+    b6_311G_D                  = "6-311G(d)",         ("H-Br",)
+    b6_311G_D_P                = "6-311G(d,p)",       ("H-Br",)
+    b6_311G_2D                 = "6-311G(2d)",        ("H-Br",)
+    b6_311G_2D_P               = "6-311G(2d,p)",      ("H-Br",)
+    b6_311G_2D_2P              = "6-311G(2d,2p)",     ("H-Br",)
+    b6_311G_2DF                = "6-311G(2df)",       ("H-Br",)
+    b6_311G_2DF_2P             = "6-311G(2df,2p)",    ("H-Br",)
+    b6_311G_2DF_2PD            = "6-311G(2df,2pd)",   ("H-Br",)
+    b6_311G_3DF                = "6-311G(3df)",       ("H-Br",)
+    b6_311G_3DF_3PD            = "6-311G(3df,3pd)",   ("H-Br",)
+    b6_311_PLUS_G_D            = "6-311+G(d)",        ("H-Br",)
+    b6_311_PLUS_G_D_P          = "6-311+G(d,p)",      ("H-Br",)
+    b6_311_PLUS_G_2D           = "6-311+G(2d)",       ("H-Br",)
+    b6_311_PLUS_G_2D_P         = "6-311+G(2d,p)",     ("H-Br",)
+    b6_311_PLUS_G_2D_2P        = "6-311+G(2d,2p)",    ("H-Br",)
+    b6_311_PLUS_G_2DF          = "6-311+G(2df)",      ("H-Br",)
+    b6_311_PLUS_G_2DF_2P       = "6-311+G(2df,2p)",   ("H-Br",)
+    b6_311_PLUS_G_2DF_2PD      = "6-311+G(2df,2pd)",  ("H-Br",)
+    b6_311_PLUS_G_3DF          = "6-311+G(3df)",      ("H-Br",)
+    b6_311_PLUS_G_3DF_2P       = "6-311+G(3df,2p)",   ("H-Br",)
+    b6_311_PLUS_G_3DF_3PD      = "6-311+G(3df,3pd)",  ("H-Br",)
+    b6_311_PLUS_PLUS_G_D_P     = "6-311++G(d,p)",     ("H-Br",)
+    b6_311_PLUS_PLUS_G_2D_P    = "6-311++G(2d,p)",    ("H-Br",)
+    b6_311_PLUS_PLUS_G_2D_2P   = "6-311++G(2d,2p)",   ("H-Br",)
+    b6_311_PLUS_PLUS_G_2DF_2P  = "6-311++G(2df,2p)",  ("H-Br",)
+    b6_311_PLUS_PLUS_G_2DF_2PD = "6-311++G(2df,2pd)", ("H-Br",)
+    b6_311_PLUS_PLUS_G_3DF_3PD = "6-311++G(3df,3pd)", ("H-Br",)
+    bm6_31G                    = "m6-31G",            ("Sc-Cu",)
+    bm6_31G_STAR               = "m6-31G*",           ("Sc-Cu",)
 
 
 class def2BasisSet(BasisSetEnum):
@@ -202,241 +203,242 @@ class def2BasisSet(BasisSetEnum):
 class JensenBasisSet(BasisSetEnum):
     """Jensen polarization-consistent basis sets and their variants."""
 
-    PC_0         = "pc-0",         ("H-Ca", "Ga-Kr"), None, None
-    PC_1         = "pc-1",         ("H-Kr",),         None, None
-    PC_2         = "pc-2",         ("H-Kr",),         None, None
-    PC_3         = "pc-3",         ("H-Kr",),         None, None
-    PC_4         = "pc-4",         ("H-Kr",),         None, None
-    AUG_PC_0     = "aug-pc-0",     ("H-Ca", "Ga-Kr"), None, None
-    AUG_PC_1     = "aug-pc-1",     ("H-Kr",),         None, None
-    AUG_PC_2     = "aug-pc-2",     ("H-Kr",),         None, None
-    AUG_PC_3     = "aug-pc-3",     ("H-Kr",),         None, None
-    AUG_PC_4     = "aug-pc-4",     ("H-Kr",),         None, None
+    PC_0         = "pc-0",         ("H-Ca", "Ga-Kr")
+    PC_1         = "pc-1",         ("H-Kr",)
+    PC_2         = "pc-2",         ("H-Kr",)
+    PC_3         = "pc-3",         ("H-Kr",)
+    PC_4         = "pc-4",         ("H-Kr",)
+    AUG_PC_0     = "aug-pc-0",     ("H-Ca", "Ga-Kr")
+    AUG_PC_1     = "aug-pc-1",     ("H-Kr",)
+    AUG_PC_2     = "aug-pc-2",     ("H-Kr",)
+    AUG_PC_3     = "aug-pc-3",     ("H-Kr",)
+    AUG_PC_4     = "aug-pc-4",     ("H-Kr",)
 
     # Segmented contraction variants
-    PCSEG_0      = "pcseg-0",      ("H-Kr",), None, None
-    PCSEG_1      = "pcseg-1",      ("H-Kr",), None, None
-    PCSEG_2      = "pcseg-2",      ("H-Kr",), None, None
-    PCSEG_3      = "pcseg-3",      ("H-Kr",), None, None
-    PCSEG_4      = "pcseg-4",      ("H-Kr",), None, None
-    AUG_PCSEG_0  = "aug-pcseg-0",  ("H-Kr",), None, None
-    AUG_PCSEG_1  = "aug-pcseg-1",  ("H-Kr",), None, None
-    AUG_PCSEG_2  = "aug-pcseg-2",  ("H-Kr",), None, None
-    AUG_PCSEG_3  = "aug-pcseg-3",  ("H-Kr",), None, None
-    AUG_PCSEG_4  = "aug-pcseg-4",  ("H-Kr",), None, None
+    PCSEG_0      = "pcseg-0",      ("H-Kr",)
+    PCSEG_1      = "pcseg-1",      ("H-Kr",)
+    PCSEG_2      = "pcseg-2",      ("H-Kr",)
+    PCSEG_3      = "pcseg-3",      ("H-Kr",)
+    PCSEG_4      = "pcseg-4",      ("H-Kr",)
+    AUG_PCSEG_0  = "aug-pcseg-0",  ("H-Kr",)
+    AUG_PCSEG_1  = "aug-pcseg-1",  ("H-Kr",)
+    AUG_PCSEG_2  = "aug-pcseg-2",  ("H-Kr",)
+    AUG_PCSEG_3  = "aug-pcseg-3",  ("H-Kr",)
+    AUG_PCSEG_4  = "aug-pcseg-4",  ("H-Kr",)
 
     # Optimized for nuclear magnetic shieldings
-    PCSSEG_0     = "pcSseg-0",     ("H-Kr",), None, None
-    PCSSEG_1     = "pcSseg-1",     ("H-Kr",), None, None
-    PCSSEG_2     = "pcSseg-2",     ("H-Kr",), None, None
-    PCSSEG_3     = "pcSseg-3",     ("H-Kr",), None, None
-    PCSSEG_4     = "pcSseg-4",     ("H-Kr",), None, None
-    AUG_PCSSEG_0 = "aug-pcSseg-0", ("H-Kr",), None, None
-    AUG_PCSSEG_1 = "aug-pcSseg-1", ("H-Kr",), None, None
-    AUG_PCSSEG_2 = "aug-pcSseg-2", ("H-Kr",), None, None
-    AUG_PCSSEG_3 = "aug-pcSseg-3", ("H-Kr",), None, None
-    AUG_PCSSEG_4 = "aug-pcSseg-4", ("H-Kr",), None, None
+    PCSSEG_0     = "pcSseg-0",     ("H-Kr",)
+    PCSSEG_1     = "pcSseg-1",     ("H-Kr",)
+    PCSSEG_2     = "pcSseg-2",     ("H-Kr",)
+    PCSSEG_3     = "pcSseg-3",     ("H-Kr",)
+    PCSSEG_4     = "pcSseg-4",     ("H-Kr",)
+    AUG_PCSSEG_0 = "aug-pcSseg-0", ("H-Kr",)
+    AUG_PCSSEG_1 = "aug-pcSseg-1", ("H-Kr",)
+    AUG_PCSSEG_2 = "aug-pcSseg-2", ("H-Kr",)
+    AUG_PCSSEG_3 = "aug-pcSseg-3", ("H-Kr",)
+    AUG_PCSSEG_4 = "aug-pcSseg-4", ("H-Kr",)
 
     # Optimized for spin-spin coupling constants
-    PCJ_0        = "pcJ-0",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCJ_1        = "pcJ-1",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCJ_2        = "pcJ-2",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCJ_3        = "pcJ-3",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCJ_4        = "pcJ-4",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCJ_0    = "aug-pcJ-0",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCJ_1    = "aug-pcJ-1",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCJ_2    = "aug-pcJ-2",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCJ_3    = "aug-pcJ-3",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCJ_4    = "aug-pcJ-4",    ("H-He", "B-Ne", "Al-Ar"), None, None
+    PCJ_0        = "pcJ-0",        ("H-He", "B-Ne", "Al-Ar")
+    PCJ_1        = "pcJ-1",        ("H-He", "B-Ne", "Al-Ar")
+    PCJ_2        = "pcJ-2",        ("H-He", "B-Ne", "Al-Ar")
+    PCJ_3        = "pcJ-3",        ("H-He", "B-Ne", "Al-Ar")
+    PCJ_4        = "pcJ-4",        ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCJ_0    = "aug-pcJ-0",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCJ_1    = "aug-pcJ-1",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCJ_2    = "aug-pcJ-2",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCJ_3    = "aug-pcJ-3",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCJ_4    = "aug-pcJ-4",    ("H-He", "B-Ne", "Al-Ar")
 
     # Optimized for hyperfine coupling constants
-    PCH_1        = "pcH-1",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCH_2        = "pcH-2",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCH_3        = "pcH-3",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    PCH_4        = "pcH-4",        ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCH_1    = "aug-pcH-1",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCH_2    = "aug-pcH-2",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCH_3    = "aug-pcH-3",    ("H-He", "B-Ne", "Al-Ar"), None, None
-    AUG_PCH_4    = "aug-pcH-4",    ("H-He", "B-Ne", "Al-Ar"), None, None
+    PCH_1        = "pcH-1",        ("H-He", "B-Ne", "Al-Ar")
+    PCH_2        = "pcH-2",        ("H-He", "B-Ne", "Al-Ar")
+    PCH_3        = "pcH-3",        ("H-He", "B-Ne", "Al-Ar")
+    PCH_4        = "pcH-4",        ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCH_1    = "aug-pcH-1",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCH_2    = "aug-pcH-2",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCH_3    = "aug-pcH-3",    ("H-He", "B-Ne", "Al-Ar")
+    AUG_PCH_4    = "aug-pcH-4",    ("H-He", "B-Ne", "Al-Ar")
 
     # Optimized for core spectroscopy
-    PCX_1        = "pcX-1",        ("Li-Ar",), None, None
-    PCX_2        = "pcX-2",        ("Li-Ar",), None, None
-    PCX_3        = "pcX-3",        ("Li-Ar",), None, None
-    PCX_4        = "pcX-4",        ("Li-Ar",), None, None
-    AUG_PCX_1    = "aug-pcX-1",    ("Li-Ar",), None, None
-    AUG_PCX_2    = "aug-pcX-2",    ("Li-Ar",), None, None
-    AUG_PCX_3    = "aug-pcX-3",    ("Li-Ar",), None, None
-    AUG_PCX_4    = "aug-pcX-4",    ("Li-Ar",), None, None
+    PCX_1        = "pcX-1",        ("Li-Ar",)
+    PCX_2        = "pcX-2",        ("Li-Ar",)
+    PCX_3        = "pcX-3",        ("Li-Ar",)
+    PCX_4        = "pcX-4",        ("Li-Ar",)
+    AUG_PCX_1    = "aug-pcX-1",    ("Li-Ar",)
+    AUG_PCX_2    = "aug-pcX-2",    ("Li-Ar",)
+    AUG_PCX_3    = "aug-pcX-3",    ("Li-Ar",)
+    AUG_PCX_4    = "aug-pcX-4",    ("Li-Ar",)
 
 
 class ccBasisSet(BasisSetEnum):
     """Correlation Consistent basis sets, cc-pVnZ."""
 
-    CC_PVDZ               = "cc-pVDZ",          ("H-Ar", "Ca-Kr"),             None, None
-    CC_PVTZ               = "cc-pVTZ",          ("H-Ar", "Ca-Kr", "Y", "Ag", "Au"), None, None
-    CC_PVQZ               = "cc-pVQZ",          ("H-Ar", "Ca-Kr"),             None, None
-    CC_PV5Z               = "cc-pV5Z",          ("H-Ar", "Ca-Kr"),             None, None
-    CC_PV6Z               = "cc-pV6Z",          ("H-He", "Be-Ne", "Al-Ar"),    None, None
-    AUG_CC_PVDZ           = "aug-cc-pVDZ",      ("H-Ar", "Sc-Kr"),             None, None
-    AUG_CC_PVTZ           = "aug-cc-pVTZ",      ("H-Ar", "Sc-Kr", "Ag", "Au"), None, None
-    AUG_CC_PVQZ           = "aug-cc-pVQZ",      ("H-Ar", "Sc-Kr"),             None, None
-    AUG_CC_PV5Z           = "aug-cc-pV5Z",      ("H-Ar", "Sc-Kr"),             None, None
-    AUG_CC_PV6Z           = "aug-cc-pV6Z",      ("H-He", "B-Ne", "Al-Ar"),     None, None
-    CC_PVD_PLUS_D_Z       = "cc-pVD(+d)Z",      ("Na-Ar",),                    None, None
-    CC_PVT_PLUS_D_Z       = "cc-pVT(+d)Z",      ("Na-Ar",),                    None, None
-    CC_PVQ_PLUS_D_Z       = "cc-pVQ(+d)Z",      ("Na-Ar",),                    None, None
-    CC_PV5_PLUS_D_Z       = "cc-pV5(+d)Z",      ("Na-Ar",),                    None, None
-    AUG_CC_PVD_PLUS_D_Z   = "aug-cc-pVD(+d)Z",  ("Al-Ar",),                    None, None
-    AUG_CC_PVT_PLUS_D_Z   = "aug-cc-pVT(+d)Z",  ("Al-Ar",),                    None, None
-    AUG_CC_PVQ_PLUS_D_Z   = "aug-cc-pVQ(+d)Z",  ("Al-Ar",),                    None, None
-    AUG_CC_PV5_PLUS_D_Z   = "aug-cc-pV5(+d)Z",  ("Al-Ar",),                    None, None
-    AUG_CC_PV6_PLUS_D_Z   = "aug-cc-pV6(+d)Z",  ("Al-Ar",),                    None, None
-    APR_CC_PV_Q_PLUS_D_Z  = "apr-cc-pV(Q+d)Z",  ("H-Ar",),                     None, None
-    MAY_CC_PV_T_PLUS_D_Z  = "may-cc-pV(T+d)Z",  ("H-Ar",),                     None, None
-    MAY_CC_PV_Q_PLUS_D_Z  = "may-cc-pV(Q+d)Z",  ("H-Ar",),                     None, None
-    JUN_CC_PV_D_PLUS_D_Z  = "jun-cc-pV(D+d)Z",  ("H-Ar",),                     None, None
-    JUN_CC_PV_T_PLUS_D_Z  = "jun-cc-pV(T+d)Z",  ("H-Ar",),                     None, None
-    JUN_CC_PV_Q_PLUS_D_Z  = "jun-cc-pV(Q+d)Z",  ("H-Ar",),                     None, None
-    JUL_CC_PV_D_PLUS_D_Z  = "jul-cc-pV(D+d)Z",  ("H-Ar",),                     None, None
-    JUL_CC_PV_T_PLUS_D_Z  = "jul-cc-pV(T+d)Z",  ("H-Ar",),                     None, None
-    JUL_CC_PV_Q_PLUS_D_Z  = "jul-cc-pV(Q+d)Z",  ("H-Ar",),                     None, None
-    MAUG_CC_PV_D_PLUS_D_Z = "maug-cc-pV(D+d)Z", ("H-Ar",),                     None, None
-    MAUG_CC_PV_T_PLUS_D_Z = "maug-cc-pV(T+d)Z", ("H-Ar",),                     None, None
-    MAUG_CC_PV_Q_PLUS_D_Z = "maug-cc-pV(Q+d)Z", ("H-Ar",),                     None, None
-    CC_PCVDZ              = "cc-pCVDZ",         ("H-Ar", "Ca",   "Ga-Kr"),     None, None
-    CC_PCVTZ              = "cc-pCVTZ",         ("H-Ar", "Ca",   "Ga-Kr"),     None, None
-    CC_PCVQZ              = "cc-pCVQZ",         ("H-Ar", "Ca",   "Ga-Kr"),     None, None
-    CC_PCV5Z              = "cc-pCV5Z",         ("H-Ar", "Ca",   "Ga-Kr"),     None, None
-    CC_PCV6Z              = "cc-pCV6Z",         ("H-He", "B-Ne", "Al-Ar"),     None, None
-    AUG_CC_PCVDZ          = "aug-cc-pCVDZ",     ("H-Ar", "Ga-Kr"),             None, None
-    AUG_CC_PCVTZ          = "aug-cc-pCVTZ",     ("H-Ar", "Ga-Kr"),             None, None
-    AUG_CC_PCVQZ          = "aug-cc-pCVQZ",     ("H-Ar", "Ga-Kr"),             None, None
-    AUG_CC_PCV5Z          = "aug-cc-pCV5Z",     ("H-Ar", "Ga-Kr"),             None, None
-    AUG_CC_PCV6Z          = "aug-cc-pCV6Z",     ("H-He", "B-Ne",  "Al-Ar"),    None, None
-    CC_PWCVDZ             = "cc-pwCVDZ",        ("H-Ar", "Ca",    "Ga-Kr"),    None, None
-    CC_PWCVTZ             = "cc-pwCVTZ",        ("H-Ar", "Ca-Kr", "Ag", "Au"), None, None
-    CC_PWCVQZ             = "cc-pwCVQZ",        ("H-Ar", "Ca-Kr"),             None, None
-    CC_PWCV5Z             = "cc-pwCV5Z",        ("H-Ar", "Ca-Kr"),             None, None
-    AUG_CC_PWCVDZ         = "aug-cc-pwCVDZ",    ("H-Ar", "Ga-Kr"),             None, None
-    AUG_CC_PWCVTZ         = "aug-cc-pwCVTZ",    ("H-Ar", "Sc-Kr", "Ag", "Au"), None, None
-    AUG_CC_PWCVQZ         = "aug-cc-pwCVQZ",    ("H-Ar", "Sc-Kr"),             None, None
-    AUG_CC_PWCV5Z         = "aug-cc-pwCV5Z",    ("H-Ar", "Sc-Kr"),             None, None
+    CC_PVDZ               = "cc-pVDZ",          ("H-Ar", "Ca-Kr")
+    CC_PVTZ               = "cc-pVTZ",          ("H-Ar", "Ca-Kr", "Y", "Ag", "Au")
+    CC_PVQZ               = "cc-pVQZ",          ("H-Ar", "Ca-Kr")
+    CC_PV5Z               = "cc-pV5Z",          ("H-Ar", "Ca-Kr")
+    CC_PV6Z               = "cc-pV6Z",          ("H-He", "Be-Ne", "Al-Ar")
+    AUG_CC_PVDZ           = "aug-cc-pVDZ",      ("H-Ar", "Sc-Kr")
+    AUG_CC_PVTZ           = "aug-cc-pVTZ",      ("H-Ar", "Sc-Kr", "Ag", "Au")
+    AUG_CC_PVQZ           = "aug-cc-pVQZ",      ("H-Ar", "Sc-Kr")
+    AUG_CC_PV5Z           = "aug-cc-pV5Z",      ("H-Ar", "Sc-Kr")
+    AUG_CC_PV6Z           = "aug-cc-pV6Z",      ("H-He", "B-Ne", "Al-Ar")
+    CC_PVD_PLUS_D_Z       = "cc-pVD(+d)Z",      ("Na-Ar",)
+    CC_PVT_PLUS_D_Z       = "cc-pVT(+d)Z",      ("Na-Ar",)
+    CC_PVQ_PLUS_D_Z       = "cc-pVQ(+d)Z",      ("Na-Ar",)
+    CC_PV5_PLUS_D_Z       = "cc-pV5(+d)Z",      ("Na-Ar",)
+    AUG_CC_PVD_PLUS_D_Z   = "aug-cc-pVD(+d)Z",  ("Al-Ar",)
+    AUG_CC_PVT_PLUS_D_Z   = "aug-cc-pVT(+d)Z",  ("Al-Ar",)
+    AUG_CC_PVQ_PLUS_D_Z   = "aug-cc-pVQ(+d)Z",  ("Al-Ar",)
+    AUG_CC_PV5_PLUS_D_Z   = "aug-cc-pV5(+d)Z",  ("Al-Ar",)
+    AUG_CC_PV6_PLUS_D_Z   = "aug-cc-pV6(+d)Z",  ("Al-Ar",)
+    APR_CC_PV_Q_PLUS_D_Z  = "apr-cc-pV(Q+d)Z",  ("H-Ar",)
+    MAY_CC_PV_T_PLUS_D_Z  = "may-cc-pV(T+d)Z",  ("H-Ar",)
+    MAY_CC_PV_Q_PLUS_D_Z  = "may-cc-pV(Q+d)Z",  ("H-Ar",)
+    JUN_CC_PV_D_PLUS_D_Z  = "jun-cc-pV(D+d)Z",  ("H-Ar",)
+    JUN_CC_PV_T_PLUS_D_Z  = "jun-cc-pV(T+d)Z",  ("H-Ar",)
+    JUN_CC_PV_Q_PLUS_D_Z  = "jun-cc-pV(Q+d)Z",  ("H-Ar",)
+    JUL_CC_PV_D_PLUS_D_Z  = "jul-cc-pV(D+d)Z",  ("H-Ar",)
+    JUL_CC_PV_T_PLUS_D_Z  = "jul-cc-pV(T+d)Z",  ("H-Ar",)
+    JUL_CC_PV_Q_PLUS_D_Z  = "jul-cc-pV(Q+d)Z",  ("H-Ar",)
+    MAUG_CC_PV_D_PLUS_D_Z = "maug-cc-pV(D+d)Z", ("H-Ar",)
+    MAUG_CC_PV_T_PLUS_D_Z = "maug-cc-pV(T+d)Z", ("H-Ar",)
+    MAUG_CC_PV_Q_PLUS_D_Z = "maug-cc-pV(Q+d)Z", ("H-Ar",)
+    CC_PCVDZ              = "cc-pCVDZ",         ("H-Ar", "Ca",   "Ga-Kr")
+    CC_PCVTZ              = "cc-pCVTZ",         ("H-Ar", "Ca",   "Ga-Kr")
+    CC_PCVQZ              = "cc-pCVQZ",         ("H-Ar", "Ca",   "Ga-Kr")
+    CC_PCV5Z              = "cc-pCV5Z",         ("H-Ar", "Ca",   "Ga-Kr")
+    CC_PCV6Z              = "cc-pCV6Z",         ("H-He", "B-Ne", "Al-Ar")
+    AUG_CC_PCVDZ          = "aug-cc-pCVDZ",     ("H-Ar", "Ga-Kr")
+    AUG_CC_PCVTZ          = "aug-cc-pCVTZ",     ("H-Ar", "Ga-Kr")
+    AUG_CC_PCVQZ          = "aug-cc-pCVQZ",     ("H-Ar", "Ga-Kr")
+    AUG_CC_PCV5Z          = "aug-cc-pCV5Z",     ("H-Ar", "Ga-Kr")
+    AUG_CC_PCV6Z          = "aug-cc-pCV6Z",     ("H-He", "B-Ne",  "Al-Ar")
+    CC_PWCVDZ             = "cc-pwCVDZ",        ("H-Ar", "Ca",    "Ga-Kr")
+    CC_PWCVTZ             = "cc-pwCVTZ",        ("H-Ar", "Ca-Kr", "Ag", "Au")
+    CC_PWCVQZ             = "cc-pwCVQZ",        ("H-Ar", "Ca-Kr")
+    CC_PWCV5Z             = "cc-pwCV5Z",        ("H-Ar", "Ca-Kr")
+    AUG_CC_PWCVDZ         = "aug-cc-pwCVDZ",    ("H-Ar", "Ga-Kr")
+    AUG_CC_PWCVTZ         = "aug-cc-pwCVTZ",    ("H-Ar", "Sc-Kr", "Ag", "Au")
+    AUG_CC_PWCVQZ         = "aug-cc-pwCVQZ",    ("H-Ar", "Sc-Kr")
+    AUG_CC_PWCV5Z         = "aug-cc-pwCV5Z",    ("H-Ar", "Sc-Kr")
 
 
 class RelativisticBasisSet(BasisSetEnum):
     """Relativistic basis sets for the DKH, ZORA, or X2C approaches."""
 
     # Recontracted Ahlrichs Basis Sets
-    DKH_SV_P_   = "DKH-SV(P)",   ("H-Kr",), None, None
-    DKH_SVP     = "DKH-SVP",     ("H-Kr",), None, None
-    DKH_TZV_P_  = "DKH-TZV(P)",  ("H-Kr",), None, None
-    DKH_TZVP    = "DKH-TZVP",    ("H-Kr",), None, None
-    DKH_TZVPP   = "DKH-TZVPP",   ("H-Kr",), None, None
-    DKH_QZVP    = "DKH-QZVP",    ("H-Kr",), None, None
-    DKH_QZVPP   = "DKH-QZVPP",   ("H-Kr",), None, None
-    ZORA_SV_P_  = "ZORA-SV(P)",  ("H-Kr",), None, None
-    ZORA_SVP    = "ZORA-SVP",    ("H-Kr",), None, None
-    ZORA_TZV_P_ = "ZORA-TZV(P)", ("H-Kr",), None, None
-    ZORA_TZVP   = "ZORA-TZVP",   ("H-Kr",), None, None
-    ZORA_TZVPP  = "ZORA-TZVPP",  ("H-Kr",), None, None
-    ZORA_QZVP   = "ZORA-QZVP",   ("H-Kr",), None, None
-    ZORA_QZVPP  = "ZORA-QZVPP",  ("H-Kr",), None, None
+    DKH_SV_P_   = "DKH-SV(P)",   ("H-Kr",)
+    DKH_SVP     = "DKH-SVP",     ("H-Kr",)
+    DKH_TZV_P_  = "DKH-TZV(P)",  ("H-Kr",)
+    DKH_TZVP    = "DKH-TZVP",    ("H-Kr",)
+    DKH_TZVPP   = "DKH-TZVPP",   ("H-Kr",)
+    DKH_QZVP    = "DKH-QZVP",    ("H-Kr",)
+    DKH_QZVPP   = "DKH-QZVPP",   ("H-Kr",)
+    ZORA_SV_P_  = "ZORA-SV(P)",  ("H-Kr",)
+    ZORA_SVP    = "ZORA-SVP",    ("H-Kr",)
+    ZORA_TZV_P_ = "ZORA-TZV(P)", ("H-Kr",)
+    ZORA_TZVP   = "ZORA-TZVP",   ("H-Kr",)
+    ZORA_TZVPP  = "ZORA-TZVPP",  ("H-Kr",)
+    ZORA_QZVP   = "ZORA-QZVP",   ("H-Kr",)
+    ZORA_QZVPP  = "ZORA-QZVPP",  ("H-Kr",)
 
     # Recontracted def2 basis sets
-    DKH_DEF2_SVP         = "DKH-def2-SVP",          ("H-Kr",), None, None
-    DKH_DEF2_SV_P_       = "DKH-def2-SV(P)",        ("H-Kr",), None, None
-    DKH_DEF2_TZVP        = "DKH-def2-TZVP",         ("H-Kr",), None, None
-    DKH_DEF2_TZVP_F_     = "DKH-def2-TZVP(-f)",     ("H-Kr",), None, None
-    DKH_DEF2_TZVPP       = "DKH-def2-TZVPP",        ("H-Kr",), None, None
-    DKH_DEF2_QZVPP       = "DKH-def2-QZVPP",        ("H-Kr",), None, None
-    ZORA_DEF2_SVP        = "ZORA-def2-SVP",         ("H-Kr",), None, None
-    ZORA_DEF2_SV_P_      = "ZORA-def2-SV(P)",       ("H-Kr",), None, None
-    ZORA_DEF2_TZVP       = "ZORA-def2-TZVP",        ("H-Kr",), None, None
-    ZORA_DEF2_TZVP_F_    = "ZORA-def2-TZVP(-f)",    ("H-Kr",), None, None
-    ZORA_DEF2_TZVPP      = "ZORA-def2-TZVPP",       ("H-Kr",), None, None
-    ZORA_DEF2_QZVPP      = "ZORA-def2-QZVPP",       ("H-Kr",), None, None
+    DKH_DEF2_SVP         = "DKH-def2-SVP",          ("H-Kr",)
+    DKH_DEF2_SV_P_       = "DKH-def2-SV(P)",        ("H-Kr",)
+    DKH_DEF2_TZVP        = "DKH-def2-TZVP",         ("H-Kr",)
+    DKH_DEF2_TZVP_F_     = "DKH-def2-TZVP(-f)",     ("H-Kr",)
+    DKH_DEF2_TZVPP       = "DKH-def2-TZVPP",        ("H-Kr",)
+    DKH_DEF2_QZVPP       = "DKH-def2-QZVPP",        ("H-Kr",)
+    ZORA_DEF2_SVP        = "ZORA-def2-SVP",         ("H-Kr",)
+    ZORA_DEF2_SV_P_      = "ZORA-def2-SV(P)",       ("H-Kr",)
+    ZORA_DEF2_TZVP       = "ZORA-def2-TZVP",        ("H-Kr",)
+    ZORA_DEF2_TZVP_F_    = "ZORA-def2-TZVP(-f)",    ("H-Kr",)
+    ZORA_DEF2_TZVPP      = "ZORA-def2-TZVPP",       ("H-Kr",)
+    ZORA_DEF2_QZVPP      = "ZORA-def2-QZVPP",       ("H-Kr",)
     # Minimally augmented variants
-    MA_DKH_DEF2_SVP      = "ma-DKH-def2-SVP",       ("H-Kr",), None, None
-    MA_DKH_DEF2_SV_P_    = "ma-DKH-def2-SV(P)",     ("H-Kr",), None, None
-    MA_DKH_DEF2_TZVP     = "ma-DKH-def2-TZVP",      ("H-Kr",), None, None
-    MA_DKH_DEF2_TZVP_F_  = "ma-DKH-def2-TZVP(-f)",  ("H-Kr",), None, None
-    MA_DKH_DEF2_TZVPP    = "ma-DKH-def2-TZVPP",     ("H-Kr",), None, None
-    MA_DKH_DEF2_QZVPP    = "ma-DKH-def2-QZVPP",     ("H-Kr",), None, None
-    MA_ZORA_DEF2_SVP     = "ma-ZORA-def2-SVP",      ("H-Kr",), None, None
-    MA_ZORA_DEF2_SV_P_   = "ma-ZORA-def2-SV(P)",    ("H-Kr",), None, None
-    MA_ZORA_DEF2_TZVP    = "ma-ZORA-def2-TZVP",     ("H-Kr",), None, None
-    MA_ZORA_DEF2_TZVP_F_ = "ma-ZORA-def2-TZVP(-f)", ("H-Kr",), None, None
-    MA_ZORA_DEF2_TZVPP   = "ma-ZORA-def2-TZVPP",    ("H-Kr",), None, None
-    MA_ZORA_DEF2_QZVPP   = "ma-ZORA-def2-QZVPP",    ("H-Kr",), None, None
+    MA_DKH_DEF2_SVP      = "ma-DKH-def2-SVP",       ("H-Kr",)
+    MA_DKH_DEF2_SV_P_    = "ma-DKH-def2-SV(P)",     ("H-Kr",)
+    MA_DKH_DEF2_TZVP     = "ma-DKH-def2-TZVP",      ("H-Kr",)
+    MA_DKH_DEF2_TZVP_F_  = "ma-DKH-def2-TZVP(-f)",  ("H-Kr",)
+    MA_DKH_DEF2_TZVPP    = "ma-DKH-def2-TZVPP",     ("H-Kr",)
+    MA_DKH_DEF2_QZVPP    = "ma-DKH-def2-QZVPP",     ("H-Kr",)
+    MA_ZORA_DEF2_SVP     = "ma-ZORA-def2-SVP",      ("H-Kr",)
+    MA_ZORA_DEF2_SV_P_   = "ma-ZORA-def2-SV(P)",    ("H-Kr",)
+    MA_ZORA_DEF2_TZVP    = "ma-ZORA-def2-TZVP",     ("H-Kr",)
+    MA_ZORA_DEF2_TZVP_F_ = "ma-ZORA-def2-TZVP(-f)", ("H-Kr",)
+    MA_ZORA_DEF2_TZVPP   = "ma-ZORA-def2-TZVPP",    ("H-Kr",)
+    MA_ZORA_DEF2_QZVPP   = "ma-ZORA-def2-QZVPP",    ("H-Kr",)
 
     # Segmented all-electron relativistically contracted basis sets
-    SARC_DKH_SVP    = "SARC-DKH-SVP",    ("Hf-Hg",),         None, None
-    SARC_DKH_TZVP   = "SARC-DKH-TZVP",   ("Rb-Rn", "Ac-Lr"), None, None
-    SARC_DKH_TZVPP  = "SARC-DKH-TZVPP",  ("Rb-Rn", "Ac-Lr"), None, None
-    SARC_ZORA_SVP   = "SARC-ZORA-SVP",   ("Hf-Hg",),         None, None
-    SARC_ZORA_TZVP  = "SARC-ZORA-TZVP",  ("Rb-Rn", "Ac-Lr"), None, None
-    SARC_ZORA_TZVPP = "SARC-ZORA-TZVPP", ("Rb-Rn", "Ac-Lr"), None, None
+    SARC_DKH_SVP    = "SARC-DKH-SVP",    ("Hf-Hg",)
+    SARC_DKH_TZVP   = "SARC-DKH-TZVP",   ("Rb-Rn", "Ac-Lr")
+    SARC_DKH_TZVPP  = "SARC-DKH-TZVPP",  ("Rb-Rn", "Ac-Lr")
+    SARC_ZORA_SVP   = "SARC-ZORA-SVP",   ("Hf-Hg",)
+    SARC_ZORA_TZVP  = "SARC-ZORA-TZVP",  ("Rb-Rn", "Ac-Lr")
+    SARC_ZORA_TZVPP = "SARC-ZORA-TZVPP", ("Rb-Rn", "Ac-Lr")
 
     # Quadruple-zeta SARC basis sets for lanthanides
-    SARC2_DKH_QZV   = "SARC2-DKH-QZV",   ("La-Lu",), None, None
-    SARC2_DKH_QZVP  = "SARC2-DKH-QZVP",  ("La-Lu",), None, None
-    SARC2_ZORA_QZV  = "SARC2-ZORA-QZV",  ("La-Lu",), None, None
-    SARC2_ZORA_QZVP = "SARC2-ZORA-QZVP", ("La-Lu",), None, None
+    SARC2_DKH_QZV   = "SARC2-DKH-QZV",   ("La-Lu",)
+    SARC2_DKH_QZVP  = "SARC2-DKH-QZVP",  ("La-Lu",)
+    SARC2_ZORA_QZV  = "SARC2-ZORA-QZV",  ("La-Lu",)
+    SARC2_ZORA_QZVP = "SARC2-ZORA-QZVP", ("La-Lu",)
 
     # All-electron X2C Basis Sets
-    X2C_SV_P_ALL      = "x2c-SV(P)all",      ("H-Rn",), None, None
-    X2C_SVPALL        = "x2c-SVPall",        ("H-Rn",), None, None
-    X2C_TZVPALL       = "x2c-TZVPall",       ("H-Rn",), None, None
-    X2C_TZVPPALL      = "x2c-TZVPPall",      ("H-Rn",), None, None
-    X2C_QZVPALL       = "x2c-QZVPall",       ("H-Rn",), None, None
-    X2C_QZVPPALL      = "x2c-QZVPPall",      ("H-Rn",), None, None
+    X2C_SV_P_ALL      = "x2c-SV(P)all",      ("H-Rn",)
+    X2C_SVPALL        = "x2c-SVPall",        ("H-Rn",)
+    X2C_TZVPALL       = "x2c-TZVPall",       ("H-Rn",)
+    X2C_TZVPPALL      = "x2c-TZVPPall",      ("H-Rn",)
+    X2C_QZVPALL       = "x2c-QZVPall",       ("H-Rn",)
+    X2C_QZVPPALL      = "x2c-QZVPPall",      ("H-Rn",)
     # NMR Shielding Optimized
-    X2C_SV_P_ALL_S    = "x2c-SV(P)all-s",    ("H-Rn",), None, None
-    X2C_SVPALL_S      = "x2c-SVPall-s",      ("H-Rn",), None, None
-    X2C_TZVPALL_S     = "x2c-TZVPall-s",     ("H-Rn",), None, None
-    X2C_TZVPPALL_S    = "x2c-TZVPPall-s",    ("H-Rn",), None, None
-    X2C_QZVPALL_S     = "x2c-QZVPall-s",     ("H-Rn",), None, None
-    X2C_QZVPPALL_S    = "x2c-QZVPPall-s",    ("H-Rn",), None, None
+    X2C_SV_P_ALL_S    = "x2c-SV(P)all-s",    ("H-Rn",)
+    X2C_SVPALL_S      = "x2c-SVPall-s",      ("H-Rn",)
+    X2C_TZVPALL_S     = "x2c-TZVPall-s",     ("H-Rn",)
+    X2C_TZVPPALL_S    = "x2c-TZVPPall-s",    ("H-Rn",)
+    X2C_QZVPALL_S     = "x2c-QZVPall-s",     ("H-Rn",)
+    X2C_QZVPPALL_S    = "x2c-QZVPPall-s",    ("H-Rn",)
     # Two-component variants, not actually implemented yet
-    # X2C_SV_P_ALL_2C   = "x2c-SV(P)all-2c",   ("H-Rn",), None, None
-    # X2C_SVPALL_2C     = "x2c-SVPall-2c",     ("H-Rn",), None, None
-    # X2C_TZVPALL_2C    = "x2c-TZVPall-2c",    ("H-Rn",), None, None
-    # X2C_TZVPPALL_2C   = "x2c-TZVPPall-2c",   ("H-Rn",), None, None
-    # X2C_QZVPALL_2C    = "x2c-QZVPall-2c",    ("H-Rn",), None, None
-    # X2C_QZVPPALL_2C   = "x2c-QZVPPall-2c",   ("H-Rn",), None, None
-    # X2C_QZVPALL_2C_S  = "x2c-QZVPall-2c-s",  ("H-Rn",), None, None
-    # X2C_QZVPPALL_2C_S = "x2c-QZVPPall-2c-s", ("H-Rn",), None, None
+    # X2C_SV_P_ALL_2C   = "x2c-SV(P)all-2c",   ("H-Rn",)
+    # X2C_SVPALL_2C     = "x2c-SVPall-2c",     ("H-Rn",)
+    # X2C_TZVPALL_2C    = "x2c-TZVPall-2c",    ("H-Rn",)
+    # X2C_TZVPPALL_2C   = "x2c-TZVPPall-2c",   ("H-Rn",)
+    # X2C_QZVPALL_2C    = "x2c-QZVPall-2c",    ("H-Rn",)
+    # X2C_QZVPPALL_2C   = "x2c-QZVPPall-2c",   ("H-Rn",)
+    # X2C_QZVPALL_2C_S  = "x2c-QZVPall-2c-s",  ("H-Rn",)
+    # X2C_QZVPPALL_2C_S = "x2c-QZVPPall-2c-s", ("H-Rn",)
 
     # Correlation-Consistent Relativistic Basis Set
-    CC_PVDZ_DK       = "cc-pVDZ-DK",       ("H-Ar", "Sc-Kr"),                            None, None
-    CC_PVTZ_DK       = "cc-pVTZ-DK",       ("H-Ar", "Sc-Kr", "Y-Xe",  "Hf-Rn"),          None, None
-    CC_PVQZ_DK       = "cc-pVQZ-DK",       ("H-Ar", "Sc-Kr", "In-Xe", "Tl-Rn"),          None, None
-    CC_PV5Z_DK       = "cc-pV5Z-DK",       ("H-Ar", "Sc-Kr"),                            None, None
-    CC_PVDZ_DK3      = "cc-pVDZ-DK3",      ("U",),                                       None, None
-    CC_PVTZ_DK3      = "cc-pVTZ-DK3",      ("U",),                                       None, None
-    CC_PVQZ_DK3      = "cc-pVQZ-DK3",      ("U",),                                       None, None
-    AUG_CC_PVDZ_DK   = "aug-cc-pVDZ-DK",   ("H-Ar", "Sc-Kr"),                            None, None
-    AUG_CC_PVTZ_DK   = "aug-cc-pVTZ-DK",   ("H-Ar", "Sc-Kr", "Y-Xe",  "Hf-Rn"),          None, None
-    AUG_CC_PVQZ_DK   = "aug-cc-pVQZ-DK",   ("H-Ar", "Sc-Kr", "In-Xe", "Tl-Rn"),          None, None
-    AUG_CC_PV5Z_DK   = "aug-cc-pV5Z-DK",   ("H-Ar", "Sc-Kr"),                            None, None
-    CC_PWCVDZ_DK     = "cc-pwCVDZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn"),                   None, None
-    CC_PWCVTZ_DK     = "cc-pwCVTZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn", "Y-Xe",  "Hf-Rn"), None, None
-    CC_PWCVQZ_DK     = "cc-pwCVQZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn", "In-Xe", "Tl-Rn"), None, None
-    CC_PWCV5Z_DK     = "cc-pwCV5Z-DK",     ("H-Be", "Na-Mg", "Ca-Zn"),                   None, None
-    CC_PWCVDZ_DK3    = "cc-pwCVDZ-DK3",    ("U",),                                       None, None
-    CC_PWCVTZ_DK3    = "cc-pwCVTZ-DK3",    ("U",),                                       None, None
-    CC_PWCVQZ_DK3    = "cc-pwCVQZ-DK3",    ("U",),                                       None, None
-    AUG_CC_PWCVDZ_DK = "aug-cc-pwCVDZ-DK", ("H-Be", "Na-Mg", "Sc-Zn"),                   None, None
-    AUG_CC_PWCVTZ_DK = "aug-cc-pwCVTZ-DK", ("H-Be", "Na-Mg", "Sc-Zn", "Y-Xe",  "Hf-Rn"), None, None
-    AUG_CC_PWCVQZ_DK = "aug-cc-pwCVQZ-DK", ("H-Be", "Na-Mg", "Sc-Zn", "In-Xe", "Tl-Rn"), None, None
-    AUG_CC_PWCV5Z_DK = "aug-cc-pwCV5Z-DK", ("H-Be", "Na-Mg", "Sc-Zn"),                   None, None
+    CC_PVDZ_DK       = "cc-pVDZ-DK",       ("H-Ar", "Sc-Kr")
+    CC_PVTZ_DK       = "cc-pVTZ-DK",       ("H-Ar", "Sc-Kr", "Y-Xe",  "Hf-Rn")
+    CC_PVQZ_DK       = "cc-pVQZ-DK",       ("H-Ar", "Sc-Kr", "In-Xe", "Tl-Rn")
+    CC_PV5Z_DK       = "cc-pV5Z-DK",       ("H-Ar", "Sc-Kr")
+    CC_PVDZ_DK3      = "cc-pVDZ-DK3",      ("U",)
+    CC_PVTZ_DK3      = "cc-pVTZ-DK3",      ("U",)
+    CC_PVQZ_DK3      = "cc-pVQZ-DK3",      ("U",)
+    AUG_CC_PVDZ_DK   = "aug-cc-pVDZ-DK",   ("H-Ar", "Sc-Kr")
+    AUG_CC_PVTZ_DK   = "aug-cc-pVTZ-DK",   ("H-Ar", "Sc-Kr", "Y-Xe",  "Hf-Rn")
+    AUG_CC_PVQZ_DK   = "aug-cc-pVQZ-DK",   ("H-Ar", "Sc-Kr", "In-Xe", "Tl-Rn")
+    AUG_CC_PV5Z_DK   = "aug-cc-pV5Z-DK",   ("H-Ar", "Sc-Kr")
+    CC_PWCVDZ_DK     = "cc-pwCVDZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn")
+    CC_PWCVTZ_DK     = "cc-pwCVTZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn", "Y-Xe",  "Hf-Rn")
+    CC_PWCVQZ_DK     = "cc-pwCVQZ-DK",     ("H-Be", "Na-Mg", "Ca-Zn", "In-Xe", "Tl-Rn")
+    CC_PWCV5Z_DK     = "cc-pwCV5Z-DK",     ("H-Be", "Na-Mg", "Ca-Zn")
+    CC_PWCVDZ_DK3    = "cc-pwCVDZ-DK3",    ("U",)
+    CC_PWCVTZ_DK3    = "cc-pwCVTZ-DK3",    ("U",)
+    CC_PWCVQZ_DK3    = "cc-pwCVQZ-DK3",    ("U",)
+    AUG_CC_PWCVDZ_DK = "aug-cc-pwCVDZ-DK", ("H-Be", "Na-Mg", "Sc-Zn")
+    AUG_CC_PWCVTZ_DK = "aug-cc-pwCVTZ-DK", ("H-Be", "Na-Mg", "Sc-Zn", "Y-Xe",  "Hf-Rn")
+    AUG_CC_PWCVQZ_DK = "aug-cc-pwCVQZ-DK", ("H-Be", "Na-Mg", "Sc-Zn", "In-Xe", "Tl-Rn")
+    AUG_CC_PWCV5Z_DK = "aug-cc-pwCV5Z-DK", ("H-Be", "Na-Mg", "Sc-Zn")
 
     # Relativistically Contracted ANO Basis Sets
-    ANO_RCC_Full = "ANO-RCC-Full", ("H-Cm",), None, None
-    ANO_RCC_DZP  = "ANO-RCC-DZP",  ("H-Cm",), None, None
-    ANO_RCC_TZP  = "ANO-RCC-TZP",  ("H-Cm",), None, None
-    ANO_RCC_QZP  = "ANO-RCC-QZP",  ("H-Cm",), None, None
+    ANO_RCC_Full = "ANO-RCC-Full", ("H-Cm",)
+    ANO_RCC_DZP  = "ANO-RCC-DZP",  ("H-Cm",)
+    ANO_RCC_TZP  = "ANO-RCC-TZP",  ("H-Cm",)
+    ANO_RCC_QZP  = "ANO-RCC-QZP",  ("H-Cm",)
+# fmt: on
 
 
 @dataclass(init=False, frozen=False)
@@ -454,7 +456,11 @@ class AuxBasisSet:
         self,
         name: str,
         element_ranges: tuple[str],
-        parent_basis: PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet,
+        parent_basis: PopleBasisSet
+        | def2BasisSet
+        | JensenBasisSet
+        | ccBasisSet
+        | RelativisticBasisSet,
         # ecp: str | None = None,
         # ecp_elements: tuple[str] | None = None,
     ):
@@ -463,28 +469,32 @@ class AuxBasisSet:
         self.parent_basis = parent_basis.__name__
 
     def __hash__(self):
-        return hash(
-            (self.basis_name, self.elements, self.parent_basis)
-        )
+        return hash((self.basis_name, self.elements, self.parent_basis))
 
 
 class AuxBasisSetEnum(AuxBasisSet, Enum):
     """Base class for auxiliary basis set enums."""
+
     def __new__(
         cls,
         basis_name: str,
         element_ranges: tuple[str],
-        parent_basis: PopleBasisSet | def2BasisSet | JensenBasisSet | ccBasisSet | RelativisticBasisSet,
+        parent_basis: PopleBasisSet
+        | def2BasisSet
+        | JensenBasisSet
+        | ccBasisSet
+        | RelativisticBasisSet,
     ):
         self = BasisSet.__new__(cls)
         self._name_ = basis_name
         self._value_ = basis_name
         return self
-    
+
     def __str__(self):
         return self.basis_name
 
 
+# fmt: off
 class AuxJBasisSet(AuxBasisSetEnum):
     """Coulomb-fitting auxiliary basis sets."""
 
@@ -584,11 +594,10 @@ def get_basis_set(
     for pattern, basis_set in patterns.items():
         if pattern.match(value) is not None:
             return basis_set(value)
+# fmt: on
 
 
-def get_aux_basis(
-    value: str
-) -> AuxJBasisSet | AuxJKBasisSet | AuxCBasisSet:
+def get_aux_basis(value: str) -> AuxJBasisSet | AuxJKBasisSet | AuxCBasisSet:
     """Get a basis set enum member from a basis set."""
 
     if "/J" in value:
@@ -617,6 +626,3 @@ def get_basis_family(basis_class: str) -> str:
             return "Pople"
         case _:
             return "Unknown"
-
-
-

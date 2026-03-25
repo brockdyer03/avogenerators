@@ -47,7 +47,7 @@ class SCFConv(StrEnum):
 
     SLOPPYSCF    = "SloppySCF"
     LOOSESCF     = "LooseSCF"
-    MEDIUMSCF    = "MEDIUMSCF"
+    MEDIUMSCF    = "MediumSCF"
     STRONGSCF    = "StrongSCF"
     TIGHTSCF     = "TightSCF"
     VERYTIGHTSCF = "VeryTightSCF"
