@@ -10,9 +10,10 @@
 from .block_base import BlockEnum, ORCAString
 
 
+# fmt: off
 class ElProp(BlockEnum):
     """Keywords for the electrical properties."""
-                      # name,         dtype,    default, options, minimum, maximum
+
     DIPOLE          = "Dipole",        bool,       True
     QUADRUPOLE      = "Quadrupole",    bool,       False
     POLAR           = "Polar",         bool,       False
@@ -35,4 +36,4 @@ class ElProp(BlockEnum):
         3, # CenterOfMass
         ("CenterOfElCharge", "CenterOfNucCharge", "CenterOfSpinDens", "CenterOfMass"),
     )
-
+# fmt: on
