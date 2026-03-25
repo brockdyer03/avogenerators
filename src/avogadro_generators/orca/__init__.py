@@ -213,9 +213,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 if len(constraint) == 3:
                     # distance
                     value, atom1, atom2 = constraint
-                    generated_input += (
-                        f"{{ B {atom1} {atom2} {value:.6f} C }} \n"
-                    )
+                    generated_input += f"{{ B {atom1} {atom2} {value:.6f} C }} \n"
                 if len(constraint) == 4:
                     # angle
                     value, atom1, atom2, atom3 = constraint
@@ -225,7 +223,9 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 if len(constraint) == 5:
                     # torsion / dihedral
                     value, atom1, atom2, atom3, atom4 = constraint
-                    generated_input += f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }} \n"
+                    generated_input += (
+                        f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }} \n"
+                    )
 
         # look for frozen atoms
         if "frozen" in cjson["atoms"]:
