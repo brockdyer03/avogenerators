@@ -58,6 +58,7 @@ class Disp(Flag):
             case _:
                 raise ValueError("Invalid Dispersion, how did you even get here?")
 
+    # fmt: off
     NODISP = 0
     D3BJ   = auto()
     D3     = D3BJ
@@ -65,6 +66,7 @@ class Disp(Flag):
     D4     = auto()
     NL     = auto() # VV10 Non-local dispersion correction
     SCNL   = auto() # Self-consistent variant
+    # fmt: on
 
 
 @dataclass
@@ -76,6 +78,8 @@ class Functional:
     func_name: str
     disp: Disp
 
+
+# fmt: off
 
 class Composite(StrEnum):
     """Composite -3c methods."""
@@ -233,3 +237,4 @@ class Functionals(Functional, Enum):
     SOS_PBE_QIDH          = "SOS-PBE-QIDH",          Disp.NODISP
     SCS_B2GP_PLYP21       = "SCS-B2GP-PLYP21",       Disp.NODISP
     SOS_B2GP_PLYP21       = "SOS-B2GP-PLYP21",       Disp.NODISP
+# fmt: on
