@@ -7,10 +7,11 @@
 # ******************************************************************************
 """Classes and methods for the %scf block in ORCA."""
 
-from collections.abc import Sequence
+# from collections.abc import Sequence
 from .block_base import BlockEnum, ORCAString, NestedBlockEnum
 
 
+# fmt: off
 class SCF(BlockEnum):
 
     CONVERGENCE   = "Convergence",   ORCAString, 2, ("Sloppy", "Loose", "Medium", "Strong", "Tight", "VeryTight", "Extreme")
@@ -93,3 +94,4 @@ class TRAH(NestedBlockEnum):
     INACTIVEMOS     = "InactiveMOs",     ORCAString, 0, ("Canonical", "NotSet")
     PRECOND         = "Precond",         ORCAString, 0, ("Diag", "Full", "None")
     PRECONMAXRED    = "PreconMaxRed",    int,   250
+# fmt: on
