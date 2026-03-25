@@ -10,6 +10,7 @@
 from enum import StrEnum
 
 
+# fmt: off
 class RunType(StrEnum):
     """Types of calculations to run."""
 
@@ -143,6 +144,7 @@ class PNO(StrEnum):
     LOOSEPNO  = "LoosePNO"
     NORMALPNO = "NormalPNO"
     TIGHTPNO  = "TightPNO"
+# fmt: on
 
 
 def match_simple_keyword(kwd: str):
