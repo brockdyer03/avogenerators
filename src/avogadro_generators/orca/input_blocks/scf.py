@@ -15,14 +15,14 @@ from .block_base import BlockEnum, ORCAString, NestedBlockEnum
 class SCF(BlockEnum):
 
     CONVERGENCE   = "Convergence",   ORCAString, 2, ("Sloppy", "Loose", "Medium", "Strong", "Tight", "VeryTight", "Extreme")
-    TOL_E         = "TolE",          float, 1e-8
-    TOL_RMSP      = "TolRMSP",       float, 5e-9
-    TOL_MAXP      = "TolMaxP",       float, 1e-7
-    TOL_ERR       = "TolErr",        float, 5e-7
-    TOL_G         = "TolG",          float, 1e-5
-    TOL_X         = "TolX",          float, 1e-5
-    THRESH        = "Thresh",        float, 2.5e-11
-    TCUT          = "TCut",          float, 2.5e-12
+    TOL_E         = "TolE",          float, 1e-6
+    TOL_RMSP      = "TolRMSP",       float, 1e-6
+    TOL_MAXP      = "TolMaxP",       float, 1e-5
+    TOL_ERR       = "TolErr",        float, 1e-5
+    TOL_G         = "TolG",          float, 5e-5
+    TOL_X         = "TolX",          float, 5e-5
+    THRESH        = "Thresh",        float, 1e-10
+    TCUT          = "TCut",          float, 1e-11
     CONVCHECKMODE = "ConvCheckMode", int,   2, None, 0, 2
     CONVFORCED    = "ConvForced",    int,   1, None, 0, 1
 
