@@ -26,6 +26,8 @@ from .basis import Basis
 from .scf import SCF
 from .elprop import ElProp
 
+
+# fmt: off
 basis_extras = {
     # Basis.BASIS: {
     #     "label"  : "Basis",
@@ -474,3 +476,4 @@ elprop_extras = {
         "toolTip": "Origin to use for electric properties.",
     },
 }
+# fmt: on
