@@ -10,6 +10,8 @@
 from enum import StrEnum
 from typing import Self
 
+
+# fmt: off
 class SimpleLibXC(StrEnum):
 
     def format_input(self) -> str:
@@ -799,6 +801,7 @@ class ExCorrLibXC(StrEnum):
     HYB_LDA_XC_BN05            = "hyb_lda_xc_bn05"
     HYB_LDA_XC_CAM_LDA0        = "hyb_lda_xc_cam_lda0"
     HYB_LDA_XC_LDA0            = "hyb_lda_xc_lda0"
+# fmt: on
 
 
 def check_libxc(
@@ -824,10 +827,11 @@ def format_libxc(
     func2: ExchangeLibXC | CorrelationLibXC | None = None,
 ) -> str:
     """Format a non-simple input LibXC functional in the %method block.
-    
+
     This function presupposes that you have already checked that the
     chosen functional(s) are valid.
     """
+    # fmt: off
     if isinstance(func1, ExCorrLibXC):
         libxc_str = (
             "%method\n"
@@ -851,4 +855,5 @@ def format_libxc(
            f"    Correlation {func1}\n"
             "end"
         )
+    # fmt: on
     return libxc_str
