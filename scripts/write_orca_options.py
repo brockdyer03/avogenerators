@@ -46,7 +46,6 @@ Until this is fixed, please test thoroughly and ensure that the options
 in the generator do not cause the aforementioned window size issue.
 """
 
-
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -78,12 +77,12 @@ from avogadro_generators.orca.input_blocks.option_extras import (
 class BasicOption:
     """Possible values for a user option."""
 
-    dtype:   str # string, stringList, filePath, boolean, integer, float, text, table
+    dtype: str  # string, stringList, filePath, boolean, integer, float, text, table
     default: str | int
-    label:   str
-    options: tuple | None       = None
-    toolTip: str | None         = None
-    hide:    bool | None        = None
+    label: str
+    options: tuple | None = None
+    toolTip: str | None = None
+    hide: bool | None = None
     minimum: int | float | None = None
     maximum: int | float | None = None
 
@@ -92,7 +91,7 @@ class BasicTab:
     """Class for writing the Basic tab"""
 
     name = "Basic"
-
+    # fmt: off
     inputs = {
         "Title": BasicOption(
             dtype="string",
@@ -116,11 +115,11 @@ class BasicTab:
             default=4,
             label="Memory",
             minimum=1,
-            toolTip="Total available memory (divided by nprocs to get memory per core)"
+            toolTip="Total available memory (divided by nprocs to get memory per core)",
         ),
         "Calculation Type": BasicOption(
             dtype="stringList",
-            default=2, # Opt
+            default=2,  # Opt
             label="Calculation Type",
             options=(
                 RunType.SP,
@@ -130,11 +129,11 @@ class BasicTab:
                 RunType.FREQ,
                 RunType.NUMFREQ,
             ),
-            toolTip="Type of calculation to run"
+            toolTip="Type of calculation to run",
         ),
         "Theory": BasicOption(
             dtype="stringList",
-            default=0, # r2SCAN-3c
+            default=0,  # r2SCAN-3c
             label="Theory",
             options=(
                 Composite.R2SCAN_3C,
@@ -165,7 +164,7 @@ class BasicTab:
         ),
         "Basis": BasicOption(
             dtype="stringList",
-            default=1, # def2-TZVP
+            default=1,  # def2-TZVP
             label="Basis",
             options=(
                 def2BasisSet.DEF2_SVP,
@@ -176,21 +175,19 @@ class BasicTab:
                 def2BasisSet.DEF2_SVPD,
                 def2BasisSet.DEF2_TZVPPD,
                 def2BasisSet.DEF2_QZVPPD,
-
                 ccBasisSet.CC_PVDZ,
                 ccBasisSet.CC_PVTZ,
                 ccBasisSet.CC_PVQZ,
                 ccBasisSet.AUG_CC_PVDZ,
                 ccBasisSet.AUG_CC_PVTZ,
                 ccBasisSet.AUG_CC_PVQZ,
-
                 JensenBasisSet.PC_1,
                 JensenBasisSet.PC_2,
                 JensenBasisSet.PC_3,
                 JensenBasisSet.AUG_PC_1,
                 JensenBasisSet.AUG_PC_2,
                 JensenBasisSet.AUG_PC_3,
-            )
+            ),
         ),
         "Charge": BasicOption(
             dtype="integer",
@@ -204,7 +201,7 @@ class BasicTab:
             default=1,
             label="Multiplicity",
             minimum=1,
-            toolTip="Calculated as 2S+1 where S is the number of unpaired electrons"
+            toolTip="Calculated as 2S+1 where S is the number of unpaired electrons",
         ),
         "Solvent": BasicOption(
             dtype="stringList",
@@ -226,20 +223,20 @@ class BasicTab:
                 Solvent.s_TOLUENE,
                 Solvent.s_PYRIDINE,
                 Solvent.s_TETRAHYDROFURAN,
-            )
+            ),
         ),
         "Solvation Model": BasicOption(
             dtype="stringList",
-            default=0, # CPCM, but really is nothing without Solvent
+            default=0,  # CPCM, but really is nothing without Solvent
             label="Solvation Model",
             options=(
-                "CPCM",     # CPCM
-                "SMD",      # SMD
-                "COSMO_RS", # COSMO_RS
-                "ALPB",     # ALPB
-                "ddCOSMO",  # DDCOSMO
-                "CPCMX",    # CPCMX
-            )
+                "CPCM",
+                "SMD",
+                "COSMO_RS",
+                "ALPB",
+                "ddCOSMO",
+                "CPCMX",
+            ),
         ),
         "basic_disp_corr": BasicOption(
             dtype="stringList",
@@ -261,14 +258,14 @@ class BasicTab:
         ),
         "basic_print_level": BasicOption(
             dtype="stringList",
-            default=2, # NormalPrint
+            default=2,  # NormalPrint
             label="Print Level",
             options=(
                 Output.MINIPRINT,
                 Output.SMALLPRINT,
                 Output.NORMALPRINT,
                 Output.LARGEPRINT,
-            )
+            ),
         ),
         "basic_constrain": BasicOption(
             dtype="boolean",
@@ -282,7 +279,7 @@ class BasicTab:
             toolTip="Comma- or whitespace-separated list of simple input keywords.",
         ),
     }
-
+    # fmt: on
     @classmethod
     def write_tab(cls) -> str:
         """Write the ``options.toml`` entry for this tab."""
@@ -323,14 +320,14 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
     """Write the ``options.toml`` entry for an input block."""
     tab = ""
     for option in block_enum:
-
+        # fmt: off
         key = option.get_json_key() # e.g. ElProp_DIPOLE
         toolTip       = extras[option]["toolTip"]
         label         = extras[option]["label"]
         override_type = extras[option].get("override_type", None)
         add_dummy     = extras[option].get("add_dummy", False)
-
-        tab += f'[{key}]\n'
+        # fmt: on
+        tab += f"[{key}]\n"
         tab += f'label = "{label}"\n'
 
         if override_type is not None:
@@ -342,7 +339,7 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
             if option.options is None:
                 tab += f'default = "{option.default}"\n'
             else:
-                tab += f'default = {option.default}\n'
+                tab += f"default = {option.default}\n"
         elif option.dtype == "boolean" and option.default is not None:
             tab += f"default = {str(option.default).lower()}\n"
         elif option.default is not None:
@@ -350,7 +347,7 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
 
         if option.options is not None:
             tab += "values = [\n"
-            if add_dummy: # Add a blank option at the beginning.
+            if add_dummy:  # Add a blank option at the beginning.
                 tab += '    "",\n'
             for opt in option.options:
                 tab += f'    "{opt}",\n'
@@ -368,6 +365,7 @@ def write_block_tab(block_enum, tab_name: str, extras: dict) -> str:
 
     return tab
 
+
 """This is where you should put any custom options that have special
 behavior. It is currently used to put lists of every basis set into
 the Basis tab.
@@ -377,7 +375,7 @@ custom_opts = {
         "type": "stringList",
         "default": 0,
         "label": "Pople Basis Set",
-        "values": [""]+[str(i) for i in PopleBasisSet],
+        "values": [""] + [str(i) for i in PopleBasisSet],
         "toolTip": "Pople-style split-valence basis sets.",
         "tab": "Basis",
     },
@@ -385,7 +383,7 @@ custom_opts = {
         "type": "stringList",
         "default": 0,
         "label": "def2 Basis Set",
-        "values": [""]+[str(i) for i in def2BasisSet],
+        "values": [""] + [str(i) for i in def2BasisSet],
         "toolTip": "Karlsruhe def2-n(Z)VP basis sets.",
         "tab": "Basis",
     },
@@ -393,7 +391,7 @@ custom_opts = {
         "type": "stringList",
         "default": 0,
         "label": "cc-pVnZ Basis Set",
-        "values": [""]+[str(i) for i in ccBasisSet],
+        "values": [""] + [str(i) for i in ccBasisSet],
         "toolTip": "Correlation Consistent basis sets.",
         "tab": "Basis",
     },
@@ -401,7 +399,7 @@ custom_opts = {
         "type": "stringList",
         "default": 0,
         "label": "pc-n Basis Set",
-        "values": [""]+[str(i) for i in JensenBasisSet],
+        "values": [""] + [str(i) for i in JensenBasisSet],
         "toolTip": "Jensen's Polarization-Consistent basis sets.",
         "tab": "Basis",
     },
@@ -409,7 +407,7 @@ custom_opts = {
         "type": "stringList",
         "default": 0,
         "label": "Relativistic Basis Set",
-        "values": [""]+[str(i) for i in RelativisticBasisSet],
+        "values": [""] + [str(i) for i in RelativisticBasisSet],
         "toolTip": "Relativistic SARC/ZORA/DKH/x2c basis sets.",
         "tab": "Basis",
     },
@@ -431,10 +429,11 @@ tabs = {
 }
 
 if __name__ == "__main__":
-    orca_toml = Path(__file__).parent.parent / "src/avogadro_generators/orca/options.toml"
+    orca_toml = (
+        Path(__file__).parent.parent / "src/avogadro_generators/orca/options.toml"
+    )
 
     toml = "# This file was automatically generated, do NOT modify manually!\n\n"
-
 
     toml += f'tabs = ["{BasicTab.name}"'
     for info in tabs.values():
@@ -444,7 +443,7 @@ if __name__ == "__main__":
     toml += BasicTab.write_tab()
 
     for key, opt in custom_opts.items():
-        toml += f'[{key}]\n'
+        toml += f"[{key}]\n"
         toml += f'label = "{opt["label"]}"\n'
         toml += f'type = "{opt["type"]}"\n'
         toml += f"default = {opt['default']}\n"
