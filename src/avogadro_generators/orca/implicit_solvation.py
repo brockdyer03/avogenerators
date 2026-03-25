@@ -11,6 +11,7 @@ from enum import Enum, Flag, auto
 from dataclasses import dataclass
 
 
+# fmt: off
 class SolvationModel(Flag):
     """Solvation models supported in ORCA.
 
@@ -40,16 +41,17 @@ class SolvationModel(Flag):
     ALPB     = auto()
     DDCOSMO  = auto()
     CPCMX    = auto()
-
+# fmt: on
 SM = SolvationModel
+
 
 @dataclass(frozen=True)
 class SolventData:
-
     aliases: tuple[str]
     models: SolvationModel
 
 
+# fmt: off
 class Solvent(SolventData, Enum):
 
     def __new__(
@@ -360,3 +362,4 @@ class XTBSolvent(SolventData, Enum):
     s_N_UNDECANE                     = ("n-undecane", "undecane"),                      SM.CPCMX
     s_WATER                          = ("water", "h2o"),                                SM.CPCMX | SM.ALPB | SM.DDCOSMO
     s_XYLENE                         = ("xylene",),                                     SM.CPCMX
+# fmt: on
