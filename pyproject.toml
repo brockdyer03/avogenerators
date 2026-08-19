@@ -9,7 +9,7 @@ authors =  [
     { name = "Eric Berquist", email = "eric.berquist@gmail.com" },
     { name = "Shiv Upadhyay", email = "shivnupadhyay@gmail.com" },
     { name = "Amanda E. Dumi", email = "amanda.e.dumi@gmail.com" },
-    { name = "Adrea Snow", email = "adrea.snow@gmail.com" },
+    { name = "Adrea Snow", email = "adrea.snow@gmail.com" },  # codespell:ignore adrea
     { name = "Christian Clauss", email = "cclauss@me.com" },
     { name = "Ty Balduf", email = "tbalduf@gmail.com" },
     { name = "Javier Cerezo", email = "javier.cerezo@um.es" },
