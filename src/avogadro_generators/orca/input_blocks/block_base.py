@@ -54,9 +54,7 @@ class BlockKeyword:
         | type[dict]
     )
     default: ORCAString | str | bool | int | float | Sequence | dict | None = None
-    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = (
-        None
-    )
+    options: tuple[ORCAString | str | bool | int | float | Sequence | dict] | None = None
     minimum: int | float | None = None
     maximum: int | float | None = None
 
@@ -119,11 +117,11 @@ class BlockEnum(BlockKeyword, Enum):
     def __new__(
         cls,
         key_name: str,
-        _dtype: ORCAString | str | bool | int | float | Sequence, # noqa: FBT001, PYI041
-        default: ORCAString | str | bool | int | float | Sequence | None = None, # noqa: FBT001, PYI041
+        _dtype: ORCAString | str | bool | int | float | Sequence,  # noqa: FBT001, PYI041
+        default: ORCAString | str | bool | int | float | Sequence | None = None,  # noqa: FBT001, PYI041
         options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
-        minimum: int | float | None = None, # noqa: PYI041
-        maximum: int | float | None = None, # noqa: PYI041
+        minimum: int | float | None = None,  # noqa: PYI041
+        maximum: int | float | None = None,  # noqa: PYI041
     ):
         self = BlockKeyword.__new__(cls)
         self._value_ = key_name
@@ -150,11 +148,11 @@ class NestedBlockEnum(BlockKeyword, Enum):
     def __new__(
         cls,
         key_name: str,
-        _dtype: ORCAString | str | bool | int | float | Sequence, # noqa: FBT001, PYI041
-        default: ORCAString | str | bool | int | float | Sequence | None = None, # noqa: FBT001, PYI041
+        _dtype: ORCAString | str | bool | int | float | Sequence,  # noqa: FBT001, PYI041
+        default: ORCAString | str | bool | int | float | Sequence | None = None,  # noqa: FBT001, PYI041
         options: tuple[ORCAString | str | bool | int | float | Sequence] | None = None,
-        minimum: int | float | None = None, # noqa: PYI041
-        maximum: int | float | None = None, # noqa: PYI041
+        minimum: int | float | None = None,  # noqa: PYI041
+        maximum: int | float | None = None,  # noqa: PYI041
     ):
         self = BlockKeyword.__new__(cls)
         self._value_ = key_name

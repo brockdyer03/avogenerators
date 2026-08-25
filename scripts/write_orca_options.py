@@ -430,9 +430,7 @@ tabs = {
 }
 
 if __name__ == "__main__":
-    orca_toml = (
-        Path(__file__).parent.parent / "src/avogadro_generators/orca/options.toml"
-    )
+    orca_toml = Path(__file__).parent.parent / "src/avogadro_generators/orca/options.toml"
 
     toml = "# This file was automatically generated, do NOT modify manually!\n\n"
 

@@ -131,9 +131,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
         simple_keywords.append(method.value)
     elif isinstance(method, (MP2, CoupledCluster)):
         if auxc_basis is None:
-            warnings.append(
-                "No AuxC basis selected, please select one from the Basis tab."
-            )
+            warnings.append("No AuxC basis selected, please select one from the Basis tab.")
             simple_keywords.extend([method.value, basis_set])
         elif auxc_basis.parent_basis != basis_set.__class__.__name__:
             aux_fam = get_basis_family(auxc_basis.parent_basis)
@@ -195,11 +193,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     if nprocs != 1:
         generated_input += f"%pal\n    nprocs = {nprocs}\nend\n"
 
-    if (
-        constrain is True
-        and "atoms" in cjson
-        and ("constraints" in cjson or "frozen" in cjson)
-    ):
+    if constrain is True and "atoms" in cjson and ("constraints" in cjson or "frozen" in cjson):
         # check for constraints and frozen atoms in cjson
         generated_input += "%geom\n"
         generated_input += "    Constraints \n"
@@ -217,15 +211,11 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
                 if len(constraint) == 4:
                     # angle
                     value, atom1, atom2, atom3 = constraint
-                    generated_input += (
-                        f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }} \n"
-                    )
+                    generated_input += f"{{ A {atom1} {atom2} {atom3} {value:.6f} C }} \n"
                 if len(constraint) == 5:
                     # torsion / dihedral
                     value, atom1, atom2, atom3, atom4 = constraint
-                    generated_input += (
-                        f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }} \n"
-                    )
+                    generated_input += f"{{ D {atom1} {atom2} {atom3} {atom4} {value:.6f} C }} \n"
 
         # look for frozen atoms
         if "frozen" in cjson["atoms"]:

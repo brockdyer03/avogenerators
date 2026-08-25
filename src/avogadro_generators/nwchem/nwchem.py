@@ -9,17 +9,17 @@
 
 
 def basisGuiToInput(gui):
-    if gui == '3-21 G':
+    if gui == "3-21 G":
         return "3-21G"
-    elif gui == '6-31 G(d)':
+    elif gui == "6-31 G(d)":
         return "6-31G*"
-    elif gui == '6-31 G(d,p)':
+    elif gui == "6-31 G(d,p)":
         return "6-31G**"
-    elif gui == '6-31+ G(d)':
+    elif gui == "6-31+ G(d)":
         return "6-31+G*"
-    elif gui == '6-311 G(d)':
+    elif gui == "6-311 G(d)":
         return "6-311G*"
-    elif gui == 'LANL2DZ':
+    elif gui == "LANL2DZ":
         return "LANL2DZ ECP"
     else:
         return gui
@@ -30,13 +30,13 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     warnings = []
 
     # Extract options:
-    opts = input_json['options']
-    title = opts['Title']
-    calculate = opts['Calculation Type']
-    theory = opts['Theory']
-    basis = opts['Basis']
-    multiplicity = opts['Multiplicity']
-    charge = opts['Charge']
+    opts = input_json["options"]
+    title = opts["Title"]
+    calculate = opts["Calculation Type"]
+    theory = opts["Theory"]
+    basis = opts["Basis"]
+    multiplicity = opts["Multiplicity"]
+    charge = opts["Charge"]
 
     # Preamble
     nwfile = ""
@@ -89,11 +89,11 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
 
     # Task
     nwfile += f"task {task} "
-    if calculate == 'Single Point':
+    if calculate == "Single Point":
         nwfile += "energy"
-    elif calculate == 'Equilibrium Geometry':
+    elif calculate == "Equilibrium Geometry":
         nwfile += "optimize"
-    elif calculate == 'Frequencies':
+    elif calculate == "Frequencies":
         nwfile += "freq"
     else:
         warnings.append(f"Invalid calculation type: {calculate}")
@@ -106,20 +106,20 @@ def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 
-    filename = input_json['options']['Filename Base'] + '.nw'
+    filename = input_json["options"]["Filename Base"] + ".nw"
 
     result = {
-        'files': [
+        "files": [
             {
-                'filename': filename,
-                'contents': generated_input,
-                'highlightStyles': ['default'],
+                "filename": filename,
+                "contents": generated_input,
+                "highlightStyles": ["default"],
             },
         ],
-        'mainFile': filename,
+        "mainFile": filename,
     }
 
     if warnings:
-        result['warnings'] = warnings
+        result["warnings"] = warnings
 
     return result
