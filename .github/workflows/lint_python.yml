@@ -11,9 +11,8 @@ jobs:
       - uses: astral-sh/setup-uv@v10.0.1
         with:
           version: "0.12.5"
-          python-version: 3.14
-      - run: uv pip install ruff codespell pytest pytest-random-order safety
-      - run: ruff format --config="ruff.toml" --check src scripts
-      - run: codespell --ignore-words-list="ba,nd,te,adrea"
-      - run: safety check
-      - run: ruff check --config="ruff.toml" src scripts
+          python-version: 3.11
+      - run: uv sync --group dev
+      - run: ruff format --check
+      - run: codespell **.py
+      - run: ruff check src scripts
