@@ -45,12 +45,12 @@ def main():
             from .terachem.terachem import generateInput
     
     # Load the JSON passed by Avogadro
-    input = json.load(sys.stdin)
-    output = generateInput(input, args.debug)
+    inp = json.load(sys.stdin)
+    output = generateInput(inp, args.debug)
 
     if args.debug:
         output["files"].append(
-            {"filename": "debug_info", "contents": input}
+            {"filename": "debug_info", "contents": inp}
         )
 
     print(json.dumps(output))

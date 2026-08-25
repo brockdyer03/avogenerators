@@ -55,7 +55,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif multiplicity == 6:
         multStr = 'SEXTET'
     else:
-        raise Exception('Unhandled multiplicity: %d' % multiplicity)
+        raise NotImplementedError(f'Unhandled multiplicity: {multiplicity}')
 
     # Calculation type:
     calcStr = ''
@@ -68,7 +68,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Transition State':
         calcStr = 'SADDLE'
     else:
-        raise Exception('Unhandled calculation type: %s' % calculate)
+        raise NotImplementedError(f'Unhandled calculation type: {calculate}')
 
     eps = ""
     dielectric = ""
@@ -84,11 +84,12 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         hftype = 'UHF'
 
     # Charge, mult, calc type, theory:
-    generated_input += ' AUX LARGE CHARGE=%d %s %s %s %s PDBOUT THREADS=%d %s\n' %\
-        (charge, multStr, calcStr, theory, eps, nCores, hftype)
+    generated_input += (
+        f' AUX LARGE CHARGE={charge:d} {multStr} {calcStr} {theory} {eps} PDBOUT THREADS={nCores:d} {hftype}\n'
+    )
 
     # Title
-    generated_input += '%s\n\n' % title
+    generated_input += f'{title}\n\n'
 
     # Coordinates
     if calculate == 'Single Point':
@@ -99,7 +100,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     return generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

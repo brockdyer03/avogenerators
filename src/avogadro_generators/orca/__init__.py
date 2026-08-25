@@ -7,26 +7,26 @@
 # ******************************************************************************
 """Input generation for ORCA (https://www.faccts.de/orca/)."""
 
-from .input_blocks import SCF, Basis, ElProp, format_block_keyword
-from .simple_keywords import (
-    RunType,
-    Output,
-    match_simple_keyword,
-)
-from .dft import Composite, Functionals, Disp
-from .wft import MP2, CoupledCluster
+from ..utilities import Element
 from .basis_sets import (
-    PopleBasisSet,
-    def2BasisSet,
     JensenBasisSet,
-    ccBasisSet,
+    PopleBasisSet,
     RelativisticBasisSet,
-    get_basis_set,
+    ccBasisSet,
+    def2BasisSet,
     get_aux_basis,
     get_basis_family,
+    get_basis_set,
 )
-from .implicit_solvation import Solvent, SolvationModel
-from ..utilities import Element
+from .dft import Composite, Disp, Functionals
+from .implicit_solvation import SolvationModel, Solvent
+from .input_blocks import SCF, Basis, ElProp, format_block_keyword
+from .simple_keywords import (
+    Output,
+    RunType,
+    match_simple_keyword,
+)
+from .wft import MP2, CoupledCluster
 
 
 def write_block(block_name: str, keys_vals: dict):
@@ -312,7 +312,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str], list[str]]:
     return generated_input, warnings, syntax_groups
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings, syntax_groups = generateInputFile(input_json)
 

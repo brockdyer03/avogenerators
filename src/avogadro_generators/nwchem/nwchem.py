@@ -42,10 +42,10 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     nwfile = ""
     nwfile += "echo\n\n"
     nwfile += "start molecule\n\n"
-    nwfile += "title \"%s\"\n" % title
+    nwfile += f'title "{title}"\n'
 
     # Charge
-    nwfile += "charge %d\n\n" % charge
+    nwfile += f"charge {charge:d}\n\n"
 
     # Coordinates
     nwfile += "geometry units angstroms print xyz autosym\n"
@@ -70,7 +70,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         task = "dft"
         nwfile += "dft\n"
         nwfile += "  xc b3lyp\n"
-        nwfile += "  mult %d\n" % multiplicity
+        nwfile += f"  mult {multiplicity:d}\n"
         nwfile += "end\n\n"
     elif theory == "MP2":
         task = "mp2"
@@ -85,10 +85,10 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         nwfile += "  freeze atomic\n"
         nwfile += "end\n\n"
     else:
-        warnings.append("Invalid Theory: %s" % theory)
+        warnings.append(f"Invalid Theory: {theory}")
 
     # Task
-    nwfile += "task %s " % task
+    nwfile += f"task {task} "
     if calculate == 'Single Point':
         nwfile += "energy"
     elif calculate == 'Equilibrium Geometry':
@@ -96,13 +96,13 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Frequencies':
         nwfile += "freq"
     else:
-        warnings.append("Invalid calculation type: %s" % calculate)
+        warnings.append(f"Invalid calculation type: {calculate}")
     nwfile += "\n"
 
     return nwfile, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

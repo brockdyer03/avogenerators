@@ -33,7 +33,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Transition State':
         calcStr = 'saddle'
     else:
-        warnings.append('Unhandled calculation type: %s' % calculate)
+        warnings.append(f'Unhandled calculation type: {calculate}')
 
     theoryStr = ''
     if theory in ['RHF', 'MP2']:
@@ -44,9 +44,9 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif theory in ['B3LYP', 'BLYP', 'SVWN', 'B97', 'HCTH', 'FT97']:
         if directScf:
             theoryStr += 'scftype direct\n'
-        theoryStr += 'dft %s' % theory.lower()
+        theoryStr += f'dft {theory.lower()}'
     else:
-        warnings.append('Unhandled theory type: %s' % theory)
+        warnings.append(f'Unhandled theory type: {theory}')
 
     basisStr = ''
     if basis == 'STO-3G':
@@ -56,7 +56,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif basis in ['3-21G', '6-31G', 'cc-pVDZ', 'cc-pVTZ']:
         basisStr = basis
     else:
-        warnings.append('Unhandled basis type: %s' % basis)
+        warnings.append(f'Unhandled basis type: {basis}')
 
     generated_input = ''
 
@@ -65,13 +65,13 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     generated_input += '# For more GAMESS-UK input options consult the manual at:\n'
     generated_input += '# http://www.cfs.dl.ac.uk/docs/index.shtml\n\n'
 
-    generated_input += 'title\n%s\n\n' % title
+    generated_input += f'title\n{title}\n\n'
 
     if calculate in ['Equilibrium Geometry', 'Transition State']:
         generated_input += '# Ensure orbital vectors printed after optimization:\n'
         generated_input += 'iprint vectors\n\n'
 
-    generated_input += 'mult %d\ncharge %d\n\n' % (multiplicity, charge)
+    generated_input += f'mult {multiplicity:d}\ncharge {charge:d}\n\n'
 
     generated_input += 'geometry angstrom'
     if calculate == 'Transition State':
@@ -80,17 +80,17 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
 
     generated_input += '$$coords:_xyzZS$$\nend\n\n'
 
-    generated_input += 'basis %s\n\n' % basisStr
+    generated_input += f'basis {basisStr}\n\n'
 
-    generated_input += 'runtype %s\n' % calcStr
-    generated_input += '%s\n\n' % theoryStr
+    generated_input += f'runtype {calcStr}\n'
+    generated_input += f'{theoryStr}\n\n'
 
     generated_input += 'enter\n'
 
     return generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

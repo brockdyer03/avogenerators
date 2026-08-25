@@ -39,7 +39,7 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
     elif calculate == 'Equilibrium Geometry':
         calcStr = 'minimize'
     else:
-        warnings.append('Unhandled calculation type: %s' % calculate)
+        warnings.append(f'Unhandled calculation type: {calculate}')
 
     theoryStr = ''
     if unrestricted:
@@ -59,7 +59,7 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
     # Create input file
     generated_input = ''
 
-    generated_input += '#\n# %s\n#\n\n' % title
+    generated_input += f'#\n# {title}\n#\n\n'
 
     generated_input += f'{"run":<15}{calcStr}\n\n'
 
@@ -75,12 +75,12 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
     generated_input += 'end\n'
 
     # Create XYZ file
-    coordFile = '$$atomCount$$\n%s\n$$coords:Sxyz$$\n' % title
+    coordFile = f'$$atomCount$$\n{title}\n$$coords:Sxyz$$\n'
 
     return generated_input, coordFile, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, coordFile, warnings = generateInputFile(input_json)
 

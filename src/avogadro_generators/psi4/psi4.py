@@ -35,7 +35,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Frequencies':
         calcStr = 'frequencies'
     else:
-        warnings.append('Unhandled calculation type: %s' % calculate)
+        warnings.append(f'Unhandled calculation type: {calculate}')
 
     generated_input = ''
 
@@ -58,7 +58,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     return generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

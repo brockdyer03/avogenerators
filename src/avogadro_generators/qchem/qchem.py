@@ -30,33 +30,33 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Frequencies':
         calcStr = 'Freq'
     else:
-        warnings.append('Unhandled calculation type: %s' % calculate)
+        warnings.append(f'Unhandled calculation type: {calculate}')
 
     theoryStr = ''
     if theory in ['HF', 'B3LYP', 'B3LYP5', 'EDF1', 'M062X', 'MP2', 'CCSD']:
         theoryStr = theory
     else:
-        warnings.append('Unhandled theory type: %s' % theory)
+        warnings.append(f'Unhandled theory type: {theory}')
 
     basisStr = ''
     if basis in ['STO-3G', '3-21G', '6-31G(d)', '6-31G(d,p)', '6-31+G(d)',
                  '6-311G(d)', 'cc-pVDZ', 'cc-pVTZ']:
-        basisStr = 'BASIS %s' % basis
+        basisStr = f'BASIS {basis}'
     elif basis in ['LANL2DZ', 'LACVP']:
-        basisStr = 'ECP %s' % basis
+        basisStr = f'ECP {basis}'
     else:
-        warnings.append('Unhandled basis type: %s' % basis)
+        warnings.append(f'Unhandled basis type: {basis}')
 
     generated_input = ''
 
     generated_input += '$rem\n'
-    generated_input += '   JOBTYPE %s\n' % calcStr
-    generated_input += '   METHOD %s\n' % theoryStr
-    generated_input += '   %s\n' % basisStr
+    generated_input += f'   JOBTYPE {calcStr}\n'
+    generated_input += f'   METHOD {theoryStr}\n'
+    generated_input += f'   {basisStr}\n'
     generated_input += '   GUI 2\n'
     generated_input += '$end\n\n'
 
-    generated_input += '$comment\n   %s\n$end\n\n' % title
+    generated_input += f'$comment\n   {title}\n$end\n\n'
 
     generated_input += '$molecule\n'
     generated_input += f'   {charge} {multiplicity}\n'
@@ -66,7 +66,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     return generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

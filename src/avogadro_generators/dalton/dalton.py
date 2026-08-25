@@ -39,10 +39,10 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
 
     # Basis
     coordfile += 'BASIS\n'
-    coordfile += '%s\n' % basis
+    coordfile += f'{basis}\n'
     # Title
-    coordfile += ' %s\n' % title
-    coordfile += ' %s Generated with Avogadro 2\n' % theory
+    coordfile += f' {title}\n'
+    coordfile += f' {theory} Generated with Avogadro 2\n'
     # Coordinates
     cjson  = input_json['cjson']
     # roll up the atoms for each element type
@@ -56,11 +56,11 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
             atom_types += 1  # a new atom type
         atoms[z].append(coords)
         start += 3
-    coordfile += 'Atomtypes=%d Angstrom\n' % atom_types
+    coordfile += f'Atomtypes={atom_types:d} Angstrom\n'
 
     for z in range(len(atoms)):
         if len(atoms[z]) > 0:
-            coordfile += 'Charge=%d.0 Atoms=%d\n' % (z, len(atoms[z]))
+            coordfile += f'Charge={z:d}.0 Atoms={len(atoms[z])}\n'
             for atom in atoms[z]:
                 coordfile += f'{symbols[z]}{atom[0]:15.5f}{atom[1]:15.5f}{atom[2]:15.5f}\n'
     coordfile += ''
@@ -91,7 +91,7 @@ def generateInputFile(input_json: dict) -> tuple[str, str, list[str]]:
     return coordfile, generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     coordfile, generated_input, warnings = generateInputFile(input_json)
 

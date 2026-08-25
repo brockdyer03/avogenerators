@@ -36,7 +36,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif basis == 'AUG-cc-pVTZ':
         basisStr = 'avtz'
     else:
-        warnings.append('Unhandled basis type: %s' % basis)
+        warnings.append(f'Unhandled basis type: {basis}')
 
     cjson = input_json['cjson']
 
@@ -47,11 +47,11 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
             numElectrons += z
     except KeyError:
         numElectrons = 0
-    wavefnStr = 'wf,%d,1,%d' % (numElectrons, multiplicity - 1)
+    wavefnStr = f'wf,{numElectrons:d},1,{multiplicity - 1:d}'
 
     theoryStr = ''
     if theory != 'B3LYP':
-        theoryStr += '{rhf\n%s}\n' % wavefnStr
+        theoryStr += f'{{rhf\n{wavefnStr}}}\n'
     # Intentionally not using elif here:
     if theory != 'RHF':
         theoryKey = ''
@@ -60,7 +60,7 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
         elif theory == 'B3LYP':
             theoryKey = 'uks,b3lyp'
         else:
-            warnings.append('Unhandled theory type: %s' % theory)
+            warnings.append(f'Unhandled theory type: {theory}')
         theoryStr += f'{{{theoryKey}\n{wavefnStr}}}\n'
 
     calcStr = ''
@@ -71,16 +71,16 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
     elif calculate == 'Frequencies':
         calcStr = '{optg}\n{frequencies}\n\n'
     else:
-        warnings.append('Unhandled calculation type: %s' % calculate)
+        warnings.append(f'Unhandled calculation type: {calculate}')
 
     # Create input file
     generated_input = ''
 
-    generated_input += '*** %s\n\n' % title
+    generated_input += f'*** {title}\n\n'
     generated_input += 'gprint,basis\n'
     generated_input += 'gprint,orbital\n\n'
 
-    generated_input += 'basis, %s\n\n' % basisStr
+    generated_input += f'basis, {basisStr}\n\n'
 
     if oldVersion:
         generated_input += 'geomtyp=xyz\n'
@@ -91,21 +91,21 @@ def generateInputFile(input_json: dict) -> tuple[str, list[str]]:
             numAtoms = len(cjson['atoms']['elements']['number'])
         except KeyError:
             numAtoms = 0
-        generated_input += '%d\n\n' % numAtoms
+        generated_input += f'{numAtoms:d}\n\n'
 
     generated_input += '$$coords:Sxyz$$\n'
     generated_input += '}\n\n'
 
-    generated_input += '%s\n' % theoryStr
+    generated_input += f'{theoryStr}\n'
 
-    generated_input += '%s' % calcStr
+    generated_input += f'{calcStr}'
 
     generated_input += "---\n"
 
     return generated_input, warnings
 
 
-def generateInput(input_json: dict, debug: bool) -> dict:
+def generateInput(input_json: dict, debug: bool) -> dict:  # noqa: FBT001
 
     generated_input, warnings = generateInputFile(input_json)
 

@@ -2,6 +2,7 @@
 
 from enum import Enum
 
+
 class Element(Enum):
 
     def __new__(cls, value):
